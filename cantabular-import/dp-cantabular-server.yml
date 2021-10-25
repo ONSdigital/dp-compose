@@ -7,6 +7,7 @@ services:
         ports:
             - 8491:8491
         restart: unless-stopped
+        user: ${UID-1000}:${GID-1000}
         volumes:
             - ../../dp-cantabular-server/cantabular/data:/app/data
             - ../../dp-cantabular-server/cantabular/scripts:/app/scripts

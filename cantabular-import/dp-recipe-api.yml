@@ -18,6 +18,7 @@ services:
         ports:
             - 22300:22300
         restart: unless-stopped
+        user: ${UID-1000}:${GID-1000}
         environment:
             MONGODB_BIND_ADDR:        "mongodb:27017"
             KAFKA_ADDR:               "kafka:9092"

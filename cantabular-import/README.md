@@ -34,7 +34,13 @@ as `dp-compose` (this repository):
 `zebedee`
 
 Expects you to have environment variables `zebedee_root` and 
-`SERVICE_AUTH_TOKEN` set in your local environment
+`SERVICE_AUTH_TOKEN` set in your local environment.
+
+To use the `start-import` helpers scripts or analysis tools you will need
+to set an environment variable called `FLORENCE_PASSWORD` to your local
+florence login password for `florence@magicroundabout.ons.gov.uk`. Alternatively
+you can directly edit `helpers/florence-token` to hard code your username
+and password.
 
 You will need to run the `import-recipes` script in `dp-recipe-api` when
 first building the containers before running an import. Alternatively there 
@@ -52,6 +58,9 @@ Assets generated using the  `-debug` flag won't work.
 
 You will also need to run `make generate-prod` in the dp-frontend-dataset-controller to generate the asset files.
 
+For dp-frontend-dataset-controller you will need to generate assets using
+`make generate-prod`
+
 You will also need to make sure you have some
 datasets into your Mongo collections. The easiest way to do this is to use the
 import script in `dp-dataset-api`. Currently it can be found on it's own branch
@@ -65,11 +74,17 @@ This only needs to be done once (or until you generate debug assets).
 
 # Bring Up Cantabular Import Services #
 
-`make start`
+The first time you run the import journey you will need to run:
 
-(note: we use `sudo` to prevent docker having issues accessing the `GOCACHE`
-volume it creates. `sudo` requires the `-E` in order to preserve existing
-environment variables)
+`make start-privileged`
+
+This will initialise the Go cache directories used by the containers to speed
+up start-up time. You may also need to use this make target if you make code
+changes that add more dependencies (go modules).
+
+On subsequent runs you can use:
+
+`make start`
 
 # Bring Up Cantabular Import Services Detached (running in background) #
 
@@ -113,8 +128,6 @@ which services need rebuilding (no need to bring everything down first).
 Files:
 
     run-cantabular-without-sudo.sh
-
-    get-florence-token.sh
 
 are used by `cantabular-import/helpers/test-compose/test-compose.go` and are nedded at this level for it to bring up the cantabular containers.
 

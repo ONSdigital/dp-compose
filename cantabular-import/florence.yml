@@ -19,6 +19,7 @@ services:
             - dp-frontend-router
             - dp-frontend-dataset-controller
         restart: unless-stopped
+        user: ${UID-1000}:${GID-1000}
         environment:
             ENCRYPTION_DISABLED:    "true"
             ENABLE_DATASET_IMPORT:  "true"

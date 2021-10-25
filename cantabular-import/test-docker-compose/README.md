@@ -18,11 +18,12 @@ Usage: (on mac books)
 
     Using Docker 3.3.3 works well (the one before having docker-compose v2.0.0-beta.6 ... which does not work well)
 
-* Edit the `../get-florence-token.sh` script to use your florence username/password
+* Edit the `helpers/florence-token` script to use your florence username/password. Alternatively set the
+`FLORENCE_PASSWORD` environment variable to your florence login's password.
 
 * Adjust the constant `maxRuns` in `test-compose.go` for the number of times you want the process to run. Each loop of the process may take about 3 minutes. You may also need to adjust `maxContainersInJob` to match the number of containers that are run for the cantabular import process (which may change).
 
-* First run `./run-cantabular-without-sudo.sh` in its directory and then when all containers running, run `./start-import.sh` in its directory to test that at least one import process completes OK
+* First run `make start` and then when all containers running, run `./start-import.sh` in its directory to test that at least one import process completes OK
 
 * Then to run multiple tests: `./test-compose.sh`
 

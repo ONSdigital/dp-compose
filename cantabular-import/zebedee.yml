@@ -13,6 +13,7 @@ services:
         volumes:
             - $zebedee_root:/zebedee_root
         restart: unless-stopped
+        user: ${UID-1000}:${GID-1000}
         environment:
             DATASET_API_URL:            "http://dp-dataset-api:22000"
             DATASET_API_AUTH_TOKEN:     "FD0108EA-825D-411C-9B1D-41EF7727F465"
@@ -35,4 +36,3 @@ services:
             ENABLE_CENTRALISED_KEYRING: "false"
             KEYRING_SECRET_KEY:         "38c03PzhNuSrYV8J0537XQ=="
             KEYRING_INIT_VECTOR:        "RkL9MmjfRcPB86alO82gHQ=="
-

@@ -19,6 +19,7 @@ services:
         ports:
             - 23600:23600
         restart: unless-stopped
+        user: ${UID-1000}:${GID-1000}
         environment:
             BIND_ADDR:              ":23600"
             KAFKA_ADDR:             "kafka:9092"

@@ -7,7 +7,8 @@ After running one or more import processes, such as:
 
 you can extract the logs for the containers by doing:
 
-* Edit the `../get-florence-token.sh` script to use your florence username/password
+* Edit the `helpers/florence-token` script to use your florence username/password or set
+your `FLORENCE_PASSWORD` environment variables to your florence password.
 
 run:
 

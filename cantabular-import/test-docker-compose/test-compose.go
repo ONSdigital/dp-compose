@@ -306,8 +306,8 @@ func prettyPrint(s interface{}) string {
 func getToken() (string, error) {
 	fmt.Printf("Running get-florence-token\n")
 
-	cmd := exec.Command("./get-florence-token.sh") // where to get the command from
-	cmd.Dir = ".."                                 // where to execute the command*/
+	cmd := exec.Command("./florence-token")        // where to get the command from
+	cmd.Dir = "../helpers"                         // where to execute the command*/
 
 	var out bytes.Buffer
 	cmd.Stdout = &out

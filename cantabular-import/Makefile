@@ -1,4 +1,11 @@
+UID := $(shell id -u)
+GID := $(shell id -g)
+
+export UID
+export GID
+
 # start full journey
+.PHONY: start
 start:
 	@echo "starting containers"
 	docker-compose up
