@@ -55,7 +55,8 @@ and Mongo tools
 to run the scripts below
 
 You will need to run the `import-recipes` script in `dp-recipe-api` when
-first building the containers before running an import. See the README here:
+first building the containers, while the stack is running but before running an import.
+See the README here:
 https://github.com/ONSdigital/dp-recipe-api/tree/develop/import-recipes
 
 :bulb: **Note:** *As an alternative to running the `import-recipes` script on its own, there is
