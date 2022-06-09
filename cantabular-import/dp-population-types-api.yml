@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+    dp-population-types-api:
+        build:
+            context: ../../dp-population-types-api
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-population-types-api:/dp-population-types-api
+        ports:
+            - 12900:12900
+        restart: unless-stopped
+        environment:
+            BIND_ADDR: ":12900"
+            SERVICE_AUTH_TOKEN:           $SERVICE_AUTH_TOKEN
+            DATASET_API_URL:             "http://dp-dataset-api:22000"
+            CANTABULAR_URL:              "http://dp-cantabular-server:8491"
+            CANTABULAR_API_EXT_URL:      "http://dp-cantabular-api-ext:8492"
