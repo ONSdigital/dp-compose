@@ -21,14 +21,15 @@ services:
             - 26700:26700
         restart: unless-stopped
         environment:
-            BIND_ADDR:              ":26700"
-            KAFKA_ADDR:             "kafka-1:19092,kafka-2:19092,kafka-3:19092"
-            VAULT_ADDR:             "http://vault:8200"
-            DATASET_API_URL:        "http://dp-dataset-api:22000"
-            LOCAL_OBJECT_STORE:     "http://minio:9000"
-            MINIO_ACCESS_KEY:       "minio-access-key"
-            MINIO_SECRET_KEY:       "minio-secret-key"
-            SERVICE_AUTH_TOKEN:     $SERVICE_AUTH_TOKEN
-            VAULT_TOKEN:            "0000-0000-0000-0000"
-            PUBLIC_BUCKET:          "public-bucket"
-            PRIVATE_BUCKET:         "private-bucket"
+            BIND_ADDR:          ":26700"
+            KAFKA_ADDR:         "kafka-1:19092,kafka-2:19092,kafka-3:19092"
+            VAULT_ADDR:         "http://vault:8200"
+            DATASET_API_URL:    "http://dp-dataset-api:22000"
+            FILTER_API_URL:     "http://dp-filter-api:22100"
+            LOCAL_OBJECT_STORE: "http://minio:9000"
+            MINIO_ACCESS_KEY:   "minio-access-key"
+            MINIO_SECRET_KEY:   "minio-secret-key"
+            SERVICE_AUTH_TOKEN: $SERVICE_AUTH_TOKEN
+            VAULT_TOKEN:        "0000-0000-0000-0000"
+            PUBLIC_BUCKET:      "public-bucket"
+            PRIVATE_BUCKET:     "private-bucket"
