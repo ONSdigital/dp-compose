@@ -22,6 +22,7 @@ services:
         environment:
             ENCRYPTION_DISABLED:    "true"
             ENABLE_DATASET_IMPORT:  "true"
+            ENABLE_CANTABULAR_JOURNEY: "true"
             API_ROUTER_URL:         "http://dp-api-router:23200"
             ROUTER_URL:             "http://dp-frontend-router:20000"
             DATASET_CONTROLLER_URL: "http://dp-publishing-dataset-controller:24000"

@@ -32,4 +32,5 @@ services:
             FILTER_API_URL:           "http://dp-filter-api:22100"
             SERVICE_AUTH_TOKEN:       $SERVICE_AUTH_TOKEN
             DIMENSIONS_API_URL:       "http://dp-cantabular-dimension-api:27200"
+            ENABLE_CANTABULAR_METADATA_EXTRACTOR_API: "true"
             CANTABULAR_METADATA_API_URL: "http://dp-cantabular-metadata-extractor-api:28300"
