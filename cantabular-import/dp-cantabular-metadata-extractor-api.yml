@@ -18,5 +18,4 @@ services:
         environment:
             BIND_ADDR:                     ":28300"
             SERVICE_AUTH_TOKEN:            $SERVICE_AUTH_TOKEN
-            # replace below by direct metadata access
-            CANTABULAR_EXT_API_URL:      "http://dp-cantabular-api-ext:8492"
+            CANTABULAR_METADATA_URL: "http://dp-cantabular-metadata-service:8493"
