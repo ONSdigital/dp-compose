@@ -12,6 +12,7 @@ services:
             - ./reflex
         volumes:
             - ../../dp-cantabular-filter-flex-api:/dp-cantabular-filter-flex-api
+            - /home/samin/methods/dp-api-clients-go:/home/samin/methods/dp-api-clients-go
         ports:
             - 27100:27100
         restart: unless-stopped
@@ -31,3 +32,7 @@ services:
             CANTABULAR_URL:              "http://dp-cantabular-server:8491"
             CANTABULAR_API_EXT_URL:      "http://dp-cantabular-api-ext:8492"
             MONGODB_BIND_ADDR:           "mongodb:27017"
+
+            ELASTIC_APM_SERVICE_NAME: "cantabular-filter-flex-api"
+            ELASTIC_APM_SERVER_URL: "http://apm:8200"
+            ELASTIC_APM_ENVIRONMENT: "cantabular-filter-flex"

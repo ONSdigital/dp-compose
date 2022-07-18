@@ -121,31 +121,52 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
-  ELK:
-    image: sebp/elk
-    expose:
-      - 5601
-      - 9200
-      - 5044
+
+  apm:
+    image: elastic/apm-server:8.3.2
+    cap_add: ["CHOWN", "DAC_OVERRIDE", "SETGID", "SETUID"]
+    cap_drop: ["ALL"]
     ports:
-      - '5601:5601'
-      - '9200:9200'
-      - '5044:5044' 
+    - 8201:8200
+    command: >
+       apm-server -e
+         -E apm-server.rum.enabled=true
+         -E setup.kibana.host=kibana:5601
+         -E setup.template.settings.index.number_of_replicas=0
+         -E apm-server.kibana.enabled=true
+         -E apm-server.kibana.host=kibana:5601
+         -E apm-server.kibana.username=apm_system
+         -E apm-server.kibana.password=IDyz7LreVADvZYcoUQd9
+         -E output.elasticsearch.hosts=["elasticsearch:9200"]
+         -E output.elasticsearch.username=elastic
+         -E output.elasticsearch.password=mY8AKhVUuJHfHythkaFC
+         -E output.logstash.enabled=false
+    healthcheck:
+      interval: 10s
+      retries: 12
+      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
 
-#  elasticsearch:
-#    image: "docker.elastic.co/elasticsearch/elasticsearch:8.3.2"
-#    environment:
-#      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-#      - "discovery.type=single-node"
-#    ports:
-#      - "9200:9200"
-#    volumes:
-#      - elasticsearch_data:/usr/share/elasticsearch/data
-
-#  kibana:
-#    image: "docker.elastic.co/kibana/kibana:8.3.2"
-#    ports:
-#      - "5601:5601"
+  elasticsearch:
+   # https://codingfundas.com/setting-up-elasticsearch-6-8-with-kibana-and-x-pack-security-enabled/index.html
+   image: "docker.elastic.co/elasticsearch/elasticsearch:8.3.2"
+   environment:
+     - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+     - "discovery.type=single-node"
+   ports:
+     - "9200:9200"
+   volumes:
+     - elasticsearch_data:/usr/share/elasticsearch/data
+     - ./elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+     - ./elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12
+  kibana:
+   depends_on:
+     - elasticsearch
+   image: "docker.elastic.co/kibana/kibana:8.3.2"
+   ports:
+     - "5601:5601"
+     - "8202:8200"
+   volumes:
+     - ./kibana.yml:/usr/share/kibana/config/kibana.yml
 
   filebeat:
     image: "docker.elastic.co/beats/filebeat:8.3.2"
@@ -155,5 +176,4 @@ services:
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
 
-#volumes:
-#  elasticsearch_data:
+volumes: { "elasticsearch_data", "certs"}

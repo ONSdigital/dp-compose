@@ -12,6 +12,7 @@ services:
             - ./reflex
         volumes:
             - ../../dp-dataset-api:/dp-dataset-api
+            - /home/samin/methods/dp-api-clients-go:/home/samin/methods/dp-api-clients-go
         depends_on:
             - kafka-1
             - kafka-2
@@ -28,3 +29,7 @@ services:
             ZEBEDEE_URL:                   "http://zebedee:8082"
             SERVICE_AUTH_TOKEN:            $SERVICE_AUTH_TOKEN
             DISABLE_GRAPH_DB_DEPENDENCY:   "true"
+
+            ELASTIC_APM_SERVICE_NAME: "cantabular-filter-flex-api"
+            ELASTIC_APM_SERVER_URL: "http://apm:8200"
+            ELASTIC_APM_ENVIRONMENT: "cantabular-filter-flex"
