@@ -75,12 +75,16 @@ cloneServices() {
     done
 }
 
-
 pull() {
     cd $DIR
     for repo in $(ls -d $DIR/*/); do
         cd ${repo}
-        git pull
+	if [ -d ".git" ]; then
+        	git pull
+	fi
+	if [ -f "go.mod" ]; then
+		go get -u  all
+	fi 
         logSuccess "'$repo' updated"
     done
 }
