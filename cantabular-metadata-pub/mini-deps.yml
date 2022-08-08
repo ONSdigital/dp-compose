@@ -1,0 +1,106 @@
+version: '3.3'
+services:
+  mongodb:
+    image: mongo:3.6
+    ports:
+      - 27017:27017
+    volumes:
+      # Load init script to ensure dbs and collections are created
+      - ./mongodb/entrypoint-initdb.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:6.0.0
+    expose:
+      - 2181
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  kafka-1:
+    image: confluentinc/cp-kafka:6.0.0
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9092:9092 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9092 || exit -1"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+  kafka-2:
+    image: confluentinc/cp-kafka:6.0.0
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9093:9093 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 2
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9093 || exit -1"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  kafka-3:
+    image: confluentinc/cp-kafka:6.0.0
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9094:9094 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 3
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19092,PLAINTEXT_HOST://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9094 || exit -1"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+  postgres:
+    build: ../postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - 5432:5432
+  minio:
+    image: 'bitnami/minio:latest'
+    volumes:
+      - ./minio/data:/data
+    ports:
+      - '9001:9000'
+      - '9002:9001'
+    environment:
+      - MINIO_ROOT_USER=minio-access-key
+      - MINIO_ROOT_PASSWORD=minio-secret-key
+         - MINIO_DEFAULT_BUCKETS=public-bucket,private-bucket
+  vault:
+    image: 'hashicorp/vault:latest'
+    ports:
+      - '8200:8200'
+    entrypoint: vault server -dev -dev-kv-v1
+    volumes:
+      - ./vault/config:/vault/config
+    environment:
+      - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+      - VAULT_DEV_ROOT_TOKEN_ID=0000-0000-0000-0000

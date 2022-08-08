@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+    dp-cantabular-metadata-extractor-api:
+        build:
+            context: ../../dp-cantabular-metadata-extractor-api
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-cantabular-metadata-extractor-api:/dp-cantabular-metadata-extractor-api
+        ports:
+            - 28300:28300
+        restart: unless-stopped
+        environment:
+            BIND_ADDR:                     ":28300"
+            SERVICE_AUTH_TOKEN:            $SERVICE_AUTH_TOKEN
+            CANTABULAR_METADATA_URL: "http://dp-cantabular-metadata-service:8493"
