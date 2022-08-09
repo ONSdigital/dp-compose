@@ -20,6 +20,7 @@ files=(
     dp-publishing-dataset-controller.yml 
     dp-recipe-api.yml 
     zebedee.yml 
+    the-train.yml 
     # local
     florence.yml
     dp-api-router.yml
