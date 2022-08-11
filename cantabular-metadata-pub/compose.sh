@@ -43,5 +43,5 @@ done
 
 # strip final :
 COMPOSE_FILE=${COMPOSE_FILE%:*} \
-COMPOSE_PROJECT_NAME=cantabular-metadata-pub \
+COMPOSE_PROJECT_NAME=cantabular-metadata-pub-2021 \
 COMPOSE_PATH_SEPARATOR=: docker-compose $CMD
