@@ -38,8 +38,10 @@ DP_FRONTEND_FILTER_FLEX_DATASET_DIR="$DIR/dp-frontend-filter-flex-dataset"
 DP_FRONTEND_DATASET_CONTROLLER_DIR="$DIR/dp-frontend-dataset-controller"
 ZEBEDEE_DIR="$DIR/zebedee"
 ZEBEDEE_GENERATED_CONTENT_DIR=${zebedee_root}
+DP_CANTABULAR_UAT_DIR="$DIR/dp-cantabular-uat"
 
 ACTION=$1
+POSTMAN_ENVIRONMENT=${2:-"local"}
 
 ##################### FUNCTIONS ##########################
 logSuccess() {
@@ -65,6 +67,7 @@ splash() {
     echo "   pull      - git pull the latest from your remote repos"
     echo "   setup     - preparing services. Run this once, before 'up'"
     echo "   up        - run the containers via docker-compose"
+    echo "   smoke     - run the smoke tests"
 }
 
 cloneServices() {
@@ -282,6 +285,21 @@ downServices () {
     logSuccess "Stopping dp cantabular import... Done."
 }
 
+smoke () {
+  POSTMAN_ENVIRONMENT=$1
+
+  if ! command newman -v &> /dev/null
+  then
+    echo "ERROR: smoke tests require newman to be installed"
+    echo "       https://github.com/postmanlabs/newman"
+    exit
+
+  else
+    echo "Running smoke tests in enviroment '$POSTMAN_ENVIRONMENT'"
+    newman run "$DP_CANTABULAR_UAT_DIR/postman/get_data_public_journey.json" -e "$DP_CANTABULAR_UAT_DIR/postman/$POSTMAN_ENVIRONMENT.postman_environment.json"
+  fi
+}
+###########
 
 #####################    MAIN    #########################
 
@@ -294,5 +312,6 @@ case $ACTION in
 "pull") pull;;
 "setup") setupServices;;
 "init-db") initDB;;
+"smoke") smoke $POSTMAN_ENVIRONMENT;;
 *) echo "invalid action - [${ACTION}]"; splash;;
 esac
