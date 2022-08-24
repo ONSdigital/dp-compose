@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   mongodb:
-    image: mongo:3.6
+    image: mongo:4.4.6
     ports:
       - 27017:27017
     volumes:
