@@ -4,8 +4,8 @@ CMD=$*
 
 PREFIX="../cantabular-import/"
 
-# from PREFIX directory
 files=(
+    # from PREFIX directory
     babbage.yml 
     dp-cantabular-api-ext.yml 
     dp-cantabular-metadata-service.yml 
@@ -21,11 +21,15 @@ files=(
     dp-recipe-api.yml 
     zebedee.yml 
     the-train.yml 
-    # local
+    dp-filter-api.yml
+    dp-cantabular-csv-exporter.yml
+    deps.yml
+    # local overrides present in this directory
     florence.yml
     dp-api-router.yml
-    mini-deps.yml
+    #mini-deps.yml
     dp-cantabular-metadata-extractor-api.yml
+    dp-dataset-api.yml 
 )
 
 
@@ -42,6 +46,7 @@ do
 done
 
 # strip final :
+
 COMPOSE_FILE=${COMPOSE_FILE%:*} \
 COMPOSE_PROJECT_NAME=cantabular-metadata-pub-2021 \
 COMPOSE_PATH_SEPARATOR=: docker-compose $CMD
