@@ -30,6 +30,8 @@ files=(
     #mini-deps.yml
     dp-cantabular-metadata-extractor-api.yml
     dp-dataset-api.yml 
+    # new
+    dp-topic-api.yml 
 )
 
 

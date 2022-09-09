@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    dp-topic-api:
+        build:
+            context: ../../dp-topic-api
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-topic-api:/dp-topic-api
+        depends_on:
+            - mongodb
+            - zebedee
+
+        ports:
+            - 25300:25300
+        restart: unless-stopped
+        environment:
+            BIND_ADDR:                     ":25300"
+            MONGODB_BIND_ADDR:        "mongodb:27017"
+            ENABLE_PRIVATE_ENDPOINTS: "true"
+            ZEBEDEE_URL:              "http://zebedee:8082"
+            SERVICE_AUTH_TOKEN:       $SERVICE_AUTH_TOKEN
