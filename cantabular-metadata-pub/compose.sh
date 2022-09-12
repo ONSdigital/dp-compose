@@ -23,6 +23,7 @@ files=(
     the-train.yml 
     dp-filter-api.yml
     dp-cantabular-csv-exporter.yml
+    dp-cantabular-xlsx-exporter.yml
     deps.yml
     # local overrides present in this directory
     florence.yml
