@@ -4,6 +4,7 @@ CMD=$*
 
 PREFIX="../cantabular-import/"
 
+# check this
 files=(
     # from PREFIX directory
     babbage.yml 
@@ -11,7 +12,6 @@ files=(
     dp-cantabular-metadata-service.yml 
     dp-cantabular-server.yml 
     dp-dataset-api.yml 
-    dp-download-service.yml 
     dp-frontend-dataset-controller.yml 
     dp-frontend-router.yml 
     dp-import-api.yml 
@@ -25,6 +25,9 @@ files=(
     dp-cantabular-csv-exporter.yml
     dp-cantabular-xlsx-exporter.yml
     deps.yml
+    dp-download-service.yml
+    # new
+    dp-cantabular-metadata-exporter.yml
     # local overrides present in this directory
     florence.yml
     dp-api-router.yml
@@ -33,6 +36,7 @@ files=(
     dp-dataset-api.yml 
     # new
     dp-topic-api.yml 
+    dp-cantabular-csv-exporter.yml
 )
 
 
