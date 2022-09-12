@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+    dp-dataset-api:
+        build:
+            context: ../../dp-dataset-api
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-dataset-api:/dp-dataset-api
+        depends_on:
+            - kafka-1
+            - kafka-2
+            - kafka-3
+            - mongodb
+        ports:
+            - 22000:22000
+        restart: unless-stopped
+        environment:
+            MONGODB_BIND_ADDR:             "mongodb:27017"
+            KAFKA_ADDR:                    "kafka-1:19092,kafka-2:19092,kafka-3:19092"
+            ENABLE_PRIVATE_ENDPOINTS:      "true"
+            ENABLE_DETACH_DATASET:         "true"
+            ZEBEDEE_URL:                   "http://zebedee:8082"
+            SERVICE_AUTH_TOKEN:            $SERVICE_AUTH_TOKEN
+            DISABLE_GRAPH_DB_DEPENDENCY:   "true"
+            ENCRYPTION_DISABLED:           "true"
