@@ -24,6 +24,7 @@ files=(
     dp-filter-api.yml
     dp-cantabular-csv-exporter.yml
     dp-cantabular-xlsx-exporter.yml
+    dp-cantabular-metadata-exporter.yml
     deps.yml
     dp-download-service.yml
     # new
