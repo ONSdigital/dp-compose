@@ -1,0 +1,61 @@
+version: "3.9"
+services:
+  dp-design-system:
+    build:
+      context: "${DP_DESIGN_SYSTEM_PATH}"
+      dockerfile: ../../dockerfiles/Dockerfile.dp-design-system
+    ports:
+      - "9002:9002"
+    command: ["bash", "-c", "npm install && npm run dev"]
+  dp-sixteens:
+    build:
+      context: "${DP_SIXTEENS_PATH}"
+      dockerfile: ../../dockerfiles/Dockerfile.sixteens
+    ports:
+      - "9000:9000"
+    command: ["bash", "-c", "npm run dev"]
+  dp-frontend-homepage-controller:
+    build:
+      context: "${DP_FRONTEND_HOMEPAGE_CONTROLLER_PATH}"
+      dockerfile: ../../dockerfiles/Dockerfile.dp-frontend-homepage-controller
+    ports:
+      - "24400:24400"
+    command: ["make", "debug"]
+  dp-topic-api:
+    build:
+      context: "${DP_TOPICS_API_PATH}"
+      dockerfile: ../../dockerfiles/Dockerfile.dp-topic-api
+    ports:
+      - "25300:25300"
+    command: ["make", "debug"]
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_BIND_ADDR=host.docker.internal:27017
+  dp-frontend-router:
+    build:
+      context: "${DP_FRONTEND_ROUTER_PATH}"
+      dockerfile: ../../dockerfiles/Dockerfile.dp-frontend-router
+    ports:
+      - "20000:20000"
+    command: ["make", "debug"]
+  dp-api-router:
+    build:
+        context: "${DP_API_ROUTER_PATH}"
+        dockerfile: ../../dockerfiles/Dockerfile.dp-api-router
+    ports:
+      - "23200:23200"
+    command: ["make", "debug"]
+  zebedee:
+    build:
+        context: "${ZEBEDEE_PATH}"
+        dockerfile: ../../dockerfiles/Dockerfile.zebedee
+    ports:
+      - "8080:8080"
+    command: ["/zebedee/run.sh"]
+  mongodb:
+    image: mongo:3.6
+    expose:
+      - 27017
+    ports:
+      - 27017:27017

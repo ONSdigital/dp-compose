@@ -13,3 +13,5 @@ cantabular-import/analysis/count-log-events/*.txt
 cantabular-import/analysis/tmp/*.txt
 
 cantabular-import/analysis/simple-plot/*.svg
+
+cantabular-import/census_hub/services

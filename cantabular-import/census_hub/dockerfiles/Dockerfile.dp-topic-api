@@ -1,0 +1,7 @@
+FROM golang:alpine
+
+WORKDIR /dp-topic-api
+
+COPY . /dp-topic-api
+
+RUN apk add --virtual build-deps build-base

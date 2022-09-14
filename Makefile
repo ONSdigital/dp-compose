@@ -1,3 +1,5 @@
+CENSUS_DIR=cantabular-import/census_hub
+
 .PHONY: start
 start:
 	@echo "starting dp-compose containers"
@@ -27,3 +29,12 @@ clean:
 restart:
 	@echo "restarting dp-compose containers"
 	docker-compose restart
+
+census-up:
+	$(MAKE) -C $(CENSUS_DIR) up
+
+census-up-build:
+	$(MAKE) -C $(CENSUS_DIR) up-build
+
+census-install-up:
+	$(MAKE) -C $(CENSUS_DIR) install-up
