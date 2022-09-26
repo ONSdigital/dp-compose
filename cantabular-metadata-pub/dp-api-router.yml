@@ -30,6 +30,7 @@ services:
             IMPORT_API_URL:           "http://dp-import-api:21800"
             DATASET_API_URL:          "http://dp-dataset-api:22000"
             FILTER_API_URL:           "http://dp-filter-api:22100"
+            TOPIC_API_URL:            "http://dp-topic-api:25300"
             SERVICE_AUTH_TOKEN:       $SERVICE_AUTH_TOKEN
             DIMENSIONS_API_URL:       "http://dp-cantabular-dimension-api:27200"
             ENABLE_CANTABULAR_METADATA_EXTRACTOR_API: "true"
