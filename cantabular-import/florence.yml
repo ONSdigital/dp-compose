@@ -25,3 +25,8 @@ services:
             API_ROUTER_URL:         "http://dp-api-router:23200"
             ROUTER_URL:             "http://dp-frontend-router:20000"
             DATASET_CONTROLLER_URL: "http://dp-publishing-dataset-controller:24000"
+        logging:
+            driver: gelf
+            options:
+              gelf-address: "udp://127.0.0.1:5044"
+              tag: "florence"
