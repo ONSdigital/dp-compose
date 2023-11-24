@@ -1,0 +1,160 @@
+version: '3.3'
+services:
+  # mongodb:
+  #   image: mongo:3.6
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     # Load init script to ensure dbs and collections are created
+  #     - ./mongodb/entrypoint-initdb.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  # zookeeper-1:
+  #   image: confluentinc/cp-zookeeper:6.0.0
+  #   expose:
+  #     - 2181
+  #   environment:
+  #     ZOOKEEPER_SERVER_ID: 1
+  #     ZOOKEEPER_CLIENT_PORT: 2181
+  #     ZOOKEEPER_TICK_TIME: 2000
+  # kafka-1:
+  #   image: confluentinc/cp-kafka:6.2.10
+  #   expose:
+  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+  #   ports:
+  #     - 9092:9092 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+  #   depends_on:
+  #     - zookeeper-1
+  #   environment:
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+  #     KAFKA_BROKER_ID: 1
+  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:9092
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  # kafka-2:
+  #   image: confluentinc/cp-kafka:6.2.10
+  #   expose:
+  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+  #   ports:
+  #     - 9093:9093 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+  #   depends_on:
+  #     - zookeeper-1
+  #   environment:
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+  #     KAFKA_BROKER_ID: 2
+  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092,PLAINTEXT_HOST://localhost:9093
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  # kafka-3:
+  #   image: confluentinc/cp-kafka:6.2.10
+  #   expose:
+  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+  #   ports:
+  #     - 9094:9094 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+  #   depends_on:
+  #     - zookeeper-1
+  #   environment:
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+  #     KAFKA_BROKER_ID: 3
+  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19092,PLAINTEXT_HOST://localhost:9094
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  postgres:
+    build: ../postgres
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - 5432:5432
+  elasticsearch:
+    image: elasticsearch:2.4.2
+    ports:
+     - "9300:9300"
+     - "9200:9200"
+    environment:
+     - "discovery.type=single-node"
+  # minio:
+  #   image: 'bitnami/minio:2022.10.21'
+  #   volumes:
+  #     - ./minio/data:/data
+  #   ports:
+  #     - '9001:9000'
+  #     - '9002:9001'
+  #   environment:
+  #     - MINIO_ROOT_USER=minio-access-key
+  #     - MINIO_ROOT_PASSWORD=minio-secret-key
+  #     - MINIO_DEFAULT_BUCKETS=public-bucket,private-bucket
+  # vault:
+  #   image: 'hashicorp/vault:latest'
+  #   ports:
+  #     - '8200:8200'
+  #   entrypoint: vault server -dev -dev-kv-v1
+  #   volumes:
+  #     - ./vault/config:/vault/config
+  #   environment:
+  #     - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+  #     - VAULT_DEV_ROOT_TOKEN_ID=0000-0000-0000-0000
+  collector:
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/collector-config.yml", ""]
+    volumes:
+      - ./collector-config.yml:/collector-config.yml
+    ports:
+      - "4317:4317"
+      - "8889:8889"
+      - "1777:1777"
+      - "13133:13133"
+    depends_on:
+      - jaeger-all-in-one
+      - zipkin-all-in-one
+
+  # Jaeger
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger.service.local
+    command:
+      - "--memory.max-traces"
+      - "10000"
+      - "--query.base-path"
+      - "/jaeger/ui"
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"
+      - "43170:4317"  
+    environment:
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_REPORTER_LOG_SPANS=true
+      - JAEGER_SAMPLER_PARAM=1
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://collector:4317
+
+  # Zipkin
+  zipkin-all-in-one:
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
+
+  # Prometheus
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  # kowl:
+  #   image: rsmnarts/kowl:latest
+  #   restart: "no"
+  #   ports:
+  #     - '9888:8080'
+  #   environment:
+  #     KAFKA_BROKERS: kafka-1:19092
+  #   depends_on:
+  #     - kafka-1
+  #     - kafka-2
+  #     - kafka-3

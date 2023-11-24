@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    babbage:
+        build:
+            context: ../../babbage
+            dockerfile: Dockerfile.local
+        depends_on:
+            - elasticsearch
+        ports:
+            - 8080:8080
+        restart: unless-stopped
+        environment:
+            RESTOLINO_STATIC: "src/main/web"
+            RESTOLINO_CLASSES: "target/classes"
+            PACKAGE_PREFIX: "com.github.onsdigital"
+            DP_COLOURED_LOGGING: "true"
+            DP_LOGGING_FORMAT: "pretty_json"
+            DEV_ENVIRONMENT: "Y"
+            IS_PUBLISHING: "N"
+            RELOAD_TEMPLATES: "Y"
+            ENABLE_CACHE: "N"
+            TEMPLATES_DIR: "src/main/web/templates/handlebars"
+            ENABLE_COVID19_FEATURE: "false"
+            OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
+            OTEL_SERVICE_NAME: "babbage-web"
+            ELASTIC_SEARCH_SERVER: "elasticsearch"
+            JAVA_OPTS: "-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=8010,server=y,suspend=n"

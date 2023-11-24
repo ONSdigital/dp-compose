@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+    dp-frontend-homepage-controller:
+        build:
+            context: ../../dp-frontend-homepage-controller
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-frontend-homepage-controller:/dp-frontend-homepage-controller
+        ports:
+            - 30000:30000
+        restart: unless-stopped
+        environment:
+            BABBAGE_URL:                      "http://babbage:8080"
+            # DATASET_CONTROLLER_URL:           "http://dp-frontend-dataset-controller:20200"
+            # API_ROUTER_URL:                   "http://dp-api-router:23200/v1"
+            # FILTER_FLEX_ROUTES_ENABLED:       "true"
+            # FILTER_FLEX_DATASET_SERVICE_URL:  "http://dp-frontend-filter-flex-dataset:20100"
+            ASSETS_DIRECTORY:                 "../../dp-frontend-homepage-controller/assets"

@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+    zebedee:
+        build:
+            context: ../../zebedee
+            dockerfile: Dockerfile
+        depends_on:
+            - kafka-1
+            - kafka-2
+            - kafka-3
+        ports:
+            - 8082:8082
+        volumes:
+            - /Users/francesmoore/Desktop/zebedee-content/generated/zebedee:/zebedee_root
+        restart: unless-stopped
+        environment:
+            DATASET_API_URL:            "http://dp-dataset-api:22000"
+            DATASET_API_AUTH_TOKEN:     "FD0108EA-825D-411C-9B1D-41EF7727F465"
+            ENABLE_PERMISSIONS_AUTH:    "true"
+            ENABLE_DATASET_IMPORT:      "true"
+            FORMAT_LOGGING:             "true"
+            JAVA_OPTS:                  " -Xmx1204m -Xdebug -Xrunjdwp:transport=dt_socket,address=8002,server=y,suspend=n"
+            PORT:                       "8082"
+            RESTOLINO_STATIC:           "src/main/resources/files"
+            RESTOLINO_CLASSES:          "zebedee-reader/target/classes"
+            PACKAGE_PREFIX:             "com.github.onsdigital.zebedee.reader.api"
+            CONTENT_DIR:                "content"
+            audit_db_enabled:           "false"
+            enable_splunk_reporting:    "false"
+            zebedee_root:               "/zebedee_root"
+            SERVICE_AUTH_TOKEN:         "c0cf5410dcd52763aae7f74496094dcbc89bb65cce2cbba40c5a559b145d8f6f"
+            db_audit_url:               "jdbc:postgresql://localhost:5432/audit"
+            db_audit_username:          "postgres"
+            db_audit_password:          "mysecretpassword"
+            publish_url:                "http://the-train:8084"
+            ENABLE_CENTRALISED_KEYRING: "false"
+            KEYRING_SECRET_KEY:         "38c03PzhNuSrYV8J0537XQ=="
+            KEYRING_INIT_VECTOR:        "RkL9MmjfRcPB86alO82gHQ=="
+
