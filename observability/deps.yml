@@ -1,68 +1,68 @@
 version: '3.3'
 services:
-  # mongodb:
-  #   image: mongo:3.6
-  #   ports:
-  #     - 27017:27017
-  #   volumes:
-  #     # Load init script to ensure dbs and collections are created
-  #     - ./mongodb/entrypoint-initdb.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
-  # zookeeper-1:
-  #   image: confluentinc/cp-zookeeper:6.0.0
-  #   expose:
-  #     - 2181
-  #   environment:
-  #     ZOOKEEPER_SERVER_ID: 1
-  #     ZOOKEEPER_CLIENT_PORT: 2181
-  #     ZOOKEEPER_TICK_TIME: 2000
-  # kafka-1:
-  #   image: confluentinc/cp-kafka:6.2.10
-  #   expose:
-  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
-  #   ports:
-  #     - 9092:9092 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
-  #   depends_on:
-  #     - zookeeper-1
-  #   environment:
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-  #     KAFKA_BROKER_ID: 1
-  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:9092
-  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
-  # kafka-2:
-  #   image: confluentinc/cp-kafka:6.2.10
-  #   expose:
-  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
-  #   ports:
-  #     - 9093:9093 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
-  #   depends_on:
-  #     - zookeeper-1
-  #   environment:
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-  #     KAFKA_BROKER_ID: 2
-  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092,PLAINTEXT_HOST://localhost:9093
-  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
-  # kafka-3:
-  #   image: confluentinc/cp-kafka:6.2.10
-  #   expose:
-  #     - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
-  #   ports:
-  #     - 9094:9094 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
-  #   depends_on:
-  #     - zookeeper-1
-  #   environment:
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-  #     KAFKA_BROKER_ID: 3
-  #     KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19092,PLAINTEXT_HOST://localhost:9094
-  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-  #     KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  mongodb:
+    image: mongo:3.6
+    ports:
+      - 27017:27017
+    volumes:
+      # Load init script to ensure dbs and collections are created
+      - ./mongodb/entrypoint-initdb.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:6.0.0
+    expose:
+      - 2181
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  kafka-1:
+    image: confluentinc/cp-kafka:6.2.10
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9092:9092 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  kafka-2:
+    image: confluentinc/cp-kafka:6.2.10
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9093:9093 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 2
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+  kafka-3:
+    image: confluentinc/cp-kafka:6.2.10
+    expose:
+      - 19092 # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
+    ports:
+      - 9094:9094 # map localhost port so that broker is reachable from the host, values needs to match PLAINTEXT_HOST port
+    depends_on:
+      - zookeeper-1
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_BROKER_ID: 3
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19092,PLAINTEXT_HOST://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
   postgres:
     build: ../postgres
     environment: 

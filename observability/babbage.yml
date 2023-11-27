@@ -24,4 +24,4 @@ services:
             OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
             OTEL_SERVICE_NAME: "babbage-web"
             ELASTIC_SEARCH_SERVER: "elasticsearch"
-            JAVA_OPTS: "-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=8010,server=y,suspend=n"
+            JAVA_OPTS: "-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=8010,server=y,suspend=n -Duser.language=en -Duser.region=EN"

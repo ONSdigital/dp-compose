@@ -9,23 +9,13 @@ exporters:
   otlp:
     endpoint: "jaeger.service.local:4317"
     tls:
-      # cert_file: /etc/cert.pem
-      # key_file: /etc/cert-key.pem
       insecure: true
-  #   tls:
-  # # prometheus:
-  #   endpoint: "aws-ot-collector.service.local:9464"
-  #   resource_to_telemetry_conversion:
-  #     enabled: true
-  #   enable_open_metrics: true
+
 receivers:
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
-
-
-
 
 service:
   pipelines:
