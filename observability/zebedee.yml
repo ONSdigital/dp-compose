@@ -11,7 +11,7 @@ services:
         ports:
             - 8082:8082
         volumes:
-            - /Users/francesmoore/Desktop/zebedee-content/generated:/zebedee_root
+            - $zebedee_root:/zebedee_root
         restart: unless-stopped
         environment:
             DATASET_API_URL:            "http://dp-dataset-api:22000"

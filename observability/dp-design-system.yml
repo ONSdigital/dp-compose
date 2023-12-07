@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  dp-design-system:
+    build:
+      context: ../../dp-design-system
+      dockerfile: Dockerfile.local
+    expose:
+      - "9002"
+    ports:
+      - 9002:9002
+    volumes:
+      - ../../dp-design-system:/dp-design-system
+    restart: unless-stopped
+   

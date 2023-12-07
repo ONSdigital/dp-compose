@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  sixteens:
+    build:
+      context: ../../sixteens
+      dockerfile: Dockerfile.local
+    expose:
+      - "9000"
+    ports:
+      - 9000:9000
+    volumes:
+      - ../../sixteens:/sixteens
+      - /sixteens/node_modules/
+    restart: unless-stopped
+   

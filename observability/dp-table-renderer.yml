@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+    dp-table-renderer:
+        build:
+            context: ../../dp-table-renderer
+            dockerfile: Dockerfile.local
+        command:
+            - reflex
+            - -d
+            - none
+            - -c
+            - ./reflex
+        volumes:
+            - ../../dp-table-renderer:/dp-table-renderer
+        ports:
+            - 23300:23300
+        restart: unless-stopped
+        environment:
+            OTEL_EXPORTER_OTLP_ENDPOINT: "collector:4317"
+            OTEL_SERVICE_NAME: "dp-table-renderer"

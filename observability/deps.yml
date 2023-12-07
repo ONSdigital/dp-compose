@@ -77,27 +77,6 @@ services:
      - "9200:9200"
     environment:
      - "discovery.type=single-node"
-  # minio:
-  #   image: 'bitnami/minio:2022.10.21'
-  #   volumes:
-  #     - ./minio/data:/data
-  #   ports:
-  #     - '9001:9000'
-  #     - '9002:9001'
-  #   environment:
-  #     - MINIO_ROOT_USER=minio-access-key
-  #     - MINIO_ROOT_PASSWORD=minio-secret-key
-  #     - MINIO_DEFAULT_BUCKETS=public-bucket,private-bucket
-  # vault:
-  #   image: 'hashicorp/vault:latest'
-  #   ports:
-  #     - '8200:8200'
-  #   entrypoint: vault server -dev -dev-kv-v1
-  #   volumes:
-  #     - ./vault/config:/vault/config
-  #   environment:
-  #     - VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
-  #     - VAULT_DEV_ROOT_TOKEN_ID=0000-0000-0000-0000
   collector:
     image: otel/opentelemetry-collector:latest
     command: ["--config=/collector-config.yml", ""]
@@ -147,14 +126,4 @@ services:
     ports:
       - "9090:9090"
 
-  # kowl:
-  #   image: rsmnarts/kowl:latest
-  #   restart: "no"
-  #   ports:
-  #     - '9888:8080'
-  #   environment:
-  #     KAFKA_BROKERS: kafka-1:19092
-  #   depends_on:
-  #     - kafka-1
-  #     - kafka-2
-  #     - kafka-3
+
