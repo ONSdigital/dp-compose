@@ -3,7 +3,7 @@ services:
   dp-upload-service:
     build:
       context: ${ROOT_UPLOAD_SERVICE:-../../../../dp-upload-service}
-      dockerfile: Dockerfile-local
+      dockerfile: Dockerfile.local
     command:
       - reflex
       - -d

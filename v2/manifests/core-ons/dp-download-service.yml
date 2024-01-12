@@ -1,5 +1,5 @@
 version: '3.3'
-services:  
+services:
   dp-download-service:
     build:
       context: ${ROOT_DOWNLOAD_SERVICE:-../../../../dp-download-service}
@@ -31,7 +31,7 @@ services:
       ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
       IS_PUBLISHING:                'true'
     volumes:
-      - ${ROOT_DOWNLOAD_SERVICE:-../../../../dp-download-service}:/service
+      - ${ROOT_DOWNLOAD_SERVICE:-../../../../dp-download-service}:/dp-download-service
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:23600/health" ]
       interval: 30s
