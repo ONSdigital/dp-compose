@@ -22,7 +22,7 @@ SERVICES="babbage dp-api-clients-go dp-api-router dp-cantabular-api-ext dp-canta
           dp-recipe-api dp-topic-api dp-zebedee-content dp-zebedee-utils zebedee"
 
 FRONTEND_SERVICES="dp-frontend-filter-dataset-controller dp-frontend-filter-flex-dataset dp-frontend-geography-controller
-                   dp-frontend-homepage-controller dp-frontend-renderer dp-frontend-router dp-frontend-cookie-controller
+                   dp-frontend-homepage-controller dp-frontend-router dp-frontend-cookie-controller
                    dp-frontend-dataset-controller dp-frontend-feedback-controller"
 
 EXTRA_SERVICES="dp dp-cantabular-ui dp-cantabular-uat dp-code-list-scripts dp-component-test dp-compose dp-design-system dp-kafka dp-net

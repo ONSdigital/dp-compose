@@ -19,7 +19,6 @@ services:
     restart: unless-stopped
     environment:
       HEALTHCHECK_INTERVAL:            ${HEALTHCHECK_INTERVAL:-30s}
-      RENDERER_URL:                    ${RENDERER_URL:-http://dp-renderer:20010}
       HOMEPAGE_CONTROLLER_URL:         ${HOMEPAGE_CONTROLLER_URL:-http://dp-frontend-homepage-controller:24400}
       BABBAGE_URL:                     ${BABBAGE_URL:-http://babbage:8080}
       DATASET_CONTROLLER_URL:          ${DATASET_CONTROLLER_URL:-http://dp-publishing-dataset-controller:24000}
