@@ -12,3 +12,15 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
       service: dp-download-service
+  dp-static-file-publisher:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-static-file-publisher.yml
+      service: dp-static-file-publisher
+  dp-permissions-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
+      service: dp-permissions-api
+  dp-identity-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-identity-api.yml
+      service: dp-identity-api

@@ -19,7 +19,6 @@ services:
       PORT:                        8084
       DP_COLOURED_LOGGING:         "true"
       DP_LOGGING_FORMAT:           "pretty_json"
-      PUBLISHING_THREAD_POOL_SIZE: 100
       MAX_FILE_UPLOAD_SIZE_MB:     -1
       MAX_REQUEST_SIZE_MB:         -1
       FILE_THRESHOLD_SIZE_MB:      0
