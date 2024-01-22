@@ -50,3 +50,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
+  dp-publishing-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
+      service: dp-publishing-dataset-controller
