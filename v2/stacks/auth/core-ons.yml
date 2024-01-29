@@ -10,9 +10,93 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
-  florence: # note: this might not build :( manually delete florence/dist florence/src/node_modules florence/assets/data.go 
+  florence: # note: this might not build :( manually delete florence/dist florence/src/node_modules florence/assets/data.go
     extends:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
       service: florence
     environment:
       ENABLE_NEW_SIGN_IN: true
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+  dp-frontend-homepage-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
+      service: dp-frontend-homepage-controller
+  babbage:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage
+    environment:
+      FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
+  sixteens:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
+      service: sixteens
+  dp-files-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
+      service: dp-files-api
+    environment:
+      KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
+  the-train:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/the-train.yml
+      service: the-train
+  dp-publishing-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
+      service: dp-publishing-dataset-controller
+  zookeeper-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: zookeeper-1
+  kafka-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-1
+    depends_on:
+      - zookeeper-1
+  kafka-2:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-2
+    depends_on:
+      - zookeeper-1
+  kafka-3:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-3
+    depends_on:
+      - zookeeper-1
+  dp-design-system:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
+      service: dp-design-system
+  dp-topic-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+      service: dp-topic-api
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+  dp-image-importer:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
+      service: dp-image-importer
+  vault:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/vault.yml
+      service: vault
+  kowl:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-tools.yml
+      service: kowl
+    depends_on:
+      - zookeeper-1
+  localstack:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/localstack.yml
+      service: localstack
