@@ -24,7 +24,7 @@ services:
       PACKAGE_PREFIX:                 "com.github.onsdigital.zebedee"
       audit_db_enabled:               "false"
       enable_splunk_reporting:        "false"
-      zebedee_root:                   "${zebedee_root:-/zebedee_root}"
+      zebedee_root:                   "/zebedee_root"
       db_audit_url:                   "jdbc:postgresql://postgis:5432/audit"
       db_audit_username:              "postgres"
       db_audit_password:              "postgres"
