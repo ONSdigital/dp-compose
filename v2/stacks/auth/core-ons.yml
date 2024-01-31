@@ -5,7 +5,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
     environment:
-      ENABLE_JWT_SESSIONS: true
+      ENABLE_JWT_SESSIONS: "true"
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
@@ -15,4 +15,4 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
       service: florence
     environment:
-      ENABLE_NEW_SIGN_IN: true
+      ENABLE_NEW_SIGN_IN:     "true"
