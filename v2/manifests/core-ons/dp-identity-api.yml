@@ -33,7 +33,7 @@ services:
       AWS_COGNITO_USER_POOL_ID:     $AWS_COGNITO_USER_POOL_ID
       AWS_COGNITO_CLIENT_ID:        $AWS_COGNITO_CLIENT_ID
       AWS_COGNITO_CLIENT_SECRET:    $AWS_COGNITO_CLIENT_SECRET
-      AWS_AUTH_FLOW":               "USER_PASSWORD_AUTH"
+      AWS_AUTH_FLOW:                "USER_PASSWORD_AUTH"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:25600/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

@@ -13,12 +13,12 @@ services:
       BIND_ADDR:                          ':26900'
       GRACEFUL_SHUTDOWN_TIMEOUT:          '30s'
       HEALTHCHECK_CRITICAL_TIMEOUT:       '30s'
-      KAFKA_ADDR:                         'kafka:9092'
+      KAFKA_ADDR:                         ${KAFKA_ADDR:-kafka:9092}
       KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: '1'
-      KAFKA_VERSION:                      '3.1.0'
+      KAFKA_VERSION:                      ${KAFKA_VERSION:-3.1.0}
       KAFKA_MAX_BYTES:                    '2000000'
       KAFKA_MIN_HEALTHY_BROKERS:          '1'
-      MONGODB_BIND_ADDR:                  'mongodb:27017'
+      MONGODB_BIND_ADDR:                  ${MONGODB_BIND_ADDR:-mongodb:27017}
       MONGODB_DATABASE:                   'files'
       MONGODB_ENABLE_READ_CONCERN:        'false'
       MONGODB_ENABLE_WRITE_CONCERN:       'true'
