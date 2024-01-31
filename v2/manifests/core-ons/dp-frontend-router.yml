@@ -27,7 +27,7 @@ services:
       FILTER_FLEX_DATASET_SERVICE_URL: ${FILTER_FLEX_DATASET_SERVICE_URL:-http://dp-frontend-filter-flex-dataset:20100}
       RELEASE_CALENDAR_ENABLED:        ${RELEASE_CALENDAR_ENABLED:-false}
       RELEASE_CALENDAR_CONTROLLER_URL: ${RELEASE_CALENDAR_CONTROLLER_URL:-http://dp-frontend-release-calendar:27700}
-      SEARCH_ROUTES_ENABLED:           true 
+      SEARCH_ROUTES_ENABLED:           "true"
       SEARCH_CONTROLLER_URL:           ${SEARCH_CONTROLLER_URL:-http://dp-frontend-search-controller:25000}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:20000/health" ]

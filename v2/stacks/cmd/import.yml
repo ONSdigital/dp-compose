@@ -8,7 +8,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
       service: dp-dataset-api
-    environment:  
+    environment:
       DISABLE_GRAPH_DB_DEPENDENCY: false
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
