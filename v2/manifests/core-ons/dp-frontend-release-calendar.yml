@@ -24,7 +24,7 @@ services:
       DEBUG:          ${DEBUG:-false}
       SITE_DOMAIN:    ${SITE_DOMAIN:-localhost}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:27700/health"]
-      interval:   ${HEALTHCHECK_INTERVAL:-30s}
-      timeout:    10s
-      retries:    10
+      test: ["CMD", "curl", "-sSf", "http://localhost:27700/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10

@@ -30,7 +30,7 @@ services:
       SEARCH_ROUTES_ENABLED:           true 
       SEARCH_CONTROLLER_URL:           ${SEARCH_CONTROLLER_URL:-http://dp-frontend-search-controller:25000}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:20000/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:20000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

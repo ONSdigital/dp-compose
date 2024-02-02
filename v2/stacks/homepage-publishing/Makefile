@@ -22,3 +22,7 @@ down:
 clean:
 	@echo "stopping and removing containers, associated volumes and networks"
 	docker-compose down -v
+
+.PHONY: health
+health:
+	@../../scripts/health.sh

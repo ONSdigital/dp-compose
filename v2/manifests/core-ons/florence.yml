@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 services:
   florence:
     build:
@@ -27,7 +27,7 @@ services:
       ROUTER_URL:                 ${FRONTEND_ROUTER_URL:-http://dp-frontend-router:20000}
       DATASET_CONTROLLER_URL:     ${DATASET_CONTROLLER_URL:-http://dp-publishing-dataset-controller:24000}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8081/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:8081/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

@@ -24,7 +24,7 @@ services:
       GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       GRAPH_DRIVER_TYPE:           ${GRAPH_DRIVER_TYPE:-neptune}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:22400/health" ]
+      test: [ "CMD", "curl", "-sSf", "http://localhost:22400/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

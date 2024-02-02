@@ -1,8 +1,13 @@
-version: '3.3'
-services:  
+version: "3.3"
+services:
   http-echo:
     platform: linux/amd64
     image: hashicorp/http-echo:alpine
-    command: ['-text', 'http-echo']
+    command: ["-text", "http-echo"]
     ports:
       - 15678:5678
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:5678/"]
+      interval: 60s
+      timeout: 10s
+      retries: 10

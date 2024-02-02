@@ -26,3 +26,7 @@ clean:
 .PHONY: install
 install:
 	./install.sh
+
+.PHONY: health
+health:
+	@../../scripts/health.sh

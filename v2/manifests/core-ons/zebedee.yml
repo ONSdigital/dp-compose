@@ -44,7 +44,7 @@ services:
       website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8082/health" ]
+      test: [ "CMD", "curl", "-sSf", "http://localhost:8082/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

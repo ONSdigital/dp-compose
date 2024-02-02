@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 services:
   dp-upload-service:
     build:
@@ -30,7 +30,7 @@ services:
     volumes:
       - ${ROOT_UPLOAD_SERVICE:-../../../../dp-upload-service}:/dp-upload-service
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:25100/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:25100/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

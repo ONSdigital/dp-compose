@@ -22,7 +22,7 @@ services:
     volumes:
       - ${ROOT_PERMISSIONS_API:-../../../../dp-permissions-api}:/service
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:25400/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:25400/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

@@ -24,7 +24,7 @@ services:
       ELASTIC_SEARCH_URL:          ${ELASTIC_SEARCH_URL:-http://sitewideelasticsearch:9200}
       SIGN_ELASTICSEARCH_REQUESTS: ${SIGN_ELASTICSEARCH_REQUESTS:-false}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:25900/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:25900/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10
