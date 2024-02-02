@@ -1,8 +1,9 @@
 version: "3.3"
 services:
-  zebedee:
+  zebedee-reader:
+    x-repo-url: "https://github.com/ONSdigital/zebedee"
     build:
-      context: ${ROOT_ZEBEDEE:-../../../../zebedee}/zebedee-reader
+      context: ${DP_REPO_DIR:-../../../..}/zebedee/zebedee-reader
       dockerfile: Dockerfile.local
     expose:
       - "8082"

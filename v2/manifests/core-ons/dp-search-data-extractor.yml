@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-search-data-extractor:
+    x-repo-url: "https://github.com/ONSdigital/dp-search-data-extractor"
     build:
-      context: ${ROOT_SEARCH_DATA_EXTRACTOR:-../../../../dp-search-data-extractor}
+      context: ${DP_REPO_DIR:-../../../..}/dp-search-data-extractor
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_SEARCH_DATA_EXTRACTOR:-../../../../dp-search-data-extractor}:/dp-search-data-extractor
+      - ${DP_REPO_DIR:-../../../..}/dp-search-data-extractor:/dp-search-data-extractor
     expose:
       - "25800"
     ports:

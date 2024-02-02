@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-import-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-import-api"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-import-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-import-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-import-api}:/dp-import-api
+      - ${DP_REPO_DIR:-../../../..}/dp-import-api:/dp-import-api
     expose:
       - "21800"
     ports:

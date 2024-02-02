@@ -26,3 +26,7 @@ clean:
 .PHONY: health
 health:
 	@../../scripts/health.sh
+
+.PHONY: clone
+clone:
+	@../../scripts/clone.sh

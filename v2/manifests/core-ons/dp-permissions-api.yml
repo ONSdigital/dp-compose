@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-permissions-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-permissions-api"
     build:
-      context: ${ROOT_PERMISSIONS_API:-../../../../dp-permissions-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-permissions-api
       dockerfile: Dockerfile-local
     expose:
       - "25400"
@@ -20,7 +21,7 @@ services:
       IS_PUBLISHING:                ${IS_PUBLISHING:-true}
       IDENTITY_WEB_KEY_SET_URL:     ${IDENTITY_API_URL:-http://dp-identity-api:25600}
     volumes:
-      - ${ROOT_PERMISSIONS_API:-../../../../dp-permissions-api}:/service
+      - ${DP_REPO_DIR:-../../../..}/dp-permissions-api:/service
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25400/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

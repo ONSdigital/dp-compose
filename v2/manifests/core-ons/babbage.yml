@@ -1,8 +1,9 @@
 version: '3.3'
 services:
   babbage:
+    x-repo-url: "https://github.com/ONSdigital/babbage"
     build:
-      context: ${ROOT_BABBAGE:-../../../../babbage}
+      context: ${DP_REPO_DIR:-../../../..}/babbage
       dockerfile: Dockerfile.local
     expose:
       - "8080"

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-dimension-search-builder:
+    x-repo-url: "https://github.com/ONSdigital/dp-dimension-search-builder"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-dimension-search-builder}
+      context: ${DP_REPO_DIR:-../../../..}/dp-dimension-search-builder
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-dimension-search-builder}:/dp-dimension-search-builder
+      - ${DP_REPO_DIR:-../../../..}/dp-dimension-search-builder:/dp-dimension-search-builder
     expose:
       - "22900"
     ports:

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-homepage-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-homepage-controller"
     build:
-      context: ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-homepage-controller}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-homepage-controller
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-homepage-controller}:/dp-frontend-homepage-controller
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-homepage-controller:/dp-frontend-homepage-controller
     expose:
       - "24400"
     ports:

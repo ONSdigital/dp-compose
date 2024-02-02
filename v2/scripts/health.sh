@@ -12,8 +12,9 @@ fatal() {
 
 # ==| MAIN |================================================================
 
-# Ensure jq is installed
-which jq > /dev/null || fatal "jq not installed"
+# Ensure dependencies are installed
+[[ -n $BASH_VERSINFO && $BASH_VERSINFO -lt 4 ]] && fatal "your 'bash' is too old, please run 'brew install bash'"
+which jq > /dev/null || fatal "jq not installed, please run 'brew install jq'"
 
 # List services (includes stopped and uninitialised services)
 services=( $(docker-compose config --services) )

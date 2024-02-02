@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-observation-extractor:
+    x-repo-url: "https://github.com/ONSdigital/dp-observation-extractor"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-observation-extractor}
+      context: ${DP_REPO_DIR:-../../../..}/dp-observation-extractor
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-observation-extractor}:/dp-observation-extractor
+      - ${DP_REPO_DIR:-../../../..}/dp-observation-extractor:/dp-observation-extractor
     expose:
       - "21600"
     ports:

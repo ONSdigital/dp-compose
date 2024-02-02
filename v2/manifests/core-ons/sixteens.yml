@@ -1,16 +1,16 @@
 version: "3.3"
 services:
   sixteens:
+    x-repo-url: "https://github.com/ONSdigital/sixteens"
     build:
-      context: ${ROOT_SIXTEENS:-../../../../sixteens}
+      context: ${DP_REPO_DIR:-../../../..}/sixteens
       dockerfile: Dockerfile.local
     expose:
       - "9000"
     ports:
       - 9000:9000
     volumes:
-      - ${ROOT_SIXTEENS:-../../../../sixteens}:/sixteens
-      - /sixteens/node_modules/
+      - ${DP_REPO_DIR:-../../../..}/sixteens:/sixteens
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:9000"]

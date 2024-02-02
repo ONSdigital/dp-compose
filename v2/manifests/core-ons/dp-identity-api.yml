@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-identity-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-identity-api"
     build:
-      context: ${ROOT_IDENTITY_API:-../../../../dp-identity-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-identity-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IDENTITY_API:-../../../../dp-identity-api}:/dp-identity-api
+      - ${DP_REPO_DIR:-../../../..}/dp-identity-api:/dp-identity-api
       - ~/.aws/:/root/.aws/
     expose:
       - "25600"

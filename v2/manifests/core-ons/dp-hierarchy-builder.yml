@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-hierarchy-builder:
+    x-repo-url: "https://github.com/ONSdigital/dp-hierarchy-builder"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-hierarchy-builder}
+      context: ${DP_REPO_DIR:-../../../..}/dp-hierarchy-builder
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-hierarchy-builder}:/dp-hierarchy-builder
+      - ${DP_REPO_DIR:-../../../..}/dp-hierarchy-builder:/dp-hierarchy-builder
     expose:
       - "22700"
     ports:

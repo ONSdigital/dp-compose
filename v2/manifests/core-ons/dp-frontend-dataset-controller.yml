@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-dataset-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-dataset-controller"
     build:
-      context: ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-dataset-controller}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-dataset-controller
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-dataset-controller}:/dp-frontend-dataset-controller
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-dataset-controller:/dp-frontend-dataset-controller
     expose:
       - "20200"
     ports:

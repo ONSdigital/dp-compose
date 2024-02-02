@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-observation-importer:
+    x-repo-url: "https://github.com/ONSdigital/dp-observation-importer"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-observation-importer}
+      context: ${DP_REPO_DIR:-../../../..}/dp-observation-importer
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-observation-importer}:/dp-observation-importer
+      - ${DP_REPO_DIR:-../../../..}/dp-observation-importer:/dp-observation-importer
     expose:
       - "21700"
     ports:

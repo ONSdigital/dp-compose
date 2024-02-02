@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-import-tracker:
+    x-repo-url: "https://github.com/ONSdigital/dp-import-tracker"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-import-tracker}
+      context: ${DP_REPO_DIR:-../../../..}/dp-import-tracker
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-import-tracker}:/dp-import-tracker
+      - ${DP_REPO_DIR:-../../../..}/dp-import-tracker:/dp-import-tracker
     expose:
       - "21300"
     ports:

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-search-data-importer:
+    x-repo-url: "https://github.com/ONSdigital/dp-search-data-importer"
     build:
-      context: ${ROOT_SEARCH_DATA_IMPORTER:-../../../../dp-search-data-importer}
+      context: ${DP_REPO_DIR:-../../../..}/dp-search-data-importer
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_SEARCH_DATA_IMPORTER:-../../../../dp-search-data-importer}:/dp-search-data-importer
+      - ${DP_REPO_DIR:-../../../..}/dp-search-data-importer:/dp-search-data-importer
     expose:
       - "25900"
     ports:

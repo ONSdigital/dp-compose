@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-search-data-finder:
+    x-repo-url: "https://github.com/ONSdigital/dp-search-data-finder"
     build:
-      context: ${ROOT_SEARCH_DATA_FINDER:-../../../../dp-search-data-finder}
+      context: ${DP_REPO_DIR:-../../../..}/dp-search-data-finder
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_SEARCH_DATA_FINDER:-../../../../dp-search-data-finder}:/dp-search-data-finder
+      - ${DP_REPO_DIR:-../../../..}/dp-search-data-finder:/dp-search-data-finder
     expose:
       - "28000"
     ports:

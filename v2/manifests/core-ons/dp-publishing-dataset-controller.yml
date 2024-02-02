@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-publishing-dataset-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-publishing-dataset-controller"
     build:
-      context: ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-publishing-dataset-controller}
+      context: ${DP_REPO_DIR:-../../../..}/dp-publishing-dataset-controller
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-publishing-dataset-controller}:/dp-publishing-dataset-controller
+      - ${DP_REPO_DIR:-../../../..}/dp-publishing-dataset-controller:/dp-publishing-dataset-controller
     expose:
       - "24000"
     ports:

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-dataset-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-dataset-api"
     build:
-      context: ${ROOT_DATASET_API:-../../../../dp-dataset-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-dataset-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_DATASET_API:-../../../../dp-dataset-api}:/dp-dataset-api
+      - ${DP_REPO_DIR:-../../../..}/dp-dataset-api:/dp-dataset-api
     expose:
       - "22000"
     ports:
@@ -33,7 +34,7 @@ services:
       MONGODB_BIND_ADDR:           ${MONGODB_BIND_ADDR:-mongodb:27017}
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:22000/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:22000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

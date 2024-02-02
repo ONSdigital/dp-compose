@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-release-calendar:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-release-calendar"
     build:
-      context: ${ROOT_RELEASE_CALENDAR:-../../../../dp-frontend-release-calendar}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-release-calendar
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_RELEASE_CALENDAR:-../../../../dp-frontend-release-calendar}:/dp-frontend-release-calendar
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-release-calendar:/dp-frontend-release-calendar
     expose:
       - "27700"
     ports:

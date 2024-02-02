@@ -1,8 +1,9 @@
-version: '3.3'
+version: "3.3"
 services:
   the-train:
+    x-repo-url: "https://github.com/ONSdigital/the-train"
     build:
-      context: ${ROOT_THE_TRAIN:-../../../../The-Train}
+      context: ${DP_REPO_DIR:-../../../..}/the-train
       dockerfile: Dockerfile
     expose:
       - "8084"
@@ -19,7 +20,6 @@ services:
       PORT:                        8084
       DP_COLOURED_LOGGING:         "true"
       DP_LOGGING_FORMAT:           "pretty_json"
-      PUBLISHING_THREAD_POOL_SIZE: 100
       MAX_FILE_UPLOAD_SIZE_MB:     -1
       MAX_REQUEST_SIZE_MB:         -1
       FILE_THRESHOLD_SIZE_MB:      0

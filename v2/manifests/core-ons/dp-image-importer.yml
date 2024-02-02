@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-image-importer:
+    x-repo-url: "https://github.com/ONSdigital/dp-image-importer"
     build:
-      context: ${ROOT_IMAGE_IMPORTER:-../../../../dp-image-importer}
+      context: ${DP_REPO_DIR:-../../../..}/dp-image-importer
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_IMPORTER:-../../../../dp-image-importer}:/dp-image-importer
+      - ${DP_REPO_DIR:-../../../..}/dp-image-importer:/dp-image-importer
     expose:
       - "24800"
     ports:
