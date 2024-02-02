@@ -28,7 +28,7 @@ services:
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:21400/health" ]
+      test: [ "CMD", "curl", "-sSf", "http://localhost:21400/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

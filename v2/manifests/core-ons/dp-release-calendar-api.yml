@@ -21,7 +21,7 @@ services:
       BIND_ADDR:                ":27800"
       API_ROUTER_URL:           ${API_ROUTER_URL:-http://dp-api-router:23200}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:27800/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:27800/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

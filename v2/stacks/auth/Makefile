@@ -41,3 +41,7 @@ check_defined = \
 __check_defined = \
 	$(if $(value $1),, \
 	$(error Undefined environment variable: $1$(if $2, ($2))))
+
+.PHONY: health
+health:
+	@../../scripts/health.sh

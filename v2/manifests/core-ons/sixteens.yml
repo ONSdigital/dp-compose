@@ -13,7 +13,7 @@ services:
       - /sixteens/node_modules/
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9000" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:9000"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

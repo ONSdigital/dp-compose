@@ -43,7 +43,7 @@ services:
       FILES_API_URL:               ${FILES_API_URL:-http://dp-files-api:26900}
       IDENTITY_API_URL:            ${IDENTITY_API_URL:-http://dp-identity-api:25600}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:23200/health" ]
+      test: [ "CMD", "curl", "-sSf", "http://localhost:23200/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

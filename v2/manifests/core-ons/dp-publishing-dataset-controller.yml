@@ -28,7 +28,7 @@ services:
       SERVICE_AUTH_TOKEN:             $SERVICE_AUTH_TOKEN
       SITE_DOMAIN:                    ${SITE_DOMAIN:-localhost}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:24000/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:24000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

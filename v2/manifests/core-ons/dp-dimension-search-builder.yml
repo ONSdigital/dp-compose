@@ -29,7 +29,7 @@ services:
       HIERARCHY_API_URL:           ${HIERARCHY_API_URL:-http://dp-hierarchy-api:22600}
       ELASTIC_SEARCH_URL:          ${ELASTIC_SEARCH_URL:-http://cmdelasticsearch:9200}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:22900/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:22900/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

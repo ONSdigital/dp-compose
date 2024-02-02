@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 services:
   dp-files-api:
     build:
@@ -35,8 +35,8 @@ services:
     volumes:
       - ${ROOT_FILES_API:-../../../../dp-files-api}:/service
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:26900/health" ]
-      interval: 30s
+      test: ["CMD", "curl", "-sSf", "http://localhost:26900/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10
     entrypoint: make debug

@@ -28,7 +28,7 @@ services:
       MAP_RENDERER_HOST:        ${MAP_RENDERER_HOST:-http://localhost:23500}
       TABLE_RENDERER_HOST:      ${TABLE_RENDERER_HOST:-http://localhost:23300}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
+      test: [ "CMD", "curl", "-sSf", "http://localhost:8080/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

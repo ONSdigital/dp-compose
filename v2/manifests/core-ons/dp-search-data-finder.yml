@@ -27,7 +27,7 @@ services:
       SERVICE_AUTH_TOKEN: $SERVICE_AUTH_TOKEN
       ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:28000/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:28000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

@@ -28,7 +28,7 @@ services:
       CANTABULAR_URL:           ${CANTABULAR_URL:-http://localhost:8491}
       CANTABULAR_API_EXT_URL:   ${CANTABULAR_API_EXT_URL:-http://localhost:8492}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:27300/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:27300/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10
