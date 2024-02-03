@@ -28,6 +28,7 @@ services:
       ELASTIC_SEARCH_PORT:      ${ELASTIC_SEARCH_PORT:-9300}
       MAP_RENDERER_HOST:        ${MAP_RENDERER_HOST:-http://localhost:23500}
       TABLE_RENDERER_HOST:      ${TABLE_RENDERER_HOST:-http://localhost:23300}
+      OTEL_JAVAAGENT_ENABLED:   ${OTEL_JAVAAGENT_ENABLED:-"false"}
     healthcheck:
       test: [ "CMD", "curl", "-sSf", "http://localhost:8080/health" ]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

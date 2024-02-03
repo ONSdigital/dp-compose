@@ -10,11 +10,11 @@ services:
     ports:
       - 8082:8082
     volumes:
-      - ${zebedee_root}:/zebedee_root
+      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     restart: unless-stopped
     environment:
       DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
-      DATASET_API_AUTH_TOKEN:         ${DATASET_API_AUTH_TOKEN:-FD0108EA-825D-411C-9B1D-41EF7727F465}
+      DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-true}
       ENABLE_DATASET_IMPORT:          ${ENABLE_DATASET_IMPORT:-true}
       FORMAT_LOGGING:                 ${FORMAT_LOGGING:-true}
@@ -33,7 +33,7 @@ services:
       ENABLE_CENTRALISED_KEYRING:     "false"
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
       KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
-      SERVICE_AUTH_TOKEN:             $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_STATIC_FILES_PUBLISHING: "true"
       FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
       ENABLE_JWT_SESSIONS:            "false"
@@ -44,6 +44,7 @@ services:
       AWS_COGNITO_KEY_ID_TWO:         "GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="
       website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
+      OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

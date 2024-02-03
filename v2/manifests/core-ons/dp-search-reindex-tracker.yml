@@ -21,7 +21,7 @@ services:
     environment:
       BIND_ADDR:          ":28500"
       ELASTIC_SEARCH_URL: ${ELASTIC_SEARCH_URL:-http://sitewideelasticsearch:9200}
-      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN}
+      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:28500/health"]

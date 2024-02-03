@@ -31,7 +31,7 @@ services:
       VAULT_ADDR:                         "http://vault:8200"
       VAULT_PATH':                        "secret/shared/psk"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
-      SERVICE_AUTH_TOKEN:                 $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:                 ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25100/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

@@ -12,10 +12,10 @@ services:
     restart: unless-stopped
     user: ${UID-1000}:${GID-1000}
     volumes:
-      - $zebedee_root:/$zebedee_root
+      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     environment:
-      TRANSACTION_STORE:           "$zebedee_root/zebedee/transactions"
-      WEBSITE:                     "$zebedee_root/zebedee/master"
+      TRANSACTION_STORE:           "/zebedee_root/zebedee/transactions"
+      WEBSITE:                     "/zebedee_root/zebedee/master"
       PUBLISHING_THREAD_POOL_SIZE: 100
       PORT:                        8084
       DP_COLOURED_LOGGING:         "true"

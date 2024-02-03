@@ -1,46 +1,60 @@
 # Specifies the service upon which to act, by default this is all services
 SERVICE ?=
 
+# Specifies the default environment variable file for the stack
+DEFAULT_ENV_FILE ?= default.env
+
+# Specifies the local override environment variable file for the stack
+LOCAL_ENV_FILE ?= local.env
+
+# Specifies the environment variables files for docker compose to use.
+# See the docs for more details:
+# https://docs.docker.com/compose/environment-variables/envvars/#compose_env_files
+COMPOSE_ENV_FILES ?= $(LOCAL_ENV_FILE),$(DEFAULT_ENV_FILE)
+
 .PHONY: up
-up:
+up: $(LOCAL_ENV_FILE)
 	@echo "building, creating and starting containers..."
-	docker-compose up -d $(SERVICE)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
 .PHONY: down
-down:
+down: $(LOCAL_ENV_FILE)
 	@echo "stopping and removing containers and networks..."
-	docker-compose down $(SERVICE)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down $(SERVICE)
 
 .PHONY: clean
-clean:
+clean: $(LOCAL_ENV_FILE)
 	@echo "stopping and removing containers, associated volumes and networks..."
-	docker-compose down -v $(SERVICE)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
 .PHONY: start
-start:
+start: $(LOCAL_ENV_FILE)
 	@echo "starting containers..."
-	docker-compose start $(SERVICE) $(ENV_FILE_ARGS)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose start $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: stop
-stop:
+stop: $(LOCAL_ENV_FILE)
 	@echo "stopping containers..."
-	docker-compose stop $(SERVICE) $(ENV_FILE_ARGS)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose stop $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: logs
-logs:
-	docker-compose logs -f $(SERVICE) $(ENV_FILE_ARGS)
+logs: $(LOCAL_ENV_FILE)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose logs -f $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: ps
-ps:
-	docker-compose ps $(SERVICE) $(ENV_FILE_ARGS)
+ps: $(LOCAL_ENV_FILE)
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose ps $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: health
-health:
-	@../../scripts/health.sh
+health: $(LOCAL_ENV_FILE)
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) ../../scripts/health.sh
 
 .PHONY: base-init
-base-init: clone
+base-init: clone $(LOCAL_ENV_FILE)
 
 .PHONY: clone
 clone:
 	@../../scripts/clone.sh
+
+$(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
+	cp ../$(LOCAL_ENV_FILE).tmpl $(LOCAL_ENV_FILE)

@@ -20,9 +20,9 @@ services:
       - "25600:25600"
     restart: unless-stopped
     environment:
-      AWS_ACCESS_KEY_ID:            $AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:        $AWS_SECRET_ACCESS_KEY
-      AWS_SESSION_TOKEN:            $AWS_SESSION_TOKEN
+      AWS_ACCESS_KEY_ID:            ${AWS_ACCESS_KEY_ID:?please define a valid AWS_ACCESS_KEY_ID in your local system, get from aws login dashboard}
+      AWS_SECRET_ACCESS_KEY:        ${AWS_SECRET_ACCESS_KEY:?please define a valid AWS_SECRET_ACCESS_KEY in your local system, get from aws login dashboard}
+      AWS_SESSION_TOKEN:            ${AWS_SESSION_TOKEN:?please define a valid AWS_SESSION_TOKEN in your local system, get from aws login dashboard}
       BIND_ADDR:                    ":25600"
       GRACEFUL_SHUTDOWN_TIMEOUT:    "30s"
       HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}
@@ -31,9 +31,9 @@ services:
       ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
       AWS_REGION:                   "eu-west-2"
       AWS_PROFILE:                  "dp-sandbox"
-      AWS_COGNITO_USER_POOL_ID:     $AWS_COGNITO_USER_POOL_ID
-      AWS_COGNITO_CLIENT_ID:        $AWS_COGNITO_CLIENT_ID
-      AWS_COGNITO_CLIENT_SECRET:    $AWS_COGNITO_CLIENT_SECRET
+      AWS_COGNITO_USER_POOL_ID:     ${AWS_COGNITO_USER_POOL_ID:?please define a valid AWS_COGNITO_USER_POOL_ID in your local system, get from cognito, e.g. sandbox-florence-users}
+      AWS_COGNITO_CLIENT_ID:        ${AWS_COGNITO_CLIENT_ID:?please define a valid AWS_COGNITO_CLIENT_ID in your local system, get from within pool}
+      AWS_COGNITO_CLIENT_SECRET:    ${AWS_COGNITO_CLIENT_SECRET:?please define a valid AWS_COGNITO_CLIENT_SECRET in your local system, get from within pool}
       AWS_AUTH_FLOW:                "USER_PASSWORD_AUTH"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25600/health"]

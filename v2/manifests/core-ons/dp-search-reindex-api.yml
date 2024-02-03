@@ -24,7 +24,7 @@ services:
       KAFKA_ADDR:         ${KAFKA_ADDR:-kafka-1:19092,kafka-2:19092,kafka-3:19092}
       KAFKA_VERSION:      ${KAFKA_VERSION:-3.1.0}
       SEARCH_API_URL:     ${SEARCH_API_URL:-http://dp-search-api:23900}
-      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN}
+      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
       MONGODB_BIND_ADDR:  ${MONGODB_BIND_ADDR:-mongodb:27017}
     healthcheck:
