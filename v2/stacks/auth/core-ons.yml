@@ -20,10 +20,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
       service: dp-frontend-router
-  dp-frontend-homepage-controller:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
-      service: dp-frontend-homepage-controller
   babbage:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml
@@ -74,10 +70,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
       service: dp-design-system
-  dp-topic-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
-      service: dp-topic-api
   dp-image-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
