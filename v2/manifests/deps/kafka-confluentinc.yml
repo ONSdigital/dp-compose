@@ -4,6 +4,8 @@ services:
     image: confluentinc/cp-zookeeper:6.0.0
     expose:
       - 2181
+    ports:
+      - "2181:2181"
     environment:
       ZOOKEEPER_SERVER_ID:   1
       ZOOKEEPER_CLIENT_PORT: 2181
