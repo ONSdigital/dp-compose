@@ -16,6 +16,9 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      zebedee:
+        condition: service_healthy
   dp-dimension-extractor:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dimension-extractor.yml
