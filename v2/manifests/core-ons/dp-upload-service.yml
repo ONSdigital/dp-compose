@@ -4,7 +4,7 @@ services:
     x-repo-url: "https://github.com/ONSdigital/dp-upload-service"
     build:
       context: ${DP_REPO_DIR:-../../../..}/dp-upload-service
-      dockerfile: Dockerfile-local
+      dockerfile: Dockerfile.local
     command:
       - reflex
       - -d
