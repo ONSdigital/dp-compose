@@ -64,6 +64,9 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-import-api.yml
       service: dp-import-api
+    depends_on:
+      dp-dataset-api:
+        condition: service_healthy
   dp-import-tracker:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-import-tracker.yml
