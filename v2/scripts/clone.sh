@@ -1,36 +1,18 @@
 #!/usr/bin/env bash
 
-# Set DP_REPO_DIR to override the default repo cloning location
 DP_COMPOSE_V2_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-DP_REPO_DIR=${DP_REPO_DIR:-${DP_COMPOSE_V2_DIR}/../..}
+source "${DP_COMPOSE_V2_DIR}/scripts/utils.sh"
 
 # Set VERBOSE=true to debug connection issues
 VERBOSE=${VERBOSE:-false}
 
 #==| CONSTANTS |================================================
-RED="\e[31m"
-AMBER="\e[33m"
-GREEN="\e[32m"
-RESET="\e[0m"
 REPO_URL_REGEX='^https?:\/\/[^\/]+\/([^\/]+)\/([^\/]+)\/?$'
+REPO_SSH_URL_REGEX='^(git@)?github.com:([^\/]+)\/([^\/]+)\/?(\.git)?$'
 
 #==| FUNCTIONS |================================================
 
-# Fatal error log that exits the script with error code 1
-fatal() {
-    echo -e "${RED}ERROR: ${1}${RESET}"
-    exit 1
-}
-
-# Red error log
-error() {
-    echo -e "${RED}ERROR: ${1}${RESET}"
-}
-
-# Green info log
-info() {
-    echo -e "${GREEN}INFO: ${1}${RESET}"
-}
+# tbc
 
 # ==| MAIN |================================================================
 
@@ -40,12 +22,13 @@ which git > /dev/null || fatal "git not installed"
 which yq > /dev/null || fatal "yq not installed"
 
 # Test ssh to github
+res=0
 if [[ $VERBOSE = true ]]; then
-    ssh -v -T git@github.com
+    ssh -v -T git@github.com || res=$?
 else
-    ssh -T git@github.com &>/dev/null
+    ssh -T git@github.com &>/dev/null || res=$?
 fi
-case $? in
+case $res in
     1)
         info "github ssh authentication successful"
         ;;
@@ -57,52 +40,59 @@ case $? in
 esac
 
 # Get list of repo urls from docker compose config
-set +o pipefail
-repos=$(docker-compose config | yq -er '.services | to_entries | .[].value."x-repo-url"' | grep -v 'null' | uniq)
-if [[ ${PIPESTATUS[0]} > 0 ]]; then
-    fatal "failed to list repos, make sure your compose configuration is valid"
-elif [[ ${PIPESTATUS[1]} > 0 ]]; then
-    fatal "unexpected error while parsing docker compose config"
-fi
+repos=( $(make list-repos) )
+info "repos: ${repos[*]}"
 
 errors=0
 for repo_url in ${repos[@]}; do
     # Strip '.git' extension if present
-    repo_url=${repo_url%%}
+    repo_url=${repo_url%.git}
 
     # Parse repo URL
     if [[ "$repo_url" =~ $REPO_URL_REGEX ]]; then
         org=${BASH_REMATCH[1]}
         repo=${BASH_REMATCH[2]}
+        clone_url="git@github.com:$org/$repo"
+    elif [[ "$repo_url" =~ $REPO_SSH_URL_REGEX ]]; then
+        repo=${BASH_REMATCH[3]}
+        clone_url=$repo_url
     else
         error "failed to parse repo url: '$repo_url'"
     fi
 
     # Check if the repo already exits
-    pushd "${DP_REPO_DIR}" > /dev/null
-        if [[ -d "$repo" ]]; then
-            info "repo already cloned, skipping: $repo ($repo_url)"
-        else
-            info "cloning repo...: $repo ($repo_url)"
-
-            # If not then clone it
-            if [[ $VERBOSE = true ]]; then
-                git clone "git@github.com:$org/$repo"
-            else
-                git clone "git@github.com:$org/$repo" 2> /dev/null
-            fi
+    repo_path="${DP_REPO_DIR}/$repo"
+    if [[ -d "${repo_path}" ]]; then
+        if [[ ${1-} == pull ]]; then
+            git -C "${repo_path}" pull
             if [[ $? > 0 ]]; then
-                error "failed to clone repo, please make sure the repo exists and you have access to it: $repo ($repo_url)"
+                error "failed to pull repo: $repo ($repo_url)"
                 ((errors++))
             else
-                info "successfully cloned repo: $repo ($repo_url)"
+                info "successfully pulled repo: $repo ($repo_url)"
             fi
+        else
+            info "repo already cloned, skipping: $repo ($repo_url)"
         fi
-    popd > /dev/null
+    else
+        # If not then clone it
+        info "cloning repo...: $repo ($repo_url)"
+
+        if [[ $VERBOSE = true ]]; then
+            git -C "${DP_REPO_DIR}" clone "$clone_url"
+        else
+            git -C "${DP_REPO_DIR}" clone "$clone_url" 2> /dev/null
+        fi
+        if [[ $? > 0 ]]; then
+            error "failed to clone repo, please make sure the repo exists and you have access to it: $repo ($repo_url)"
+            ((errors++))
+        else
+            info "successfully cloned repo: $repo ($repo_url)"
+        fi
+    fi
 done
 
 if [[ $errors > 0 ]]; then
-    error "failed to clone $errors repos"
-else
-    info "all repos have been cloned"
+    fatal "failed to action $errors repos"
 fi
+info "${#repos[*]} repos have been actioned"

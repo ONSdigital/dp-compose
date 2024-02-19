@@ -9,7 +9,8 @@ services:
       - "25400"
     ports:
       - "25400:25400"
-    restart: "no"
+    entrypoint: make debug
+    restart: "unless-stopped"
     environment:
       BIND_ADDR:                    ":25400"
       HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}

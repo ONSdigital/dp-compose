@@ -6,7 +6,7 @@ services:
       context: ${DP_REPO_DIR:-../../../..}/dp-files-api
       dockerfile: Dockerfile-local
     volumes:
-      - ${DP_REPO_DIR:-../../../..}/dp-files-api:/dp-files-api
+      - ${DP_REPO_DIR:-../../../..}/dp-files-api:/service
     expose:
       - "26900"
     ports:

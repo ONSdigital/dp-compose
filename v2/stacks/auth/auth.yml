@@ -5,6 +5,9 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
       service: dp-permissions-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-identity-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-identity-api.yml

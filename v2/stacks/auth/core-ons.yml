@@ -5,7 +5,13 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
     environment:
-      ENABLE_JWT_SESSIONS: "true"
+      ENABLE_JWT_SESSIONS:     "true"
+      ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+    depends_on:
+      dp-identity-api:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
@@ -16,16 +22,25 @@ services:
       service: florence
     environment:
       ENABLE_NEW_SIGN_IN: "true"
+    depends_on:
+      zebedee:
+        condition: service_healthy
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
       service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   babbage:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml
       service: babbage
     environment:
       FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   sixteens:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
@@ -36,23 +51,41 @@ services:
       service: dp-files-api
     environment:
       KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
       service: the-train
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-publishing-dataset-controller:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
       service: dp-publishing-dataset-controller
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-design-system:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
       service: dp-design-system
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-image-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
       service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-image-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
       service: dp-image-importer
+    depends_on:
+      dp-api-router:
+        condition: service_healthy

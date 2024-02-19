@@ -27,23 +27,26 @@ clean: $(LOCAL_ENV_FILE)
 	@echo "stopping and removing containers, associated volumes and networks..."
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
-.PHONY: start
-start: $(LOCAL_ENV_FILE)
-	@echo "starting containers..."
-	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose start $(SERVICE) $(ENV_FILE_ARGS)
+.PHONY: ps start stop config
+ps start stop config: $(LOCAL_ENV_FILE)
+	@echo "$@ containers..." >&2
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
-.PHONY: stop
-stop: $(LOCAL_ENV_FILE)
-	@echo "stopping containers..."
-	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose stop $(SERVICE) $(ENV_FILE_ARGS)
+.PHONY: countainer-id
+countainer-id: $(LOCAL_ENV_FILE)
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
+
+.PHONY: attach
+attach: $(LOCAL_ENV_FILE)
+	@c_id=$$(make countainer-id);								\
+		if [[ -z $$c_id ]]; then echo Could not get container-id >&2; exit 3; fi;	\
+		if [[ $$c_id =~ [[:space:]] ]]; then echo Use more specific SERVICE, got IDs $$c_id >&2; exit 4; fi;	\
+		echo "Attaching to container '$$c_id' for $(SERVICE)" >&2;			\
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
 .PHONY: logs
 logs: $(LOCAL_ENV_FILE)
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose logs -f $(SERVICE) $(ENV_FILE_ARGS)
-
-.PHONY: ps
-ps: $(LOCAL_ENV_FILE)
-	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose ps $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: health
 health: $(LOCAL_ENV_FILE)
@@ -55,6 +58,13 @@ base-init: clone $(LOCAL_ENV_FILE)
 .PHONY: clone
 clone:
 	@../../scripts/clone.sh
+
+.PHONY: pull
+pull:
+	@../../scripts/clone.sh pull
+
+list-repos:
+	@make config | yq -r '.services | to_entries | .[].value."x-repo-url" | select(.)' | sort -u
 
 $(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
 	cp ../$(LOCAL_ENV_FILE).tmpl $(LOCAL_ENV_FILE)
