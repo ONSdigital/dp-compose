@@ -64,10 +64,11 @@ for repo_url in ${repos[@]}; do
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
         if [[ ${1-} == pull ]]; then
-            git -C "${repo_path}" pull
-            if [[ $? > 0 ]]; then
+            res=0
+            git -C "${repo_path}" pull || res=$?
+            if [[ $res > 0 ]]; then
                 error "failed to pull repo: $repo ($repo_url)"
-                ((errors++))
+                let errors+=1
             else
                 info "successfully pulled repo: $repo ($repo_url)"
             fi
