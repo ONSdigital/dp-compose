@@ -28,6 +28,11 @@ for name in ${services[@]}; do
     state_f=""
     health_f=""
 
+    if [[ -n ${SERVICE:-} && ! "$name" =~ "$SERVICE"* ]]; then
+        printf -- "- %-40b %-11b %-11b %-40b\n" "$name" "-" "-" "skipped"
+        continue
+    fi
+
     # Get state of service
     IFS=" " read -r state health exit_code <<<"$(docker-compose ps $name --format=json | jq -r '"\(.State) \(.Health) \(.ExitCode)"')"
     health_output=""
