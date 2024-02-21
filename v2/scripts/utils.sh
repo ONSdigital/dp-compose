@@ -12,25 +12,31 @@ RED="\e[31m"
 CYAN="\e[36m"
 RESET="\e[0m"
 
+colour() {
+    local colour=$1; shift
+    local RESET_safe="${RESET//\[/\\[}"
+    echo -e "${colour}${@//${RESET_safe}/${RESET}${colour}}${RESET}"
+}
+
 # Fatal error log that exits the script with error code 2
 fatal() {
-    echo -e "${RED}ERROR: $@${RESET}" >&2
+    colour ${RED} "ERROR: $@" >&2
     exit 2
 }
 
 # Red error log
 error() {
-    echo -e "${RED}ERROR: $@${RESET}" >&2
+    colour ${RED} "ERROR: $@" >&2
 }
 
 # Yellow warning log
 warning() {
-    echo -e "${YELLOW}WARNING: $@${RESET}" >&2
+    colour ${YELLOW} "WARNING: $@" >&2
 }
 
 # Green info log
 info() {
-    echo -e "${GREEN}INFO: $@${RESET}" >&2
+    colour ${GREEN} "INFO: $@" >&2
 }
 
 # For cloneServices, please set:
