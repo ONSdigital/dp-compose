@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  dp-frontend-cookie-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-cookie-controller"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-cookie-controller
+      dockerfile: Dockerfile.local
+    command:
+      - reflex
+      - -d
+      - none
+      - -c
+      - ./reflex
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-cookie-controller:/dp-frontend-cookie-controller
+    expose:
+      - "24100"
+    ports:
+      - 24100:24100
+    restart: unless-stopped
+    environment:
+      BIND_ADDR:          ":24100"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:24100/health" ]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
