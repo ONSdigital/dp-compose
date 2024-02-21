@@ -9,6 +9,7 @@ set -euo pipefail
 GREEN="\e[32m"
 YELLOW="\e[33m"
 RED="\e[31m"
+CYAN="\e[36m"
 RESET="\e[0m"
 
 # Fatal error log that exits the script with error code 2

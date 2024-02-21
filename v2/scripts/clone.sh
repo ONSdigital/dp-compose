@@ -60,6 +60,8 @@ for repo_url in ${repos[@]}; do
         error "failed to parse repo url: '$repo_url'"
     fi
 
+    repo_pp=$(colour $CYAN $repo)
+
     # Check if the repo already exits
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
@@ -67,17 +69,17 @@ for repo_url in ${repos[@]}; do
             res=0
             git -C "${repo_path}" pull || res=$?
             if [[ $res > 0 ]]; then
-                error "failed to pull repo: $repo ($repo_url)"
+                error "failed to pull repo: $repo_pp ($repo_url)"
                 let errors+=1
             else
-                info "successfully pulled repo: $repo ($repo_url)"
+                info "successfully pulled repo: $repo_pp ($repo_url)"
             fi
         else
-            info "repo already cloned, skipping: $repo ($repo_url)"
+            info "repo already cloned, skipping: $repo_pp ($repo_url)"
         fi
     else
         # If not then clone it
-        info "cloning repo...: $repo ($repo_url)"
+        info "cloning repo...: $repo_pp ($repo_url)"
 
         if [[ $VERBOSE = true ]]; then
             git -C "${DP_REPO_DIR}" clone "$clone_url"
@@ -85,10 +87,10 @@ for repo_url in ${repos[@]}; do
             git -C "${DP_REPO_DIR}" clone "$clone_url" 2> /dev/null
         fi
         if [[ $? > 0 ]]; then
-            error "failed to clone repo, please make sure the repo exists and you have access to it: $repo ($repo_url)"
-            ((errors++))
+            error "failed to clone repo, please make sure the repo exists and you have access to it: $repo_pp ($repo_url)"
+            let errors+=1
         else
-            info "successfully cloned repo: $repo ($repo_url)"
+            info "successfully cloned repo: $repo_pp ($repo_url)"
         fi
     fi
 done

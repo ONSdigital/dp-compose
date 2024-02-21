@@ -14,23 +14,39 @@ COMPOSE_ENV_FILES ?= $(LOCAL_ENV_FILE),$(DEFAULT_ENV_FILE)
 
 .PHONY: up
 up: $(LOCAL_ENV_FILE)
-	@echo "building, creating and starting containers..."
+	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
 .PHONY: down
 down: $(LOCAL_ENV_FILE)
-	@echo "stopping and removing containers and networks..."
+	@echo "\033[34m""stopping and removing containers and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down $(SERVICE)
 
 .PHONY: clean
 clean: $(LOCAL_ENV_FILE)
-	@echo "stopping and removing containers, associated volumes and networks..."
+	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
 .PHONY: ps start stop config
 ps start stop config: $(LOCAL_ENV_FILE)
-	@echo "$@ containers..." >&2
+	@echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
+
+.PHONY: images
+images:
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $@ $(SERVICE) $(ENV_FILE_ARGS)
+
+.PHONY: image-id
+image-id: $(LOCAL_ENV_FILE)
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '/$(SERVICE)$$/{print $$1}'
+
+.PHONY: clean-image
+clean-image:
+	@i_id=$$(make image-id);								\
+		if [[ -z $$i_id ]]; then echo Could not get image-id >&2; exit 3; fi;		\
+		if [[ $$i_id =~ [[:space:]] ]]; then echo Use more specific SERVICE, got IDs $$i_id >&2; exit 4; fi;	\
+		echo "\033[34m""Removing image '$$i_id' for $(SERVICE)\033[0m" >&2;		\
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
 
 .PHONY: countainer-id
 countainer-id: $(LOCAL_ENV_FILE)
@@ -63,8 +79,13 @@ clone:
 pull:
 	@../../scripts/clone.sh pull
 
+.PHONY: list-repos
 list-repos:
 	@make config | yq -r '.services | to_entries | .[].value."x-repo-url" | select(.)' | sort -u
+
+.PHONY: list-services
+list-services:
+	@make config | yq -r '.services | keys | .[]'
 
 $(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
 	cp ../$(LOCAL_ENV_FILE).tmpl $(LOCAL_ENV_FILE)
