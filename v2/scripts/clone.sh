@@ -61,14 +61,14 @@ for repo_url in ${repos[@]}; do
         continue
     fi
 
-	repo_pp="$(colour $CYAN "$(printf "%-30s" $repo)")"
+    repo_pp="$(colour $CYAN "$(printf "%-30s" $repo)")"
 
     # Check if the repo already exits
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
+        branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
+        branch_pp=$(colour $YELLOW $branch)
         if [[ ${1-} == pull ]]; then
-			branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
-			branch_pp=$(colour $YELLOW $branch)
             res=0
             git -C "${repo_path}" pull || res=$?
             if [[ $res > 0 ]]; then

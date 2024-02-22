@@ -54,14 +54,13 @@ cloneServices() {
 }
 
 logSuccess() {
-    echo -e "$GREEN${1}$RESET"
+    colour $GREEN "$@"
 }
 
 logWarning() {
-    echo -e "$YELLOW${1}$RESET"
+    colour $YELLOW "$@"
 }
 
 logError() {
-    echo -e "$RED${1}$RESET"
+    colour $RED "$@"
 }
-
