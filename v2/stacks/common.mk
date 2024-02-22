@@ -57,7 +57,7 @@ attach: $(LOCAL_ENV_FILE)
 	@c_id=$$(make countainer-id);								\
 		if [[ -z $$c_id ]]; then echo Could not get container-id >&2; exit 3; fi;	\
 		if [[ $$c_id =~ [[:space:]] ]]; then echo Use more specific SERVICE, got IDs $$c_id >&2; exit 4; fi;	\
-		echo "Attaching to container '$$c_id' for $(SERVICE)" >&2;			\
+		echo "\033[34m""Attaching to container '$$c_id' for $(SERVICE)\033[0m" >&2;			\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
 .PHONY: logs

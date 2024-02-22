@@ -41,12 +41,12 @@ esac
 
 # Get list of repo urls from docker compose config
 repos=( $(make list-repos) )
-info "repos: ${repos[*]}"
 
 errors=0
 for repo_url in ${repos[@]}; do
     # Strip '.git' extension if present
     repo_url=${repo_url%.git}
+    repo_url_pp=$(colour $GREY $repo_url)
 
     # Parse repo URL
     if [[ "$repo_url" =~ $REPO_URL_REGEX ]]; then
@@ -58,6 +58,7 @@ for repo_url in ${repos[@]}; do
         clone_url=$repo_url
     else
         error "failed to parse repo url: '$repo_url'"
+        continue
     fi
 
     repo_pp=$(colour $CYAN $repo)
@@ -69,17 +70,17 @@ for repo_url in ${repos[@]}; do
             res=0
             git -C "${repo_path}" pull || res=$?
             if [[ $res > 0 ]]; then
-                error "failed to pull repo: $repo_pp ($repo_url)"
+                error "failed to pull repo: $repo_pp ($repo_url_pp)"
                 let errors+=1
             else
-                info "successfully pulled repo: $repo_pp ($repo_url)"
+                info "successfully pulled repo: $repo_pp ($repo_url_pp)"
             fi
         else
-            info "repo already cloned, skipping: $repo_pp ($repo_url)"
+            info "repo already cloned, skipping: $repo_pp ($repo_url_pp)"
         fi
     else
         # If not then clone it
-        info "cloning repo...: $repo_pp ($repo_url)"
+        info "cloning repo...: $repo_pp ($repo_url_pp)"
 
         if [[ $VERBOSE = true ]]; then
             git -C "${DP_REPO_DIR}" clone "$clone_url"
@@ -87,10 +88,10 @@ for repo_url in ${repos[@]}; do
             git -C "${DP_REPO_DIR}" clone "$clone_url" 2> /dev/null
         fi
         if [[ $? > 0 ]]; then
-            error "failed to clone repo, please make sure the repo exists and you have access to it: $repo_pp ($repo_url)"
+            error "failed to clone repo, please make sure the repo exists and you have access to it: $repo_pp ($repo_url_pp)"
             let errors+=1
         else
-            info "successfully cloned repo: $repo_pp ($repo_url)"
+            info "successfully cloned repo: $repo_pp ($repo_url_pp)"
         fi
     fi
 done

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!false dot me
 
 # Set DP_REPO_DIR to override the default repo cloning location
 DP_REPO_DIR=${DP_REPO_DIR:-${DP_COMPOSE_V2_DIR}/../..}
@@ -6,16 +6,17 @@ DP_REPO_DIR=${DP_REPO_DIR:-${DP_COMPOSE_V2_DIR}/../..}
 set -euo pipefail
 
 # prompt colours
-GREEN="\e[32m"
-YELLOW="\e[33m"
-RED="\e[31m"
-CYAN="\e[36m"
-RESET="\e[0m"
+GREEN=$'\e[32m'
+YELLOW=$'\e[33m'
+RED=$'\e[31m'
+CYAN=$'\e[36m'
+GREY=$'\e[30;1m'
+RESET=$'\e[0m'
 
 colour() {
-    local colour=$1; shift
-    local RESET_safe="${RESET//\[/\\[}"
-    echo -e "${colour}${@//${RESET_safe}/${RESET}${colour}}${RESET}"
+    local colour="$1"; shift
+    set -- "${@//${RESET}/${RESET}${colour}}"
+    echo "${colour}$@${RESET}"
 }
 
 # Fatal error log that exits the script with error code 2
