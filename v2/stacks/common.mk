@@ -27,6 +27,9 @@ clean: $(LOCAL_ENV_FILE)
 	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
+.PHONY: refresh
+refresh: down clean-image up
+
 .PHONY: ps start stop config
 ps start stop config: $(LOCAL_ENV_FILE)
 	@echo "\033[34m""$@ containers...\033[0m" >&2
