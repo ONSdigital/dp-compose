@@ -10,7 +10,7 @@ source "${DP_COMPOSE_V2_DIR}/scripts/utils.sh"
 which jq > /dev/null || fatal "jq not installed, please run 'brew install jq'"
 
 # List services (includes stopped and uninitialised services)
-services=( $(docker-compose config --services) )
+services=( $(make list-services) )
 if [[ $? > 0 ]]; then
     fatal "failed to list services, make sure your compose configuration is valid"
 fi

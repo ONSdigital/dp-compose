@@ -61,22 +61,24 @@ for repo_url in ${repos[@]}; do
         continue
     fi
 
-    repo_pp=$(colour $CYAN $repo)
+	repo_pp="$(colour $CYAN "$(printf "%-30s" $repo)")"
 
     # Check if the repo already exits
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
         if [[ ${1-} == pull ]]; then
+			branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
+			branch_pp=$(colour $YELLOW $branch)
             res=0
             git -C "${repo_path}" pull || res=$?
             if [[ $res > 0 ]]; then
-                error "failed to pull repo: $repo_pp ($repo_url_pp)"
+                error "failed to pull repo: $repo_pp ($branch_pp $repo_url_pp)"
                 let errors+=1
             else
-                info "successfully pulled repo: $repo_pp ($repo_url_pp)"
+                info "successfully pulled repo: $repo_pp ($branch_pp $repo_url_pp)"
             fi
         else
-            info "repo already cloned, skipping: $repo_pp ($repo_url_pp)"
+            info "repo already cloned, skipping: $repo_pp ($branch_pp $repo_url_pp)"
         fi
     else
         # If not then clone it
