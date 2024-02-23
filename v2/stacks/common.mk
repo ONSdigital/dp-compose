@@ -19,6 +19,7 @@ MULTI_OK ?=
 
 LOGS_TIMESTAMP ?=
 LOGS_NO_PREFIX ?=
+QUIET ?=
 
 .PHONY: up
 up: $(LOCAL_ENV_FILE)
@@ -40,7 +41,7 @@ refresh: down clean-image up
 
 .PHONY: ps start stop config
 ps start stop config: $(LOCAL_ENV_FILE)
-	@echo "\033[34m""$@ containers...\033[0m" >&2
+	@[[ -n "$(QUIET)" ]] || echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: images
@@ -96,32 +97,40 @@ pull git-status:
 
 .PHONY: list-apps
 list-apps:
-	@make config | yq -r '.services | to_entries | .[] | select(.value | has("x-repo-url")) | .key'
+	@make QUIET=1 config | yq -r '.services | to_entries | .[] | select(.value | has("x-repo-url")) | .key'
 
 .PHONY: list-repos
 list-repos:
-	@make config | yq -r '.services | to_entries | .[].value."x-repo-url" | select(.)' | sort
+	@make QUIET=1 config | yq -r '.services | to_entries | .[].value."x-repo-url" | select(.)' | sort
 
 .PHONY: list-services
 list-services:
-	@make config | yq -r '.services | keys | .[]'
+	@make QUIET=1 config | yq -r '.services | keys | .[]'
 
 .PHONY: list-environment
 list-env-vars:
-	@make config | yq '.services.[].environment | select(.) | keys | .[]' | sort -u
+	@make QUIET=1 config | yq '.services.[].environment | select(.) | keys | .[]' | sort -u
 
 $(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
 	cp ../$(LOCAL_ENV_FILE).tmpl $(LOCAL_ENV_FILE)
 
-.PHONY: check-sanity
-check-sanity: check-versions check-env-vars
+.PHONY: check
+check: check-config check-versions check-env-vars
+
+check-config:
+	@source $(SCRIPTS_DIR)/utils.sh;		\
+		cfg="$$(make config QUIET=1)";		\
+		for app in $$(make list-apps); do	\
+			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");	\
+			[[ $$test0 != null ]] || warning "$$(colour $$BOLD $$app) has no healthcheck";		\
+		done
 
 .PHONY: check-versions
 check-versions:
 	@source $(SCRIPTS_DIR)/utils.sh;	\
 		is_ver java		"$$(java -version		2>&1 | sed -En 's/.* version "(.*)"$$/\1/p')"		"1\.8\.*";		\
 		is_ver maven		"$$(mvn --version		2>&1 | sed -En 's/.* Maven ([0-9]+\..*) .*/\1/p')"	"3\.*";			\
-		is_ver docker		"$$(docker --version		2>&1 | sed -En 's/.* version ([^ ]+) .*/\1/p')"		"25\.*";		\
+		is_ver docker		"$$(docker --version		2>&1 | sed -En 's/.* version ([^ ]+), .*/\1/p')"		"25\.*";		\
 		is_ver docker-compose	"$$(docker-compose --version	2>&1 | sed -En 's/.* version v([0-9.]+.*)/\1/p')"	"2\.2?\.*";		\
 		: is_ver nvm		"$$(nvm --version		2>&1 )"							"0\.[3-9][0-9]\..*";	\
 		: is_ver npm		"$$(npm --version		2>&1 )"							"0\.[3-9][0-9]\..*"
@@ -133,5 +142,5 @@ check-env-vars:
 			[[ "$$env_var" == *.* ]] && continue;				\
 			eval val=\$${$$env_var-DoesNotExist};				\
 			[[ "$$val" == "DoesNotExist" ]] && continue;			\
-			warning "env var is from your environment: $$env_var";		\
+			warning "env var is from your environment: $$(colour $$BOLD $$env_var)";	\
 		done

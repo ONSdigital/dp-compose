@@ -97,3 +97,59 @@ Contains scripts and files to set the initial state required for stacks to work.
 ## Kafka
 
 Some stacks use KRaft mode, which is an early release: https://github.com/apache/kafka/blob/6d1d68617ecd023b787f54aafc24a4232663428d/config/kraft/README.md
+
+
+## Useful `make` targets
+
+We use `make` to allow quick/easy use of `docker` and `docker-compose` commands
+with the correct setup (make sets the env vars that docker needs) for the given stack.
+
+### Make options
+
+Some optional general *make variables* can be used:
+
+- `make ... SERVICE=....`
+
+   By default, most make targets will act on all services (e.g. `make up`), but you can limit the action
+   to a given service if you specify `SERVICE` e.g. `make up SERVICE=dp-api-router`
+
+   Some targets will use `SERVICE` as a prefix and act on all matching services.
+
+- `make ... MULTI_OK=1`
+
+   Some make actions/targets will fail if SERVICE does not specify a single service, e.g. `make clean-image`
+   whereas if you set `MULTI_OK` it will act on more than one: e.g. `make clean-image MULTI_OK=1`
+
+### Make targets
+
+- `make ps`
+    equivalent to `docker-compose ps` (show running containers)
+- `make config`
+   equivalent to `docker-compose config` (show single YAML describing the stack)
+- `make up` / `make down`
+   bring the container(s) (for the stack or `SERVICE`) up/down
+- `make health`
+   query the health of each service
+- `make clone` / `make pull` / `make git-status`
+   `git clone/pull/status` all apps used by this stack
+- `make list-repos`
+   show the list of repos for the apps in the stack - used by `make clone`
+- `make list-services`
+   show the list of all services/containers
+- `make list-apps`
+   show the list of apps (a subset of *services* that have a 'x-repo-url' field)
+- `make logs` `make logs-tail LOGS_TIMESTAMP=1 LOGS_NO_PREFIX=1`
+   show the logs for the matching services (optionally with timestamp and/or container-prefixed)
+- `make attach`
+   attach to a running container (i.e. get a shell)
+- `make clean`
+- `make clean-image`
+- `make refresh`
+   a shortcut for `make down clean-image up`
+- `make check`
+- [ ] `make check-config`
+- [ ] `make check-env-vars`
+- [ ] `make check-versions`
+
+[ ] in florence asset on port 9000 should be from host sixteens but are from dp-frontend-router
+

@@ -71,7 +71,7 @@ is_ver() {
         return 1
     fi
     if [[ $app_ver =~ ^$want_ver ]]; then
-        info "$(colour $CYAN $app) is version $(colour $GREEN $app_ver), wanted $(colour $GREEN "$want_ver")"
+        info "$(colour $CYAN $app) is version $(colour $BOLD $app_ver), wanted $(colour $BOLD "$want_ver")"
         return 0
     fi
     warning "$(colour $CYAN $app) is version $(colour $RED $app_ver), wanted $(colour $GREEN "$want_ver")"
