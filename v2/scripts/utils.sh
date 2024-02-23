@@ -62,7 +62,7 @@ logError() {
     colour $RED "$@"
 }
 
-is_version() {
+is_ver() {
     local app=$1;       shift
     local app_ver=$1;   shift
     local want_ver=$1;  shift
@@ -71,7 +71,8 @@ is_version() {
         return 1
     fi
     if [[ $app_ver =~ ^$want_ver ]]; then
+        info "$(colour $CYAN $app) is version $(colour $GREEN $app_ver), wanted $(colour $GREEN "$want_ver")"
         return 0
     fi
-    warning "$(colour $CYAN $app) is version $(colour $YELLOW $app_ver), but need $(colour $GREEN "$want_ver")"
+    warning "$(colour $CYAN $app) is version $(colour $RED $app_ver), wanted $(colour $GREEN "$want_ver")"
 }
