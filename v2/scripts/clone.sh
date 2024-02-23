@@ -68,14 +68,15 @@ for repo_url in ${repos[@]}; do
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
         branch_pp=$(colour $YELLOW $branch)
-        if [[ ${1-} == pull ]]; then
+        if [[ :pull:git-status: == *:${1-}:* ]]; then
+            git_arg=${1#git-}
             res=0
-            git -C "${repo_path}" pull || res=$?
+            git -C "${repo_path}" $git_arg || res=$?
             if [[ $res > 0 ]]; then
-                error "failed to pull repo: $repo_pp ($branch_pp $repo_url_pp)"
+                error "failed to '$git_arg' repo: $repo_pp ($branch_pp $repo_url_pp)"
                 let errors+=1
             else
-                info "successfully pulled repo: $repo_pp ($branch_pp $repo_url_pp)"
+                info "successfully '$git_arg' on repo: $repo_pp ($branch_pp $repo_url_pp)"
             fi
         else
             info "repo already cloned, skipping: $repo_pp ($branch_pp $repo_url_pp)"

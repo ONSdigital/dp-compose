@@ -5,13 +5,10 @@ DP_REPO_DIR=${DP_REPO_DIR:-${DP_COMPOSE_V2_DIR}/../..}
 
 set -euo pipefail
 
-# prompt colours
-GREEN=$'\e[32m'
-YELLOW=$'\e[33m'
-RED=$'\e[31m'
-CYAN=$'\e[36m'
-GREY=$'\e[30;1m'
-RESET=$'\e[0m'
+# colours
+BOLD=$'\e[1m';      GREY=$'\e[30;1m';    RESET=$'\e[0m'
+RED=$'\e[31m';      GREEN=$'\e[32m';     YELLOW=$'\e[33m';   BLUE=$'\e[34m'
+MAGENTA=$'\e[35m';  CYAN=$'\e[36m';      WHITE=$'\e[37m'
 
 colour() {
     local colour="$1"; shift
@@ -63,4 +60,18 @@ logWarning() {
 
 logError() {
     colour $RED "$@"
+}
+
+is_version() {
+    local app=$1;       shift
+    local app_ver=$1;   shift
+    local want_ver=$1;  shift
+    if [[ -z $app_ver ]]; then
+        warning "$(colour $CYAN $app) cannot obtain version - check for app version $(colour $GREEN "$want_ver") being installed or maybe I cannot parse the version output"
+        return 1
+    fi
+    if [[ $app_ver =~ ^$want_ver ]]; then
+        return 0
+    fi
+    warning "$(colour $CYAN $app) is version $(colour $YELLOW $app_ver), but need $(colour $GREEN "$want_ver")"
 }
