@@ -19,6 +19,7 @@ ENABLE_MULTI ?=
 
 LOGS_TIMESTAMP ?=
 LOGS_NO_PREFIX ?=
+LOGS_TAIL ?=
 QUIET ?=
 
 .PHONY: up
@@ -72,10 +73,10 @@ attach: $(LOCAL_ENV_FILE)
 		echo "\033[34m""Attaching to container '$$c_id' for $(SERVICE)\033[0m" >&2;			\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
-.PHONY: logs logs-tail
-logs logs-tail: $(LOCAL_ENV_FILE)
+.PHONY: logs
+logs: $(LOCAL_ENV_FILE)
 	@logs_arg="";	\
-		[[ $@ == logs-tail ]]		&& logs_arg+="-f ";	\
+		[[ -n "$(LOGS_TAIL)" ]]		&& logs_arg+="-f ";	\
 		[[ -n "$(LOGS_TIMESTAMP)" ]]	&& logs_arg+="-t ";	\
 		[[ -n "$(LOGS_NO_PREFIX)" ]]	&& logs_arg+="--no-log-prefix ";	\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose logs $$logs_arg $(SERVICE) $(ENV_FILE_ARGS)
