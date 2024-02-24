@@ -1,25 +1,31 @@
 # dp-compose
+
 A project to assist in composing multiple DP services
 
-Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Docker for mac - NOT the previous docker toolbox which runs docker in a VM.
+Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Docker Desktop for mac - NOT the previous docker toolbox which runs docker in a VM.
 
-Note that if you run Docker using the mac VM, you will need to increase its resources.
+Note that if you run Docker using the mac VM, you will need to
+[increase its resources](https://www.docker.com/products/docker#/mac).
 
-https://www.docker.com/products/docker#/mac
+## V2
 
-More information about the kafka cluster [here](./kafka-cluster.md)
+There is a version 2 folder (`v2`), which contains different docker compose definitions for each stack.
 
-### V2
+Please, have a look at the [version 2 README](./v2/README.md) for more information,
+especially if you are new to dp-compose.
 
-There is a version 2 folder, which contains different docker compose definitions for each stack.
+## Non-v2 stacks
 
-Please, have a look to [version 2 README](./v2/README.md) for more information
+There are some stacks in this directory (not the `v2` directory) which follow the below documentation, but we recommend starting with the (above) V2 stacks before using these.
+
+More information about the kafka cluster [here](./kafka-cluster.md).
 
 ### Run
 
 You may run containers for all required backing services by doing one of the following:
-- Run ```docker-compose up```
-- Using the ``` ./run.sh ``` script does the same thing.
+
+- Run `docker-compose up`
+- Using the `./run.sh` script does the same thing.
 - Run `make start` to start the kafka cluster containers
 
 You can run `make stop` to stop the containers, or `make clean` to stop and remove them as well.
@@ -28,9 +34,9 @@ You can run `make stop` to stop the containers, or `make clean` to stop and remo
 
 ## CMD
 
-The ONS website and CMD both require Elastic search but (annoyingly) require different versions. The `docker-compose.yml` will start 2 instances. 
+The ONS website and CMD both require Elasticsearch but (annoyingly) require different versions. The `docker-compose.yml` will start 2 instances.
 
-**Note:** The default ports for Elastic search is usually `9200` & `9300` however in order to avoid a port conflict
+**Note:** The default ports for Elasticsearch is usually `9200` & `9300` however in order to avoid a port conflict
  when running 2 different versions on the same box at the same time the CMD instance is set to use ports `10200` & `10300`.
 
 :warning: **Gotcha Warning** :warning:
@@ -38,33 +44,33 @@ You'll need to overwrite your ES config for the `dp-dimension-search-builder` an
 
 ## Postgis
 
-**Important**: Zebedee requires _**Postgis**_. 
+**Important**: Zebedee requires _**Postgis**_.
 
-The _dp-compose_postgis_ container by default uses port `5432` 
+The _dp-compose_postgis_ container by default uses port `5432`
 
 ### Checking postgres version
 
-`docker ps -a`
+If you run the below command you should see something similar to (see IMAGE column):
 
-You should see something similar to (see IMAGE):
-```
+```shell
+$ docker ps -a
 CONTAINER ID    IMAGE                 COMMAND                   CREATED           STATUS           PORTS                     NAMES
 d343558fd467    dp-compose_postgis    "docker-entrypoint.s…"    11 minutes ago    Up 11 minutes    0.0.0.0:5432->5432/tcp    dp-compose-postgis-1
 ```
 
-Or (see TAG)
-```
-docker images
-```
-```
+Or this command (see TAG column)
+
+```shell
+$ docker images
 REPOSITORY    TAG     IMAGE ID        CREATED           SIZE
 postgis      latest   ed34a2d5eb79    25 minutes ago    567MB
 ```
 
 ### Connecting to Postgres
-To connect to the container and query via the postgres _cli_
 
-```
+To connect to the container and query via the postgres CLI
+
+```shell
 docker run -it --rm --link dp-compose_postgis_1:postgis --net dp-compose_default postgis/postgis psql -h postgis -U postgres
 ```
 
@@ -72,4 +78,4 @@ docker run -it --rm --link dp-compose_postgis_1:postgis --net dp-compose_default
 
 Dependencies should be kept at specific versions and up-to-date with production.
 Previously we were just using 'latest' and out-of-date versions which both could lead to unexpected behaviour.
-This repository should be the source of truth for which versions to use for dependencies. 
+This repository should be the source of truth for which versions to use for dependencies.

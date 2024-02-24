@@ -66,14 +66,14 @@ are commented out.
 5- Run the stack
 
 ```sh
-make start-detached
+make up
 ```
 
 ### Reindex
 
 In order to populate elasticsearch, you may run the reindex script, and if you have followed the previous steps you will have access to the necessary external data.
 
-Navigate to your `search-api` location, edit the necessary config under `cmd/reindex/local.go`, and run:
+Navigate to your `dp-search-api` repo location, edit the necessary config under `cmd/reindex/local.go`, and run:
 
 ```sh
 make reindex
@@ -108,94 +108,94 @@ $ collection-id
 
 If you want to run a stand-alone search stack, without external dependencies, you may use the basic stack, like so:
 
-1- Edit docker-compose config
+1. Edit docker-compose config
 
-Edit this stack's `.env` file and uncomment this block (by default this is uncommented):
+   Edit this stack's `default.env` file and uncomment this block (by default this is uncommented):
 
-```sh
-# -- FULL STACK (WEB) --
-COMPOSE_FILE=deps.yml:backend.yml:frontend.yml
-```
+   ```sh
+   # -- FULL STACK (WEB) --
+   COMPOSE_FILE=deps.yml:backend.yml:frontend.yml
+   ```
 
-Ensure that the the blocks that begin
+   Ensure that the the blocks that begin
 
-```sh
-# -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
-```
+   ```sh
+   # -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
+   ```
 
-and
+   and
 
-```sh
-# -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
-```
+   ```sh
+   # -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
+   ```
 
-are commented out.
+   are commented out.
 
-2- Run the stack
+1. Run the stack
 
-```sh
-make start-detached
-```
+   ```sh
+   make up
+   ```
 
-### Run in Publishing mode
+## Run in Publishing mode
 
 To run in publishing mode (mostly used to view Search via Florence) do the following:
 
-1- Edit docker-compose config
+1. Edit docker-compose config
 
-Edit this stack's `.env` file and uncomment this block:
+   Edit this stack's `.env` file and uncomment this block:
 
-```sh
-# -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
-#COMPOSE_FILE=deps.yml:backend.yml:frontend.yml:publishing.yml
-#IS_PUBLISHING=true
-#ENABLE_AUDIT=true
-```
+   ```sh
+   # -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
+   #COMPOSE_FILE=deps.yml:backend.yml:frontend.yml:publishing.yml
+   #IS_PUBLISHING=true
+   #ENABLE_AUDIT=true
+   ```
 
-Ensure that the the blocks that begin
+   Ensure that the the blocks that begin
 
-```sh
-# -- FULL STACK (WEB) --
-```
+   ```sh
+   # -- FULL STACK (WEB) --
+   ```
 
-and
+   and
 
-```sh
-# -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
-```
+   ```sh
+   # -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
+   ```
 
-are commented out.
+   are commented out.
 
-2- Ensure your service auth token is valid in your zebedee
+1. Ensure your service auth token is valid in your zebedee
 
-Check the /services directory to ensure there is a token there.
+   Check the /services directory to ensure there is a token there.
 
-3- Run the stack
+1. Run the stack
 
-```sh
-make start-detached
-```
+   ```sh
+   make up
+   ```
 
-### Run with Reindex Pipeline
+## Run with Reindex Pipeline
 
 If you want to run a search stack, without external dependencies, including the reindex pipeline:
 
-1- Edit docker-compose config
+1. Edit docker-compose config
 
-Edit this stack's `.env` file and uncomment this block (by default this is commented):
+   Edit this stack's `default.env` file and uncomment this block (by default this is commented):
 
-```sh
-# -- FULL STACK (WEB) + REINDEX --
-COMPOSE_FILE=deps.yml:backend.yml:frontend.yml:reindex.yml
-```
+   ```sh
+   # -- FULL STACK (WEB) + REINDEX --
+   COMPOSE_FILE=deps.yml:backend.yml:frontend.yml:reindex.yml
+   ```
 
-2- Run the stack
+1. Run the stack
 
-```sh
-make start-detached
-```
+   ```sh
+   make up
+   ```
 
-### Gotchas
+## Gotchas
 
 Some errors seen while adding new services that you can overcome
 
@@ -232,7 +232,7 @@ run go get github.com/kevinburke/go-bindata/go-bindata
 
 - Delete your local files under the `.go/` (not source controlled) directory for the service
 - Delete the offending image from the container
-- Try again i.e. `make start-detached`
+- Try again i.e. `make up`
 
 ---
 
@@ -252,4 +252,4 @@ Solution: set your authentication token
 
 - Add the response to the header of the GET request
 
-`X-Florence-Token:{TheResponseFromThePOSTRequest}`
+`X-Florence-Token: {TheResponseFromThePOSTRequest}`

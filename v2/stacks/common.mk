@@ -15,7 +15,7 @@ COMPOSE_ENV_FILES ?= $(LOCAL_ENV_FILE),$(DEFAULT_ENV_FILE)
 SCRIPTS_DIR ?= ../../scripts
 
 # by default, do not act on more than one (app, image, etc)
-MULTI_OK ?=
+ENABLE_MULTI ?=
 
 LOGS_TIMESTAMP ?=
 LOGS_NO_PREFIX ?=
@@ -55,8 +55,8 @@ image-id: $(LOCAL_ENV_FILE)
 .PHONY: clean-image
 clean-image:
 	@i_id=$$(make image-id);								\
-		if [[ -z $$i_id ]]; then echo Could not get image-id >&2; exit 3; fi;		\
-		if [[ $$i_id =~ [[:space:]] && -z "$(MULTI_OK)" ]]; then echo Use more specific SERVICE, got IDs $$i_id >&2; exit 4; fi;	\
+		if [[ -z $$i_id ]]; then echo "Could not get image-id" >&2; exit 3; fi;		\
+		if [[ $$i_id =~ [[:space:]] && -z "$(ENABLE_MULTI)" ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got >1 IDs $$i_id" >&2; exit 4; fi;	\
 		echo "\033[34m""Removing image '$$i_id' for $(SERVICE)\033[0m" >&2;		\
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
 
@@ -67,8 +67,8 @@ countainer-id: $(LOCAL_ENV_FILE)
 .PHONY: attach
 attach: $(LOCAL_ENV_FILE)
 	@c_id=$$(make countainer-id);								\
-		if [[ -z $$c_id ]]; then echo Could not get container-id >&2; exit 3; fi;	\
-		if [[ $$c_id =~ [[:space:]] && -z "$(MULTI_OK)" ]]; then echo Use more specific SERVICE, got IDs $$c_id >&2; exit 4; fi;	\
+		if [[ -z $$c_id ]]; then echo "Could not get container-id" >&2; exit 3; fi;	\
+		if [[ $$c_id =~ [[:space:]] ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got IDs $$c_id" >&2; exit 4; fi;	\
 		echo "\033[34m""Attaching to container '$$c_id' for $(SERVICE)\033[0m" >&2;			\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
@@ -87,12 +87,8 @@ health: $(LOCAL_ENV_FILE)
 .PHONY: base-init
 base-init: clone $(LOCAL_ENV_FILE)
 
-.PHONY: clone
-clone:
-	@$(SCRIPTS_DIR)/clone.sh
-
-.PHONY: pull git-status
-pull git-status:
+.PHONY: clone pull git-status
+clone pull git-status:
 	@$(SCRIPTS_DIR)/clone.sh $@
 
 .PHONY: list-apps
@@ -131,7 +127,7 @@ check-versions:
 		is_ver java		"$$(java -version		2>&1 | sed -En 's/.* version "(.*)"$$/\1/p')"		"1\.8\.*";		\
 		is_ver maven		"$$(mvn --version		2>&1 | sed -En 's/.* Maven ([0-9]+\..*) .*/\1/p')"	"3\.*";			\
 		is_ver docker		"$$(docker --version		2>&1 | sed -En 's/.* version ([^ ]+), .*/\1/p')"		"25\.*";		\
-		is_ver docker-compose	"$$(docker-compose --version	2>&1 | sed -En 's/.* version v([0-9.]+.*)/\1/p')"	"2\.2?\.*";		\
+		is_ver docker-compose	"$$(docker-compose --version	2>&1 | sed -En 's/.* version v?([0-9.]+.*)/\1/p')"	"2\.2?\.*";		\
 		: is_ver nvm		"$$(nvm --version		2>&1 )"							"0\.[3-9][0-9]\..*";	\
 		: is_ver npm		"$$(npm --version		2>&1 )"							"0\.[3-9][0-9]\..*"
 
