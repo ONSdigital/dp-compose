@@ -4,6 +4,8 @@ This folder contains the different stacks. To run a stack you have to go to its 
 
 ```sh
 cd $chosen_stack_name_here
+# for example, relative to this 'stacks' directory
+cd auth
 ```
 
 ## Initialisation
@@ -17,7 +19,7 @@ Some stacks require an initialisation step, please check the corresponding [stac
 A `Makefile` is provided for each stack, so you can run the corresponding `make` command. For example:
 
 ```sh
-# from inside the stack directory
+# inside the given stack directory
 make up      # bring the stack up
 ```
 
@@ -31,9 +33,10 @@ See [using make](#using-make), below, for more information on the available `mak
 
 ### Environment
 
-Check the `local.env` file and change it for your development requirements - you might need to point to local services running in an IDE for example.
+Check the `local.env` file and change it for your development requirements - you might need to point to local services running in an IDE, for example.
 
 You can override any env var defined by any manifest used by the stack, any value that you override in `local.env` will be picked up by all the manifests used by the stack.
+
 Here is a comprehensive list of env vars you can override:
 
 - Secret values, which **MUST NOT** be committed:
@@ -137,7 +140,7 @@ Here is a comprehensive list of env vars you can override:
 
 ### General guidance for each stack
 
-Unless stated, below, for each stack listed, the following is assumed:
+Unless stated below, for each stack listed, the following is assumed:
 
 1. You are in the given stack directory
 
@@ -152,6 +155,14 @@ Unless stated, below, for each stack listed, the following is assumed:
    make check
    ```
 
+1. You may want to get the relevant repos uptodate
+
+   ```sh
+   # optional
+   # this will also clone any that are not yet cloned
+   make pull
+   ```
+
 1. You have started the docker stack
 
    ```sh
@@ -161,7 +172,7 @@ Unless stated, below, for each stack listed, the following is assumed:
 1. When you have completed testing/development (see below, per stack), you may stop all containers and clean the environment:
 
    ```sh
-   # WARNING: this will remove local data
+   # WARNING: this will remove local data from ephemeral databases, etc
    make clean
    ```
 

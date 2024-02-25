@@ -70,16 +70,16 @@ Each sub-folder corresponds to a particular stack and contains at least:
 - `default.env` and `local.env`: With the environmental variables required to override the default config for the services in the stack (`local.env` is git-ignored because it contains your local, and possibly sensitive, env vars)
   - More information [here](https://docs.docker.com/compose/environment-variables/#using-the---env-file--option)
 
-#### stack .env
+#### stack env files
 
-Note that each `.env` file should be used only to override required env vars for that particular stack, and check that any compulsory env vars for the stack are set (for example, most stacks will require your system to have `SERVICE_AUTH_TOKEN` and `zebedee_root`).
+Note that each `*.env` file should be used only to override required env vars for that particular stack, and check that any compulsory env vars for the stack are set (for example, most stacks will require your system to have `SERVICE_AUTH_TOKEN` and `zebedee_root`).
 
 For example, the following `default.env` file:
 
 - checks for compulsory env vars
-- defines relative paths to manifests and provisioning scripts
+- defines relative paths to shared manifests and provisioning scripts
 - overwrites default values used by the stack and/or extended manifests
-- configures docker compose for the stack:
+- configures docker compose for the stack
 
 ```shell
 # -- Compulsory env vars validation --
@@ -99,6 +99,8 @@ COMPOSE_PATH_SEPARATOR=:
 COMPOSE_PROJECT_NAME=home-web
 COMPOSE_HTTP_TIMEOUT=120
 ```
+
+Any changes to these stack defaults - that only affect your individual circumstances - should go into the `local.env` file in the given stack.
 
 ### provisioning
 
