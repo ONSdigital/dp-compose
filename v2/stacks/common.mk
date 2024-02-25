@@ -88,8 +88,8 @@ health: $(LOCAL_ENV_FILE)
 .PHONY: base-init
 base-init: clone $(LOCAL_ENV_FILE)
 
-.PHONY: clone pull git-status
-clone pull git-status:
+.PHONY: clone pull git-status check-repos
+clone pull git-status check-repos:
 	@$(SCRIPTS_DIR)/clone.sh $@
 
 .PHONY: list-apps
@@ -112,14 +112,15 @@ $(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
 	cp ../$(LOCAL_ENV_FILE).tmpl $(LOCAL_ENV_FILE)
 
 .PHONY: check
-check: check-config check-versions check-env-vars
+check: check-config check-versions check-env-vars check-repos
 
+.PHONY: check-config
 check-config:
 	@source $(SCRIPTS_DIR)/utils.sh;		\
 		cfg="$$(make config QUIET=1)";		\
 		for app in $$(make list-apps); do	\
-			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");	\
-			[[ $$test0 != null ]] || warning "$$(colour $$BOLD $$app) has no healthcheck";		\
+			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");		\
+			[[ $$test0 != null ]] || warning "$$(colour $$BOLD $$app) has no healthcheck";	\
 		done
 
 .PHONY: check-versions

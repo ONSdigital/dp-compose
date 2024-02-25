@@ -81,6 +81,10 @@ for repo_url in ${repos[@]}; do
         else
             info "repo already cloned, skipping: $repo_pp ($branch_pp $repo_url_pp)"
         fi
+
+    elif [[ "${1-}" == "check-repos" ]]; then
+        warn "not found repo: $repo_pp ($repo_url_pp)"
+
     else
         # If not then clone it
         info "cloning repo...: $repo_pp ($repo_url_pp)"
@@ -102,4 +106,4 @@ done
 if [[ $errors > 0 ]]; then
     fatal "failed to action $errors repos"
 fi
-info "${#repos[*]} repos have been actioned"
+info "done ${#repos[*]} repos"
