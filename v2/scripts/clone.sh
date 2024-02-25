@@ -63,7 +63,7 @@ for repo_url in ${repos[@]}; do
 
     repo_pp="$(colour $CYAN "$(printf "%-30s" $repo)")"
 
-    # Check if the repo already exits
+    # Check if the repo already exists locally
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
@@ -83,7 +83,7 @@ for repo_url in ${repos[@]}; do
         fi
 
     elif [[ "${1-}" == "check-repos" ]]; then
-        warn "not found repo: $repo_pp ($repo_url_pp)"
+        warn "no local repo: $repo_pp ($repo_url_pp) - run: $(colour $CYAN "make clone")"
 
     else
         # If not then clone it
