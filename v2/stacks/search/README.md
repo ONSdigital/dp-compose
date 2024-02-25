@@ -12,62 +12,60 @@ Or you may run it with mappings to localhost, to obtain data from external sourc
 
 If you want to use data from en external source (e.g. Sandbox environment), you may use the backend-with-mappings stack, like so:
 
-1- Set a valid service auth token for the environment you want to use. For example, you may check the environment's secrets in `dp-configs` and use a valid token:
+1. Set a valid service auth token for the environment you want to use. For example, you may check the environment's secrets in `dp-configs` and use a valid token:
 
-```sh
-export export SERVICE_AUTH_TOKEN=<valid_token>
-```
+   ```sh
+   export SERVICE_AUTH_TOKEN=<valid_token>
+   ```
 
-2- Gain access to the environment you want to use. For example, you may login to sandbox environment:
+1. Gain access to the environment you want to use. For example, you may login to sandbox environment:
 
-```sh
-aws sso login --profile dp-sandbox
-```
+   ```sh
+   aws sso login --profile dp-sandbox
+   ```
 
-3- Use the `dp` tool to ssh to `zebedee` and `dp-dataset-api` with port forwarding. For example:
+1. Use the `dp` tool to ssh to `zebedee` and `dp-dataset-api` with port forwarding. For example:
 
-```sh
-# Zebedee
-dp ssh sandbox publishing 1 -p 8082:10.30.138.93:26251
-```
+   ```sh
+   # Zebedee
+   dp ssh sandbox publishing 1 -p 8082:10.30.138.93:26251
 
-```sh
-# Dataset API
-dp ssh sandbox publishing 2 -p 22000:10.30.138.234:25681
-```
+   # Dataset API
+   dp ssh sandbox publishing 2 -p 22000:10.30.138.234:25681
+   ```
 
-Please, replace the publishing node, ip and port according to where the services are currently deployed when you run this. You can check this in [Consul](https://consul.dp.aws.onsdigital.uk/ui/eu/services)
+   Please, replace the publishing node, ip and port according to where the services are currently deployed when you run this. You can check this in [Consul](https://consul.dp.aws.onsdigital.uk/ui/eu/services)
 
-4- Edit docker-compose config
+1. Edit docker-compose config
 
-Edit this stack's `.env` file and uncomment the following block:
+   Copy the below block of this stack's `default.env` file and paste uncommented into `local.env`:
 
-```sh
-# -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
-#COMPOSE_FILE=deps.yml:backend-with-mappings.yml:frontend.yml
-#ZEBEDEE_URL="http://host.docker.internal:8082"       
-#DATASET_API_URL="http://host.docker.internal:22000" 
-```
+   ```sh
+   # -- BACKEND WITH MAPPINGS -- Uncomment the following lines to run backend with mappings
+   #COMPOSE_FILE=deps.yml:backend-with-mappings.yml:frontend.yml
+   #ZEBEDEE_URL="http://host.docker.internal:8082"
+   #DATASET_API_URL="http://host.docker.internal:22000"
+   ```
 
-Ensure that the the blocks that begin
+   Ensure that the the blocks that begin
 
-```sh
-# -- FULL STACK (WEB) --
-```
+   ```sh
+   # -- FULL STACK (WEB) --
+   ```
 
-and
+   and
 
-```sh
-# -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
-```
+   ```sh
+   # -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode
+   ```
 
-are commented out.
+   are commented out in `local.env`.
 
-5- Run the stack
+1. Run the stack
 
-```sh
-make up
-```
+   ```sh
+   make up
+   ```
 
 ### Reindex
 
@@ -87,22 +85,22 @@ When a dataset is published, the search extract-import kafka pipeline is trigger
 
 WARNING: The pipeline assumes that an index with alias "ons" already exists, please make sure you have run the re-index script before trying the pipeline.
 
-1- Navigate to your `search-data-extractor` location and then to `cmd/producer`
+1. Navigate to your `search-data-extractor` location and then to `cmd/producer`
 
-2- Run `go run main.go` and introduce the requested fields. When all the information is introduced a kafka message will be produced. For example:
+1. Run `go run main.go` and introduce the requested fields. When all the information is introduced a kafka message will be produced. For example:
 
-```sh
---- [Send Kafka ContentPublished] ---
-Please type the URI
-$ /datasets/your-datasetid-here/editions/2021/versions/1/metadata
-Please type the dataset type (legacy or datasets)
-$ datasets
-Please type the collection ID
-$ collection-id
-{"created_at":"2023-03-28T12:49:39.788994Z","namespace":"dp-search-data-extractor","event":"sending content-published event","severity":3,"data":{"contentPublishedEvent":{"URI":"datasets/your-datasetid-here/editions/2021/versions/1/metadata","DataType":"datasets","CollectionID":"collection-id","JobID":"","SearchIndex":"","TraceID":"054435ded"}}}
-```
+   ```sh
+   --- [Send Kafka ContentPublished] ---
+   Please type the URI
+   $ /datasets/your-datasetid-here/editions/2021/versions/1/metadata
+   Please type the dataset type (legacy or datasets)
+   $ datasets
+   Please type the collection ID
+   $ collection-id
+   {"created_at":"2023-03-28T12:49:39.788994Z","namespace":"dp-search-data-extractor","event":"sending content-published event","severity":3,"data":{"contentPublishedEvent":{"URI":"datasets/your-datasetid-here/editions/2021/versions/1/metadata","DataType":"datasets","CollectionID":"collection-id","JobID":"","SearchIndex":"","TraceID":"054435ded"}}}
+   ```
 
-3- Check the docker-compose logs, starting with `search-data-extractor` to validate that the message is consumed and processed as expected.
+1. Check the docker-compose logs, starting with `search-data-extractor` to validate that the message is consumed and processed as expected.
 
 ## Run standalone
 
@@ -143,7 +141,7 @@ To run in publishing mode (mostly used to view Search via Florence) do the follo
 
 1. Edit docker-compose config
 
-   Edit this stack's `.env` file and uncomment this block:
+   Copy the below block of this stack's `default.env` file and paste uncommented into `local.env`:
 
    ```sh
    # -- FULL STACK (PUBLISHING) -- Uncomment the following lines to run full stack in publishing mode

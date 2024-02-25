@@ -6,7 +6,7 @@ The auth stack uses the sandbox cognito instance to store users and their permis
 
 ## Getting secrets
 
-To run this stack you will need to obtain the relevant secrets for the .env file, which **must not be committed**:
+To run this stack you will need to obtain the relevant secrets for the `local.env` file, which **must not be committed**:
 
 ```sh
 # get from AWS > Cognito > User Pools > sandbox-florence-users > user pool ID
