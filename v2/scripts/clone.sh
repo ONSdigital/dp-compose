@@ -67,7 +67,8 @@ for repo_url in ${repos[@]}; do
     repo_path="${DP_REPO_DIR}/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
-        branch_pp=$(colour $YELLOW $branch)
+        br_colour=$GREEN; [[ $branch == develop ]] || br_colour=$YELLOW
+        branch_pp=$(colour $br_colour $branch)
         if [[ :pull:git-status: == *:${1-}:* ]]; then
             git_arg=${1#git-}
             res=0

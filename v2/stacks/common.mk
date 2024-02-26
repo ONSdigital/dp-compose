@@ -119,9 +119,12 @@ check-config:
 	@source $(SCRIPTS_DIR)/utils.sh;		\
 		cfg="$$(make config QUIET=1)";		\
 		for app in $$(make list-apps); do	\
-			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");		\
-			[[ $$test0 != null ]] || warning "$$(colour $$BOLD $$app) has no healthcheck";	\
-		done
+			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");			\
+			[[ $$test0 == null ]] || continue;							\
+			known=; [[ $$app == the-train ]] && known=" $$(colour $$GREEN "(known issue)")";	\
+			warning "$$(colour $$BOLD $$app) has no healthcheck$$known";				\
+		done;					\
+		test \! -f ".env" || warning "Found '.env' file, but this is no longer used"
 
 .PHONY: check-versions
 check-versions:
