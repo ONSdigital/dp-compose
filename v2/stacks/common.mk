@@ -10,7 +10,7 @@ LOCAL_ENV_FILE ?= local.env
 # Specifies the environment variables files for docker compose to use.
 # See the docs for more details:
 # https://docs.docker.com/compose/environment-variables/envvars/#compose_env_files
-COMPOSE_ENV_FILES ?= $(LOCAL_ENV_FILE),$(DEFAULT_ENV_FILE)
+COMPOSE_ENV_FILES ?= $(DEFAULT_ENV_FILE),$(LOCAL_ENV_FILE)
 
 SCRIPTS_DIR ?= ../../scripts
 
