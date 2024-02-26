@@ -115,7 +115,7 @@ $(LOCAL_ENV_FILE): |../$(LOCAL_ENV_FILE).tmpl
 check: check-config check-versions check-env-vars check-repos
 
 .PHONY: check-config
-check-config:
+check-config: $(LOCAL_ENV_FILE)
 	@source $(SCRIPTS_DIR)/utils.sh;		\
 		cfg="$$(make config QUIET=1)";		\
 		for app in $$(make list-apps); do	\
@@ -124,6 +124,8 @@ check-config:
 			known=; [[ $$app == the-train ]] && known=" $$(colour $$GREEN "(known issue)")";	\
 			warning "$$(colour $$BOLD $$app) has no healthcheck$$known";				\
 		done;					\
+		res=0; grep -E '^(COMPOSE_|PATH_(MANIFESTS|PROVISIONING))' "$(LOCAL_ENV_FILE)" || res=$$?;				\
+			[[ $$res == 1 ]] || warning "Found the above lines in '$(LOCAL_ENV_FILE)' file, when they should not be there (probably)";	\
 		test \! -f ".env" || warning "Found '.env' file, but this is no longer used"
 
 .PHONY: check-versions
@@ -143,5 +145,7 @@ check-env-vars:
 			[[ "$$env_var" == *.* ]] && continue;				\
 			eval val=\$${$$env_var-DoesNotExist};				\
 			[[ "$$val" == "DoesNotExist" ]] && continue;			\
-			warning "env var is from your environment: $$(colour $$BOLD $$env_var)";	\
+			known=; [[ :zebedee_root:AWS_PROFILE:AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY:AWS_SESSION_TOKEN: == *:$$env_var:*	\
+					|| $$env_var == AWS_COGNITO_* ]] && known="	$$(colour $$GREEN "(expected var)")";			\
+			warning "env var is from your environment: $$(colour $$BOLD $$env_var)$$known";	\
 		done
