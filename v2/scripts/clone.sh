@@ -42,7 +42,7 @@ esac
 # Get list of repo urls from docker compose config
 repos=( $(make list-repos) )
 
-errors=0
+errors=()
 for repo_url in ${repos[@]}; do
     # Strip '.git' extension if present
     repo_url=${repo_url%.git}
@@ -75,7 +75,7 @@ for repo_url in ${repos[@]}; do
             git -C "${repo_path}" $git_arg || res=$?
             if [[ $res > 0 ]]; then
                 error "failed to '$git_arg' repo: $repo_pp ($branch_pp $repo_url_pp)"
-                let errors+=1
+                errors+=( $repo )
             else
                 info "successfully '$git_arg' on repo: $repo_pp ($branch_pp $repo_url_pp)"
             fi
@@ -97,14 +97,14 @@ for repo_url in ${repos[@]}; do
         fi
         if [[ $? > 0 ]]; then
             error "failed to clone repo, please make sure the repo exists and you have access to it: $repo_pp ($repo_url_pp)"
-            let errors+=1
+            errors+=( $repo )
         else
             info "successfully cloned repo: $repo_pp ($repo_url_pp)"
         fi
     fi
 done
 
-if [[ $errors > 0 ]]; then
-    fatal "failed to action $errors repos"
+if [[ ${#errors[*]} > 0 ]]; then
+    fatal "failed to action ${#errors[*]} repos: ${errors[*]}"
 fi
 info "done ${#repos[*]} repos"
