@@ -1,32 +1,8 @@
-.PHONY: start
-start:
-	@echo "starting containers"
-	docker-compose up
+# Include common make targets
+include ../common.mk
 
-.PHONY: start-detached
-start-detached:
-	@echo "starting containers in background"
-	docker-compose up -d
+.PHONY: init
+init: base-init
+	# Add stack specific initialisation logic here
 
-.PHONY: stop
-stop:
-	@echo "stopping containers"
-	docker-compose stop
-
-.PHONY: down
-down:
-	@echo "stopping and removing containers and networks"
-	docker-compose down
-
-.PHONY: clean
-clean:
-	@echo "stopping and removing containers, associated volumes and networks"
-	docker-compose down -v
-
-.PHONY: install
-install:
-	./install.sh
-
-.PHONY: health
-health:
-	@../../scripts/health.sh
+# Add any stack specific helper targets here

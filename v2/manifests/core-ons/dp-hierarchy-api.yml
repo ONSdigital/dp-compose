@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-hierarchy-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-hierarchy-api"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-hierarchy-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-hierarchy-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-hierarchy-api}:/dp-hierarchy-api
+      - ${DP_REPO_DIR:-../../../..}/dp-hierarchy-api:/dp-hierarchy-api
     expose:
       - "22600"
     ports:
@@ -30,7 +31,7 @@ services:
       GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       GRAPH_DRIVER_TYPE:           ${GRAPH_DRIVER_TYPE:-neptune}
     healthcheck:
-      test: ["CMD", "curl", "-sSf", "http://localhost:24700/health"]
+      test: ["CMD", "curl", "-sSf", "http://localhost:22600/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

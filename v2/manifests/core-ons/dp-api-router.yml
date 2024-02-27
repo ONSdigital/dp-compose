@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-api-router:
+    x-repo-url: "https://github.com/ONSdigital/dp-api-router"
     build:
-      context: ${ROOT_API_ROUTER:-../../../../dp-api-router}
+      context: ${DP_REPO_DIR:-../../../..}/dp-api-router
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_API_ROUTER:-../../../../dp-api-router}:/dp-api-router
+      - ${DP_REPO_DIR:-../../../..}/dp-api-router:/dp-api-router
     expose:
       - "23200"
     ports:
@@ -25,7 +26,7 @@ services:
       KAFKA_ADDR:                  ${KAFKA_ADDR:-kafka-1:19092,kafka-2:19092,kafka-3:19092}
       KAFKA_VERSION:               ${KAFKA_VERSION:-3.1.0}
       KAFKA_MAX_BYTES:             ${KAFKA_MAX_BYTES:-2000000}
-      SERVICE_AUTH_TOKEN:          $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_AUDIT:                ${ENABLE_AUDIT:-false}
       ENABLE_PRIVATE_ENDPOINTS:    ${ENABLE_PRIVATE_ENDPOINTS:-true}
       ENABLE_TOPIC_API:            ${ENABLE_TOPIC_API:-true}
@@ -43,7 +44,7 @@ services:
       FILES_API_URL:               ${FILES_API_URL:-http://dp-files-api:26900}
       IDENTITY_API_URL:            ${IDENTITY_API_URL:-http://dp-identity-api:25600}
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:23200/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:23200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

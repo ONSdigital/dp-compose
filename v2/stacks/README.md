@@ -1,250 +1,271 @@
 # Stacks
 
-This folder contains definitions for the different stacks. To run a stack you have to go to its corresponding folder:
+This folder contains the different stacks. To run a stack you have to go to its corresponding folder where the stack is defined:
 
 ```sh
-cd stacks/<stack_name>
+cd $chosen_stack_name_here
+# for example, relative to this 'stacks' directory
+cd auth
 ```
 
-### Initialisation:
+## Initialisation
 
-Please make sure you have cloned the required repositories as siblings of dp-compose (or you override the corresponding `ROOT_{service}` env var).
+Please make sure you have cloned the required repositories as siblings of `dp-compose` (see [`make clone`](#make-targets) for help with this).
 
-Some stacks require an initialisation step, please check the corresponding stack instructions in that case.
+Some stacks require an initialisation step, please check the corresponding [stack instructions](#current-stacks) in that case.
 
+### Run with make targets
 
-### Run with default docker compose commands:
-
-Then just standard Docker compose commands: e.g.:
-
-- to start detached: `docker compose up -d`, or with the alias: `dpc up -d`
-
-- to get logs for a service: `docker compose logs -f dp-files-api`, or: `dpc logs dp-files-api`
-
-### Run with default docker compose commands:
-
-Alternatevily, if a Makefile is provided for the stack, you can run the corresponding `make` command. For example:
+A `Makefile` is provided for each stack, so you can run the corresponding `make` command. For example:
 
 ```sh
-make start-detached
+# inside the given stack directory
+make up      # bring the stack up
 ```
 
+or, in the same directory:
+
 ```sh
-make clean
+make clean   # bring the stack down and remove it from docker
 ```
+
+See [using make](#using-make), below, for more information on the available `make` targets.
 
 ### Environment
 
-Check the `.env` file and change it for your development requirements - you might need to point to local services running in an IDE for example.
+Check the `local.env` file and change it for your development requirements - you might need to point to local services running in an IDE, for example.
 
-You can override any env var defined by any manifest used by the stack, any value that you override in `.env` will be picked up by all the manifests used by the stack.
+You can override any env var defined by any manifest used by the stack, any value that you override in `local.env` will be picked up by all the manifests used by the stack.
+
 Here is a comprehensive list of env vars you can override:
 
-- Secret values, which MUST NOT be committed:
-```sh
-# get from cognito: sandbox-florence-users
-AWS_COGNITO_USER_POOL_ID
-# get from within pool - App Integration: App client: dp-identity-api
-AWS_COGNITO_CLIENT_ID
-# get from within pool - App Integration: App client: dp-identity-api
-AWS_COGNITO_CLIENT_SECRET
+- Secret values, which **MUST NOT** be committed:
 
-# Below values from the aws login-dashboard:
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-AWS_SESSION_TOKEN
+   ```sh
+   # get from cognito: sandbox-florence-users
+   AWS_COGNITO_USER_POOL_ID
+   # get from within pool - App Integration: App client: dp-identity-api
+   AWS_COGNITO_CLIENT_ID
+   # get from within pool - App Integration: App client: dp-identity-api
+   AWS_COGNITO_CLIENT_SECRET
 
-To get the above values do the following:
-- login to the AWS [console](https://ons.awsapps.com/start#/)
-- click on `Command line or programmatic access`
-- click on `Option 1: Set AWS environment variables (Short-term credentials)`
-- copy the highlighted values
+   # Below values from the aws login-dashboard:
+   AWS_ACCESS_KEY_ID
+   AWS_SECRET_ACCESS_KEY
+   AWS_SESSION_TOKEN
+   ```
 
-Note that the AWS_SESSION_TOKEN is only valid for 12 hours. Once the token has expired you would need to stop the stack, retrieve and set new credentials before running the stack again.
-# This should be your locally generated token by Zebedee
-SERVICE_AUTH_TOKEN
-```
+   To get the above values do the following:
+
+  - login to the AWS [console](https://ons.awsapps.com/start#/)
+  - click on `Command line or programmatic access`
+  - click on `Option 1: Set AWS environment variables (Short-term credentials)`
+  - copy the highlighted values, paste them into the `local.env` file
+
+   Note that the `AWS_SESSION_TOKEN` is only valid for 12 hours. Once the token has expired, you would need to stop the stack, retrieve and set new credentials before running the stack again.
+
+  ```sh
+  # This should be your locally generated token by Zebedee
+  SERVICE_AUTH_TOKEN
+  ```
 
 - Flags (true or false values)
-```sh
-AUTHORISATION_ENABLED
-IS_PUBLISHING
-ENABLE_PRIVATE_ENDPOINTS
-ENABLE_AUDIT
-ENABLE_TOPIC_API
-ENABLE_FILES_API
-ENABLE_RELEASE_CALENDAR_API
-DEBUG
-ENABLE_CENSUS_TOPIC_SUBSECTION
-ENABLE_NEW_NAVBAR
-FILTER_FLEX_ROUTES_ENABLED
-ENABLE_PERMISSION_API
-ENABLE_NEW_SIGN_IN
-ENABLE_DATASET_IMPORT
-FORMAT_LOGGING
-ENABLE_PERMISSIONS_AUTH
-```
+
+   ```sh
+   AUTHORISATION_ENABLED
+   IS_PUBLISHING
+   ENABLE_PRIVATE_ENDPOINTS
+   ENABLE_AUDIT
+   ENABLE_TOPIC_API
+   ENABLE_FILES_API
+   ENABLE_RELEASE_CALENDAR_API
+   DEBUG
+   ENABLE_CENSUS_TOPIC_SUBSECTION
+   ENABLE_NEW_NAVBAR
+   FILTER_FLEX_ROUTES_ENABLED
+   ENABLE_PERMISSION_API
+   ENABLE_NEW_SIGN_IN
+   ENABLE_DATASET_IMPORT
+   FORMAT_LOGGING
+   ENABLE_PERMISSIONS_AUTH
+   ```
 
 - Other vars
-```sh
-HEALTHCHECK_INTERVAL
-TMPDIR
-```
+
+   ```sh
+   HEALTHCHECK_INTERVAL
+   TMPDIR
+   ```
 
 - Service URLs
 
-```sh
-# for local development you may use: http://host.docker.internal: (note: MacOS only!)
-# if your stack uses an HTTP stub container (http-echo), then you can use `http-echo:5678` as host for any URL service that you want to mock.
-# e.g. MOCKED_SERVICE_URL=http://http-echo:5678
+   ```sh
+   # for local development you may use: http://host.docker.internal: (note: MacOS only!)
+   # if your stack uses an HTTP stub container (http-echo), then you can use `http-echo:5678` as host for any URL service that you want to mock.
+   # e.g. MOCKED_SERVICE_URL=http://http-echo:5678
 
-# Core
-API_ROUTER_URL
-FRONTEND_ROUTER_URL
-ZEBEDEE_URL
-FLORENCE_URL
-BABBAGE_URL
+   # Core
+   API_ROUTER_URL
+   FRONTEND_ROUTER_URL
+   ZEBEDEE_URL
+   FLORENCE_URL
+   BABBAGE_URL
 
-# Auth
-PERMISSIONS_API_URL
-IDENTITY_API_URL
+   # Auth
+   PERMISSIONS_API_URL
+   IDENTITY_API_URL
 
-# Backend
-FILES_API_URL
-UPLOAD_API_URL
-DOWNLOAD_SERVICE_URL
-DATASET_API_URL
-IMAGE_API_URL
-FILTER_API_URL
-DATASET_API_URL
-RECIPE_API_URL
-IMPORT_API_URL
-TOPIC_API_URL
-RELEASE_CALENDAR_API_URL
-SEARCH_API_URL
+   # Backend
+   FILES_API_URL
+   UPLOAD_API_URL
+   DOWNLOAD_SERVICE_URL
+   DATASET_API_URL
+   IMAGE_API_URL
+   FILTER_API_URL
+   DATASET_API_URL
+   RECIPE_API_URL
+   IMPORT_API_URL
+   TOPIC_API_URL
+   RELEASE_CALENDAR_API_URL
+   SEARCH_API_URL
 
-# frontend
-SIXTEENS_URL
-DATASET_CONTROLLER_URL
-HOMEPAGE_CONTROLLER_URL
-DATASET_CONTROLLER_URL
-```
+   # frontend
+   SIXTEENS_URL
+   DATASET_CONTROLLER_URL
+   HOMEPAGE_CONTROLLER_URL
+   DATASET_CONTROLLER_URL
+   ```
 
-- Service roots:
+## Current stacks
 
-```sh
-# each manifest service points to the root of the corresponding repostitory, with a default value of (../../../../<repo>
+### General guidance for each stack
 
-# Example:
-ROOT_API_ROUTER
-(default is ../../../../dp-api-router)
-```
+Unless stated below, for each stack listed, the following is assumed:
 
-## Homepage web
+1. You are in the given stack directory
 
-Deploys a stack for the home page and census hub in web mode.
+   ```sh
+   cd $sub_directory_under_stacks  # this varies per-stack
+   cd homepage-web                 # for example
+   ```
 
-1) The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
+1. You have checked any prerequisites
 
-2) Go to the stack root folder
+   ```sh
+   make check
+   ```
 
-```sh
-cd homepage-web
-```
+1. You may want to get the relevant repos uptodate
 
-3) Start the docker stack
+   ```sh
+   # optional
+   # this will also clone any that are not yet cloned
+   make pull
+   ```
 
-```sh
-make start-detached
-```
+1. You have started the docker stack
 
-3) Open your browser and check you can see the home page: `localhost:24400`
+   ```sh
+   make up
+   ```
 
-3) Check you can see the census hub page: `localhost:24400/census`
+1. When you have completed testing/development (see below, per stack), you may stop all containers and clean the environment:
 
-4) You may stop all containers and clean the environment when you finish:
+   ```sh
+   # WARNING: this will remove local data from ephemeral databases, etc
+   make clean
+   ```
 
-```sh
-make clean
-```
+### Homepage web
 
+A stack for the home page and census hub in Web mode.
 
-## Homepage publishing
+The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
 
-Deploys a stack for the home page in publishing mode.
+Stack root folder is [`homepage-web`](./homepage-web/).
+See the [general guidance, above](#general-guidance-for-each-stack), first, then:
 
-1) The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes htat you have defined `zebedee_root` env var in your system.
+1. Open your browser and check you can see the home page: `localhost:24400`
 
-2) Go to the stack root folder
+1. Check you can see the census hub page: `localhost:24400/census`
 
-```sh
-cd homepage-publishing
-```
+### Homepage publishing
 
-3) Start the docker stack
+Deploys a stack for the home page in Publishing mode.
 
-```sh
-make start-detached
-```
+The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
 
-3) Open your browser and check you can see the florence website: `http://localhost:8081/florence`
+Stack root folder is [`homepage-publishing`](./homepage-publishing/).
+See the [general guidance, above](#general-guidance-for-each-stack), first, then:
 
-4) Log in to florence and perform a publish journey
+1. Open your browser and check you can see the florence website: `http://localhost:8081/florence`
 
-5) You may stop all containers and clean the environment when you finish:
+1. Log in to florence and perform the publish journey
 
-```sh
-make clean
-```
+### Static files
 
-## Static files
+Stack root folder is either
 
-1) Start the docker stack
+- [`static-files-with-auth`](./static-files-with-auth/)
+- [`static-files`](./static-files/)
 
-```sh
-make start-detached
-```
+See the [general guidance, above](#general-guidance-for-each-stack), first.
 
-2) You may stop all containers and clean the environment when you finish:
+### Search
 
-```sh
-make clean
-```
+Stack root folder is [`search`](./search/).
+See the [general guidance, above](#general-guidance-for-each-stack), first.
 
+## Using `make`
 
-## Search
+We use `make` to allow quick/easy use of `docker` and `docker-compose` commands
+with the correct setup (`make` sets the env vars that `docker` needs) for the given stack.
 
-1) Start the docker stack:
+### Make options
 
-```sh
-make start-detached
-```
+Some optional general *make variables* can be used:
 
-2) Stop the docker stack, removing containers, without removing the data:
+- `make ... SERVICE=....`
 
-```sh
-make down
-```
+   By default, most make targets will act on all services (e.g. `make up`), but you can limit the action
+   to a given service if you specify `SERVICE` e.g. `make up SERVICE=dp-api-router`
 
-3) You may stop all containers and clean the environment when you finish. WARNING: this will remove local data:
+   Some targets will use `SERVICE` as a prefix and act on all matching services.
 
-```sh
-make clean
-```
+- `make ... ENABLE_MULTI=1`
 
-More information in [search stack readme](./search/README.md)
+   Some make actions/targets will fail if SERVICE does not specify a single service, e.g. `make clean-image`
+   whereas if you set `ENABLE_MULTI` it will act on more than one: e.g. `make clean-image ENABLE_MULTI=1`
 
+- there are some variables specific to `make logs`, see below for those.
 
-## Static files with auth
+### Make targets
 
-1) Start the docker stack
-
-```sh
-make start-detached
-```
-
-2) You may stop all containers and clean the environment when you finish:
-
-```sh
-make clean
-```
+- `make ps`
+    equivalent to `docker-compose ps` (show running containers)
+- `make config`
+   equivalent to `docker-compose config` (show single YAML describing the stack)
+- `make up` / `make down`
+   bring the container(s) (for the stack or `SERVICE`) up/down
+- `make health`
+   query the health of each service
+- `make clone` / `make pull` / `make git-status`
+   `git clone/pull/status` all apps used by this stack
+- `make list-repos`
+   show the list of repos for the apps in the stack - used by `make clone`
+- `make list-services`
+   show the list of all services/containers
+- `make list-apps`
+   show the list of apps (a subset of *services* that have a 'x-repo-url' field)
+- `make logs LOGS_TAIL=1 LOGS_TIMESTAMP=1 LOGS_NO_PREFIX=1`
+   show the logs for the matching services (optionally with tailing, timestamp and/or container-prefixed)
+- `make attach`
+   attach to a running container (i.e. get a shell)
+- `make clean`
+- `make clean-image` - remove container images
+- `make refresh`
+   a shortcut for `make down clean-image up`
+- `make check` comprises
+  - `make check-config` - check certain conditions are true
+  - `make check-env-vars` - warn if your shell is setting some relevant env vars
+  - `make check-versions` - warn if specific versions of expected apps are missing

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-dimension-importer:
+    x-repo-url: "https://github.com/ONSdigital/dp-dimension-importer"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-dimension-importer}
+      context: ${DP_REPO_DIR:-../../../..}/dp-dimension-importer
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-dimension-importer}:/dp-dimension-importer
+      - ${DP_REPO_DIR:-../../../..}/dp-dimension-importer:/dp-dimension-importer
     expose:
       - "21500"
     ports:
@@ -31,7 +32,7 @@ services:
       GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       GRAPH_DRIVER_TYPE:           ${GRAPH_DRIVER_TYPE:-neptune}
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:21500/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:21500/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

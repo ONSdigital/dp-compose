@@ -1,15 +1,17 @@
 # v2
 
-Motivation is to consolidate: 
+Motivation for v2 is to consolidate:
+
 - dp-compose (this repo)
-- https://github.com/ONSdigital/dp-static-files-compose
-- https://github.com/ONSdigital/dp-interactives-compose
+- [dp-static-files-compose](https://github.com/ONSdigital/dp-static-files-compose)
+- [dp-interactives-compose](https://github.com/ONSdigital/dp-interactives-compose)
 
 And to create a structure that allows stacks to be easily modified or created.
 
-Giving an end-to-end development environment for working with ONS services in a stable, reliable and repeatable way.
+Giving an end-to-end development environment for working with ONS DP services in a stable, reliable and repeatable way.
 
-Eventually move this v2 directory as root - remove all other directories/files. So a single source of truth.
+Eventually move this v2 directory up to root and remove/refactor all other directories/files.
+So, a single source of truth.
 
 ## Setup
 
@@ -17,16 +19,24 @@ Completely optional but it might be a good idea to clean the Docker environment 
 
 For everything to work as expected make sure of the following:
 
-- `git clone` in same dir and level all relevant ONS repos in [manifests](manifests) dir (you will see errors if this is not as expected)
-- optional: add an alias - something like `alias dpc='docker-compose --project-dir . -f profiles/static-files.yml'` this makes life a bit easier
+- we `git clone` our repos to the same parent directory (e.g. `~/src/github.com/ONSdigital`), the relevant repos are listed in the [manifests](manifests) directory (you will likely see errors if this is not as expected)
+- your command-line completion should work: we use `make`/`Makefile`s extensively, and using completion really helps
 
 ## Usage
 
-Each stack is independent from the other, and `make` or `docker` commands should be run from the root of the stack you want to use.
+Each stack is independent from the other, and `make` should be run from the root of the stack you want to use.
 
-Please follow the instructions in [stacks README](./stacks/README.md) to run each stack.
+For example:
 
-Note that you should have the source code for all the ons dependencies of a stack cloned before the stack can be executed successfully.
+```shell
+$ cd stacks/auth      # use the 'auth' stack (relative to this directory)
+$ make check          # run some pre-flight checks
+..some checks are run...
+$ make clone          # clone the relevant repos
+...git clone activity for the repos in this stack...
+```
+
+Please follow the instructions in [stacks README](./stacks/README.md) for more information on running each stack.
 
 Note that before starting a stack you should stop any other stack running.
 
@@ -51,26 +61,27 @@ The files are organised in subfolders according to their type:
 
 ### stacks
 
-Contains definitions for each stack, including config overrides and docker compose extension files. Each stack should be independent form the other stacks, but they shoudl extends the required manifests, overwriting any env var required by the stack to work as expected.
+Contains definitions for each stack, including config overrides and docker compose extension files. Each stack should be independent from the other stacks, but they should extend the required manifests, overwriting any env vars required by the stack to work as expected.
 
-Each subfolder corresponds to a particular stack and contains at least:
+Each sub-folder corresponds to a particular stack and contains at least:
 
-- {stack}.yml: Extended docker-compose file which uses the manifests for required services.
+- `{stack}.yml`: Extended docker-compose file which uses the manifests for required services.
   - More information [here](https://docs.docker.com/compose/extends/)
-- .env: With the environmental variables required to override the default config for the services in the stack
+- `default.env` and `local.env`: With the environmental variables required to override the default config for the services in the stack (`local.env` is git-ignored because it contains your local, and possibly sensitive, env vars)
   - More information [here](https://docs.docker.com/compose/environment-variables/#using-the---env-file--option)
 
-#### stack .env
+#### stack env files
 
-Note that each `.env` file should be used only to override required env vars for that particular stack, and check that any compulsory env var for the stack is set (for example, most stacks will require your system to have `SERVICE_AUTH_TOKEN` and `zebedee_root`).
+Note that each `*.env` file should be used only to override required env vars for that particular stack, and check that any compulsory env vars for the stack are set (for example, most stacks will require your system to have `SERVICE_AUTH_TOKEN` and `zebedee_root`).
 
-For example, the following .env file:
+For example, the following `default.env` file:
+
 - checks for compulsory env vars
-- defines relative paths to manifests and provisioning scripts
+- defines relative paths to shared manifests and provisioning scripts
 - overwrites default values used by the stack and/or extended manifests
-- configures docker compose for the stack:
+- configures docker compose for the stack
 
-```sh
+```shell
 # -- Compulsory env vars validation --
 zebedee_root=${zebedee_root:?please define a valid zebedee_root in your local system}
 SERVICE_AUTH_TOKEN=${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
@@ -87,8 +98,9 @@ COMPOSE_FILE=deps.yml:core-ons.yml
 COMPOSE_PATH_SEPARATOR=:
 COMPOSE_PROJECT_NAME=home-web
 COMPOSE_HTTP_TIMEOUT=120
-
 ```
+
+Any changes to these stack defaults - that only affect your individual circumstances - should go into the `local.env` file in the given stack.
 
 ### provisioning
 
@@ -96,4 +108,4 @@ Contains scripts and files to set the initial state required for stacks to work.
 
 ## Kafka
 
-Some stacks use KRaft mode, which is an early release: https://github.com/apache/kafka/blob/6d1d68617ecd023b787f54aafc24a4232663428d/config/kraft/README.md
+Some stacks use KRaft mode, which is an [early release](https://github.com/apache/kafka/blob/6d1d68617ecd023b787f54aafc24a4232663428d/config/kraft/README.md).

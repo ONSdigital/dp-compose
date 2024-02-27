@@ -1,37 +1,38 @@
 version: "3.3"
 services:
   dp-download-service:
+    x-repo-url: "https://github.com/ONSdigital/dp-download-service"
     build:
-      context: ${ROOT_DOWNLOAD_SERVICE:-../../../../dp-download-service}
+      context: ${DP_REPO_DIR:-../../../..}/dp-download-service
       dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-download-service:/dp-download-service
     expose:
       - "23600"
     ports:
       - 23600:23600
     environment:
       HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}
-      BIND_ADDR:                    ':23600'
-      AWS_REGION:                   'eu-west-1'
+      BIND_ADDR:                    ":23600"
+      AWS_REGION:                   "eu-west-1"
       LOCALSTACK_HOST:              ${LOCALSTACK_URL:-http://localstack:4566}
-      BUCKET_NAME:                  'testing'
-      PUBLIC_BUCKET_URL:            'http://localhost:4566/testing-public/'
+      BUCKET_NAME:                  "testing"
+      PUBLIC_BUCKET_URL:            "http://localhost:4566/testing-public/"
       ENCRYPTION_DISABLED:          ${ENCRYPTION_DISABLED:-false}
-      GRACEFUL_SHUTDOWN_TIMEOUT:    '5s'
-      HEALTHCHECK_CRITICAL_TIMEOUT: '5s'
-      VAULT_TOKEN:                  '0000-0000-0000-0000'
+      GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
+      HEALTHCHECK_CRITICAL_TIMEOUT: "5s"
+      VAULT_TOKEN:                  "0000-0000-0000-0000"
       VAULT_ADDR:                   ${VAULT_ADDR:-http://vault:8200}
-      VAULT_PATH:                   'secret/shared/psk'
+      VAULT_PATH:                   "secret/shared/psk"
       FILES_API_URL:                ${FILES_API_URL:-http://dp-files-api:26900}
-      MINIO_ACCESS_KEY:             'test'
-      MINIO_SECRET_KEY:             'test'
+      MINIO_ACCESS_KEY:             "test"
+      MINIO_SECRET_KEY:             "test"
       LOCAL_OBJECT_STORE:           ${LOCALSTACK_URL:-http://localstack:4566}
       IMAGE_API_URL:                ${IMAGE_API_URL:-http://dp-image-api:24700}
       FILTER_API_URL:               ${FILTER_API_URL:-http://dp-filter-api:22100}
       DATASET_API_URL:              ${DATASET_API_URL:-http://dp-dataset-api:22000}
       ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
-      IS_PUBLISHING:                'true'
-    volumes:
-      - ${ROOT_DOWNLOAD_SERVICE:-../../../../dp-download-service}:/service
+      IS_PUBLISHING:                "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:23600/health"]
       interval: 30s

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-dataset-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-dataset-controller"
     build:
-      context: ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-dataset-controller}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-dataset-controller
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_HOMEPAGE_CONTROLLER:-../../../../dp-frontend-dataset-controller}:/dp-frontend-dataset-controller
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-dataset-controller:/dp-frontend-dataset-controller
     expose:
       - "20200"
     ports:
@@ -25,7 +26,7 @@ services:
       ENABLE_CENSUS_TOPIC_SUBSECTION: ${ENABLE_CENSUS_TOPIC_SUBSECTION:-false}
       ENABLE_NEW_NAVBAR:              ${ENABLE_NEW_NAVBAR:-false}
       IS_PUBLISHING_MODE:             ${IS_PUBLISHING:-false}
-      SERVICE_AUTH_TOKEN:             $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       SITE_DOMAIN:                    ${SITE_DOMAIN:-localhost}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:20200/health"]

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-release-calendar-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-release-calendar-api"
     build:
-      context: ${ROOT_RELEASE_CALENDAR_API:-../../../../dp-release-calendar-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-release-calendar-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_RELEASE_CALENDAR_API:-../../../../dp-release-calendar-api}:/dp-release-calendar-api
+      - ${DP_REPO_DIR:-../../../..}/dp-release-calendar-api:/dp-release-calendar-api
     expose:
       - "27800"
     ports:

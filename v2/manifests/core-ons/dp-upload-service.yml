@@ -1,34 +1,37 @@
 version: "3.3"
 services:
   dp-upload-service:
+    x-repo-url: "https://github.com/ONSdigital/dp-upload-service"
     build:
-      context: ${ROOT_UPLOAD_SERVICE:-../../../../dp-upload-service}
-      dockerfile: Dockerfile-local
+      context: ${DP_REPO_DIR:-../../../..}/dp-upload-service
+      dockerfile: Dockerfile.local
     command:
       - reflex
       - -d
       - none
       - -c
       - ./reflex
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-upload-service:/dp-upload-service
+    expose:
+      - "25100"
     ports:
       - 25100:25100
     environment:
       HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
-      BIND_ADDR:                          ':25100'
-      AWS_REGION:                         'eu-west-1'
+      BIND_ADDR:                          ":25100"
+      AWS_REGION:                         "eu-west-1"
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
-      UPLOAD_BUCKET_NAME:                 'deprecated'
-      STATIC_FILES_ENCRYPTED_BUCKET_NAME: 'testing'
+      UPLOAD_BUCKET_NAME:                 "deprecated"
+      STATIC_FILES_ENCRYPTED_BUCKET_NAME: "testing"
       ENCRYPTION_DISABLED:                ${ENCRYPTION_DISABLED:-false}
-      GRACEFUL_SHUTDOWN_TIMEOUT:          '5s'
-      HEALTHCHECK_CRITICAL_TIMEOUT:       '5s'
-      VAULT_TOKEN:                        '0000-0000-0000-0000'
-      VAULT_ADDR:                         ${VAULT_ADDR:-http://vault:8200}
-      VAULT_PATH:                         'secret/shared/psk'
+      GRACEFUL_SHUTDOWN_TIMEOUT:          "5s"
+      HEALTHCHECK_CRITICAL_TIMEOUT:       "5s"
+      VAULT_TOKEN:                        "0000-0000-0000-0000"
+      VAULT_ADDR:                         "http://vault:8200"
+      VAULT_PATH':                        "secret/shared/psk"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
-      SERVICE_AUTH_TOKEN:                 $SERVICE_AUTH_TOKEN
-    volumes:
-      - ${ROOT_UPLOAD_SERVICE:-../../../../dp-upload-service}:/dp-upload-service
+      SERVICE_AUTH_TOKEN:                 ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25100/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

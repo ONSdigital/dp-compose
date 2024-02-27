@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-recipe-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-recipe-api"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-recipe-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-recipe-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-recipe-api}:/dp-recipe-api
+      - ${DP_REPO_DIR:-../../../..}/dp-recipe-api:/dp-recipe-api
     expose:
       - "22300"
     ports:

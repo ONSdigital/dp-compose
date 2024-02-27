@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-search-reindex-tracker:
+    x-repo-url: "https://github.com/ONSdigital/dp-search-reindex-tracker"
     build:
-      context: ${ROOT_SEARCH_REINDEX_TRACKER:-../../../../dp-search-reindex-tracker}
+      context: ${DP_REPO_DIR:-../../../..}/dp-search-reindex-tracker
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_SEARCH_REINDEX_TRACKER:-../../../../dp-search-reindex-racker}:/dp-search-reindex-tracker
+      - ${DP_REPO_DIR:-../../../..}/dp-search-reindex-tracker:/dp-search-reindex-tracker
     expose:
       - "28500"
     ports:
@@ -20,7 +21,7 @@ services:
     environment:
       BIND_ADDR:          ":28500"
       ELASTIC_SEARCH_URL: ${ELASTIC_SEARCH_URL:-http://sitewideelasticsearch:9200}
-      SERVICE_AUTH_TOKEN:                 $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:28500/health"]

@@ -1,18 +1,19 @@
 version: "3.3"
 services:
   dp-design-system:
+    x-repo-url: "https://github.com/ONSdigital/dp-design-system"
     build:
-      context: ${ROOT_DESIGN_SYSTEM:-../../../../dp-design-system}
+      context: ${DP_REPO_DIR:-../../../..}/dp-design-system
       dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-design-system:/dp-design-system
     expose:
       - "9002"
     ports:
       - 9002:9002
-    volumes:
-      - ${ROOT_DESIGN_SYSTEM:-../../../../dp-design-system}:/dp-design-system
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:9002" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:9002"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

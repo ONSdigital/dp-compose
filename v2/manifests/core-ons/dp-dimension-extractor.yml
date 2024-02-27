@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-dimension-extractor:
+    x-repo-url: "https://github.com/ONSdigital/dp-dimension-extractor"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-dimension-extractor}
+      context: ${DP_REPO_DIR:-../../../..}/dp-dimension-extractor
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-dimension-extractor}:/dp-dimension-extractor
+      - ${DP_REPO_DIR:-../../../..}/dp-dimension-extractor:/dp-dimension-extractor
     expose:
       - "21400"
     ports:
@@ -28,7 +29,7 @@ services:
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:21400/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:21400/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

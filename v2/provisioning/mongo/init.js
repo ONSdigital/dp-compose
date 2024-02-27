@@ -30,8 +30,8 @@ var databases = [
 		collections: [{"name":"images"}, {"name":"images_locks"}]
 	},
 	{
-		name: "files",
-		collections: [{"name":"metadata"}]
+			name: "files",
+		collections: [{"name":"metadata"},{"name":"collections"}]
 	},
 	{
         name: "permissions",

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-image-importer:
+    x-repo-url: "https://github.com/ONSdigital/dp-image-importer"
     build:
-      context: ${ROOT_IMAGE_IMPORTER:-../../../../dp-image-importer}
+      context: ${DP_REPO_DIR:-../../../..}/dp-image-importer
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_IMPORTER:-../../../../dp-image-importer}:/dp-image-importer
+      - ${DP_REPO_DIR:-../../../..}/dp-image-importer:/dp-image-importer
     expose:
       - "24800"
     ports:
@@ -19,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR:               ":24800"
-      SERVICE_AUTH_TOKEN:      $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:      ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENCRYPTION_DISABLED:     ${ENCRYPTION_DISABLED:-false}
       IMAGE_API_URL:           ${IMAGE_API_URL:-http://dp-image-api:24700}
       KAFKA_ADDR:              ${KAFKA_ADDR:-kafka-1:19092,kafka-2:19092,kafka-3:19092}

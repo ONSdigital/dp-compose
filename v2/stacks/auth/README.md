@@ -6,7 +6,7 @@ The auth stack uses the sandbox cognito instance to store users and their permis
 
 ## Getting secrets
 
-To run this stack you will need to obtain the relevant secrets for the .env file, which **must not be committed**:
+To run this stack you will need to obtain the relevant secrets for the `local.env` file, which **must not be committed**:
 
 ```sh
 # get from AWS > Cognito > User Pools > sandbox-florence-users > user pool ID
@@ -36,17 +36,3 @@ To get the aws values from the dashboard do the following:
 - copy the highlighted values
 
 Note that the AWS_SESSION_TOKEN is only valid for 12 hours. Once the token has expired you would need to stop the stack, retrieve and set new credentials before running the stack again.
-
-## Run the stack
-
-```sh
-make start-detached
-```
-
-You should now be able to log in to Florence via your sandbox credentials at localhost:8081/florence/login
-
-When you're done, clean down the environment:
-
-```sh
-make clean
-```

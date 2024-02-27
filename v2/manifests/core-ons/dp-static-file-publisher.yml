@@ -1,39 +1,43 @@
 version: "3.3"
 services:
   dp-static-file-publisher:
+    x-repo-url: "https://github.com/ONSdigital/dp-static-file-publisher"
     build:
-      context: ${ROOT_STATIC_FILE_PUBLISHER:-../../../../dp-static-file-publisher}
+      context: ${DP_REPO_DIR:-../../../..}/dp-static-file-publisher
       dockerfile: Dockerfile-local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-static-file-publisher:/dp-static-file-publisher
     expose:
       - "24900"
     ports:
       - 24900:24900
     environment:
       HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
-      BIND_ADDR:                          ':24900'
-      GRACEFUL_SHUTDOWN_TIMEOUT:          '30s'
-      HEALTHCHECK_CRITICAL_TIMEOUT:       '30s'
-      VAULT_TOKEN:                        '0000-0000-0000-0000'
+      BIND_ADDR:                          ":24900"
+      GRACEFUL_SHUTDOWN_TIMEOUT:          "30s"
+      HEALTHCHECK_CRITICAL_TIMEOUT:       "30s"
+      VAULT_TOKEN:                        "0000-0000-0000-0000"
       VAULT_ADDR:                         ${VAULT_ADDR:-http://vault:8200}
-      VAULT_PATH:                         'secret/shared/psk'
-      VAULT_RETRIES:                      '3'
-      KAFKA_ADDR:                         'kafka:9092'
-      KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: '1'
-      KAFKA_VERSION:                      '3.1.0'
-      KAFKA_MAX_BYTES:                    '2000000'
-      KAFKA_MIN_HEALTHY_BROKERS:          '1'
-      STATIC_FILE_PUBLISHED_TOPIC:        'static-file-published'
-      STATIC_FILE_PUBLISHED_TOPIC_V2:     'static-file-published-v2'
-      S3_PRIVATE_BUCKET_NAME:             'testing'
-      S3_PUBLIC_BUCKET_NAME:              'testing-public'
+      VAULT_PATH:                         "secret/shared/psk"
+      VAULT_RETRIES:                      "3"
+      KAFKA_ADDR:                         "kafka:9092"
+      KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: "1"
+      KAFKA_VERSION:                      "3.1.0"
+      KAFKA_MAX_BYTES:                    "2000000"
+      KAFKA_MIN_HEALTHY_BROKERS:          "1"
+      STATIC_FILE_PUBLISHED_TOPIC:        "static-file-published"
+      STATIC_FILE_PUBLISHED_TOPIC_V2:     "static-file-published-v2"
+      AWS_REGION:                         "eu-west-1"
+      AWS_SECRET_ACCESS_KEY:              "test"
+      AWS_ACCESS_KEY_ID:                  "test"
+      S3_PRIVATE_BUCKET_NAME:             "testing"
+      S3_PUBLIC_BUCKET_NAME:              "testing-public"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
-      CONSUMER_GROUP:                     'dp-static-file-publisher'
+      CONSUMER_GROUP:                     "dp-static-file-publisher"
       S3_LOCAL_URL:                       ${LOCALSTACK_URL:-http://localstack:4566}
-      S3_LOCAL_ID:                        'test'
-      S3_LOCAL_SECRET:                    'test'
+      S3_LOCAL_ID:                        "test"
+      S3_LOCAL_SECRET:                    "test"
       IMAGE_API_URL:                      ${IMAGE_API_URL:-http://dp-image-api:24700}
-    volumes:
-      - ${ROOT_STATIC_FILE_PUBLISHER:-../../../../dp-static-file-publisher}:/service
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:24900/health"]
       interval: 30s

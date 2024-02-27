@@ -1,19 +1,20 @@
 version: "3.3"
 services:
   zebedee:
+    x-repo-url: "https://github.com/ONSdigital/zebedee"
     build:
-      context: ${ROOT_ZEBEDEE:-../../../../zebedee}
+      context: ${DP_REPO_DIR:-../../../..}/zebedee
       dockerfile: Dockerfile
     expose:
       - "8082"
     ports:
       - 8082:8082
     volumes:
-      - ${zebedee_root}:/zebedee_root
+      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     restart: unless-stopped
     environment:
       DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
-      DATASET_API_AUTH_TOKEN:         ${DATASET_API_AUTH_TOKEN:-FD0108EA-825D-411C-9B1D-41EF7727F465}
+      DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-true}
       ENABLE_DATASET_IMPORT:          ${ENABLE_DATASET_IMPORT:-true}
       FORMAT_LOGGING:                 ${FORMAT_LOGGING:-true}
@@ -29,22 +30,25 @@ services:
       db_audit_username:              "postgres"
       db_audit_password:              "postgres"
       publish_url:                    ${PUBLISH_URL:-http://the-train:8084}
-      ENABLE_CENTRALISED_KEYRING:     "false"
+      ENABLE_CENTRALISED_KEYRING:     "true"
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
       KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
-      SERVICE_AUTH_TOKEN:             $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_STATIC_FILES_PUBLISHING: "true"
       FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
       ENABLE_JWT_SESSIONS:            "false"
       IDENTITY_API_URL:               ${IDENTITY_API_URL:-http://dp-identity-api:25600}
-      AWS_COGNITO_SIGNING_KEY_ONE:    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApU1DqxJalEmlznkrM+U4aSBMw9u5axcIqNeUq8+ZHo98uKy8Xy5zCOXfWx6KafOPJhbOZInFaSh9UMaluSSw11l/PR4KrGBFzJODQ+RMq6bHW6FlwwHSkMTSfQ0hwzO7y91BiZFmJnaUECf52H3QBApGT4TT060ri5zt1ygpliRwjLLlHW1XX0epzZH3ogrikn4i65e8w6uUcsGBhQvQQqiHvEpcgCSWS6SUIeVjv5ZTT4stZuDtkbijtSgDrP2xDQCEZO1OipvT6O4ycDNb2Hjapddi25Rgr08aLP/zqM16fIiueXIbYf0Dn4eUuRxFAq3LjyEGjZ6vv+4nh34M2QIDAQAB"
-      AWS_COGNITO_SIGNING_KEY_TWO:    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"
-      AWS_COGNITO_KEY_ID_ONE:         "2a8vXmIK67ZZ3hFZ/DwQATgvqZgRBFjuuVavlw3zEwo="
-      AWS_COGNITO_KEY_ID_TWO:         "GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="
+      AWS_COGNITO_SIGNING_KEY_ONE:    ${AWS_COGNITO_SIGNING_KEY_ONE:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApU1DqxJalEmlznkrM+U4aSBMw9u5axcIqNeUq8+ZHo98uKy8Xy5zCOXfWx6KafOPJhbOZInFaSh9UMaluSSw11l/PR4KrGBFzJODQ+RMq6bHW6FlwwHSkMTSfQ0hwzO7y91BiZFmJnaUECf52H3QBApGT4TT060ri5zt1ygpliRwjLLlHW1XX0epzZH3ogrikn4i65e8w6uUcsGBhQvQQqiHvEpcgCSWS6SUIeVjv5ZTT4stZuDtkbijtSgDrP2xDQCEZO1OipvT6O4ycDNb2Hjapddi25Rgr08aLP/zqM16fIiueXIbYf0Dn4eUuRxFAq3LjyEGjZ6vv+4nh34M2QIDAQAB"}
+      AWS_COGNITO_SIGNING_KEY_TWO:    ${AWS_COGNITO_SIGNING_KEY_TWO:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"}
+      AWS_COGNITO_KEY_ID_ONE:         ${AWS_COGNITO_KEY_ID_ONE:-"2a8vXmIK67ZZ3hFZ/DwQATgvqZgRBFjuuVavlw3zEwo="}
+      AWS_COGNITO_KEY_ID_TWO:         ${AWS_COGNITO_KEY_ID_TWO:-"GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="}
       website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
+      OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
+      ELASTIC_SEARCH_CLUSTER:         "cluster"
+      ELASTIC_SEARCH_SERVER:          "elasticsearch"
     healthcheck:
-      test: [ "CMD", "curl", "-sSf", "http://localhost:8082/health" ]
+      test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: 10s
       retries: 10

@@ -4,6 +4,9 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-code-list-api.yml
       service: dp-code-list-api
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-dataset-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
@@ -13,10 +16,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      zebedee:
+        condition: service_healthy
   dp-dimension-extractor:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dimension-extractor.yml
       service: dp-dimension-extractor
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-dimension-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dimension-importer.yml
@@ -24,10 +33,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-dimension-search-builder:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dimension-search-builder.yml
       service: dp-dimension-search-builder
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-hierarchy-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-hierarchy-api.yml
@@ -35,6 +50,9 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-hierarchy-builder:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-hierarchy-builder.yml
@@ -42,10 +60,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-import-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-import-api.yml
       service: dp-import-api
+    depends_on:
+      dp-dataset-api:
+        condition: service_healthy
   dp-import-tracker:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-import-tracker.yml
@@ -53,10 +77,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-observation-extractor:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-observation-extractor.yml
       service: dp-observation-extractor
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-observation-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-observation-importer.yml
@@ -64,17 +94,27 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-publishing-dataset-controller:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
       service: dp-publishing-dataset-controller
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-recipe-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-recipe-api.yml
       service: dp-recipe-api
+    depends_on:
+      dp-import-api:
+        condition: service_healthy
   dp-upload-service:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
       service: dp-upload-service
-
-
+    depends_on:
+      dp-import-api:
+        condition: service_healthy

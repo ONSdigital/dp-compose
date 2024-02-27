@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-topic-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-topic-api"
     build:
-      context: ${ROOT_TOPIC_API:-../../../../dp-topic-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-topic-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_TOPIC_API:-../../../../dp-topic-api}:/dp-topic-api
+      - ${DP_REPO_DIR:-../../../..}/dp-topic-api:/dp-topic-api
     expose:
       - "25300"
     ports:

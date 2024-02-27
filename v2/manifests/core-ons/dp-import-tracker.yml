@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-import-tracker:
+    x-repo-url: "https://github.com/ONSdigital/dp-import-tracker"
     build:
-      context: ${ROOT_IMAGE_API:-../../../../dp-import-tracker}
+      context: ${DP_REPO_DIR:-../../../..}/dp-import-tracker
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_IMAGE_API:-../../../../dp-import-tracker}:/dp-import-tracker
+      - ${DP_REPO_DIR:-../../../..}/dp-import-tracker:/dp-import-tracker
     expose:
       - "21300"
     ports:
@@ -26,7 +27,7 @@ services:
       KAFKA_MAX_BYTES:             ${KAFKA_MAX_BYTES:-2000000}
       KAFKA_VERSION:               ${KAFKA_VERSION:-3.1.0}
       IS_PUBLISHING:               ${IS_PUBLISHING:-true}
-      SERVICE_AUTH_TOKEN:          $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}

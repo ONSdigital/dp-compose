@@ -1,39 +1,40 @@
 version: "3.3"
 services:
   dp-files-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-files-api"
     build:
-      context: ${ROOT_FILES_API:-../../../../dp-files-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-files-api
       dockerfile: Dockerfile-local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-files-api:/service
     expose:
       - "26900"
     ports:
       - 26900:26900
     environment:
       HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
-      BIND_ADDR:                          ':26900'
-      GRACEFUL_SHUTDOWN_TIMEOUT:          '30s'
-      HEALTHCHECK_CRITICAL_TIMEOUT:       '30s'
-      KAFKA_ADDR:                         ${KAFKA_ADDR:-kafka:9092}
-      KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: '1'
-      KAFKA_VERSION:                      ${KAFKA_VERSION:-3.1.0}
-      KAFKA_MAX_BYTES:                    '2000000'
-      KAFKA_MIN_HEALTHY_BROKERS:          '1'
-      MONGODB_BIND_ADDR:                  ${MONGODB_BIND_ADDR:-mongodb:27017}
-      MONGODB_DATABASE:                   'files'
-      MONGODB_ENABLE_READ_CONCERN:        'false'
-      MONGODB_ENABLE_WRITE_CONCERN:       'true'
-      MONGODB_CONNECT_TIMEOUT:            '30s'
-      MONGODB_QUERY_TIMEOUT:              '5s'
-      IS_PUBLISHING:                      'true'
+      BIND_ADDR:                          ":26900"
+      GRACEFUL_SHUTDOWN_TIMEOUT:          "30s"
+      HEALTHCHECK_CRITICAL_TIMEOUT:       "30s"
+      KAFKA_ADDR:                         "kafka:9092"
+      KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: "1"
+      KAFKA_VERSION:                      "3.1.0"
+      KAFKA_MAX_BYTES:                    "2000000"
+      KAFKA_MIN_HEALTHY_BROKERS:          "1"
+      MONGODB_BIND_ADDR:                  "mongodb:27017"
+      MONGODB_DATABASE:                   "files"
+      MONGODB_ENABLE_READ_CONCERN:        "false"
+      MONGODB_ENABLE_WRITE_CONCERN:       "true"
+      MONGODB_CONNECT_TIMEOUT:            "30s"
+      MONGODB_QUERY_TIMEOUT:              "5s"
+      IS_PUBLISHING:                      "true"
       PERMISSIONS_API_URL:                ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
       IDENTITY_API_URL:                   ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       IDENTITY_WEB_KEY_SET_URL:           ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       ZEBEDEE_URL:                        ${ZEBEDEE_URL:-http://zebedee:8082}
-      AUTHORISATION_ENABLED:              ${AUTHORISATION_ENABLED:-true}
-      S3_PRIVATE_BUCKET_NAME:             'testing'
+      AUTHORISATION_ENABLED:              ${AUTHORISATION_ENABLED:-false}
+      S3_PRIVATE_BUCKET_NAME:             "testing"
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
-    volumes:
-      - ${ROOT_FILES_API:-../../../../dp-files-api}:/service
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:26900/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

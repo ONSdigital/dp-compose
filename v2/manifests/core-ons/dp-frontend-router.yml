@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-router:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-router"
     build:
-      context: ${ROOT_FRONTEND_ROUTER:-../../../../dp-frontend-router}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-router
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_FRONTEND_ROUTER:-../../../../dp-frontend-router}:/dp-frontend-router
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-router:/dp-frontend-router
     expose:
       - "20000"
     ports:

@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-frontend-search-controller:
+    x-repo-url: "https://github.com/ONSdigital/dp-frontend-search-controller"
     build:
-      context: ${ROOT_FRONTEND_SEARCH_CONTROLLER:-../../../../dp-frontend-search-controller}
+      context: ${DP_REPO_DIR:-../../../..}/dp-frontend-search-controller
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,17 +12,17 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_FRONTEND_SEARCH_CONTROLLER:-../../../../dp-frontend-search-controller}:/dp-frontend-search-controller
+      - ${DP_REPO_DIR:-../../../..}/dp-frontend-search-controller:/dp-frontend-search-controller
     expose:
       - "25000"
     ports:
       - 25000:25000
     restart: unless-stopped
     environment:
-      BIND_ADDR: ":25000"
-      API_ROUTER_URL: ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
-      IS_PUBLISHING: ${IS_PUBLISHING:-true}
-      SERVICE_AUTH_TOKEN: $SERVICE_AUTH_TOKEN
+      BIND_ADDR:          ":25000"
+      API_ROUTER_URL:     ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
+      IS_PUBLISHING:      ${IS_PUBLISHING:-true}
+      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

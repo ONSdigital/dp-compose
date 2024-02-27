@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   dp-population-types-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-population-types-api"
     build:
-      context: ${ROOT_POPULATION_TYPES_API:-../../../../dp-population-types-api}
+      context: ${DP_REPO_DIR:-../../../..}/dp-population-types-api
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_POPULATION_TYPES_API:-../../../../dp-population-types-api}:/dp-population-types-api
+      - ${DP_REPO_DIR:-../../../..}/dp-population-types-api:/dp-population-types-api
     expose:
       - "27300"
     ports:
@@ -19,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR:                ":27300"
-      SERVICE_AUTH_TOKEN:       $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:       ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_PRIVATE_ENDPOINTS: ${ENABLE_PRIVATE_ENDPOINTS:-false}
       ENABLE_PERMISSIONS_AUTH:  ${ENABLE_PERMISSIONS_AUTH:-true}
       ZEBEDEE_URL:              ${ZEBEDEE_URL:-http://zebedee:8082}

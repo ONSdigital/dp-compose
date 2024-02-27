@@ -24,7 +24,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
       service: dp-topic-api
-  zebedee:
+  zebedee-reader:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee-reader.yml
-      service: zebedee
+      service: zebedee-reader

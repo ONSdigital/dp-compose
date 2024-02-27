@@ -1,8 +1,9 @@
 version: "3.3"
 services:
   florence:
+    x-repo-url: "https://github.com/ONSdigital/florence"
     build:
-      context: ${ROOT_FLORENCE:-../../../../florence}
+      context: ${DP_REPO_DIR:-../../../..}/florence
       dockerfile: Dockerfile.local
     command:
       - reflex
@@ -11,7 +12,7 @@ services:
       - -c
       - ./reflex
     volumes:
-      - ${ROOT_FLORENCE:-../../../../florence}:/florence
+      - ${DP_REPO_DIR:-../../../..}/florence:/florence
     expose:
       - "8081"
     ports:
