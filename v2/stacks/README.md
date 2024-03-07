@@ -243,6 +243,8 @@ Some optional general *make variables* can be used:
 
 - `make ps`
     equivalent to `docker-compose ps` (show running containers)
+- `make ps-docker`
+    equivalent to `docker ps` (show running containers)
 - `make config`
    equivalent to `docker-compose config` (show single YAML describing the stack)
 - `make up` / `make down`

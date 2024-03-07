@@ -49,6 +49,11 @@ ps start stop config: $(LOCAL_ENV_FILE)
 images:
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $@ $(SERVICE) $(ENV_FILE_ARGS)
 
+.PHONY: ps-docker
+ps-docker:
+	@do=$@; do=$${do%-docker};	\
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $$do $(SERVICE) $(ENV_FILE_ARGS)
+
 .PHONY: image-id
 image-id: $(LOCAL_ENV_FILE)
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '/$(SERVICE)$$/{print $$1}'
@@ -61,13 +66,13 @@ clean-image:
 		echo "\033[34m""Removing image '$$i_id' for $(SERVICE)\033[0m" >&2;		\
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
 
-.PHONY: countainer-id
-countainer-id: $(LOCAL_ENV_FILE)
+.PHONY: container-id
+container-id: $(LOCAL_ENV_FILE)
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
 
 .PHONY: attach
 attach: $(LOCAL_ENV_FILE)
-	@c_id=$$(make countainer-id);								\
+	@c_id=$$(make container-id);								\
 		if [[ -z $$c_id ]]; then echo "Could not get container-id" >&2; exit 3; fi;	\
 		if [[ $$c_id =~ [[:space:]] ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got IDs $$c_id" >&2; exit 4; fi;	\
 		echo "\033[34m""Attaching to container '$$c_id' for $(SERVICE)\033[0m" >&2;			\

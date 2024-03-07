@@ -84,7 +84,7 @@ for repo_url in ${repos[@]}; do
         fi
 
     elif [[ "${1-}" == "check-repos" ]]; then
-        warn "no local repo: $repo_pp ($repo_url_pp) - run: $(colour $CYAN "make clone")"
+        warning "no local repo: $repo_pp ($repo_url_pp) - run: $(colour $CYAN "make clone")"
 
     else
         # If not then clone it
