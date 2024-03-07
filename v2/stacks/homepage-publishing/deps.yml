@@ -42,3 +42,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
       service: elasticsearch
+  elasticsearch-web:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch-web

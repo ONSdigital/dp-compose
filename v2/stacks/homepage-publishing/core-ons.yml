@@ -25,8 +25,16 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  babbage-web:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage-web
     environment:
-      IS_PUBLISHING: "Y"
+    depends_on:
+      babbage:
+        condition: service_healthy
+      zebedee-reader:
+        condition: service_healthy
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
@@ -61,6 +69,13 @@ services:
       service: zebedee
     depends_on:
       elasticsearch:
+        condition: service_started
+  zebedee-reader:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee-reader.yml
+      service: zebedee-reader
+    depends_on:
+      elasticsearch-web:
         condition: service_started
   florence:
     extends:
