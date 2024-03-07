@@ -107,3 +107,15 @@ services:
     depends_on:
       dp-image-api:
         condition: service_healthy
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+    environment:
+      DISABLE_GRAPH_DB_DEPENDENCY: false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"          # localhost mapping for linux
+      - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      zebedee:
+        condition: service_healthy

@@ -56,7 +56,8 @@ ps-docker:
 
 .PHONY: image-id
 image-id: $(LOCAL_ENV_FILE)
-	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '/$(SERVICE)$$/{print $$1}'
+	@COMPOSE_PROJECT_NAME=$(shell make config | yq .name);	\
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk "/$$COMPOSE_PROJECT_NAME-"'$(SERVICE)$$/{print $$1}'
 
 .PHONY: clean-image
 clean-image:
