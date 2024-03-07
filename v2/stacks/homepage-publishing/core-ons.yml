@@ -4,49 +4,82 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
       service: dp-design-system
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-frontend-homepage-controller:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
       service: dp-frontend-homepage-controller
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   sixteens:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
   babbage:
-    extends: 
+    extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml
       service: babbage
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
     environment:
       IS_PUBLISHING: "Y"
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
       service: the-train
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
       service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
+    depends_on:
+      zebedee:
+        condition: service_healthy
   dp-topic-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
       service: dp-topic-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   zebedee:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
+    depends_on:
+      elasticsearch:
+        condition: service_started
   florence:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
       service: florence
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-image-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
       service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-image-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
       service: dp-image-importer
+    depends_on:
+      dp-image-api:
+        condition: service_healthy

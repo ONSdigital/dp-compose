@@ -37,4 +37,8 @@ services:
       file: ${PATH_MANIFESTS}/deps/kafka-tools.yml
       service: kowl
     depends_on:
-      - zookeeper-1
+      - kafka-1
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch
