@@ -56,6 +56,15 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
+  dp-files-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
+      service: dp-files-api
+    environment:
+      KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-topic-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
