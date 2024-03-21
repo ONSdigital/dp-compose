@@ -54,9 +54,21 @@ ps-docker:
 	@do=$@; do=$${do%-docker};	\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $$do $(SERVICE) $(ENV_FILE_ARGS)
 
+.PHONY: get-repository-name
+get-repository-name: $(LOCAL_ENV_FILE)
+	@if [[ -n "$(SERVICE)" ]]; then						\
+		APPS="$(shell make list-apps)";					\
+		if [[ " $${APPS[*]} " == *" $(SERVICE) "* ]]; then		\
+			echo $(shell make config | yq .name)-$(SERVICE);	\
+		else								\
+			echo $(SERVICE);					\
+		fi;								\
+	fi
+
 .PHONY: image-id
 image-id: $(LOCAL_ENV_FILE)
-	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '/$(SERVICE)$$/{print $$1}'
+	@REPO_NAME=$(shell make get-repository-name);		\
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '$$2~/'"$$REPO_NAME"'$$/{print $$1}'
 
 .PHONY: clean-image
 clean-image:
