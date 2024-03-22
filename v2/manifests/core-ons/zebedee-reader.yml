@@ -9,6 +9,7 @@ services:
       - "8082"
     ports:
       - 8082:8082
+      - 8002:8002
     volumes:
       - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     restart: unless-stopped
