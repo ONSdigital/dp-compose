@@ -25,11 +25,12 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
   babbage-web:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml
       service: babbage-web
-    environment:
     depends_on:
       babbage:
         condition: service_healthy
