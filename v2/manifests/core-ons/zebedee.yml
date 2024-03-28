@@ -5,6 +5,8 @@ services:
     build:
       context: ${DP_REPO_DIR:-../../../..}/zebedee
       dockerfile: Dockerfile
+      args:
+        DOCKER_DEBUGGING_PORT: 8002
     expose:
       - "8082"
     ports:
