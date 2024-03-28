@@ -6,6 +6,8 @@ services:
       context: ${DP_REPO_DIR:-../../../..}/zebedee
       dockerfile: Dockerfile
       args:
+        # if you want to change this port you should also change the mapping for it below in the ports section
+        # and rebuild the docker image
         DOCKER_DEBUGGING_PORT: 8002
     expose:
       - "8082"
