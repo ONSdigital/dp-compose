@@ -9,22 +9,43 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-search-api.yml
       service: dp-search-api
+    depends_on:
+      dp-dataset-api:
+        condition: service_healthy
+      sitewideelasticsearch:
+        condition: service_healthy
   zebedee:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
+    environment:
+      OOK: true
+      # ENABLE_JWT_SESSIONS:     "true"
+      # ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+    depends_on:
+      kafka-1:
+        condition: service_started
   dp-search-data-extractor:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-search-data-extractor.yml
       service: dp-search-data-extractor
+    depends_on:
+      dp-search-api:
+        condition: service_healthy
   dp-search-data-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-search-data-importer.yml
       service: dp-search-data-importer
+    depends_on:
+      dp-search-api:
+        condition: service_healthy
   dp-dataset-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
       service: dp-dataset-api
+    depends_on:
+      zebedee:
+        condition: service_healthy
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
@@ -33,3 +54,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-release-calendar-api.yml
       service: dp-release-calendar-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
