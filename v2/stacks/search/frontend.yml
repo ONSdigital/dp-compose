@@ -12,14 +12,23 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-release-calendar.yml
       service: dp-frontend-release-calendar
+    depends_on:
+      dp-release-calendar-api:
+        condition: service_healthy
   dp-frontend-search-controller:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-search-controller.yml
       service: dp-frontend-search-controller
+    depends_on:
+      dp-search-api:
+        condition: service_healthy
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
       service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-design-system:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
