@@ -59,3 +59,8 @@ services:
       - 10200:9200
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:9200/_cluster/health?wait_for_status=yellow"]
+      interval: 60s
+      timeout: 10s
+      retries: 10

@@ -9,6 +9,7 @@ services:
       - "8080"
     ports:
       - 8080:8080
+      - 8010:8010
     restart: unless-stopped
     environment:
       JAVA_OPTS:                " -Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=8010,server=y,suspend=n"

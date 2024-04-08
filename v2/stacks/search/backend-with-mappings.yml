@@ -29,3 +29,10 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
+  dp-release-calendar-api:
+      extends:
+        file: ${PATH_MANIFESTS}/core-ons/dp-release-calendar-api.yml
+        service: dp-release-calendar-api
+      depends_on:
+        dp-api-router:
+          condition: service_healthy
