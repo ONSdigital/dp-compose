@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       args:
         # if you want to change this port you should also change the mapping for it below in the ports section
-        # and rebuild the docker image
+        # so that both the host port and container port use the new port number, and then rebuild the docker image
         DOCKER_DEBUGGING_PORT: 8002
     expose:
       - "8082"
