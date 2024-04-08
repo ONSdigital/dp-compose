@@ -300,7 +300,7 @@ ENTRYPOINT ["dlv", "--log", "--listen=:2345", "--headless=true", "--api-version=
 - Remove the `command` section of the `dp-compose/v2/manifests/core-ons/dp-identity-api.yml` file.
 - Expose the port on which the debugging server is running on by adding `- "2345:2345"` (in this example is 2345) to the ports section of the `dp-compose/v2/manifests/core-ons/dp-identity-api.yml` file.
 - In IntelliJ IDE or Goland IDE open `dp-identity-api` repo and on the menu bar click `Run->Edit Configurations...`. On the popup window in the top left corner click the `+` button and choose `Go Remote` (the default port should be 2345). Put also a useful name next to the `Name:` label. Hit `Apply` and `Ok`.
-  ![Alt text](../../v2/assets/screenshot.png?raw=true "Title")
+  ![Run/Debug Configurations screenshot](../../v2/assets/screenshot.png?raw=true "Run/Debug Configurations")
 - Run the auth stack if it is not running already (make sure to remove dp-identity-api image first) or if you are already running it, run `make refresh SERVICE=dp-identity-api`.
 - Put your breakpoints in the code that you want to debug.
 - On the menu bar click `Run->Debug Name-that-you-chose`.
