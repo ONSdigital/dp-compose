@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  project-brian:
+    x-repo-url: "https://github.com/ONSdigital/project-brian"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/project-brian
+      dockerfile: Dockerfile
+    expose:
+      - "8083"
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+    user: ${UID-1000}:${GID-1000}
+    volumes:
+      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
+    environment:
+      TRANSACTION_STORE:           "/zebedee_root/zebedee/transactions"
+      WEBSITE:                     "/zebedee_root/zebedee/master"
+      PUBLISHING_THREAD_POOL_SIZE: 100
+      PORT:                        8083
+      DP_COLOURED_LOGGING:         "true"
+      DP_LOGGING_FORMAT:           "pretty_json"
+      MAX_FILE_UPLOAD_SIZE_MB:     -1
+      MAX_REQUEST_SIZE_MB:         -1
+      FILE_THRESHOLD_SIZE_MB:      0

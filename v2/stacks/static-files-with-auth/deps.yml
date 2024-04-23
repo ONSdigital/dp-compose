@@ -1,28 +1,48 @@
 version: "3.3"
 services:
-  postgis:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/postgis.yml
-      service: postgis
-  vault:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/vault.yml
-      service: vault
-  kafka:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/kafka.yml
-      service: kafka
   mongodb:
     extends:
       file: ${PATH_MANIFESTS}/deps/mongo.yml
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  zookeeper-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: zookeeper-1
+  kafka-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-1
+    depends_on:
+      - zookeeper-1
+  kafka-2:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-2
+    depends_on:
+      - zookeeper-1
+  kafka-3:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-3
+    depends_on:
+      - zookeeper-1
+  vault:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/vault.yml
+      service: vault
+  kowl:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-tools.yml
+      service: kowl
+    depends_on:
+      - zookeeper-1
   localstack:
     extends:
       file: ${PATH_MANIFESTS}/deps/localstack.yml
       service: localstack
-  http-echo:
+  elasticsearch:
     extends:
-      file: ${PATH_MANIFESTS}/deps/http-echo.yml
-      service: http-echo
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch

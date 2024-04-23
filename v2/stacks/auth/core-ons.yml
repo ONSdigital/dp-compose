@@ -49,8 +49,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
       service: dp-files-api
-    environment:
-      KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
     depends_on:
       dp-api-router:
         condition: service_healthy
@@ -89,3 +87,32 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dp-download-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
+      service: dp-download-service
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-upload-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
+      service: dp-upload-service
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  project-brian:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/project-brian.yml
+      service: project-brian
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-static-file-publisher:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-static-file-publisher.yml
+      service: dp-static-file-publisher
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+
