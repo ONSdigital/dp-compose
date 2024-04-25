@@ -4,7 +4,89 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
+    environment:
+      ENABLE_JWT_SESSIONS:            "true"
+      ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-1}
+      scheduled_publishing_enabled:   "true"
+    depends_on:
+      dp-identity-api:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
+  florence: # note: this might not build :( manually delete florence/dist florence/src/node_modules florence/assets/data.go
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/florence.yml
+      service: florence
+    environment:
+      ENABLE_NEW_SIGN_IN: "true"
+    depends_on:
+      zebedee:
+        condition: service_healthy
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  babbage:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage
+    environment:
+      FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  sixteens:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
+      service: sixteens
+  the-train:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/the-train.yml
+      service: the-train
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-publishing-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
+      service: dp-publishing-dataset-controller
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-design-system:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
+      service: dp-design-system
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-image-importer:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
+      service: dp-image-importer
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  project-brian:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/project-brian.yml
+      service: project-brian
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  
+
