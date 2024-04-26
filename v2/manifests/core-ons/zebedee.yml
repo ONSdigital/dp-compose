@@ -53,6 +53,7 @@ services:
       ELASTIC_SEARCH_CLUSTER:         "cluster"
       ELASTIC_SEARCH_SERVER:          "elasticsearch"
       brian_url:                      "http://project-brian:8083"
+      BABBAGE_URL:                    "http://babbage:8080"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
