@@ -5,6 +5,10 @@ services:
     build:
       context: ${DP_REPO_DIR:-../../../..}/zebedee
       dockerfile: Dockerfile
+      args:
+        # if you want to change this port you should also change the mapping for it below in the ports section
+        # so that both the host port and container port use the new port number, and then rebuild the docker image
+        DOCKER_DEBUGGING_PORT: 8002
     expose:
       - "8082"
     ports:
@@ -49,6 +53,7 @@ services:
       OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
       ELASTIC_SEARCH_CLUSTER:         "cluster"
       ELASTIC_SEARCH_SERVER:          "elasticsearch"
+      brian_url:                      "http://project-brian:8083"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
