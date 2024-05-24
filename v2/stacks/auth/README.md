@@ -31,15 +31,13 @@ SERVICE_AUTH_TOKEN
 # E.g. zebedee_root=/Users/your-name/zebedee-content
 zebedee_root
 
-# You may also need these AWS settings. The profile should point to sandbox.
+# You may also need these AWS settings. The profile should point to dp-sandbox.
 AWS_PROFILE
 AWS_REGION
 
 # You may also need the following other environment variables. Get the values from the relevant secrets in sandbox:
 
-# WEBSITE and PUBLISHING_THREAD_POOL_SIZE and TRANSACTION_STORE from the-train
-WEBSITE
-PUBLISHING_THREAD_POOL_SIZE
+# TRANSACTION_STORE from the-train
 TRANSACTION_STORE
 
 # ENABLE_PRIVATE_ENDPOINTS from dp-api-router
