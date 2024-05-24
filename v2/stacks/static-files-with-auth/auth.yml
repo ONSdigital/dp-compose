@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   # new auth
   dp-permissions-api:

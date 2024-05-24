@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   zebedee-reader:
     x-repo-url: "https://github.com/ONSdigital/zebedee"

@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-observation-importer:
     x-repo-url: "https://github.com/ONSdigital/dp-observation-importer"

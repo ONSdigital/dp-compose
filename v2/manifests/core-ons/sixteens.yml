@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   sixteens:
     x-repo-url: "https://github.com/ONSdigital/sixteens"

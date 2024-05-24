@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-frontend-homepage-controller:
     x-repo-url: "https://github.com/ONSdigital/dp-frontend-homepage-controller"

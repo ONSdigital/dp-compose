@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   the-train:
     x-repo-url: "https://github.com/ONSdigital/the-train"

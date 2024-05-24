@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-design-system:
     x-repo-url: "https://github.com/ONSdigital/dp-design-system"
