@@ -3,7 +3,6 @@
 # Contains all the search stack backend services.
 # This is a self-contained stack that doesn't rely on any external mapping or running service
 
-version: "3.3"
 services:
   dp-search-api:
     extends:

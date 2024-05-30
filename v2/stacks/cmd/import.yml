@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-code-list-api:
     extends:

@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-dimension-search-builder:
     x-repo-url: "https://github.com/ONSdigital/dp-dimension-search-builder"

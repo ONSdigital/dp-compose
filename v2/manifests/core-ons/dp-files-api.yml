@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-files-api:
     x-repo-url: "https://github.com/ONSdigital/dp-files-api"
@@ -16,7 +15,7 @@ services:
       BIND_ADDR:                          ":26900"
       GRACEFUL_SHUTDOWN_TIMEOUT:          "30s"
       HEALTHCHECK_CRITICAL_TIMEOUT:       "30s"
-      KAFKA_ADDR:                         "kafka:9092"
+      KAFKA_ADDR:                         "kafka-1:19092,kafka-2:19092,kafka-3:19092"
       KAFKA_PRODUCER_MIN_BROKERS_HEALTHY: "1"
       KAFKA_VERSION:                      "3.1.0"
       KAFKA_MAX_BYTES:                    "2000000"

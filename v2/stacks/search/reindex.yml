@@ -2,7 +2,6 @@
 
 # Contains all the search stack reindex pipeline applications.
 
-version: "3.3"
 services:
   dp-search-reindex-api:
     extends:

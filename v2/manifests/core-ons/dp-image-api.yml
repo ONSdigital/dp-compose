@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-image-api:
     x-repo-url: "https://github.com/ONSdigital/dp-image-api"
