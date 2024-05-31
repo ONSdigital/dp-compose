@@ -19,7 +19,7 @@ REPO_SSH_URL_REGEX='^(git@)?github.com:([^\/]+)\/([^\/]+)\/?(\.git)?$'
 # Ensure dependencies are installed
 [[ -n $BASH_VERSINFO && $BASH_VERSINFO -lt 4 ]] && fatal "your 'bash' is too old, please run 'brew install bash'"
 which git > /dev/null || fatal "git not installed"
-which yq > /dev/null || fatal "yq not installed"
+which yq  > /dev/null || fatal "yq not installed"
 
 # Test ssh to github
 res=0
@@ -65,6 +65,7 @@ for repo_url in ${repos[@]}; do
 
     # Check if the repo already exists locally
     repo_path="${DP_REPO_DIR}/$repo"
+    repo_init_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
         br_colour=$GREEN; [[ $branch == develop ]] || br_colour=$YELLOW
@@ -100,6 +101,33 @@ for repo_url in ${repos[@]}; do
             errors+=( $repo )
         else
             info "successfully cloned repo: $repo_pp ($repo_url_pp)"
+        fi
+    fi
+
+    if [[ -d "${repo_path}" && -d ${repo_init_dir} ]]; then
+        if [[ :init: == *:${1-}:* ]]; then
+            for init_f in ${repo_init_dir}/*; do
+                res=0
+                case $init_f in
+                    (*.patch)
+                        info "Applying patch to $repo ${init_f##*/}"
+                        git -C "$repo_path" apply $init_f || res=$?
+                        ;;
+                    (*.sh)
+                        info "Applying script to $repo ${init_f##*/}"
+                        pushd "$repo_path"
+                            "$init_f" "$1" "$repo" || res=$?
+                        popd
+                        ;;
+                    (*)
+                        warning "Ignoring unknown file type: ${init_f}"
+                        ;;
+                esac
+                if [[ $res -ne 0 ]]; then
+                    warning "Applying ${init_f##*/} failed ($res), Ctrl-C within 10sec to abort"
+                    sleep 10
+                fi
+            done
         fi
     fi
 done

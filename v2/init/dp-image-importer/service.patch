@@ -1,0 +1,29 @@
+diff --git service/service.go service/service.go
+index 3564d60..5e1434b 100644
+--- service/service.go
++++ service/service.go
+@@ -162,15 +162,15 @@ func registerCheckers(ctx context.Context,
+ 
+ 	hasErrors := false
+ 
+-	if err := hc.AddCheck("S3 private bucket", s3Private.Checker); err != nil {
+-		hasErrors = true
+-		log.Error(ctx, "error adding check for s3Private private bucket", err)
+-	}
+-
+-	if err := hc.AddCheck("S3 uploaded bucket", s3Uploaded.Checker); err != nil {
+-		hasErrors = true
+-		log.Error(ctx, "error adding check for s3Private uploaded bucket", err)
+-	}
++	// if err := hc.AddCheck("S3 private bucket", s3Private.Checker); err != nil {
++	// hasErrors = true
++	// log.Error(ctx, "error adding check for s3Private private bucket", err)
++	// }
++
++	// if err := hc.AddCheck("S3 uploaded bucket", s3Uploaded.Checker); err != nil {
++	// hasErrors = true
++	// log.Error(ctx, "error adding check for s3Private uploaded bucket", err)
++	// }
+ 
+ 	if err := hc.AddCheck("Image API client", imageAPI.Checker); err != nil {
+ 		hasErrors = true

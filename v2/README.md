@@ -34,11 +34,12 @@ $ make check          # run some pre-flight checks
 ..some checks are run...
 $ make clone          # clone the relevant repos
 ...git clone activity for the repos in this stack...
+$ make init           # patch/prep the relevant repos
 ```
 
 Please follow the instructions in [stacks README](./stacks/README.md) for more information on running each stack.
 
-Note that before starting a stack you should stop any other stack running.
+**Note: before starting a stack you should stop any other stack running.**
 
 ## Structure
 
