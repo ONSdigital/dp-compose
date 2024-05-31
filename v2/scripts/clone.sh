@@ -65,7 +65,7 @@ for repo_url in ${repos[@]}; do
 
     # Check if the repo already exists locally
     repo_path="${DP_REPO_DIR}/$repo"
-    repo_init_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
+    repo_prep_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
         br_colour=$GREEN; [[ $branch == develop ]] || br_colour=$YELLOW
@@ -104,27 +104,30 @@ for repo_url in ${repos[@]}; do
         fi
     fi
 
-    if [[ -d "${repo_path}" && -d ${repo_init_dir} ]]; then
-        if [[ :init: == *:${1-}:* ]]; then
-            for init_f in ${repo_init_dir}/*; do
+    if [[ -d "${repo_path}" && -d ${repo_prep_dir} ]]; then
+        if [[ :prep: == *:${1-}:* ]]; then
+            for prep_f in ${repo_prep_dir}/*; do
                 res=0
-                case $init_f in
+                case $prep_f in
                     (*.patch)
-                        info "Applying patch to $repo ${init_f##*/}"
-                        git -C "$repo_path" apply $init_f || res=$?
+                        info "prep: Applying patch to $repo ${prep_f##*/}"
+                        pushd "$repo_path"
+                            # git -C "$repo_path" apply --unsafe-paths - < "$prep_f" || res=$?
+                            patch --forward < "$prep_f" || res=$?
+                        popd
                         ;;
                     (*.sh)
-                        info "Applying script to $repo ${init_f##*/}"
+                        info "prep: Applying script to $repo ${prep_f##*/}"
                         pushd "$repo_path"
-                            "$init_f" "$1" "$repo" || res=$?
+                            "$prep_f" "$1" "$repo" || res=$?
                         popd
                         ;;
                     (*)
-                        warning "Ignoring unknown file type: ${init_f}"
+                        warning "prep: Ignoring unknown file type: ${prep_f}"
                         ;;
                 esac
                 if [[ $res -ne 0 ]]; then
-                    warning "Applying ${init_f##*/} failed ($res), Ctrl-C within 10sec to abort"
+                    warning "prep: Applying ${prep_f##*/} failed ($res), Ctrl-C within 10sec to abort"
                     sleep 10
                 fi
             done

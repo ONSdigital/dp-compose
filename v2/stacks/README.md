@@ -253,7 +253,7 @@ Some optional general *make variables* can be used:
    query the health of each service
 - `make clone` / `make pull` / `make git-status`
    `git clone/pull/status` all apps used by this stack
-- `make init`
+- `make prep`
    apply initialisation files against repos in this stack
    (e.g. patches to source or scripts to prep the repos)
 - `make list-repos`
