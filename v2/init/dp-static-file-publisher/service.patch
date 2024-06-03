@@ -1,0 +1,29 @@
+diff --git service/service.go service/service.go
+index 45d58d5..35733fe 100644
+--- service/service.go
++++ service/service.go
+@@ -230,15 +230,15 @@ func (svc *Service) registerCheckers(ctx context.Context) (err error) {
+ 		log.Error(ctx, "failed to add KafkaFilePublishedConsumer checker", err)
+ 	}
+ 
+-	if err = svc.HealthCheck.AddCheck("S3 Public", svc.S3Public.Checker); err != nil {
+-		hasErrors = true
+-		log.Error(ctx, "failed to add public s3 client checker", err)
+-	}
+-
+-	if err = svc.HealthCheck.AddCheck("S3 Private", svc.S3Private.Checker); err != nil {
+-		hasErrors = true
+-		log.Error(ctx, "failed to add private s3 client checker", err)
+-	}
++	// XXX DO-NOT-COMMIT if err = svc.HealthCheck.AddCheck("S3 Public", svc.S3Public.Checker); err != nil {
++	// XXX DO-NOT-COMMIT hasErrors = true
++	// XXX DO-NOT-COMMIT log.Error(ctx, "failed to add public s3 client checker", err)
++	// XXX DO-NOT-COMMIT }
++
++	// XXX DO-NOT-COMMIT if err = svc.HealthCheck.AddCheck("S3 Private", svc.S3Private.Checker); err != nil {
++	// XXX DO-NOT-COMMIT hasErrors = true
++	// XXX DO-NOT-COMMIT log.Error(ctx, "failed to add private s3 client checker", err)
++	// XXX DO-NOT-COMMIT }
+ 
+ 	if err = svc.HealthCheck.AddCheck("Files Service", svc.FilesClient.Checker); err != nil {
+ 		hasErrors = true
