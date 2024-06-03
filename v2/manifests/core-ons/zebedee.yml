@@ -50,7 +50,7 @@ services:
       website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
       OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
-      ELASTIC_SEARCH_CLUSTER:         "cluster"
+      ELASTIC_SEARCH_CLUSTER:         "elasticsearch"
       ELASTIC_SEARCH_SERVER:          "elasticsearch"
       brian_url:                      "http://project-brian:8083"
       BABBAGE_URL:                    "http://babbage:8080"

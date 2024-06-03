@@ -19,7 +19,7 @@ REPO_SSH_URL_REGEX='^(git@)?github.com:([^\/]+)\/([^\/]+)\/?(\.git)?$'
 # Ensure dependencies are installed
 [[ -n $BASH_VERSINFO && $BASH_VERSINFO -lt 4 ]] && fatal "your 'bash' is too old, please run 'brew install bash'"
 which git > /dev/null || fatal "git not installed"
-which yq > /dev/null || fatal "yq not installed"
+which yq  > /dev/null || fatal "yq not installed"
 
 # Test ssh to github
 res=0
@@ -65,6 +65,7 @@ for repo_url in ${repos[@]}; do
 
     # Check if the repo already exists locally
     repo_path="${DP_REPO_DIR}/$repo"
+    repo_prep_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
         br_colour=$GREEN; [[ $branch == develop ]] || br_colour=$YELLOW
@@ -100,6 +101,34 @@ for repo_url in ${repos[@]}; do
             errors+=( $repo )
         else
             info "successfully cloned repo: $repo_pp ($repo_url_pp)"
+        fi
+    fi
+
+    if [[ -d "${repo_path}" && -d ${repo_prep_dir} ]]; then
+        if [[ :prep: == *:${1-}:* ]]; then
+            for prep_f in ${repo_prep_dir}/*; do
+                res=0
+                case $prep_f in
+                    (*.patch)
+                        info "prep: Applying patch to $repo ${prep_f##*/}"
+                        patch --directory "$repo_path" --forward -r /dev/null < "$prep_f" || res=$?
+                        [[ $res == 1 ]] && res=0
+                        ;;
+                    (*.sh)
+                        info "prep: Applying script to $repo ${prep_f##*/}"
+                        pushd "$repo_path"
+                            "$prep_f" "$1" "$repo" || res=$?
+                        popd
+                        ;;
+                    (*)
+                        warning "prep: Ignoring unknown file type: ${prep_f}"
+                        ;;
+                esac
+                if [[ $res -ne 0 ]]; then
+                    warning "prep: Applying ${prep_f##*/} failed ($res), Ctrl-C within 10sec to abort"
+                    sleep 10
+                fi
+            done
         fi
     fi
 done
