@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-search-reindex-tracker:
     x-repo-url: "https://github.com/ONSdigital/dp-search-reindex-tracker"

@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-static-file-publisher:
     x-repo-url: "https://github.com/ONSdigital/dp-static-file-publisher"

@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-topic-api:
     x-repo-url: "https://github.com/ONSdigital/dp-topic-api"

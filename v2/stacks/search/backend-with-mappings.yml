@@ -5,7 +5,6 @@
 # It assumes that these dependencies will be available in localhost.
 # `extra_hosts` blocks are used to do this mapping.
 
-version: "3.3"
 services:
   dp-search-api:
     extends:

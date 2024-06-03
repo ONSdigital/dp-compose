@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-frontend-router:
     x-repo-url: "https://github.com/ONSdigital/dp-frontend-router"

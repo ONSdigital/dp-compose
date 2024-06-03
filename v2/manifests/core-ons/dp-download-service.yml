@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-download-service:
     x-repo-url: "https://github.com/ONSdigital/dp-download-service"

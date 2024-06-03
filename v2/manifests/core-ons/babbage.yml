@@ -1,4 +1,3 @@
-version: '3.3'
 services:
   babbage:
     x-repo-url: "https://github.com/ONSdigital/babbage"

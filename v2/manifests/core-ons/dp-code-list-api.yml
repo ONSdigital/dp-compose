@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-code-list-api:
     x-repo-url: "https://github.com/ONSdigital/dp-code-list-api"
