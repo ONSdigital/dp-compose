@@ -105,8 +105,8 @@ health: $(LOCAL_ENV_FILE)
 .PHONY: base-init
 base-init: clone $(LOCAL_ENV_FILE)
 
-.PHONY: clone pull git-status check-repos
-clone pull git-status check-repos:
+.PHONY: clone pull git-status check-repos prep
+clone pull git-status check-repos prep:
 	@$(SCRIPTS_DIR)/clone.sh $@
 
 .PHONY: list-apps
