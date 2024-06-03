@@ -15,15 +15,15 @@ index 3564d60..5e1434b 100644
 -		hasErrors = true
 -		log.Error(ctx, "error adding check for s3Private uploaded bucket", err)
 -	}
-+	// if err := hc.AddCheck("S3 private bucket", s3Private.Checker); err != nil {
-+	// hasErrors = true
-+	// log.Error(ctx, "error adding check for s3Private private bucket", err)
-+	// }
++	// XXX DO-NOT-COMMIT if err := hc.AddCheck("S3 private bucket", s3Private.Checker); err != nil {
++	// XXX DO-NOT-COMMIT hasErrors = true
++	// XXX DO-NOT-COMMIT log.Error(ctx, "error adding check for s3Private private bucket", err)
++	// XXX DO-NOT-COMMIT }
 +
-+	// if err := hc.AddCheck("S3 uploaded bucket", s3Uploaded.Checker); err != nil {
-+	// hasErrors = true
-+	// log.Error(ctx, "error adding check for s3Private uploaded bucket", err)
-+	// }
++	// XXX DO-NOT-COMMIT if err := hc.AddCheck("S3 uploaded bucket", s3Uploaded.Checker); err != nil {
++	// XXX DO-NOT-COMMIT hasErrors = true
++	// XXX DO-NOT-COMMIT log.Error(ctx, "error adding check for s3Private uploaded bucket", err)
++	// XXX DO-NOT-COMMIT }
  
  	if err := hc.AddCheck("Image API client", imageAPI.Checker); err != nil {
  		hasErrors = true
