@@ -5,7 +5,6 @@
 # It assumes that these dependencies will be available in localhost.
 # `extra_hosts` blocks are used to do this mapping.
 
-version: "3.3"
 services:
   dp-search-api:
     extends:
@@ -29,3 +28,10 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
+  dp-release-calendar-api:
+      extends:
+        file: ${PATH_MANIFESTS}/core-ons/dp-release-calendar-api.yml
+        service: dp-release-calendar-api
+      depends_on:
+        dp-api-router:
+          condition: service_healthy

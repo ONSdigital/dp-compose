@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-hierarchy-api:
     x-repo-url: "https://github.com/ONSdigital/dp-hierarchy-api"

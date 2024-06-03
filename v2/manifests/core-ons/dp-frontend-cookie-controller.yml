@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-frontend-cookie-controller:
     x-repo-url: "https://github.com/ONSdigital/dp-frontend-cookie-controller"

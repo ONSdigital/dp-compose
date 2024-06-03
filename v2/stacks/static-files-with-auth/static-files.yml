@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dp-files-api:
     extends:
@@ -12,12 +11,19 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
       service: dp-download-service
-  # new auth
-  dp-permissions-api:
+    environment:
+      BUCKET_NAME:       "testing-public"
+      IS_PUBLISHING:     "false"
+      PUBLIC_BUCKET_URL: "http://localhost:14566/testing-public/"
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-static-file-publisher:
     extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
-      service: dp-permissions-api
-  dp-identity-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-identity-api.yml
-      service: dp-identity-api
+      file: ${PATH_MANIFESTS}/core-ons/dp-static-file-publisher.yml
+      service: dp-static-file-publisher
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+
+

@@ -2,12 +2,15 @@
 
 # Contains all the search stack non-ons dependencies.
 
-version: "3.3"
 services:
   sitewideelasticsearch:
     extends:
       file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
       service: sitewideelasticsearch
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch
   mongodb:
     extends:
       file: ${PATH_MANIFESTS}/deps/mongo.yml
