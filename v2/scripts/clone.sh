@@ -78,7 +78,7 @@ for repo_url in ${repos[@]}; do
                 error "failed to '$git_arg' repo: $repo_pp ($branch_pp $repo_url_pp)"
                 errors+=( $repo )
             else
-                info "successfully '$git_arg' on repo: $repo_pp ($branch_pp $repo_url_pp)"
+                info "successful '$git_arg' on repo: $repo_pp ($branch_pp $repo_url_pp)"
             fi
         else
             info "repo already cloned, skipping: $repo_pp ($branch_pp $repo_url_pp)"

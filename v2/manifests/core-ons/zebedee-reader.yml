@@ -7,8 +7,7 @@ services:
     expose:
       - "8082"
     ports:
-      - 8082:8082
-      - 8002:8002
+      - 18082:8082
     volumes:
       - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     restart: unless-stopped
@@ -21,6 +20,7 @@ services:
       PACKAGE_PREFIX:         "com.github.onsdigital.zebedee.reader.api"
       zebedee_root:           "/zebedee_root"
       OTEL_JAVAAGENT_ENABLED: ${OTEL_JAVAAGENT_ENABLED:-"false"}
+      ELASTIC_SEARCH_SERVER:  "elasticsearch-web"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

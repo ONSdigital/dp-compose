@@ -13,6 +13,22 @@ services:
       timeout: 10s
       retries: 10
 
+  elasticsearch-web:
+    image: elasticsearch:2.4.2
+    expose:
+      - "9200"
+      - "9300"
+    ports:
+      - "9308:9300"
+      - "9208:9200"
+    environment:
+      - "discovery.type=single-node"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:9200/_cluster/health?wait_for_status=yellow"]
+      interval: 60s
+      timeout: 10s
+      retries: 10
+
   sitewideelasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
     expose:

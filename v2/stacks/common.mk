@@ -152,6 +152,7 @@ check-versions:
 		is_ver maven		"$$(mvn --version		2>&1 | sed -En 's/.* Maven ([0-9]+\..*) .*/\1/p')"	"3\.*";			\
 		is_ver docker		"$$(docker --version		2>&1 | sed -En 's/.* version ([^ ]+), .*/\1/p')"	"2[5-9]\.*";		\
 		is_ver docker-compose	"$$(docker-compose --version	2>&1 | sed -En 's/.* version v?([0-9.]+.*)/\1/p')"	"2\.2[5-9]\.*";		\
+		is_ver yq		"$$(yq --version		2>&1 | sed -En 's/.* version v?([0-9.]+.*)/\1/p')"	"4\.[4-9][0-9].*";	\
 		: is_ver nvm		"$$(nvm --version		2>&1 )"							"0\.[3-9][0-9]\..*";	\
 		: is_ver npm		"$$(npm --version		2>&1 )"							"0\.[3-9][0-9]\..*"
 
