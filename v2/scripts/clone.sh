@@ -111,10 +111,8 @@ for repo_url in ${repos[@]}; do
                 case $prep_f in
                     (*.patch)
                         info "prep: Applying patch to $repo ${prep_f##*/}"
-                        pushd "$repo_path"
-                            # git -C "$repo_path" apply --unsafe-paths - < "$prep_f" || res=$?
-                            patch --forward < "$prep_f" || res=$?
-                        popd
+                        patch --directory "$repo_path" --forward -r /dev/null < "$prep_f" || res=$?
+                        [[ $res == 1 ]] && res=0
                         ;;
                     (*.sh)
                         info "prep: Applying script to $repo ${prep_f##*/}"
