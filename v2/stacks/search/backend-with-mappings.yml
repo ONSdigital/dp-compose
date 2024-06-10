@@ -35,3 +35,10 @@ services:
       depends_on:
         dp-api-router:
           condition: service_healthy
+  dp-topic-api:
+      extends:
+        file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+        service: dp-topic-api
+      depends_on:
+        dp-api-router:
+          condition: service_healthy
