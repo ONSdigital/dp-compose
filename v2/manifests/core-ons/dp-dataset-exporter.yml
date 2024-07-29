@@ -12,8 +12,6 @@ services:
       - ./reflex
     volumes:
       - ${DP_REPO_DIR:-../../../..}/dp-dataset-exporter:/dp-dataset-exporter
-      - /Users/francesmoore/src/github.com/ONSdigital/dp-graph:/Users/francesmoore/src/github.com/ONSdigital/dp-graph
-      - /Users/francesmoore/src/github.com/ONSdigital/dp-vault:/Users/francesmoore/src/github.com/ONSdigital/dp-vault
     ports:
       - 22500:22500
     restart: unless-stopped
@@ -37,7 +35,7 @@ services:
       DOWNLOAD_SERVICE_URL:        "http://dp-download-service:23600"
       FILTER_API_URL:               ${FILTER_API_URL:-http://dp-filter-api:22100}
       GRAPH_DRIVER_TYPE:           "neptune"
-      GRAPH_ADDR:                  "wss://host.docker.internal:8182/gremlin"
+      GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}
       ENCRYPTION_DISABLED:         "true"
       AWS_REGION:                   "eu-west-1"

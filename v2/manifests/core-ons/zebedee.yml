@@ -51,7 +51,7 @@ services:
       OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
       ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
       ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
-      #brian_url:                      "http://project-brian:8083"
+      brian_url:                      "http://project-brian:8083"
       BABBAGE_URL:                    "http://babbage:8080"
       UPLOAD_SERVICE_API_URL:         "http://dp-upload-service:25100"
       ENABLE_UPLOAD_NEW_ENDPOINT:     true
