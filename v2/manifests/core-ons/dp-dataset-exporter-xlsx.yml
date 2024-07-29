@@ -1,0 +1,25 @@
+services:
+  dp-dataset-exporter-xlsx:
+    x-repo-url: "https://github.com/ONSdigital/dp-dataset-exporter-xlsx"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dp-dataset-exporter-xlsx
+      dockerfile: Dockerfile.local
+    expose:
+      - "22800"
+    ports:
+      - 22800:22800
+    restart: unless-stopped
+    user: ${UID-1000}:${GID-1000}
+    environment:
+      BIND_ADDR:                   ":22800"
+      FILTER_API_URL:           ${FILTER_API_URL:-http://dp-filter-api:22100}
+      DATASET_API_URL:          ${DATASET_API_URL:-http://dp-dataset-api:22000}
+      S3_PRIVATE_BUCKET_NAME:   "csv-exported"
+      SERVICE_AUTH_TOKEN:           $SERVICE_AUTH_TOKEN
+      VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
+      VAULT_TOKEN:                 "0000-0000-0000-0000"
+      VAULT_DEV_ROOT_TOKEN_ID:     "0000-0000-0000-0000"
+      ZEBEDEE_URL:                 "http://zebedee:8082"
+      DOWNLOAD_SERVICE_URL:        "http://dp-download-service:23600"
+      KAFKA_ADDR:                  "kafka-1:19092,kafka-2:19092,kafka-3:19092"
+      

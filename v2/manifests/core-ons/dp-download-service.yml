@@ -15,7 +15,7 @@ services:
       BIND_ADDR:                    ":23600"
       AWS_REGION:                   "eu-west-1"
       LOCALSTACK_HOST:              ${LOCALSTACK_URL:-http://localstack:4566}
-      BUCKET_NAME:                  "testing"
+      BUCKET_NAME:                  "csv-exported"
       PUBLIC_BUCKET_URL:            "http://localhost:4566/testing-public/"
       ENCRYPTION_DISABLED:          ${ENCRYPTION_DISABLED:-false}
       GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
@@ -32,6 +32,7 @@ services:
       DATASET_API_URL:              ${DATASET_API_URL:-http://dp-dataset-api:22000}
       ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
       IS_PUBLISHING:                "true"
+      SERVICE_AUTH_TOKEN:           ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:23600/health"]
       interval: 30s

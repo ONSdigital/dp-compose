@@ -40,7 +40,7 @@ services:
       SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       ENABLE_STATIC_FILES_PUBLISHING: "true"
       FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
-      ENABLE_JWT_SESSIONS:            "false"
+      ENABLE_JWT_SESSIONS:            "true"
       IDENTITY_API_URL:               ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       AWS_COGNITO_SIGNING_KEY_ONE:    ${AWS_COGNITO_SIGNING_KEY_ONE:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApU1DqxJalEmlznkrM+U4aSBMw9u5axcIqNeUq8+ZHo98uKy8Xy5zCOXfWx6KafOPJhbOZInFaSh9UMaluSSw11l/PR4KrGBFzJODQ+RMq6bHW6FlwwHSkMTSfQ0hwzO7y91BiZFmJnaUECf52H3QBApGT4TT060ri5zt1ygpliRwjLLlHW1XX0epzZH3ogrikn4i65e8w6uUcsGBhQvQQqiHvEpcgCSWS6SUIeVjv5ZTT4stZuDtkbijtSgDrP2xDQCEZO1OipvT6O4ycDNb2Hjapddi25Rgr08aLP/zqM16fIiueXIbYf0Dn4eUuRxFAq3LjyEGjZ6vv+4nh34M2QIDAQAB"}
       AWS_COGNITO_SIGNING_KEY_TWO:    ${AWS_COGNITO_SIGNING_KEY_TWO:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"}
@@ -49,10 +49,13 @@ services:
       website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
       OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
-      ELASTIC_SEARCH_CLUSTER:         "elasticsearch"
-      ELASTIC_SEARCH_SERVER:          "elasticsearch"
-      brian_url:                      "http://project-brian:8083"
+      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
+      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
+      #brian_url:                      "http://project-brian:8083"
       BABBAGE_URL:                    "http://babbage:8080"
+      UPLOAD_SERVICE_API_URL:         "http://dp-upload-service:25100"
+      ENABLE_UPLOAD_NEW_ENDPOINT:     true
+      DEFAULT_WEBSITE_URL:            "http://babbage:8080"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

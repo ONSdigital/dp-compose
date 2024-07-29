@@ -27,6 +27,7 @@ services:
       IS_PUBLISHING_MODE:             ${IS_PUBLISHING:-false}
       SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       SITE_DOMAIN:                    ${SITE_DOMAIN:-localhost}
+      DOWNLOAD_SERVICE_URL:           "http://localhost:23600"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:20200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

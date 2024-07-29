@@ -32,7 +32,7 @@ services:
       retries: 10
 
   cmdelasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.0.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
     expose:
       - "9300" # exposed port to docker network so that the broker is reachable by other brokers, value needs to match PLAINTEXT port
       - "9200"
@@ -42,8 +42,9 @@ services:
       - 10200:9200
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
     healthcheck:
-      test: ["CMD", "curl", "-sSf", "http://localhost:9200/_cluster/health?wait_for_status=yellow"]
+      test: ["CMD", "curl", "-sSf", "http://cmdelasticsearch:9200/_cluster/health?wait_for_status=yellow"]
       interval: 60s
       timeout: 10s
       retries: 10

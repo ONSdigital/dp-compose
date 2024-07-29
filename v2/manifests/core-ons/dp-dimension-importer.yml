@@ -30,6 +30,7 @@ services:
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}
       GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       GRAPH_DRIVER_TYPE:           ${GRAPH_DRIVER_TYPE:-neptune}
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:21500/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
