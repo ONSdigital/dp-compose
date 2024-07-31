@@ -15,7 +15,7 @@ services:
       FILTER_API_URL:              ${FILTER_API_URL:-http://dp-filter-api:22100}
       DATASET_API_URL:             ${DATASET_API_URL:-http://dp-dataset-api:22000}
       S3_PRIVATE_BUCKET_NAME:      "csv-exported"
-      SERVICE_AUTH_TOKEN:          $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       VAULT_TOKEN:                 "0000-0000-0000-0000"
       VAULT_DEV_ROOT_TOKEN_ID:     "0000-0000-0000-0000"

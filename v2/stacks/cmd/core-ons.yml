@@ -18,6 +18,8 @@ services:
     environment:
       ENABLE_JWT_SESSIONS:            "true"
       ENABLE_PERMISSIONS_AUTH:        "true"
+      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
+      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
     depends_on:
       dp-identity-api:
         condition: service_healthy
@@ -64,8 +66,8 @@ services:
       service: babbage
     environment:
       FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
-      ELASTIC_SEARCH_SERVER:    ${ELASTIC_SEARCH_SERVER:-cmdelasticsearch}
-      ELASTIC_SEARCH_PORT:      ${ELASTIC_SEARCH_PORT:-9300}
+      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
+      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
     depends_on:
       dp-api-router:
         condition: service_healthy
