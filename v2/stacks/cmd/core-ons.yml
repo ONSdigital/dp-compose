@@ -66,8 +66,8 @@ services:
       service: babbage
     environment:
       FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
-      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
-      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
+      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"   # setting to cmd elasticsearch as this is only required for healthcheck purposes
+      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"   # setting to cmd elasticsearch as this is only required for healthcheck purposes
     depends_on:
       dp-api-router:
         condition: service_healthy
