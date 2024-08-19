@@ -8,5 +8,3 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
-
- 
