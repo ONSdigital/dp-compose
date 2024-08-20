@@ -59,5 +59,3 @@ for (database of databases) {
         }
 	}
 }
-
-

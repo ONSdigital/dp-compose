@@ -54,4 +54,3 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-
