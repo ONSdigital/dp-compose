@@ -1,0 +1,10 @@
+FROM openjdk:17-alpine3.14
+
+RUN apk add maven
+RUN apk add gcompat
+
+WORKDIR /zebedee
+
+COPY . /zebedee
+
+RUN chmod +x /zebedee

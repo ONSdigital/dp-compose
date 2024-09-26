@@ -1,0 +1,7 @@
+FROM golang:alpine
+
+WORKDIR /dp-frontend-homepage-controller
+
+COPY . /dp-frontend-homepage-controller
+
+RUN apk add --virtual build-deps build-base
