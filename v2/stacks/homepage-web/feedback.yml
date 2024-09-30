@@ -1,0 +1,8 @@
+services:
+  dp-frontend-feedback-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-feedback-controller.yml
+      service: dp-frontend-feedback-controller
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
