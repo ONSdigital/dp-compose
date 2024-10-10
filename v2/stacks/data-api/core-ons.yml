@@ -61,5 +61,10 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-
-        
+  dp-filter-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-filter-api.yml
+      service: dp-filter-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
