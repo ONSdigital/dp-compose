@@ -54,3 +54,12 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+
+        
