@@ -108,7 +108,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-recipe-api.yml
       service: dp-recipe-api
     depends_on:
-      dp-import-api:
+      dp-dataset-api:
         condition: service_healthy
   dp-upload-service:
     extends:

@@ -22,4 +22,8 @@ services:
       ZEBEDEE_URL:                 "http://zebedee:8082"
       DOWNLOAD_SERVICE_URL:        "http://dp-download-service:23600"
       KAFKA_ADDR:                  "kafka-1:19092,kafka-2:19092,kafka-3:19092"
-      
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:22800/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10

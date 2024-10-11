@@ -18,10 +18,12 @@ services:
     environment:
       ENABLE_JWT_SESSIONS:            "true"
       ENABLE_PERMISSIONS_AUTH:        "true"
-      ELASTIC_SEARCH_CLUSTER:         "cmdelasticsearch"
-      ELASTIC_SEARCH_SERVER:          "cmdelasticsearch"
+      ELASTIC_SEARCH_CLUSTER:         "elasticsearch"
+      ELASTIC_SEARCH_SERVER:          "elasticsearch"
     depends_on:
       dp-identity-api:
+        condition: service_healthy
+      elasticsearch:
         condition: service_healthy
   florence:
     extends:
@@ -56,10 +58,32 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-filter-api:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
   dp-dataset-exporter-xlsx:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-dataset-exporter-xlsx.yml
       service: dp-dataset-exporter-xlsx
+    depends_on:
+      dp-dataset-exporter:
+        condition: service_healthy
+  dp-filter-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-filter-api.yml
+      service: dp-filter-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   babbage:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml

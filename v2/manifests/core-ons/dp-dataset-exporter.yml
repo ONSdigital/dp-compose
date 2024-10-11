@@ -40,3 +40,8 @@ services:
       ENCRYPTION_DISABLED:         "true"
       AWS_REGION:                   "eu-west-1"
       LOCALSTACK_HOST:              ${LOCALSTACK_URL:-http://localstack:4566}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:22500/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
