@@ -68,3 +68,7 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dp-frontend-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
+      service: dp-frontend-dataset-controller
