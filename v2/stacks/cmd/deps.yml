@@ -41,6 +41,10 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
       service: cmdelasticsearch
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch
   localstack:
     extends:
       file: ${PATH_MANIFESTS}/deps/localstack.yml

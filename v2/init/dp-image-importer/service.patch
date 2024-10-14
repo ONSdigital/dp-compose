@@ -1,5 +1,3 @@
-diff --git service/service.go service/service.go
-index 3564d60..5e1434b 100644
 --- service/service.go
 +++ service/service.go
 @@ -162,15 +162,15 @@ func registerCheckers(ctx context.Context,

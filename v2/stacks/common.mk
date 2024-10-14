@@ -22,18 +22,32 @@ LOGS_NO_PREFIX ?=
 LOGS_TAIL ?=
 QUIET ?=
 
+# crude check to see if SERVICE is set and correct (needs to avoid recursion, hence using the yml files)
+.PHONY: verify-service
+verify-service: $(LOCAL_ENV_FILE)
+	@[[ -z "$(SERVICE)" ]] && exit 0;							\
+	for compose_env_f in $(shell sed 's/,/ /g' <<<"$(COMPOSE_ENV_FILES)"); do		\
+		source $$compose_env_f;								\
+	done;											\
+	for compose_f in $$(sed 's/:/ /g' <<<"$$COMPOSE_FILE"); do				\
+		for svc in $$(yq -r '.services | keys | .[]' $$compose_f); do			\
+			[[ "$(SERVICE)" = $$svc ]] && exit 0;					\
+		done;										\
+	done;											\
+	exit 4
+
 .PHONY: up
-up: $(LOCAL_ENV_FILE)
+up: verify-service
 	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
 .PHONY: down
-down: $(LOCAL_ENV_FILE)
+down: verify-service
 	@echo "\033[34m""stopping and removing containers and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down $(SERVICE)
 
 .PHONY: clean
-clean: $(LOCAL_ENV_FILE)
+clean: verify-service
 	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
@@ -41,21 +55,21 @@ clean: $(LOCAL_ENV_FILE)
 refresh: down clean-image up
 
 .PHONY: ps start stop config
-ps start stop config: $(LOCAL_ENV_FILE)
+ps start stop config: verify-service
 	@[[ -n "$(QUIET)" ]] || echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: images
-images:
+images: verify-service
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: ps-docker
-ps-docker:
+ps-docker: verify-service
 	@do=$@; do=$${do%-docker};	\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $$do $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: get-repository-name
-get-repository-name: $(LOCAL_ENV_FILE)
+get-repository-name: verify-service
 	@if [[ -n "$(SERVICE)" ]]; then						\
 		APPS="$(shell make list-apps)";					\
 		if [[ " $${APPS[*]} " == *" $(SERVICE) "* ]]; then		\
@@ -71,7 +85,7 @@ image-id: $(LOCAL_ENV_FILE)
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '$$2~/'"$$REPO_NAME"'$$/{print $$1}'
 
 .PHONY: clean-image
-clean-image:
+clean-image: verify-service
 	@i_id=$$(make image-id);								\
 		if [[ -z $$i_id ]]; then echo "Could not get image-id" >&2; exit 3; fi;		\
 		if [[ $$i_id =~ [[:space:]] && -z "$(ENABLE_MULTI)" ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got >1 IDs $$i_id" >&2; exit 4; fi;	\
@@ -79,11 +93,11 @@ clean-image:
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
 
 .PHONY: container-id
-container-id: $(LOCAL_ENV_FILE)
+container-id: verify-service
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
 
 .PHONY: attach
-attach: $(LOCAL_ENV_FILE)
+attach: verify-service
 	@c_id=$$(make container-id);								\
 		if [[ -z $$c_id ]]; then echo "Could not get container-id" >&2; exit 3; fi;	\
 		if [[ $$c_id =~ [[:space:]] ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got IDs $$c_id" >&2; exit 4; fi;	\
@@ -91,7 +105,7 @@ attach: $(LOCAL_ENV_FILE)
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
 .PHONY: logs
-logs: $(LOCAL_ENV_FILE)
+logs: verify-service
 	@logs_arg="";	\
 		[[ -n "$(LOGS_TAIL)" ]]		&& logs_arg+="-f ";	\
 		[[ -n "$(LOGS_TIMESTAMP)" ]]	&& logs_arg+="-t ";	\
