@@ -54,3 +54,21 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-filter-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-filter-api.yml
+      service: dp-filter-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-frontend-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
+      service: dp-frontend-dataset-controller
