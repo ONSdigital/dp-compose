@@ -1,0 +1,33 @@
+services:
+  babbage:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+  sixteens:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
+      service: sixteens
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+    depends_on:
+      zebedee-reader:
+        condition: service_healthy
+  zebedee-reader:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee-reader.yml
+      service: zebedee-reader
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
