@@ -8,3 +8,7 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
+  dis-authentication-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
+      service: dis-authentication-stub

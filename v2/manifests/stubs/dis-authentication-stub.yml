@@ -1,0 +1,23 @@
+services:
+  dis-authentication-stub:
+    x-repo-url: "https://github.com/ONSdigital/dis-authentication-stub"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-authentication-stub
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-authentication-stub:/dis-authentication-stub
+    expose:
+      - "29500"
+    ports:
+      - 29500:29500
+    environment:
+      HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}
+      BIND_ADDR:                    ":29500"
+      GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
+      HEALTHCHECK_CRITICAL_TIMEOUT: "5s"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:23600/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    entrypoint: make debug-run
