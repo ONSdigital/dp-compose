@@ -16,8 +16,8 @@ services:
       GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT: "5s"
     healthcheck:
-      test: ["CMD", "curl", "-sSf", "http://localhost:23600/health"]
+      test: ["CMD", "curl", "-sSf", "http://localhost:29500/health"]
       interval: 30s
       timeout: 10s
       retries: 10
-    entrypoint: make debug-run
+    entrypoint: make debug
