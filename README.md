@@ -2,10 +2,8 @@
 
 A project to assist in composing multiple DP services
 
-Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Docker Desktop for mac - NOT the previous docker toolbox which runs docker in a VM.
-
-Note that if you run Docker using the mac VM, you will need to
-[increase its resources](https://www.docker.com/products/docker#/mac).
+Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Colima:
+[Setting up Colima locally](setting-up-colima-locally.md)
 
 ## V2
 
