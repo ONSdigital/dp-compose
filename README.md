@@ -3,6 +3,7 @@
 A project to assist in composing multiple DP services
 
 Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Colima:
+
 [Setting up Colima locally](setting-up-colima-locally.md)
 
 ## V2
