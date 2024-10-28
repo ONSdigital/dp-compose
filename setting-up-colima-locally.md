@@ -55,3 +55,9 @@ this will delete ALL container data. Are you sure you want to continue? [y/N] y
 INFO[0008] deleting colima
 INFO[0009] done
 ```
+
+## How to Fix Colima-Related Errors
+
+To fix common errors that occur, especially when running the V2 stacks using colima, please see this guide:
+
+[Fixing Colima errors](https://github.com/ONSdigital/dp-operations/blob/main/troubleshooting/fixing-colima-related-errors.md)
