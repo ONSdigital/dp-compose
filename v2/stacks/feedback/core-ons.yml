@@ -1,0 +1,39 @@
+services:
+  dp-design-system:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
+      service: dp-design-system
+  dp-frontend-feedback-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-feedback-controller.yml
+      service: dp-frontend-feedback-controller
+    depends_on:
+      dp-design-system:
+        condition: service_healthy
+  dp-frontend-homepage-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
+      service: dp-frontend-homepage-controller
+  dp-feedback-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-feedback-api.yml
+      service: dp-feedback-api
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+    depends_on:
+      dp-frontend-homepage-controller:
+        condition: service_healthy
+      sixteens:
+        condition: service_healthy
+      dp-feedback-api:
+        condition: service_healthy
+  sixteens:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
+      service: sixteens
