@@ -36,3 +36,10 @@ To get the aws values from the dashboard do the following:
 - copy the highlighted values
 
 Note that the AWS_SESSION_TOKEN is only valid for 12 hours. Once the token has expired you would need to stop the stack, retrieve and set new credentials before running the stack again.
+
+## Gotchas
+
+In the `Makefile` of the stack there is a `DEFAULT_KEYS_FOLDER` variable that is set to point in the `static/keys` folder in the `dis-authentication-stub` repo.
+Running the `make up` command will run also the `init` target in the `Makefile` trying to decrypt the files that are inside that folder.
+If you run the `make up` command and you get an error saying that there are not such files in the folder please change the value `DEFAULT_KEYS_FOLDER` variable to the 
+fully qualified path of the `static/keys` folder.
