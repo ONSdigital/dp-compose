@@ -1,8 +1,10 @@
 # Include common make targets
 include ../common.mk
 
+# Specifies the root of where all your ONSdigital repos are
+ONS_DP_SRC_ROOT ?= $(shell git rev-parse --show-cdup)..
 # Specifies the default folder where the keys are stored in
-DEFAULT_KEYS_FOLDER ?= ../../../../dis-authentication-stub/static/keys
+DEFAULT_KEYS_FOLDER ?= $(ONS_DP_SRC_ROOT)/dis-authentication-stub/static/keys
 
 .PHONY: init
 init: base-init
