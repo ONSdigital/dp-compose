@@ -37,7 +37,7 @@ verify-service: $(LOCAL_ENV_FILE)
 	exit 4
 
 .PHONY: up
-up: verify-service
+up: init verify-service
 	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
