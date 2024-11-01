@@ -1,25 +1,15 @@
 services:
-  dp-design-system:
+  babbage:
     extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
-      service: dp-design-system
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage
     depends_on:
-      dp-api-router:
-        condition: service_healthy
-  dp-frontend-homepage-controller:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
-      service: dp-frontend-homepage-controller
-    depends_on:
-      dp-frontend-router:
+      elasticsearch:
         condition: service_healthy
   sixteens:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
-    depends_on:
-      dp-design-system:
-        condition: service_healthy
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
@@ -33,13 +23,6 @@ services:
       service: dp-api-router
     depends_on:
       zebedee-reader:
-        condition: service_healthy
-  dp-topic-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
-      service: dp-topic-api
-    depends_on:
-      dp-api-router:
         condition: service_healthy
   zebedee-reader:
     extends:

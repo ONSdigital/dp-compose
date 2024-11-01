@@ -1,0 +1,74 @@
+services:
+  zebedee:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
+      service: zebedee
+    environment:
+      ENABLE_JWT_SESSIONS:            "true"
+      ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-1}
+      UPLOAD_SERVICE_API_URL:         "http://dp-upload-service:25100"
+      ENABLE_UPLOAD_NEW_ENDPOINT:     "true"
+    depends_on:
+      dp-identity-api:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+  dp-permissions-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
+      service: dp-permissions-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-identity-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-identity-api.yml
+      service: dp-identity-api
+  dp-files-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
+      service: dp-files-api
+  dp-upload-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
+      service: dp-upload-service
+  dp-download-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
+      service: dp-download-service
+    environment:
+      BUCKET_NAME:       "testing-public"
+      IS_PUBLISHING:     "false"
+      PUBLIC_BUCKET_URL: "http://localhost:14566/testing-public/"
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-static-file-publisher:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-static-file-publisher.yml
+      service: dp-static-file-publisher
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-filter-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-filter-api.yml
+      service: dp-filter-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-frontend-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
+      service: dp-frontend-dataset-controller

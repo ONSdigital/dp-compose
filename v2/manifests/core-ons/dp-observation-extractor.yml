@@ -27,6 +27,7 @@ services:
       IS_PUBLISHING:               ${IS_PUBLISHING:-true}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
+      ENCRYPTION_DISABLED:         "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:21600/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

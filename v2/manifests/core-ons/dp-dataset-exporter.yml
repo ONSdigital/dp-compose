@@ -1,0 +1,47 @@
+services:
+  dp-dataset-exporter:
+    x-repo-url: "https://github.com/ONSdigital/dp-dataset-exporter"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dp-dataset-exporter
+      dockerfile: Dockerfile.local
+    command:
+      - reflex
+      - -d
+      - none
+      - -c
+      - ./reflex
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-dataset-exporter:/dp-dataset-exporter
+    ports:
+      - 22500:22500
+    restart: unless-stopped
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - mongodb
+    environment:
+      BIND_ADDR:                   ":22500"
+      SERVICE_AUTH_TOKEN:           $SERVICE_AUTH_TOKEN
+      KAFKA_ADDR:                  "kafka-1:19092,kafka-2:19092,kafka-3:19092"
+      ENABLE_PRIVATE_ENDPOINTS:    "true"
+      ENABLE_PERMISSIONS_AUTH:     "true"
+      MONGODB_BIND_ADDR:           "mongodb:27017"
+      VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
+      VAULT_TOKEN:                 "0000-0000-0000-0000"
+      VAULT_DEV_ROOT_TOKEN_ID:     "0000-0000-0000-0000"
+      DATASET_API_URL:              ${DATASET_API_URL:-http://dp-dataset-api:22000}   
+      ZEBEDEE_URL:                 "http://zebedee:8082"
+      DOWNLOAD_SERVICE_URL:        "http://dp-download-service:23600"
+      FILTER_API_URL:               ${FILTER_API_URL:-http://dp-filter-api:22100}
+      GRAPH_DRIVER_TYPE:           "neptune"
+      GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
+      NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}
+      ENCRYPTION_DISABLED:         "true"
+      AWS_REGION:                   "eu-west-1"
+      LOCALSTACK_HOST:              ${LOCALSTACK_URL:-http://localstack:4566}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:22500/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10

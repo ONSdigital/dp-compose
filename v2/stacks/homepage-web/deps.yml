@@ -5,3 +5,7 @@ services:
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch

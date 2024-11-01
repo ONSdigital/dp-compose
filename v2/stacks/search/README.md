@@ -71,13 +71,13 @@ If you want to use data from en external source (e.g. Sandbox environment), you 
 
 In order to populate elasticsearch, you may run the reindex script, and if you have followed the previous steps you will have access to the necessary external data.
 
-Navigate to your `dp-search-api` repo location, edit the necessary config under `cmd/reindex/local.go`, and run:
+Navigate to your `dp-search-reindex-batch` repo location and run:
 
 ```sh
-make reindex
+make debug
 ```
 
-For more information on the reindex script, please check [search-api instructions](https://github.com/ONSdigital/dp-search-api/blob/develop/README.md#running-bulk-indexer).
+For more information on the reindex script, please check [search-reindex-batch instructions](https://github.com/ONSdigital/dp-search-reindex-batch?tab=readme-ov-file#getting-started).
 
 ### Extract-Import pipeline
 

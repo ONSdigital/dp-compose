@@ -4,11 +4,7 @@ services:
       file: ${PATH_MANIFESTS}/deps/mongo.yml
       service: mongodb
     volumes:
-      - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
-  vault:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/vault.yml
-      service: vault
+      - ./provisioning/mongodb:/docker-entrypoint-initdb.d:ro
   zookeeper-1:
     extends:
       file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
@@ -37,15 +33,11 @@ services:
       service: kowl
     depends_on:
       - zookeeper-1
-  cmdelasticsearch:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
-      service: cmdelasticsearch
-  elasticsearch:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
-      service: elasticsearch
   localstack:
     extends:
       file: ${PATH_MANIFESTS}/deps/localstack.yml
       service: localstack
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch

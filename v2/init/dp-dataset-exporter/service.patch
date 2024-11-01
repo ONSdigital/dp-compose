@@ -1,0 +1,17 @@
+--- service/service.go
++++ service/service.go
+@@ -244,10 +244,10 @@ func registerCheckers(ctx context.Context, hc HealthChecker,
+ 		log.Error(ctx, "error adding check for zebedee", err)
+ 	}
+ 
+-	if err = hc.AddCheck(fmt.Sprintf("S3 %s bucket", publicUploader.BucketName()), publicUploader.Checker); err != nil {
+-		hasErrors = true
+-		log.Error(ctx, "error adding check for public s3 bucket", err)
+-	}
++	// XXX DO-NOT-COMMIT if err = hc.AddCheck(fmt.Sprintf("S3 %s bucket", publicUploader.BucketName()), publicUploader.Checker); err != nil {
++		// XXX DO-NOT-COMMIT hasErrors = true
++		// XXX DO-NOT-COMMIT log.Error(ctx, "error adding check for public s3 bucket", err)
++	// XXX DO-NOT-COMMIT }
+ 
+ 	if err = hc.AddCheck(fmt.Sprintf("S3 %s private bucket", privateUploader.BucketName()), privateUploader.Checker); err != nil {
+ 		hasErrors = true

@@ -21,7 +21,7 @@ services:
       HEALTHCHECK_INTERVAL:            ${HEALTHCHECK_INTERVAL:-30s}
       HOMEPAGE_CONTROLLER_URL:         ${HOMEPAGE_CONTROLLER_URL:-http://dp-frontend-homepage-controller:24400}
       BABBAGE_URL:                     ${BABBAGE_URL:-http://babbage:8080}
-      DATASET_CONTROLLER_URL:          ${DATASET_CONTROLLER_URL:-http://dp-publishing-dataset-controller:24000}
+      DATASET_CONTROLLER_URL:          ${DATASET_CONTROLLER_URL:-http://dp-frontend-dataset-controller:20200}
       API_ROUTER_URL:                  ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
       FILTER_FLEX_ROUTES_ENABLED:      ${FILTER_FLEX_ROUTES_ENABLED:-false}
       FILTER_FLEX_DATASET_SERVICE_URL: ${FILTER_FLEX_DATASET_SERVICE_URL:-http://dp-frontend-filter-flex-dataset:20100}

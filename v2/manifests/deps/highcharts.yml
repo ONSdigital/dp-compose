@@ -1,0 +1,5 @@
+services:
+  highcharts:
+    image: onsdigital/highcharts-export-node
+    ports:
+      - "9999:8080"

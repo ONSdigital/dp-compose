@@ -1,0 +1,14 @@
+services:
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+    environment:
+      DISABLE_GRAPH_DB_DEPENDENCY: true
+    depends_on:
+      zebedee:
+        condition: service_healthy
+  dis-authentication-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
+      service: dis-authentication-stub

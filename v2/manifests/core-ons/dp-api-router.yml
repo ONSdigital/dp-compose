@@ -42,6 +42,7 @@ services:
       SEARCH_API_URL:              ${SEARCH_API_URL:-http://dp-search-api:23900}
       FILES_API_URL:               ${FILES_API_URL:-http://dp-files-api:26900}
       IDENTITY_API_URL:            ${IDENTITY_API_URL:-http://dp-identity-api:25600}
+      DOWNLOAD_SERVICE_URL:        ${DOWNLOAD_SERVICE_URL:-http://dp-download-service:23600}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:23200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

@@ -1,0 +1,9 @@
+services:
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch
+  highcharts:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/highcharts.yml
+      service: highcharts
