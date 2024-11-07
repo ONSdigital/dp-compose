@@ -94,7 +94,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
   mathjax:
-    image: onsdigital/mathjax-api
+    image: onsdigital/mathjax-api:2024-10-10
     ports:
       - "8888:8080"
   redis:
