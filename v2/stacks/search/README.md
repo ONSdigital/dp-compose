@@ -174,24 +174,6 @@ To run in publishing mode (mostly used to view Search via Florence) do the follo
    make up
    ```
 
-## Run with Reindex Pipeline
-
-If you want to run a search stack, without external dependencies, including the reindex pipeline:
-
-1. Edit docker-compose config
-
-   Edit this stack's `default.env` file and uncomment this block (by default this is commented):
-
-   ```sh
-   # -- FULL STACK (WEB) + REINDEX --
-   COMPOSE_FILE=deps.yml:backend.yml:frontend.yml:reindex.yml
-   ```
-
-1. Run the stack
-
-   ```sh
-   make up
-   ```
 
 ## Gotchas
 
