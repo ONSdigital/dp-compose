@@ -1,0 +1,16 @@
+services:
+  dis-search-upstream-stub:
+    x-repo-url: "https://github.com/ONSdigital/dis-search-upstream-stub"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-search-upstream-stub
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-search-upstream-stub:/dis-search-upstream-stub
+    expose:
+      - "29600"
+    ports:
+      - 29600:29600
+    environment:
+      BIND_ADDR:                    ":29600"
+      GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
+    entrypoint: make debug

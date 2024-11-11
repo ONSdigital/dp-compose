@@ -56,3 +56,7 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dis-search-upstream-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dis-search-upstream-stub.yml
+      service: dis-search-upstream-stub
