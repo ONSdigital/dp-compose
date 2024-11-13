@@ -2,6 +2,8 @@
 
 This stack deploys the necessary services and dependencies to work with the data api stack.
 
+- The stack uses a local [stub](https://github.com/ONSdigital/dis-authentication-stub) for user authentication
+
 ## Gotchas
 
 In the `Makefile` of the stack there is a `DEFAULT_KEYS_FOLDER` variable that is set to point to the `static/keys` folder in the `dis-authentication-stub` repo.
