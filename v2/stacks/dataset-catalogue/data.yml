@@ -5,9 +5,8 @@ services:
       service: dp-dataset-api
     environment:
       DISABLE_GRAPH_DB_DEPENDENCY: true
-    depends_on:
-      zebedee:
-        condition: service_healthy
+      ENABLE_PRIVATE_ENDPOINTS: true
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
   dis-authentication-stub:
     extends:
       file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
