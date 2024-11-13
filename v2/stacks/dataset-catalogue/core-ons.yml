@@ -13,10 +13,6 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-  dp-identity-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-identity-api.yml
-      service: dp-identity-api
   dp-files-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
