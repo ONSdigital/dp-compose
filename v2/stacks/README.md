@@ -64,11 +64,6 @@ Here is a comprehensive list of env vars you can override:
 
    Note that the `AWS_SESSION_TOKEN` is only valid for 12 hours. Once the token has expired, you would need to stop the stack, retrieve and set new credentials before running the stack again.
 
-  ```sh
-  # This should be your locally generated token by Zebedee
-  SERVICE_AUTH_TOKEN
-  ```
-
 - Flags (true or false values)
 
    ```sh
@@ -180,27 +175,23 @@ Unless stated below, for each stack listed, the following is assumed:
 
 A stack for the home page and census hub in Web mode.
 
-The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
-
 Stack root folder is [`homepage-web`](./homepage-web/).
 See the [general guidance, above](#general-guidance-for-each-stack), first, then:
 
 1. Open your browser and check you can see the home page: `localhost:24400`
 
-1. Check you can see the census hub page: `localhost:24400/census`
+2. Check you can see the census hub page: `localhost:24400/census`
 
 ### Homepage publishing
 
 Deploys a stack for the home page in Publishing mode.
-
-The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
 
 Stack root folder is [`homepage-publishing`](./homepage-publishing/).
 See the [general guidance, above](#general-guidance-for-each-stack), first, then:
 
 1. Open your browser and check you can see the florence website: `http://localhost:8081/florence`
 
-1. Log in to florence and perform the publish journey
+2. Log in to florence and perform the publish journey
 
 ### Static files
 

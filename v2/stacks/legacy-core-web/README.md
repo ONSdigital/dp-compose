@@ -12,12 +12,6 @@ The basic version of this stack uses:
 - elasticsearch
 - highcharts
 
-## Dependencies
-
-This stack relies on having a local zebedee content store setup correctly and the correct path set to $zebedee_root
-
-See the [zebedee getting started guide](https://github.com/ONSdigital/zebedee#getting-started) for more information.
-
 ## Is it running successfully?
 
 This will allow you to run the stack and:

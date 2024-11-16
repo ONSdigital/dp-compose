@@ -26,7 +26,7 @@ services:
       KAFKA_MAX_BYTES:             ${KAFKA_MAX_BYTES:-2000000}
       KAFKA_VERSION:               ${KAFKA_VERSION:-3.1.0}
       IS_PUBLISHING:               ${IS_PUBLISHING:-true}
-      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}

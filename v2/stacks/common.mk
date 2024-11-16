@@ -183,7 +183,7 @@ check-env-vars:
 			[[ "$$env_var" == *.* ]] && continue;				\
 			eval val=\$${$$env_var-DoesNotExist};				\
 			[[ "$$val" == "DoesNotExist" ]] && continue;			\
-			known=; [[ :zebedee_root:AWS_PROFILE:AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY:AWS_SESSION_TOKEN: == *:$$env_var:*	\
+			known=; [[ :AWS_PROFILE:AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY:AWS_SESSION_TOKEN: == *:$$env_var:*	\
 					|| $$env_var == AWS_COGNITO_* ]] && known="	$$(colour $$GREEN "(expected var)")";			\
 			warning "env var is from your environment: $$(colour $$BOLD $$env_var)$$known";	\
 		done

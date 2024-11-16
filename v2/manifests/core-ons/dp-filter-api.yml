@@ -22,7 +22,7 @@ services:
       - mongodb
     environment:
       BIND_ADDR:                   ":22100"
-      SERVICE_AUTH_TOKEN:           $SERVICE_AUTH_TOKEN
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       KAFKA_ADDR:                  "kafka-1:19092,kafka-2:19092,kafka-3:19092"
       ENABLE_PRIVATE_ENDPOINTS:    "true"
       ENABLE_PERMISSIONS_AUTH:     "true"

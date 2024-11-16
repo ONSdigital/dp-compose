@@ -27,7 +27,7 @@ services:
       IS_PUBLISHING:               ${IS_PUBLISHING:-true}
       VAULT_ADDR:                  ${VAULT_ADDR:-http://vault:8200}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
-      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       VAULT_TOKEN:                 "0000-0000-0000-0000"
       ENCRYPTION_DISABLED:         "true"
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}

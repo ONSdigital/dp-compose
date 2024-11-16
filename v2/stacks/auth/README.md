@@ -24,13 +24,6 @@ AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_SESSION_TOKEN
 
-# This should be your locally generated token by Zebedee
-SERVICE_AUTH_TOKEN
-
-# You'll also need your zebedee root for content
-# E.g. zebedee_root=/Users/your-name/zebedee-content
-zebedee_root
-
 # You may also need these AWS settings. The profile should point to dp-sandbox.
 AWS_PROFILE
 AWS_REGION

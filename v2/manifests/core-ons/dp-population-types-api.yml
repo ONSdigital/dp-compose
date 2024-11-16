@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR:                ":27300"
-      SERVICE_AUTH_TOKEN:       ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:       ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       ENABLE_PRIVATE_ENDPOINTS: ${ENABLE_PRIVATE_ENDPOINTS:-false}
       ENABLE_PERMISSIONS_AUTH:  ${ENABLE_PERMISSIONS_AUTH:-true}
       ZEBEDEE_URL:              ${ZEBEDEE_URL:-http://zebedee:8082}

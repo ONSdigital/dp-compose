@@ -18,12 +18,12 @@ services:
       - 25000:25000
     restart: unless-stopped
     environment:
-      API_ROUTER_URL:           ${API_ROUTER_URL:-http://dp-api-router:23200/v1}
       BIND_ADDR:                ":25000"
+      API_ROUTER_URL:           ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
       ENABLE_FEEDBACK_API:      ${ENABLE_FEEDBACK_API:-false}
       FEEDBACK_API_URL:         ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
       IS_PUBLISHING:            ${IS_PUBLISHING:-true}
-      SERVICE_AUTH_TOKEN:       ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:       ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
