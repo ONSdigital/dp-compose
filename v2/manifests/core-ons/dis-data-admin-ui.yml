@@ -1,0 +1,20 @@
+services:
+  dis-data-admin-ui:
+    x-repo-url: "https://github.com/ONSdigital/dis-data-admin-ui"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-data-admin-ui
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-data-admin-ui:/dis-data-admin-ui
+    expose:
+      - "29400"
+    ports:
+      - 29400:29400
+    restart: unless-stopped
+    environment:
+      BIND_ADDR:                      ":29400"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:29400/data-admin/api/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10

@@ -62,3 +62,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
       service: dp-frontend-dataset-controller
+  dis-data-admin-ui:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-data-admin-ui.yml
+      service: dis-data-admin-ui
