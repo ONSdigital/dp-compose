@@ -10,10 +10,10 @@ services:
       - 8084:8084
     restart: unless-stopped
     volumes:
-      - ${TRANSACTION_STORE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/transations}}:/transations
+      - ${TRANSACTION_STORE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/transactions}}:/transactions
       - ${WEBSITE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/site}}:/site
     environment:
-      TRANSACTION_STORE:           "/transations"
+      TRANSACTION_STORE:           "/transactions"
       WEBSITE:                     "/site"
       PUBLISHING_THREAD_POOL_SIZE: 100
       PORT:                        8084
