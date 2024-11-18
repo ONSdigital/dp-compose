@@ -1,11 +1,6 @@
 # Modern bash
 brew "bash"
 
-# Command line completion
-brew "bash-completion"
-brew "zsh-completions"
-brew "docker-completion"
-
 # Modern git
 brew "git"
 
@@ -17,3 +12,9 @@ brew "docker-compose"
 # yq and jq
 brew "yq"
 brew "jq"
+
+# Command line completion
+brew "bash-completion"
+brew "zsh-completions"
+brew "docker-completion"
+
