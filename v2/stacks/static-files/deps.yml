@@ -1,8 +1,4 @@
 services:
-  postgis:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/postgis.yml
-      service: postgis
   vault:
     extends:
       file: ${PATH_MANIFESTS}/deps/vault.yml

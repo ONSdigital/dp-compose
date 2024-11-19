@@ -30,9 +30,6 @@ services:
       audit_db_enabled:               "false"
       enable_splunk_reporting:        "false"
       zebedee_root:                   "/zebedee_root"
-      db_audit_url:                   "jdbc:postgresql://postgis:5432/audit"
-      db_audit_username:              "postgres"
-      db_audit_password:              "postgres"
       publish_url:                    ${PUBLISH_URL:-http://the-train:8084}
       ENABLE_CENTRALISED_KEYRING:     "true"
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
