@@ -88,8 +88,3 @@ services:
     image: onsdigital/mathjax-api:2024-10-10
     ports:
       - "8888:8080"
-  redis:
-    image: redis:6
-    command: redis-server --requirepass default
-    ports:
-      - "6379:6379"
