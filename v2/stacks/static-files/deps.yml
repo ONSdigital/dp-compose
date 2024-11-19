@@ -3,10 +3,28 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/deps/vault.yml
       service: vault
-  kafka:
+  zookeeper-1:
     extends:
-      file: ${PATH_MANIFESTS}/deps/kafka.yml
-      service: kafka
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: zookeeper-1
+  kafka-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-1
+    depends_on:
+      - zookeeper-1
+  kafka-2:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-2
+    depends_on:
+      - zookeeper-1
+  kafka-3:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-confluentinc.yml
+      service: kafka-3
+    depends_on:
+      - zookeeper-1
   mongodb:
     extends:
       file: ${PATH_MANIFESTS}/deps/mongo.yml
