@@ -1,28 +1,33 @@
 # v2
 
-Motivation for v2 is to consolidate:
+Motivation for v2 is to create a consistent structure that allows our teams to easily stand up a local development environment in a stable, reliable and repeatable way.
 
-- dp-compose (this repo)
-- [dp-static-files-compose](https://github.com/ONSdigital/dp-static-files-compose)
-- [dp-interactives-compose](https://github.com/ONSdigital/dp-interactives-compose)
+Eventually we plan to move this v2 directory up to root and remove/refactor all other directories/files to provide a single source of truth.
 
-And to create a structure that allows stacks to be easily modified or created.
+## Getting started
 
-Giving an end-to-end development environment for working with ONS DP services in a stable, reliable and repeatable way.
+### Prerequisites
 
-Eventually move this v2 directory up to root and remove/refactor all other directories/files.
-So, a single source of truth.
+The scripts in this repo require a few tools to be installed before running them.
 
-## Setup
+1. If you haven't already, then [install `brew`](https://brew.sh/):
 
-Completely optional but it might be a good idea to clean the Docker environment - purge all containers/volumes/images and start fresh. Any issues then definitely give this a go first.
+   ```shell
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
-For everything to work as expected make sure of the following:
+2. We provide a Brewfile to install the dependencies, but this can cause issues if you have manually installed any of the tools rather than using brew. Please review the [Brewfile](./Brewfile) to see what will be installed and comment out any items you have manually installed outside of brew before continuing.
+3. Install the dependencies:
 
-- we `git clone` our repos to the same parent directory (e.g. `~/src/github.com/ONSdigital`), the relevant repos are listed in the [manifests](manifests) directory (you will likely see errors if this is not as expected)
-- your command-line completion should work: we use `make`/`Makefile`s extensively, and using completion really helps
+   ```shell
+   brew bundle --no-lock --file=./Brewfile
+   ```
 
-## Usage
+4. (Optional) It might be a good idea to clean the Docker environment - purge all containers/volumes/images and start fresh. Any issues then definitely give this a go first.
+
+:warning: We require all repos listed in the [manifests](manifests) to be cloned in the same parent directory as this repo (i.e. `../../`). If you have already cloned any of these repos to a different location it is recommended that you either delete or move them before continuing.
+
+### Usage
 
 Each stack is independent from the other, and `make` should be run from the root of the stack you want to use.
 
@@ -46,10 +51,6 @@ Please follow the instructions in [stacks README](./stacks/README.md) for more i
 The required configs and scripts have been structured as follows:
 
 ![structure](structure.png)
-
-### dockerfiles
-
-Contains `Dockerfile.dp-compose` files for services that do not have a `Dockerfile.local` yet. Each repository should have its own `Dockerfile.local`, so this `dockerfiles` folder can be removed when this is the case.
 
 ### manifests
 
@@ -94,7 +95,7 @@ PATH_PROVISIONING="../../provisioning"
 # -- Stack config env vars that override manifest defaults --
 IS_PUBLISHING="false"
 
-# -- Docker compose vars -- 
+# -- Docker compose vars --
 COMPOSE_FILE=deps.yml:core-ons.yml
 COMPOSE_PATH_SEPARATOR=:
 COMPOSE_PROJECT_NAME=home-web
