@@ -9,7 +9,6 @@ services:
     ports:
       - 8084:8084
     restart: unless-stopped
-    user: ${UID-1000}:${GID-1000}
     volumes:
       - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     environment:
