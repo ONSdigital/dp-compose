@@ -152,8 +152,7 @@ check-config: $(LOCAL_ENV_FILE)
 		for app in $$(make list-apps); do	\
 			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");			\
 			[[ $$test0 == null ]] || continue;							\
-			known=; [[ $$app == the-train ]] && known=" $$(colour $$GREEN "(known issue)")";	\
-			warning "$$(colour $$BOLD $$app) has no healthcheck$$known";				\
+			warning "$$(colour $$BOLD $$app) has no healthcheck";				\
 		done;					\
 		res=0; grep -E '^(COMPOSE_|PATH_(MANIFESTS|PROVISIONING))' "$(LOCAL_ENV_FILE)" || res=$$?;				\
 			[[ $$res == 1 ]] || warning "Found the above lines in '$(LOCAL_ENV_FILE)' file, when they should not be there (probably)";	\

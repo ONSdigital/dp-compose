@@ -22,3 +22,8 @@ services:
       MAX_FILE_UPLOAD_SIZE_MB:     -1
       MAX_REQUEST_SIZE_MB:         -1
       FILE_THRESHOLD_SIZE_MB:      0
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:8083/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
