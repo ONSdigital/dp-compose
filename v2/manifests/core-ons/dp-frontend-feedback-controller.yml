@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR:                          ":25200"
+      MAIL_HOST:                          ${MAIL_HOST:-mailhog}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
