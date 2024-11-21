@@ -10,8 +10,8 @@ services:
       - 8084:8084
     restart: unless-stopped
     volumes:
-      - ${TRANSACTION_STORE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/transactions}}:/transactions
-      - ${WEBSITE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/site}}:/site
+      - ${TRANSACTION_STORE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/transactions}:/transactions
+      - ${WEBSITE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/site}:/site
     environment:
       TRANSACTION_STORE:           "/transactions"
       WEBSITE:                     "/site"

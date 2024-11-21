@@ -10,7 +10,7 @@ services:
       - 8082:8082
       - 8002:8002
     volumes:
-      - ${content_dir:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/web/site}:/content_dir
+      - ${content_dir:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/site}:/content_dir
     restart: unless-stopped
     environment:
       FORMAT_LOGGING:         ${FORMAT_LOGGING:-true}

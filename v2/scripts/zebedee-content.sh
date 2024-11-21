@@ -21,7 +21,7 @@ init_zebedee_content() {
     # This is a very minimal check and does not include a check to insure that the latest content has been
     # initialised after a git pull. This has been done to prevent overwriting local test data unexpected, but
     # may be worth revisiting in the future.
-    if [[ -d "${repo_path}/web" && -d "${repo_path}/publishing" ]]; then
+    if [[ -d "${repo_path}/generated" ]]; then
         info "zebedee content already initialised, skipping"
     else
         info "initialising zebedee content..."
