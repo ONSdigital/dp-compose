@@ -43,6 +43,7 @@ services:
       FILES_API_URL:               ${FILES_API_URL:-http://dp-files-api:26900}
       IDENTITY_API_URL:            ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       DOWNLOAD_SERVICE_URL:        ${DOWNLOAD_SERVICE_URL:-http://dp-download-service:23600}
+      ENABLE_FEEDBACK_API:         ${ENABLE_FEEDBACK_API:-false}
       FEEDBACK_API_URL:            ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:23200/health"]

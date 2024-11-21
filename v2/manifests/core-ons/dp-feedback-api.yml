@@ -20,8 +20,9 @@ services:
     environment:
       BIND_ADDR:                          ":28600"
       GRACEFUL_SHUTDOWN_TIMEOUT:          ${GRACEFUL_SHUTDOWN_TIMEOUT:-5s}
-      HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
       HEALTHCHECK_CRITICAL_TIMEOUT:       ${HEALTHCHECK_CRITICAL_TIMEOUT:-90s}
+      HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
+      MAIL_ENCRYPTION:                    ${MAIL_ENCRYPTION:-false}
       MAIL_HOST:                          ${MAIL_HOST:-mailhog}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:28600/health"]

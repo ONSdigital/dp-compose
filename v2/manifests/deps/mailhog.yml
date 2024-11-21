@@ -6,10 +6,6 @@ services:
     ports:
       - 1025:1025 # smtp server
       - 8025:8025 # web ui
-    environment:
-      MAIL_ENCRYPTION: null
-    logging:
-      driver: "none" # disable saving logs
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 8025 || exit -1"]
       interval: 10s

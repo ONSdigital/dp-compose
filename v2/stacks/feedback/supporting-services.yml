@@ -1,0 +1,20 @@
+# Supporting Services
+
+# Contains all the supporting services for the feedback stack
+
+services:
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+    depends_on:
+      http-echo:
+        condition: service_healthy
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+  dp-design-system:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
+      service: dp-design-system

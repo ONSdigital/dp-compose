@@ -18,10 +18,12 @@ services:
       - 25200:25200
     restart: unless-stopped
     environment:
-      BIND_ADDR:                          ":25200"
-      MAIL_HOST:                          ${MAIL_HOST:-mailhog}
-      FEEDBACK_API_URL:                   ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
       API_ROUTER_URL:                     ${API_ROUTER_URL:-http://dp-api-router:23200}
+      BIND_ADDR:                          ":25200"
+      ENABLE_FEEDBACK_API:                ${ENABLE_FEEDBACK_API:-false}
+      FEEDBACK_API_URL:                   ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
+      MAIL_ENCRYPTION:                    ${MAIL_ENCRYPTION:-false}
+      MAIL_HOST:                          ${MAIL_HOST:-mailhog}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

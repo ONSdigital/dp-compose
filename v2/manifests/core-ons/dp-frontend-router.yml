@@ -18,17 +18,18 @@ services:
       - 20000:20000
     restart: unless-stopped
     environment:
-      HEALTHCHECK_INTERVAL:            ${HEALTHCHECK_INTERVAL:-30s}
-      HOMEPAGE_CONTROLLER_URL:         ${HOMEPAGE_CONTROLLER_URL:-http://dp-frontend-homepage-controller:24400}
+      API_ROUTER_URL:                  ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
       BABBAGE_URL:                     ${BABBAGE_URL:-http://babbage:8080}
       DATASET_CONTROLLER_URL:          ${DATASET_CONTROLLER_URL:-http://dp-frontend-dataset-controller:20200}
-      API_ROUTER_URL:                  ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
-      FILTER_FLEX_ROUTES_ENABLED:      ${FILTER_FLEX_ROUTES_ENABLED:-false}
+      FEEDBACK_CONTROLLER_URL:         ${FEEDBACK_CONTROLLER_URL:-http://dp-frontend-feedback-controller:25200}
       FILTER_FLEX_DATASET_SERVICE_URL: ${FILTER_FLEX_DATASET_SERVICE_URL:-http://dp-frontend-filter-flex-dataset:20100}
+      FILTER_FLEX_ROUTES_ENABLED:      ${FILTER_FLEX_ROUTES_ENABLED:-false}
+      HEALTHCHECK_INTERVAL:            ${HEALTHCHECK_INTERVAL:-30s}
+      HOMEPAGE_CONTROLLER_URL:         ${HOMEPAGE_CONTROLLER_URL:-http://dp-frontend-homepage-controller:24400}
       RELEASE_CALENDAR_ENABLED:        ${RELEASE_CALENDAR_ENABLED:-false}
       RELEASE_CALENDAR_CONTROLLER_URL: ${RELEASE_CALENDAR_CONTROLLER_URL:-http://dp-frontend-release-calendar:27700}
-      SEARCH_ROUTES_ENABLED:           "true"
       SEARCH_CONTROLLER_URL:           ${SEARCH_CONTROLLER_URL:-http://dp-frontend-search-controller:25000}
+      SEARCH_ROUTES_ENABLED:           "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:20000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
