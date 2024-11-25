@@ -171,16 +171,7 @@ Unless stated below, for each stack listed, the following is assumed:
    make clean
    ```
 
-### Homepage web
-
-A stack for the home page and census hub in Web mode.
-
-Stack root folder is [`homepage-web`](./homepage-web/).
-See the [general guidance, above](#general-guidance-for-each-stack), first, then:
-
-1. Open your browser and check you can see the home page: `localhost:24400`
-
-2. Check you can see the census hub page: `localhost:24400/census`
+See [Using `make`](#using-make) for additional make targets and other information on using `make` to work with the stacks.
 
 ### Homepage publishing
 
@@ -266,7 +257,7 @@ Some optional general *make variables* can be used:
   - `make check-env-vars` - warn if your shell is setting some relevant env vars
   - `make check-versions` - warn if specific versions of expected apps are missing
 
-# Example on how to debug a Go application running in docker
+## Example on how to debug a Go application running in docker
 
 This example will show how we can debug `dp-identity-api` when we run the auth stack.
 
