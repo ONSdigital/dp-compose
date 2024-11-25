@@ -23,7 +23,10 @@ LOGS_TAIL ?=
 QUIET ?=
 
 # colima start args specifying the default resource allocations
-COLIMA_START_ARGS ?= --cpu 4 --memory 8 --disk 100
+COLIMA_CPU_CORES  ?= 4
+COLIMA_MEMORY_GB  ?= 8
+COLIMA_DISK_GB    ?= 100
+COLIMA_START_ARGS ?= --cpu $(COLIMA_CPU_CORES) --memory $(COLIMA_MEMORY_GB) --disk $(COLIMA_DISK_GB)
 
 # crude check to see if SERVICE is set and correct (needs to avoid recursion, hence using the yml files)
 .PHONY: verify-service
@@ -62,7 +65,7 @@ clean: verify-service colima-start
 refresh: down clean-image up
 
 .PHONY: ps start stop config
-ps start stop config: verify-service colima-start
+ps start stop config: colima-start verify-service
 	@[[ -n "$(QUIET)" ]] || echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
@@ -124,7 +127,7 @@ health: $(LOCAL_ENV_FILE) colima-start
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) $(SCRIPTS_DIR)/health.sh
 
 .PHONY: base-init
-base-init: clone $(LOCAL_ENV_FILE)
+base-init: colima-start clone $(LOCAL_ENV_FILE)
 
 .PHONY: clone pull git-status check-repos prep
 clone pull git-status check-repos prep:
