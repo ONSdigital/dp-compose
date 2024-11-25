@@ -47,7 +47,7 @@ colima-start:
 	@( docker ps > /dev/null 2>&1 ) || ( echo "\033[34m""starting colima...\033[0m" && colima start $(COLIMA_START_ARGS) )
 
 .PHONY: up
-up: init verify-service colima-start
+up: init verify-service
 	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
@@ -127,10 +127,10 @@ health: $(LOCAL_ENV_FILE) colima-start
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) $(SCRIPTS_DIR)/health.sh
 
 .PHONY: base-init
-base-init: colima-start clone $(LOCAL_ENV_FILE)
+base-init: clone $(LOCAL_ENV_FILE)
 
 .PHONY: clone pull git-status check-repos prep
-clone pull git-status check-repos prep:
+clone pull git-status check-repos prep: colima-start
 	@$(SCRIPTS_DIR)/clone.sh $@
 
 .PHONY: list-apps
