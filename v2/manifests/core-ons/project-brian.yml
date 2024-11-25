@@ -9,7 +9,6 @@ services:
     ports:
       - 8083:8083
     restart: unless-stopped
-    user: ${UID-1000}:${GID-1000}
     volumes:
       - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
     environment:
@@ -22,3 +21,8 @@ services:
       MAX_FILE_UPLOAD_SIZE_MB:     -1
       MAX_REQUEST_SIZE_MB:         -1
       FILE_THRESHOLD_SIZE_MB:      0
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:8083/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10

@@ -41,38 +41,6 @@ The ONS website and CMD both require Elasticsearch but (annoyingly) require diff
 :warning: **Gotcha Warning** :warning:
 You'll need to overwrite your ES config for the `dp-dimension-search-builder` and `dp-dimension-search-api` to use ports `10200` & `10300` to ensure they are using the correct instance.
 
-## Postgis
-
-**Important**: Zebedee requires _**Postgis**_.
-
-The _dp-compose_postgis_ container by default uses port `5432`
-
-### Checking postgres version
-
-If you run the below command you should see something similar to (see IMAGE column):
-
-```shell
-$ docker ps -a
-CONTAINER ID    IMAGE                 COMMAND                   CREATED           STATUS           PORTS                     NAMES
-d343558fd467    dp-compose_postgis    "docker-entrypoint.s…"    11 minutes ago    Up 11 minutes    0.0.0.0:5432->5432/tcp    dp-compose-postgis-1
-```
-
-Or this command (see TAG column)
-
-```shell
-$ docker images
-REPOSITORY    TAG     IMAGE ID        CREATED           SIZE
-postgis      latest   ed34a2d5eb79    25 minutes ago    567MB
-```
-
-### Connecting to Postgres
-
-To connect to the container and query via the postgres CLI
-
-```shell
-docker run -it --rm --link dp-compose_postgis_1:postgis --net dp-compose_default postgis/postgis psql -h postgis -U postgres
-```
-
 ## Versioning
 
 Dependencies should be kept at specific versions and up-to-date with production.

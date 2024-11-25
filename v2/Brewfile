@@ -1,0 +1,20 @@
+# Modern bash
+brew "bash"
+
+# Modern git
+brew "git"
+
+# Docker
+brew "colima"
+brew "docker"
+brew "docker-compose"
+
+# yq and jq
+brew "yq"
+brew "jq"
+
+# Command line completion
+brew "bash-completion"
+brew "zsh-completions"
+brew "docker-completion"
+

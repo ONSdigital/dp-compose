@@ -22,6 +22,9 @@ LOGS_NO_PREFIX ?=
 LOGS_TAIL ?=
 QUIET ?=
 
+# colima start args specifying the default resource allocations
+COLIMA_START_ARGS ?= --cpu 4 --memory 8 --disk 100
+
 # crude check to see if SERVICE is set and correct (needs to avoid recursion, hence using the yml files)
 .PHONY: verify-service
 verify-service: $(LOCAL_ENV_FILE)
@@ -36,18 +39,22 @@ verify-service: $(LOCAL_ENV_FILE)
 	done;											\
 	exit 4
 
+.PHONY: colima-start
+colima-start:
+	@( docker ps > /dev/null 2>&1 ) || ( echo "\033[34m""starting colima...\033[0m" && colima start $(COLIMA_START_ARGS) )
+
 .PHONY: up
-up: init verify-service
+up: init verify-service colima-start
 	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
 .PHONY: down
-down: verify-service
+down: verify-service colima-start
 	@echo "\033[34m""stopping and removing containers and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down $(SERVICE)
 
 .PHONY: clean
-clean: verify-service
+clean: verify-service colima-start
 	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
@@ -55,16 +62,16 @@ clean: verify-service
 refresh: down clean-image up
 
 .PHONY: ps start stop config
-ps start stop config: verify-service
+ps start stop config: verify-service colima-start
 	@[[ -n "$(QUIET)" ]] || echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: images
-images: verify-service
+images: verify-service colima-start
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: ps-docker
-ps-docker: verify-service
+ps-docker: verify-service colima-start
 	@do=$@; do=$${do%-docker};	\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $$do $(SERVICE) $(ENV_FILE_ARGS)
 
@@ -80,12 +87,12 @@ get-repository-name: verify-service
 	fi
 
 .PHONY: image-id
-image-id: $(LOCAL_ENV_FILE)
+image-id: $(LOCAL_ENV_FILE) colima-start
 	@REPO_NAME=$(shell make get-repository-name);		\
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '$$2~/'"$$REPO_NAME"'$$/{print $$1}'
 
 .PHONY: clean-image
-clean-image: verify-service
+clean-image: verify-service colima-start
 	@i_id=$$(make image-id);								\
 		if [[ -z $$i_id ]]; then echo "Could not get image-id" >&2; exit 3; fi;		\
 		if [[ $$i_id =~ [[:space:]] && -z "$(ENABLE_MULTI)" ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got >1 IDs $$i_id" >&2; exit 4; fi;	\
@@ -93,11 +100,11 @@ clean-image: verify-service
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
 
 .PHONY: container-id
-container-id: verify-service
+container-id: verify-service colima-start
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
 
 .PHONY: attach
-attach: verify-service
+attach: verify-service colima-start
 	@c_id=$$(make container-id);								\
 		if [[ -z $$c_id ]]; then echo "Could not get container-id" >&2; exit 3; fi;	\
 		if [[ $$c_id =~ [[:space:]] ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got IDs $$c_id" >&2; exit 4; fi;	\
@@ -105,7 +112,7 @@ attach: verify-service
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
 
 .PHONY: logs
-logs: verify-service
+logs: verify-service colima-start
 	@logs_arg="";	\
 		[[ -n "$(LOGS_TAIL)" ]]		&& logs_arg+="-f ";	\
 		[[ -n "$(LOGS_TIMESTAMP)" ]]	&& logs_arg+="-t ";	\
@@ -113,7 +120,7 @@ logs: verify-service
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose logs $$logs_arg $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: health
-health: $(LOCAL_ENV_FILE)
+health: $(LOCAL_ENV_FILE) colima-start
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) $(SCRIPTS_DIR)/health.sh
 
 .PHONY: base-init
@@ -152,8 +159,7 @@ check-config: $(LOCAL_ENV_FILE)
 		for app in $$(make list-apps); do	\
 			test0=$$(yq '.services["'"$$app"'"].healthcheck.test[0]' <<<"$$cfg");			\
 			[[ $$test0 == null ]] || continue;							\
-			known=; [[ $$app == the-train ]] && known=" $$(colour $$GREEN "(known issue)")";	\
-			warning "$$(colour $$BOLD $$app) has no healthcheck$$known";				\
+			warning "$$(colour $$BOLD $$app) has no healthcheck";				\
 		done;					\
 		res=0; grep -E '^(COMPOSE_|PATH_(MANIFESTS|PROVISIONING))' "$(LOCAL_ENV_FILE)" || res=$$?;				\
 			[[ $$res == 1 ]] || warning "Found the above lines in '$(LOCAL_ENV_FILE)' file, when they should not be there (probably)";	\
