@@ -1,5 +1,12 @@
 services:
   highcharts:
+    x-repo-url: "https://github.com/ONSdigital/highcharts-export-docker"
+    # Using the prebuilt image for now as work is needed to pin the versions in the docker build
     image: onsdigital/highcharts-export-node
     ports:
       - "9999:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:8080/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
