@@ -2,44 +2,40 @@
 
 A project to assist in composing multiple DP services
 
+## Getting started
+
+### V2
+
+There is a version 2 folder (`v2`), which contains different docker compose definitions for each stack.
+
+Please, have a look at the [version 2 README](./v2/README.md) for more information, especially if you are new to dp-compose.
+
+#### Upgrading to V2
+
+If you were using the original stack provided in the root of this repo, this stack has been retired so you will need to upgrade to v2.
+
+In order to smooth the transition to v2, a [`v1-compat`](v2/stacks/v1-compat/) stack has been created that provides the same services as the original v1 stack. Differences exist in the make targets so please see the [`v1-compat` readme](v2/stacks/v1-compat/README.md#migrating-from-the-v1-stack) for more details.
+
+### Non-v2 stacks
+
+There are some stacks in this directory (not the `v2/` directory) which are similar to V2 stacks. These stacks formed the basis for the approach taken with V2, but have yet to be migrated to be inline with V2 themselves:
+
+* [cantabular-import](./cantabular-import/)
+* [cantabular-metadata-pub](./cantabular-metadata-pub/)
+
+These stacks will be migrated under v2 in time and no further stacks should be added outside of v2.
+
+These stacks also assume you already have Colima running. See the section on [Colima](#colima) for more information.
+
+## Colima
+
 Running dp-compose assumes Docker is running natively and not in a VM. On a Mac this requires Colima:
 
 [Setting up Colima locally](setting-up-colima-locally.md)
 
-## V2
+## Kafka
 
-There is a version 2 folder (`v2`), which contains different docker compose definitions for each stack.
-
-Please, have a look at the [version 2 README](./v2/README.md) for more information,
-especially if you are new to dp-compose.
-
-## Non-v2 stacks
-
-There are some stacks in this directory (not the `v2` directory) which follow the below documentation, but we recommend starting with the (above) V2 stacks before using these.
-
-More information about the kafka cluster [here](./kafka-cluster.md).
-
-### Run
-
-You may run containers for all required backing services by doing one of the following:
-
-- Run `docker-compose up`
-- Using the `./run.sh` script does the same thing.
-- Run `make start` to start the kafka cluster containers
-
-You can run `make stop` to stop the containers, or `make clean` to stop and remove them as well.
-
-**If you're running for the first time** you will need to seed the Mongo database and create the collections for the first time. Run the [init-db.sh](https://github.com/ONSdigital/dp-compose/blob/main/cantabular-import/helpers/init-db.sh) script to create recipe and dataset related collections.
-
-## CMD
-
-The ONS website and CMD both require Elasticsearch but (annoyingly) require different versions. The `docker-compose.yml` will start 2 instances.
-
-**Note:** The default ports for Elasticsearch is usually `9200` & `9300` however in order to avoid a port conflict
- when running 2 different versions on the same box at the same time the CMD instance is set to use ports `10200` & `10300`.
-
-:warning: **Gotcha Warning** :warning:
-You'll need to overwrite your ES config for the `dp-dimension-search-builder` and `dp-dimension-search-api` to use ports `10200` & `10300` to ensure they are using the correct instance.
+More information about working with the kafka cluster provided by stacks in this repo can be found [here](./kafka-cluster.md).
 
 ## Versioning
 
