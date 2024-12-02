@@ -1,0 +1,16 @@
+services:
+  mathjax:
+    x-repo-url: "https://github.com/ONSdigital/mathjax-api"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/mathjax-api
+      dockerfile: Dockerfile
+    expose:
+      - "8888"
+    ports:
+      - "8888:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:8080/"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
