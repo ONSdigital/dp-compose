@@ -1,0 +1,13 @@
+services:
+  mailhog:
+    image: mailhog/mailhog:latest
+    expose:
+      - 1025
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8025 || exit -1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10

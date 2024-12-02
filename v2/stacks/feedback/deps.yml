@@ -1,0 +1,9 @@
+services:
+  mailhog:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/mailhog.yml
+      service: mailhog
+  http-echo: # This is not a service, but to stub out health check for zebedee
+    extends:
+      file: ${PATH_MANIFESTS}/deps/http-echo.yml
+      service: http-echo

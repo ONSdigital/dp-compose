@@ -1,0 +1,14 @@
+# Upstream Services
+
+# Contains examples of upstream services for the feedback stack
+# Other services which use the feedback footer include:
+# - dp-frontend-homepage-controller
+
+services:
+  dp-frontend-search-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-search-controller.yml
+      service: dp-frontend-search-controller
+    depends_on:
+      dp-design-system:
+        condition: service_healthy
