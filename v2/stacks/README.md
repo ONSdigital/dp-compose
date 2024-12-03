@@ -9,17 +9,17 @@ Unless stated otherwise in the stack specific READMEs, the following steps shoul
 1. Change to the stack directory:
 
    ```sh
-   cd $sub_directory_under_stacks  # this varies per-stack
-   cd homepage-web                 # for example
+   cd stacks/$stack_dir
+   # e.g. 'cd stacks/auth'
    ```
 
-1. Check any prerequisites:
+2. Check any prerequisites:
 
    ```sh
    make check
    ```
 
-1. (Optionally) Ensure relevant repos are up-to-date:
+3. (Optionally) Ensure relevant repos are up-to-date:
 
    ```sh
    # optional
@@ -27,13 +27,13 @@ Unless stated otherwise in the stack specific READMEs, the following steps shoul
    make pull
    ```
 
-1. Start the stack:
+4. Start the stack (will clone repos if necessary):
 
    ```sh
    make up
    ```
 
-1. Stop and destroy the stack after you have completed testing/development:
+5. Stop and destroy the stack after you have completed testing/development:
 
    ```sh
    # WARNING: this will remove local data from ephemeral databases, etc
@@ -82,11 +82,11 @@ Some optional general *make variables* can be used:
 - `make prep`
    apply initialisation files against repos in this stack
    (e.g. patches to source or scripts to prep the repos)
-- `make list-repos`
+- `make _list-repos`
    show the list of repos for the apps in the stack - used by `make clone`
-- `make list-services`
+- `make _list-services`
    show the list of all services/containers
-- `make list-apps`
+- `make _list-apps`
    show the list of apps (a subset of *services* that have a 'x-repo-url' field)
 - `make logs LOGS_TAIL=1 LOGS_TIMESTAMP=1 LOGS_NO_PREFIX=1`
    show the logs for the matching services (optionally with tailing, timestamp and/or container-prefixed)
@@ -97,39 +97,6 @@ Some optional general *make variables* can be used:
 - `make refresh`
    a shortcut for `make down clean-image up`
 - `make check` comprises
-  - `make check-config` - check certain conditions are true
-  - `make check-env-vars` - warn if your shell is setting some relevant env vars
+  - `make _check-config` - check certain conditions are true
+  - `make _check-env-vars` - warn if your shell is setting some relevant env vars
   - `make check-versions` - warn if specific versions of expected apps are missing
-
-## Example on how to debug a Go application running in docker
-
-This example will show how we can debug `dp-identity-api` when we run the auth stack.
-
-- Replace the contents of the `Dockerfile.local` file (in the `dp-identity-api`) with the following code
-
-```sh
-FROM golang:1.21-bullseye AS base
-
-ENV GOCACHE=/go/.go/cache GOPATH=/go/.go/path TZ=Europe/London
-
-RUN GOBIN=/bin go install github.com/cespare/reflex@v0.3.1
-RUN GOBIN=/bin go install github.com/go-delve/delve/cmd/dlv@latest
-RUN PATH=$PATH:/bin
-
-ENV PATH=$PATH
-# Clean cache, as we want all modules in the container to be under /go/.go/path
-RUN go clean -modcache
-
-COPY . .
-RUN go build -gcflags="all=-N -l" -o /go/server
-ENTRYPOINT ["dlv", "--log", "--listen=:2345", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "./server"]
-```
-
-- Change the `BuildTime`, `GitCommit`, `Version` variables in the `dp-identity-api/main.go` file and assign them a string literal value (for example `"1"`).
-- Remove the `command` section of the `dp-compose/v2/manifests/core-ons/dp-identity-api.yml` file.
-- Expose the port on which the debugging server is running on by adding `- "2345:2345"` (in this example is 2345) to the ports section of the `dp-compose/v2/manifests/core-ons/dp-identity-api.yml` file.
-- In IntelliJ IDE or Goland IDE open `dp-identity-api` repo and on the menu bar click `Run->Edit Configurations...`. On the popup window in the top left corner click the `+` button and choose `Go Remote` (the default port should be 2345). Put also a useful name next to the `Name:` label. Hit `Apply` and `Ok`.
-  ![Run/Debug Configurations screenshot](../../v2/assets/screenshot.png?raw=true "Run/Debug Configurations")
-- Run the auth stack if it is not running already (make sure to remove dp-identity-api image first) or if you are already running it, run `make refresh SERVICE=dp-identity-api`.
-- Put your breakpoints in the code that you want to debug.
-- On the menu bar click `Run->Debug Name-that-you-chose`.

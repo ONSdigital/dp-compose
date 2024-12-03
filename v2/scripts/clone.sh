@@ -25,7 +25,7 @@ which yq  > /dev/null || fatal "yq not installed"
 test_github_ssh
 
 # Get list of repo urls from docker compose config
-repos=( $(make list-repos) )
+repos=( $(make _list-repos) )
 
 errors=()
 for repo_url in ${repos[@]}; do
@@ -68,7 +68,7 @@ for repo_url in ${repos[@]}; do
             info "repo already cloned, skipping: $repo_pp ($branch_pp $repo_url_pp)"
         fi
 
-    elif [[ "${1-}" == "check-repos" ]]; then
+    elif [[ "${1-}" == "_check-repos" ]]; then
         warning "no local repo: $repo_pp ($repo_url_pp) - run: $(colour $CYAN "make clone")"
 
     else

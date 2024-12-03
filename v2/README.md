@@ -31,20 +31,118 @@ The scripts in this repo require a few tools to be installed before running them
 
 Each stack is independent from the other, and `make` should be run from the root of the stack you want to use.
 
-For example:
+Unless stated otherwise in the stack specific READMEs, the following steps generally apply:
+
+1. If you already have another stack running, you should stop it before starting a new stack to prevent port collisions and resource exhaustion:
+
+   ```sh
+   cd stacks/$running_stack_dir
+   make stop
+   ```
+
+2. Change to the stack directory:
+
+   ```sh
+   cd stacks/$stack_dir
+   # e.g. 'cd stacks/auth'
+   ```
+
+3. Check any prerequisites:
+
+   ```sh
+   make check
+   ```
+
+4. (Optionally) Ensure relevant repos are up-to-date:
+
+   ```sh
+   # optional
+   # this will also clone any that are not yet cloned
+   make pull
+   ```
+
+5. Start the stack (will clone repos if necessary):
+
+   ```sh
+   make up
+   ```
+
+6. Destroy the stack after you have completed testing/development:
+
+   ```sh
+   # WARNING: this will remove local data from ephemeral databases, etc
+   make clean
+   ```
+
+See [Using `make`](#using-make) for additional make targets and other information on using `make` to work with the stacks.
+
+## Using `make`
+
+We use `make` to allow quick/easy use of `docker` and `docker-compose` commands
+with the correct setup (`make` sets the env vars that `docker` needs) for the given stack.
+
+### Make options
+
+Make allows you to pass variables. These variables can be passed from the command line and the order does not matter.
+
+For example, all of the following are valid:
 
 ```shell
-$ cd stacks/auth      # use the 'auth' stack (relative to this directory)
-$ make check          # run some pre-flight checks
-..some checks are run...
-$ make clone          # clone the relevant repos
-...git clone activity for the repos in this stack...
-$ make init           # patch/prep the relevant repos
+SERVICE=my-service make up
+# OR
+make up SERVICE=my-service
+# OR
+make SERVICE=my-service up
 ```
 
-Please follow the instructions in [stacks README](./stacks/README.md) for more information on running each stack.
+See [Make targets](#make-targets) below for details of which variables you can use with each target.
 
-**Note: before starting a stack you should stop any other stack running.**
+### Make targets
+
+The following are the common targets shared by all stacks that are intended for direct use:
+
+Make target | Description | Variables
+------------|-------------|----------
+`attach`    | Attach to a running container (i.e. get a shell) | The service to attach to can be specified using the `SERVICE` variable.
+`check` | Performs basic checks on your env vars, dependency versions and the stack config | N/A
+`clean` | Stops and removes containers, associated volumes and networks for the stack | A service to clean can be specified using the `SERVICE` variable.
+`clean-image` | Remove container images for the specified service | It is required to either pass the `SERVICE` to remove images for or set `ENABLE_MULTI=1` to remove all images (N.B. this is not limited to the current stack and will attempt to remove all of your images)
+`clone` | Clone all apps used by this stack | Can be limited to a specific service by passing the `SERVICE` variable.
+`colima-start` | Start colima docker runtime | N/A
+`colima-stop` | Stop colima docker runtime | N/A
+`config` | Output stack docker compose config as YAML. Equivalent to `docker-compose config` | Can be limited to a specific service by passing the `SERVICE` variable.
+`down` - DONE
+`git-status` - DONE
+`health` - DONE
+`init` - DONE
+`logs` - DONE
+`prep` - DONE
+`ps` | List running docker containers for the current stack. Equivalent to `docker-compose ps`. | The list can be restricted to a single service by passing the `SERVICE` variable.
+`ps-docker` | List all running containers (not limited to the current stack). Equivalent to `docker ps`. |
+`pull` - DONE
+`refresh` -
+`restart` - DONE
+`start` - DONE
+`stop` - DONE
+`total-purge` - DONE
+`up` - DONE
+
+Some additional internal targets also exist to be called internally by other targets. You can think of these as private methods and are not intended for direct use:
+
+* `_base-init`
+* `_check-config`
+* `_check-env-vars`
+* `_check-repos`
+* `_check-versions`
+* `_container-id`
+* `_get-repository-name`
+* `_image-id`
+* `_list-apps`
+* `_list-env-vars`
+* `_list-repos`
+* `_list-services`
+* `_verify-service`
+* `local.env`
 
 ## Structure
 
