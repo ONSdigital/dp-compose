@@ -20,12 +20,6 @@ AWS_COGNITO_CLIENT_SECRET
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_SESSION_TOKEN
-
-# This should be your locally generated token by Zebedee
-SERVICE_AUTH_TOKEN
-
-# You'll also need your zebedee root for content
-zebedee_root
 ```
 
 To get the aws values from the dashboard do the following:

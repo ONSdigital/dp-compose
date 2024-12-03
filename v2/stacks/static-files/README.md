@@ -1,8 +1,8 @@
-# Dataset Catalogue Stack
+# Static Files
 
-This stack deploys the necessary services and dependencies to work with the dataset catalogue stack.
+This stack deploys the necessary services and dependencies to work with the static file publishing stack with auth disabled.
 
-- The stack uses a local [stub](https://github.com/ONSdigital/dis-authentication-stub) for user authentication
+For testing static files with auth enabled, please see the [`static-files-with-auth stack`](../static-files-with-auth/).
 
 ## Getting started
 
@@ -21,7 +21,7 @@ To run the stack:
    make build
    ```
 
-   This is required for the local docker build to work around a current issue with the volume paths not existing pre-build. Once this issue has been resolved, this step will no longer be necessary.
+   This is required for the local docker builds to work around a current issue with the volume paths not existing pre-build. Once this issue has been resolved, this step will no longer be necessary.
 
 3. Build and start the stack:
 

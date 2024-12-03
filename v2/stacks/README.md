@@ -1,161 +1,25 @@
 # Stacks
 
-This folder contains the different stacks. To run a stack you have to go to its corresponding folder where the stack is defined:
+This folder contains the different stacks. Please refer to the README of each of the stacks for more information on how to get started.
 
-```sh
-cd $chosen_stack_name_here
-# for example, relative to this 'stacks' directory
-cd auth
-```
+## General guidance
 
-## Initialisation
+Unless stated otherwise in the stack specific READMEs, the following steps should generally apply:
 
-Please make sure you have cloned the required repositories as siblings of `dp-compose` (see [`make clone`](#make-targets) for help with this).
-
-Some stacks require an initialisation step, please check the corresponding [stack instructions](#current-stacks) in that case.
-
-### Run with make targets
-
-A `Makefile` is provided for each stack, so you can run the corresponding `make` command. For example:
-
-```sh
-# inside the given stack directory
-make up      # bring the stack up
-```
-
-or, in the same directory:
-
-```sh
-make clean   # bring the stack down and remove it from docker
-```
-
-See [using make](#using-make), below, for more information on the available `make` targets.
-
-### Environment
-
-Check the `local.env` file and change it for your development requirements - you might need to point to local services running in an IDE, for example.
-
-You can override any env var defined by any manifest used by the stack, any value that you override in `local.env` will be picked up by all the manifests used by the stack.
-
-Here is a comprehensive list of env vars you can override:
-
-- Secret values, which **MUST NOT** be committed:
-
-   ```sh
-   # get from cognito: sandbox-florence-users
-   AWS_COGNITO_USER_POOL_ID
-   # get from within pool - App Integration: App client: dp-identity-api
-   AWS_COGNITO_CLIENT_ID
-   # get from within pool - App Integration: App client: dp-identity-api
-   AWS_COGNITO_CLIENT_SECRET
-
-   # Below values from the aws login-dashboard:
-   AWS_ACCESS_KEY_ID
-   AWS_SECRET_ACCESS_KEY
-   AWS_SESSION_TOKEN
-   ```
-
-   To get the above values do the following:
-
-  - login to the AWS [console](https://ons.awsapps.com/start#/)
-  - click on `Command line or programmatic access`
-  - click on `Option 1: Set AWS environment variables (Short-term credentials)`
-  - copy the highlighted values, paste them into the `local.env` file
-
-   Note that the `AWS_SESSION_TOKEN` is only valid for 12 hours. Once the token has expired, you would need to stop the stack, retrieve and set new credentials before running the stack again.
-
-  ```sh
-  # This should be your locally generated token by Zebedee
-  SERVICE_AUTH_TOKEN
-  ```
-
-- Flags (true or false values)
-
-   ```sh
-   AUTHORISATION_ENABLED
-   IS_PUBLISHING
-   ENABLE_PRIVATE_ENDPOINTS
-   ENABLE_AUDIT
-   ENABLE_TOPIC_API
-   ENABLE_FILES_API
-   ENABLE_RELEASE_CALENDAR_API
-   DEBUG
-   ENABLE_CENSUS_TOPIC_SUBSECTION
-   ENABLE_NEW_NAVBAR
-   FILTER_FLEX_ROUTES_ENABLED
-   ENABLE_PERMISSION_API
-   ENABLE_NEW_SIGN_IN
-   ENABLE_DATASET_IMPORT
-   FORMAT_LOGGING
-   ENABLE_PERMISSIONS_AUTH
-   ```
-
-- Other vars
-
-   ```sh
-   HEALTHCHECK_INTERVAL
-   TMPDIR
-   ```
-
-- Service URLs
-
-   ```sh
-   # for local development you may use: http://host.docker.internal: (note: MacOS only!)
-   # if your stack uses an HTTP stub container (http-echo), then you can use `http-echo:5678` as host for any URL service that you want to mock.
-   # e.g. MOCKED_SERVICE_URL=http://http-echo:5678
-
-   # Core
-   API_ROUTER_URL
-   FRONTEND_ROUTER_URL
-   ZEBEDEE_URL
-   FLORENCE_URL
-   BABBAGE_URL
-
-   # Auth
-   PERMISSIONS_API_URL
-   IDENTITY_API_URL
-
-   # Backend
-   FILES_API_URL
-   UPLOAD_API_URL
-   DOWNLOAD_SERVICE_URL
-   DATASET_API_URL
-   IMAGE_API_URL
-   FILTER_API_URL
-   DATASET_API_URL
-   RECIPE_API_URL
-   IMPORT_API_URL
-   TOPIC_API_URL
-   RELEASE_CALENDAR_API_URL
-   SEARCH_API_URL
-
-   # frontend
-   SIXTEENS_URL
-   DATASET_CONTROLLER_URL
-   HOMEPAGE_CONTROLLER_URL
-   DATASET_CONTROLLER_URL
-   ```
-
-## Current stacks
-
-### General guidance for each stack
-
-Unless stated below, for each stack listed, the following is assumed:
-
-1. You are in the given stack directory
+1. Change to the stack directory:
 
    ```sh
    cd $sub_directory_under_stacks  # this varies per-stack
    cd homepage-web                 # for example
    ```
 
-1. You have checked any prerequisites
+1. Check any prerequisites:
 
    ```sh
    make check
    ```
 
-1. You may want to get the relevant repos uptodate
+1. (Optionally) Ensure relevant repos are up-to-date:
 
    ```sh
    # optional
@@ -163,58 +27,20 @@ Unless stated below, for each stack listed, the following is assumed:
    make pull
    ```
 
-1. You have started the docker stack
+1. Start the stack:
 
    ```sh
    make up
    ```
 
-1. When you have completed testing/development (see below, per stack), you may stop all containers and clean the environment:
+1. Stop and destroy the stack after you have completed testing/development:
 
    ```sh
    # WARNING: this will remove local data from ephemeral databases, etc
    make clean
    ```
 
-### Homepage web
-
-A stack for the home page and census hub in Web mode.
-
-The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
-
-Stack root folder is [`homepage-web`](./homepage-web/).
-See the [general guidance, above](#general-guidance-for-each-stack), first, then:
-
-1. Open your browser and check you can see the home page: `localhost:24400`
-
-1. Check you can see the census hub page: `localhost:24400/census`
-
-### Homepage publishing
-
-Deploys a stack for the home page in Publishing mode.
-
-The first time that you run it, you will need to generate the assets and have the zebedee content. It also assumes that you have defined `zebedee_root` env var in your system.
-
-Stack root folder is [`homepage-publishing`](./homepage-publishing/).
-See the [general guidance, above](#general-guidance-for-each-stack), first, then:
-
-1. Open your browser and check you can see the florence website: `http://localhost:8081/florence`
-
-1. Log in to florence and perform the publish journey
-
-### Static files
-
-Stack root folder is either
-
-- [`static-files-with-auth`](./static-files-with-auth/)
-- [`static-files`](./static-files/)
-
-See the [general guidance, above](#general-guidance-for-each-stack), first.
-
-### Search
-
-Stack root folder is [`search`](./search/).
-See the [general guidance, above](#general-guidance-for-each-stack), first.
+See [Using `make`](#using-make) for additional make targets and other information on using `make` to work with the stacks.
 
 ## Using `make`
 
@@ -275,7 +101,7 @@ Some optional general *make variables* can be used:
   - `make check-env-vars` - warn if your shell is setting some relevant env vars
   - `make check-versions` - warn if specific versions of expected apps are missing
 
-# Example on how to debug a Go application running in docker
+## Example on how to debug a Go application running in docker
 
 This example will show how we can debug `dp-identity-api` when we run the auth stack.
 

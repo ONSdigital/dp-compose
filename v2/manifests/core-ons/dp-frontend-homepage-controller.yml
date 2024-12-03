@@ -25,7 +25,7 @@ services:
       ENABLE_CENSUS_TOPIC_SUBSECTION: ${ENABLE_CENSUS_TOPIC_SUBSECTION:-false}
       ENABLE_NEW_NAVBAR:              ${ENABLE_NEW_NAVBAR:-false}
       IS_PUBLISHING_MODE:             ${IS_PUBLISHING:-false}
-      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       SITE_DOMAIN:                    ${SITE_DOMAIN:-localhost}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:24400/health"]

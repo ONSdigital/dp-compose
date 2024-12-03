@@ -14,11 +14,11 @@ services:
       - 8082:8082
       - 8002:8002
     volumes:
-      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
+      - ${zebedee_root:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/publishing}:/zebedee_root
     restart: unless-stopped
     environment:
       DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
-      DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-true}
       ENABLE_DATASET_IMPORT:          ${ENABLE_DATASET_IMPORT:-true}
       FORMAT_LOGGING:                 ${FORMAT_LOGGING:-true}
@@ -34,7 +34,7 @@ services:
       ENABLE_CENTRALISED_KEYRING:     "true"
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
       KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
-      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       ENABLE_STATIC_FILES_PUBLISHING: "true"
       FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
       ENABLE_JWT_SESSIONS:            "false"

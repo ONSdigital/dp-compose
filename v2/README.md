@@ -74,7 +74,7 @@ Each sub-folder corresponds to a particular stack and contains at least:
 
 #### stack env files
 
-Note that each `*.env` file should be used only to override required env vars for that particular stack, and check that any compulsory env vars for the stack are set (for example, most stacks will require your system to have `SERVICE_AUTH_TOKEN` and `zebedee_root`).
+Note that each `*.env` file should be used only to override required env vars for that particular stack and check that any compulsory env vars for the stack are set.
 
 For example, the following `default.env` file:
 
@@ -85,8 +85,9 @@ For example, the following `default.env` file:
 
 ```shell
 # -- Compulsory env vars validation --
-zebedee_root=${zebedee_root:?please define a valid zebedee_root in your local system}
-SERVICE_AUTH_TOKEN=${SERVICE_AUTH_TOKEN:?please define a valid SERVICE_AUTH_TOKEN in your local system}
+AWS_COGNITO_USER_POOL_ID=${AWS_COGNITO_USER_POOL_ID:?please define a valid AWS_COGNITO_USER_POOL_ID in your local system, get from cognito, e.g. sandbox-florence-users}
+AWS_COGNITO_CLIENT_ID=${AWS_COGNITO_CLIENT_ID:?please define a valid AWS_COGNITO_CLIENT_ID in your local system, get from within pool}
+AWS_COGNITO_CLIENT_SECRET=${AWS_COGNITO_CLIENT_SECRET:?please define a valid AWS_COGNITO_CLIENT_SECRET in your local system, get from within pool}
 
 # -- Paths --
 PATH_MANIFESTS="../../manifests"

@@ -22,22 +22,7 @@ which git > /dev/null || fatal "git not installed"
 which yq  > /dev/null || fatal "yq not installed"
 
 # Test ssh to github
-res=0
-if [[ $VERBOSE = true ]]; then
-    ssh -v -T git@github.com || res=$?
-else
-    ssh -T git@github.com &>/dev/null || res=$?
-fi
-case $res in
-    1)
-        info "github ssh authentication successful"
-        ;;
-    255)
-        fatal "github ssh authentication failed, ensure ssh is configured for github in order to use this script"
-        ;;
-    *)
-        fatal "github ssh authentication encountered unexpected error"
-esac
+test_github_ssh
 
 # Get list of repo urls from docker compose config
 repos=( $(make list-repos) )
@@ -65,7 +50,6 @@ for repo_url in ${repos[@]}; do
 
     # Check if the repo already exists locally
     repo_path="${DP_REPO_DIR}/$repo"
-    repo_prep_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
     if [[ -d "${repo_path}" ]]; then
         branch=$(git -C "${repo_path}" rev-parse --abbrev-ref HEAD)
         br_colour=$GREEN; [[ $branch == develop ]] || br_colour=$YELLOW
@@ -104,6 +88,7 @@ for repo_url in ${repos[@]}; do
         fi
     fi
 
+    repo_prep_dir="${DP_COMPOSE_V2_DIR}/init/$repo"
     if [[ -d "${repo_path}" && -d ${repo_prep_dir} ]]; then
         if [[ :prep: == *:${1-}:* ]]; then
             for prep_f in ${repo_prep_dir}/*; do

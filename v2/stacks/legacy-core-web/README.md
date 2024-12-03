@@ -12,15 +12,38 @@ The basic version of this stack uses:
 - elasticsearch
 - highcharts
 
-## Dependencies
+## Getting started
 
-This stack relies on having a local zebedee content store setup correctly and the correct path set to $zebedee_root
+To run the stack:
 
-See the [zebedee getting started guide](https://github.com/ONSdigital/zebedee#getting-started) for more information.
+1. Clone the repos needed for the stack:
+
+   ```shell
+   make clone
+   ```
+
+2. If you have never built zebedee and babbage before, then build them before continuing (requires Java 8 to be used):
+
+   ```shell
+   cd $DP_REPO_DIR/zebedee
+   make build
+   cd $DP_REPO_DIR/babbage
+   make build
+   ```
+
+   This is required for the local docker builds to work around a current issue with the volume paths not existing pre-build. Once this issue has been resolved, this step will no longer be necessary.
+
+3. Build and start the stack:
+
+   ```shell
+   make up
+   ```
+
+For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
 
 ## Is it running successfully?
 
-This will allow you to run the stack and:
+You can test your stack is running correctly by checking you can:
 
 - [render a page as HTML](http://localhost:20000/economy)
 - [render a page as JSON](http://localhost:20000/economy/data)

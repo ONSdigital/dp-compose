@@ -10,10 +10,11 @@ services:
       - 8084:8084
     restart: unless-stopped
     volumes:
-      - ${zebedee_root:?please define a valid zebedee_root in your local system}:/zebedee_root
+      - ${TRANSACTION_STORE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/transactions}:/transactions
+      - ${WEBSITE:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/site}:/site
     environment:
-      TRANSACTION_STORE:           "/zebedee_root/zebedee/transactions"
-      WEBSITE:                     "/zebedee_root/zebedee/master"
+      TRANSACTION_STORE:           "/transactions"
+      WEBSITE:                     "/site"
       PUBLISHING_THREAD_POOL_SIZE: 100
       PORT:                        8084
       DP_COLOURED_LOGGING:         "true"
