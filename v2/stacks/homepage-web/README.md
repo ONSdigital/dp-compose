@@ -14,7 +14,7 @@ To run the stack:
    make clone
    ```
 
-2. If you have never built zebedee before, then built it before continuing (requires Java 8 to be used):
+2. If you have never built zebedee before, then build it before continuing (requires Java 8 to be used):
 
    ```shell
    cd $DP_REPO_DIR/zebedee

@@ -22,7 +22,7 @@ To run the stack:
    make clone
    ```
 
-2. If you have never built zebedee and babbage before, then built them before continuing (requires Java 8 to be used):
+2. If you have never built zebedee and babbage before, then build them before continuing (requires Java 8 to be used):
 
    ```shell
    cd $DP_REPO_DIR/zebedee
