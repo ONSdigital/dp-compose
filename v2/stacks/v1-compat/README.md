@@ -59,11 +59,18 @@ SERVICE=zebedee make logs
 
 For more information about the less standard v2 make targets, see [v2 Make targets](../README.md#make-targets).
 
-## CMD and elasticsearch
+## Working with multiple Elasticsearches
 
-The ONS website and CMD both require Elasticsearch but (annoyingly) require different versions. The `docker-compose.yml` will start 2 instances.
+This stack contains three different elasticsearch instances. In order to allow locally running apps to connect, you will need to override the default ports configured in those apps.
 
-**Note:** The default ports for Elasticsearch is usually `9200` & `9300` however in order to avoid a port conflict when running 2 different versions on the same box at the same time the CMD instance is set to use ports `10200` & `10300`.
+### Legacy Core
 
-:warning: **Gotcha Warning** :warning:
-You'll need to overwrite your ES config for the `dp-dimension-search-builder` and `dp-dimension-search-api` to use ports `10200` & `10300` to ensure they are using the correct instance.
+The legacy core will use the `elasticsearch` instance so `zebedee` and `babbage` can continue to use the default ports without change.
+
+### CMD
+
+You'll need to overwrite your ES config for the `dp-dimension-search-builder` and `dp-dimension-search-api` to use ports for the `cmdelasticsearch` instance (i.e. `10200` & `10300`) to ensure they are using the correct instance.
+
+### Search Service
+
+You'll need to overwrite your ES config for the `dp-search-api` and `dp-search-data-importer` to use ports for the `sitewideelasticsearch` instance (i.e. `11200` & `11300`) to ensure they are using the correct instance.
