@@ -18,8 +18,8 @@ services:
       - 25000:25000
     restart: unless-stopped
     environment:
-      BIND_ADDR:                ":25000"
       API_ROUTER_URL:           ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
+      BIND_ADDR:                ":25000"
       ENABLE_FEEDBACK_API:      ${ENABLE_FEEDBACK_API:-false}
       FEEDBACK_API_URL:         ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
       IS_PUBLISHING:            ${IS_PUBLISHING:-true}
