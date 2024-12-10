@@ -1,6 +1,6 @@
 services:
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:s3-latest
     ports:
       - 14566:4566
     environment:
