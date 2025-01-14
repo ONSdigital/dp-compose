@@ -21,8 +21,11 @@ services:
       BIND_ADDR:          ":25800"
       KAFKA_ADDR:         ${KAFKA_ADDR:-kafka-1:19092,kafka-2:19092,kafka-3:19092}
       KAFKA_VERSION:      ${KAFKA_VERSION:-3.1.0}
-      ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
+      ENABLE_DATASET_API_CALLBACKS: ${ENABLE_DATASET_API_CALLBACKS:-true}
       DATASET_API_URL:    ${DATASET_API_URL:-http://dp-dataset-api:22000}
+      ENABLE_SEARCH_CONTENT_UPDATED_HANDLER: ${ENABLE_SEARCH_CONTENT_UPDATED_HANDLER:-true}
+      ENABLE_ZEBEDEE_CALLBACKS: ${ENABLE_ZEBEDEE_CALLBACKS:-true}
+      ZEBEDEE_URL:        ${ZEBEDEE_URL:-http://zebedee:8082}
       SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:25800/health"]
