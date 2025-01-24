@@ -22,7 +22,8 @@ services:
       KAFKA_ADDR:                  ${KAFKA_ADDR:-kafka-1:19092,kafka-2:19092,kafka-3:19092}
       CODE_LIST_API_URL:           ${CODE_LIST_API_URL:-http://dp-code-list-api:22400}
       DATASET_API_URL:             ${DATASET_API_URL:-http://dp-dataset-api:22000}
-      WEBSITE_URL:                 ${WEBSITE_URL:-http://localhost:20000}
+      IMPORT_API_URL:              ${IMPORT_API_URL:-http://dp-import-api:21800}
+      WEBSITE_URL:                 ${WEBSITE_URL:-http://dp-frontend-router:20000}
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
       ENABLE_PRIVATE_ENDPOINTS:    "true"
       ENABLE_DETACH_DATASET:       "true"
