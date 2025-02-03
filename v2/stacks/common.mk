@@ -40,8 +40,8 @@ verify-service: $(LOCAL_ENV_FILE)
 			[[ "$(SERVICE)" = $$svc ]] && exit 0;					\
 		done;										\
 	done;											\
-	echo "\033[31m""service $(SERVICE) does not exist in stack. Failed to verify.\033[0m" >&2
-	@exit 4
+	echo "\033[31m""service $(SERVICE) does not exist in stack. Failed to verify.\033[0m" >&2; \
+	exit 4
 
 .PHONY: colima-start
 colima-start:
