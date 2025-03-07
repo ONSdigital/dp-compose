@@ -31,6 +31,7 @@ services:
       enable_splunk_reporting:        "false"
       zebedee_root:                   "/zebedee_root"
       publish_url:                    ${PUBLISH_URL:-http://the-train:8084}
+      website_url:                    ${website_url:-http://babbage-web:8080}
       ENABLE_CENTRALISED_KEYRING:     "true"
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
       KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
