@@ -66,3 +66,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-data-admin-ui.yml
       service: dis-data-admin-ui
+  dis-bundle-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-bundle-api.yml
+      service: dis-bundle-api
