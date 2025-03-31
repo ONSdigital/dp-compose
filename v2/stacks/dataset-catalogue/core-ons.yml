@@ -75,3 +75,7 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dis-bundle-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-bundle-api.yml
+      service: dis-bundle-api
