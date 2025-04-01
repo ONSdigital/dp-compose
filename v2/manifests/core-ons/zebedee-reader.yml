@@ -7,8 +7,7 @@ services:
     expose:
       - "8082"
     ports:
-      - 8082:8082
-      - 8002:8002
+      - 18082:8082
     volumes:
       - ${content_dir:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/web/site}:/content_dir
     restart: unless-stopped

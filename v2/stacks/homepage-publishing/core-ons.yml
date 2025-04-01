@@ -24,8 +24,17 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-    environment:
-      IS_PUBLISHING: "Y"
+      elasticsearch:
+        condition: service_healthy
+  babbage-web:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage-web
+    depends_on:
+      babbage:
+        condition: service_healthy
+      zebedee-reader:
+        condition: service_healthy
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
@@ -47,6 +56,15 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
+  dp-files-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
+      service: dp-files-api
+    environment:
+      KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dp-topic-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
@@ -60,6 +78,13 @@ services:
       service: zebedee
     depends_on:
       elasticsearch:
+        condition: service_started
+  zebedee-reader:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee-reader.yml
+      service: zebedee-reader
+    depends_on:
+      elasticsearch-web:
         condition: service_started
   florence:
     extends:
@@ -81,4 +106,16 @@ services:
       service: dp-image-importer
     depends_on:
       dp-image-api:
+        condition: service_healthy
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+    environment:
+      DISABLE_GRAPH_DB_DEPENDENCY: false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"          # localhost mapping for linux
+      - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      zebedee:
         condition: service_healthy
