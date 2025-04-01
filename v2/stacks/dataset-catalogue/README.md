@@ -29,4 +29,26 @@ To run the stack:
    make up
    ```
 
+To run the stack with dp-topic-api database seeded:
+
+Follow the prerequsites for installing `mongosh` here - `https://github.com/ONSdigital/dp-topic-api/tree/develop/scripts`
+
+Run:
+
+   ```shell
+   make up-with-seed
+   ```
+
+This assumes that the location of dp-topic-api on your system is `/Users/{your username}/src/github.com/ONSdigital/dp-topic-api`
+
+If that is not the correct location, you will be prompted to input a custom location for dp-topic-api on your system.
+
+Once the correct location is found, you should see something like:
+
+   ```shell
+Found dp-topic-api at /Users/{your username}/src/github.com/ONSdigital/dp-topic-api
+mongosh localhost:27017/topics ./scripts/seed-database/index.js
+creating collections
+   ```
+
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).

@@ -66,6 +66,15 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-data-admin-ui.yml
       service: dis-data-admin-ui
+  dp-topic-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+      service: dp-topic-api
+    environment:
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
   dis-bundle-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-bundle-api.yml
