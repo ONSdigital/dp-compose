@@ -170,7 +170,12 @@ var databases = [
 					{ condition: '{"id": 1}', options: '{"unique": true}' }
 				]
 			},
-			{ name: "bundles" }
+			{ 
+				name: "bundles",
+				index: [
+					{ condition: '{"id": 1}', options: '{"unique": true}' }
+				] 
+			}
 		]
 	},
 	{
