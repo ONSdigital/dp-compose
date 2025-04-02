@@ -58,6 +58,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
+      environment:
+        ENABLE_JWT_SESSIONS: true
     depends_on:
       elasticsearch:
         condition: service_started
