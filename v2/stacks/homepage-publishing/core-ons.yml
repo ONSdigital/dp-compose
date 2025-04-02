@@ -90,6 +90,8 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_healthy
+      kafka-1:
+        condition: service_healthy
   dp-image-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
