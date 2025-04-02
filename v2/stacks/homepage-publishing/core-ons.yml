@@ -65,6 +65,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
       service: florence
+      environment:
+        ENABLE_NEW_SIGN_IN: true
     depends_on:
       dp-api-router:
         condition: service_healthy
@@ -75,6 +77,8 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+      mongodb:
+        condition: service_healthy
   dp-image-importer:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
@@ -82,3 +86,9 @@ services:
     depends_on:
       dp-image-api:
         condition: service_healthy
+      kafka-1:
+        condition: service_healthy
+  dis-authentication-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
+      service: dis-authentication-stub
