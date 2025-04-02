@@ -101,7 +101,7 @@ services:
         condition: service_healthy
       kafka-1:
         condition: service_healthy
-  dis-authentication-stub:
+  dp-upload-service:
     extends:
-      file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
-      service: dis-authentication-stub
+      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
+      service: dp-upload-service
