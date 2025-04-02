@@ -5,10 +5,6 @@ services:
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
-  vault:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/vault.yml
-      service: vault
   zookeeper-1:
     extends:
       file: ${PATH_MANIFESTS}/deps/kafka.yml

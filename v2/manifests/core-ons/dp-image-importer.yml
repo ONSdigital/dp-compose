@@ -27,9 +27,6 @@ services:
       IMAGE_UPLOADED_TOPIC:    ${IMAGE_UPLOADED_TOPIC:-image-uploaded}
       S3_PRIVATE_BUCKET_NAME:  "testing"
       S3_UPLOADED_BUCKET_NAME: "uploaded"
-      VAULT_TOKEN:             "0000-0000-0000-0000"
-      VAULT_ADDR:              ${VAULT_ADDR:-http://vault:8200}
-      VAULT_PATH:              "secret/shared/psk"
       DOWNLOAD_SERVICE_URL:    ${DOWNLOAD_SERVICE_URL:-http://dp-download-service:23600}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:24800/health"]
