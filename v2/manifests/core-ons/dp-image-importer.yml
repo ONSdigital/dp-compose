@@ -27,6 +27,9 @@ services:
       IMAGE_UPLOADED_TOPIC:    ${IMAGE_UPLOADED_TOPIC:-image-uploaded}
       S3_PRIVATE_BUCKET_NAME:  "testing"
       S3_UPLOADED_BUCKET_NAME: "uploaded"
+      S3_LOCAL_URL:            ${S3_LOCAL_URL:-http://localstack:4566}
+      S3_LOCAL_ID:             "test"
+      S3_LOCAL_SECRET:         "test"
       DOWNLOAD_SERVICE_URL:    ${DOWNLOAD_SERVICE_URL:-http://dp-download-service:23600}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:24800/health"]
