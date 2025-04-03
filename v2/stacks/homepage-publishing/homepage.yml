@@ -1,0 +1,34 @@
+services:
+  dp-frontend-homepage-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
+      service: dp-frontend-homepage-controller
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  dp-image-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
+      service: dp-image-api
+    environment:
+      DOWNLOAD_SERVICE_URL: http://localhost:23600 # This URL is for client requests and so must be localhost not docker
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      kafka-1:
+        condition: service_healthy
+  dp-image-importer:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
+      service: dp-image-importer
+    environment:
+      S3_UPLOADED_BUCKET_NAME: public
+      S3_PRIVATE_BUCKET_NAME: private
+    depends_on:
+      dp-image-api:
+        condition: service_healthy
+      kafka-1:
+        condition: service_healthy
+

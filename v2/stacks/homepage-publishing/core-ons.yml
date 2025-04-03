@@ -6,26 +6,10 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-  dp-frontend-homepage-controller:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-homepage-controller.yml
-      service: dp-frontend-homepage-controller
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
   sixteens:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
-  babbage:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
-      service: babbage
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-    environment:
-      IS_PUBLISHING: "Y"
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
@@ -45,7 +29,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
     environment:
-      IDENTITY_API_URL: "http://host.docker.internal:25600"
+      IDENTITY_API_URL: "http://host.docker.internal:25600" # to port forward to remote
     depends_on:
       zebedee:
         condition: service_healthy
@@ -65,7 +49,7 @@ services:
       service: zebedee
     environment:
       ENABLE_JWT_SESSIONS: true
-      IDENTITY_API_URL: "http://host.docker.internal:25600"
+      IDENTITY_API_URL: "http://host.docker.internal:25600" # to port forward to remote
     depends_on:
       elasticsearch:
         condition: service_started
@@ -79,27 +63,4 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-  dp-image-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
-      service: dp-image-api
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      kafka-1:
-        condition: service_healthy
-  dp-image-importer:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
-      service: dp-image-importer
-    depends_on:
-      dp-image-api:
-        condition: service_healthy
-      kafka-1:
-        condition: service_healthy
-  dp-upload-service:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
-      service: dp-upload-service
+
