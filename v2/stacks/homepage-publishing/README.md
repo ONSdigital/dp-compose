@@ -41,4 +41,15 @@ To run the stack:
    make up
    ```
 
+4. Use the stack to publish an image for the homepage:
+
+   - [Login](http://localhost:8081/florence/login) to florence
+   - Create a collection
+   - Click edit collection
+   - Select homepage
+   - Add a section to 'Around ONS' or to 'Headlines'
+   - Upload an image
+   - Save and submit for review
+   - [View image on the homepage](http://localhost:8081)
+
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
