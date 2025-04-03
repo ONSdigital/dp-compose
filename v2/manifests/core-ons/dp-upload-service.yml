@@ -21,8 +21,8 @@ services:
       BIND_ADDR:                          ":25100"
       AWS_REGION:                         "eu-west-1"
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
-      UPLOAD_BUCKET_NAME:                 "deprecated"
-      STATIC_FILES_ENCRYPTED_BUCKET_NAME: "testing"
+      UPLOAD_BUCKET_NAME:                 ${UPLOAD_BUCKET_NAME:-deprecated}
+      STATIC_FILES_ENCRYPTED_BUCKET_NAME: ${STATIC_FILES_ENCRYPTED_BUCKET_NAME:-testing}
       GRACEFUL_SHUTDOWN_TIMEOUT:          "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT:       "5s"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
