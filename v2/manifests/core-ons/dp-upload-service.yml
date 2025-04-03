@@ -23,7 +23,6 @@ services:
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
       UPLOAD_BUCKET_NAME:                 "deprecated"
       STATIC_FILES_ENCRYPTED_BUCKET_NAME: "testing"
-      ENCRYPTION_DISABLED:                ${ENCRYPTION_DISABLED:-false}
       GRACEFUL_SHUTDOWN_TIMEOUT:          "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT:       "5s"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
