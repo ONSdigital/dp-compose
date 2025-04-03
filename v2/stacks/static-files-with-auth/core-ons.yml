@@ -20,8 +20,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
       service: florence
-    environment:
-      ENABLE_NEW_SIGN_IN: "true"
     depends_on:
       zebedee:
         condition: service_healthy

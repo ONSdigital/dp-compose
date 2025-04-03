@@ -14,15 +14,10 @@ services:
       HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}
       BIND_ADDR:                    ":23600"
       AWS_REGION:                   "eu-west-1"
-      LOCALSTACK_HOST:              ${LOCALSTACK_URL:-http://localstack:4566}
-      BUCKET_NAME:                  "csv-exported"
+      BUCKET_NAME:                  ${BUCKET_NAME:-csv-exported}
       PUBLIC_BUCKET_URL:            "http://localhost:4566/testing-public/"
-      ENCRYPTION_DISABLED:          ${ENCRYPTION_DISABLED:-false}
       GRACEFUL_SHUTDOWN_TIMEOUT:    "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT: "5s"
-      VAULT_TOKEN:                  "0000-0000-0000-0000"
-      VAULT_ADDR:                   ${VAULT_ADDR:-http://vault:8200}
-      VAULT_PATH:                   "secret/shared/psk"
       FILES_API_URL:                ${FILES_API_URL:-http://dp-files-api:26900}
       MINIO_ACCESS_KEY:             "test"
       MINIO_SECRET_KEY:             "test"

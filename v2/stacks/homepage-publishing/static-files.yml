@@ -1,0 +1,14 @@
+services:
+  dp-upload-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
+      service: dp-upload-service
+    environment:
+      UPLOAD_BUCKET_NAME: public
+      STATIC_FILES_ENCRYPTED_BUCKET_NAME: private
+  dp-download-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
+      service: dp-download-service
+    environment:
+      BUCKET_NAME: private
