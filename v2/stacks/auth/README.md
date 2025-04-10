@@ -8,9 +8,11 @@ This stack is for testing and working directly with auth and is not designed to 
 
 - florence
 - dp-identity-api
+- dp-permissions-api
+- mongodb (required by dp-permissions-api)
 - dp-api-router (if you don't have it already)
 
-You would then follow the steps below to add the appropriate environment variables to contact sandbox cognito. 
+You would then follow the steps below to add the appropriate environment variables to contact sandbox cognito.
 
 ## Getting secrets
 
