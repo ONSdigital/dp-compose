@@ -42,47 +42,10 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
-  dp-files-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
-      service: dp-files-api
-    environment:
-      KAFKA_ADDR: 'kafka-1:9092,kafka-2:9093,kafka-3:9094'
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
       service: the-train
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-  dp-publishing-dataset-controller:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-publishing-dataset-controller.yml
-      service: dp-publishing-dataset-controller
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-  dp-design-system:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
-      service: dp-design-system
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-  dp-image-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-image-api.yml
-      service: dp-image-api
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
-  dp-image-importer:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-image-importer.yml
-      service: dp-image-importer
     depends_on:
       dp-api-router:
         condition: service_healthy
