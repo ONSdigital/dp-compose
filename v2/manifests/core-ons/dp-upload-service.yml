@@ -21,14 +21,10 @@ services:
       BIND_ADDR:                          ":25100"
       AWS_REGION:                         "eu-west-1"
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
-      UPLOAD_BUCKET_NAME:                 "deprecated"
-      STATIC_FILES_ENCRYPTED_BUCKET_NAME: "testing"
-      ENCRYPTION_DISABLED:                ${ENCRYPTION_DISABLED:-false}
+      UPLOAD_BUCKET_NAME:                 ${UPLOAD_BUCKET_NAME:-deprecated}
+      STATIC_FILES_ENCRYPTED_BUCKET_NAME: ${STATIC_FILES_ENCRYPTED_BUCKET_NAME:-testing}
       GRACEFUL_SHUTDOWN_TIMEOUT:          "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT:       "5s"
-      VAULT_TOKEN:                        "0000-0000-0000-0000"
-      VAULT_ADDR:                         "http://vault:8200"
-      VAULT_PATH:                         "secret/shared/psk"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
       SERVICE_AUTH_TOKEN:                 ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
     healthcheck:

@@ -18,10 +18,8 @@ services:
       - 8081:8081
     restart: unless-stopped
     environment:
-      ENCRYPTION_DISABLED:        ${ENCRYPTION_DISABLED:-false}
       ENABLE_HOMEPAGE_PUBLISHING: "true"
       ENABLE_PERMISSION_API:      ${ENABLE_PERMISSION_API:-false}
-      ENABLE_NEW_SIGN_IN:         ${ENABLE_NEW_SIGN_IN:-false}
       ENABLE_DATASET_IMPORT:      ${ENABLE_DATASET_IMPORT:-true}
       API_ROUTER_URL:             ${API_ROUTER_URL:-http://dp-api-router:23200}
       ROUTER_URL:                 ${FRONTEND_ROUTER_URL:-http://dp-frontend-router:20000}
