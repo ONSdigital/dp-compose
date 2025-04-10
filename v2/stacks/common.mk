@@ -62,6 +62,9 @@ clean: verify-service colima-start
 	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
+.PHONY: restart
+restart: down up
+
 .PHONY: refresh
 refresh: down clean-image up
 

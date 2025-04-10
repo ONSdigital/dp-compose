@@ -4,6 +4,16 @@ This stack deploys the necessary services and dependencies to work with the auth
 
 The auth stack uses the sandbox cognito instance to store users and their permissions.
 
+This stack is for testing and working directly with auth and is not designed to run all services. If you wish to add auth to your stack you can either add `dp-authorisation-stub` or to work directly with auth you can add:
+
+- florence
+- dp-identity-api
+- dp-permissions-api
+- mongodb (required by dp-permissions-api)
+- dp-api-router (if you don't have it already)
+
+You would then follow the steps below to add the appropriate environment variables to contact sandbox cognito.
+
 ## Getting secrets
 
 To run this stack you will need to obtain the relevant secrets for the `local.env` file, which **must not be committed**:
@@ -51,3 +61,17 @@ To get the aws values from the dashboard do the following:
 - Copy the values into your local.env file. Delete the word 'export' from each line. But keep the quotes around the values. NB. These are the only values in your local.env that may need to have quotes around them.
 
 Note that the AWS_SESSION_TOKEN is only valid for 12 hours. Once the token has expired you would need to stop the stack, retrieve and set new credentials before running the stack again.
+
+## Testing
+
+To know this stack has worked you can do the following things:
+
+- [login to florence](http://localhost:8081/florence/login) with your sandbox login
+- log out of florence
+- "forget" your password
+- view all users [via the api](http://localhost:8081/florence/api/v1/users)
+- view all groups [via the api](http://localhost:8081/florence/api/v1/groups)
+- CRUD users in florence (if you're an admin)
+- CRUD groups in florence (if you're an admin)
+
+This list is not definitive and should be taken as a guide only.
