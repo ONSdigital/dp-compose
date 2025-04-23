@@ -37,7 +37,7 @@
             "title": "Full Dataset (CSV)",
             "format": "csv",
             "media_type": "text/csv",
-            "download_url": "https://download.dp.aws.onsdigital.uk/downloads/datasets/RM086/editions/2021/versions/1.csv",
+            "download_url": "/datasets/RM086/editions/2021/versions/1.csv",
             "byte_size": 4300000
         }
     ]
@@ -81,7 +81,7 @@
             "title": "Full Dataset (CSV)",
             "format": "csv",
             "media_type": "text/csv",
-            "download_url": "https://download.dp.aws.onsdigital.uk/downloads/datasets/RM086/editions/2021/versions/2.csv",
+            "download_url": "/datasets/RM086/editions/2021/versions/2.csv",
             "byte_size": 4300000
         }
     ]
