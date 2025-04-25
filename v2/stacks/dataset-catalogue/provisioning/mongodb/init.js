@@ -189,6 +189,17 @@ var databases = [
 			},
 			{ name: "policies" }
 		]
+	},
+	{
+		name: "bundles",
+		collections: [
+			{ 
+				name: "bundles",
+				index: [
+					{ condition: '{"id": 1}', options: '{"unique": true}' }
+				] 
+			}
+		]
 	}
 ];
 
