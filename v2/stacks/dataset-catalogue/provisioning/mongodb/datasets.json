@@ -179,7 +179,7 @@
             }
         ],
         "license": "Open Government Licence v3.0",
-        "topics": ["Education", "Business"]
+        "topics": ["topic-0", "topic-1"]
     },
     "current": {
         "contacts": [
@@ -237,6 +237,6 @@
             }
         ],
         "license": "Open Government Licence v3.0",
-        "topics": ["Education", "Business"]
+        "topics": ["topic-0", "topic-1"]
     }
 }
