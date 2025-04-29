@@ -60,4 +60,4 @@ INFO[0009] done
 
 To fix common errors that occur, especially when running the V2 stacks using colima, please see this guide:
 
-[Fixing Colima errors](https://github.com/ONSdigital/dp-operations/blob/main/troubleshooting/fixing-colima-related-errors.md)
+[Fixing Colima errors](fixing-colima-related-errors.md)
