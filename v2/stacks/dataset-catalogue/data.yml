@@ -9,6 +9,7 @@ services:
       ENABLE_STATE_MACHINE: true
       ENABLE_URL_REWRITING: true
       ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
+      FILES_API_URL:     "http://dp-files-api:26900"
   dis-authentication-stub:
     extends:
       file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
