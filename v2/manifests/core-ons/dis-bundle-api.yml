@@ -12,6 +12,7 @@ services:
       - 29800:29800
     environment:
       BIND_ADDR: ":29800"
+      MONGODB_BIND_ADDR: ${MONGODB_BIND_ADDR:-mongodb:27017}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:29800/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
