@@ -204,6 +204,12 @@ var databases = [
 				index: [
 					{ condition: '{"id": 1}', options: '{"unique": true}' }
 				] 
+			},
+			{ 
+				name: "bundle_contents",
+				index: [
+					{ condition: '{"id": 1}', options: '{"unique": true}' }
+				] 
 			}
 		]
 	}
