@@ -5,9 +5,9 @@ services:
       - "6379"
     ports:
       - 6379:6379
-#    healthcheck:
-#      test: echo 'db.runCommand("ping").ok' | mongo mongodb:27017/test --quiet
-#      interval: 10s
-#      timeout: 10s
-#      retries: 10
-#      start_period: 40s
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
