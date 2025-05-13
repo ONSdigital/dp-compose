@@ -1,0 +1,9 @@
+services:
+  dis-redirect-proxy:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-redirect-proxy.yml
+      service: dis-redirect-proxy
+  dis-redirect-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-redirect-api.yml
+      service: dis-redirect-api
