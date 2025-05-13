@@ -11,9 +11,11 @@ include ../common.mk
 # Specifies the local override environment variable file for the stack
 #LOCAL_ENV_FILE ?= local.env
 
-REDIRECT_PROXY ?= dis-redirect-proxy
+REDIRECT_SERVICE ?=
 
-REDIRECT_API ?= dis-redirect-api
+#REDIRECT_PROXY ?= dis-redirect-proxy
+#
+#REDIRECT_API ?= dis-redirect-api
 
 .PHONY: init
 init: base-init
