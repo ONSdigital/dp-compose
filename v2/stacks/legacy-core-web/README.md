@@ -57,11 +57,18 @@ To run the stack:
 
 For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
 
-COMPOSE_FILE=redir-deps.yml:redir-services.yml
+   ```shell
+   COMPOSE_FILE=redir-deps.yml:redir-services.yml
+   ```
 
 Or, for the core backing services version of the stack, set the COMPOSE_FILE as follows in local.env:
 
-COMPOSE_FILE=core-deps.yml:core-services.yml
+   ```shell
+  COMPOSE_FILE=core-deps.yml:core-services.yml
+   ```
+
+Or, for the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out. 
+Instead, the COMPOSE_FILE value in default.env should be used.
 
 4. Build and start the stack:
 
