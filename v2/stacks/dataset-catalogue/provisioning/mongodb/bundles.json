@@ -16,7 +16,6 @@
           "id": "b67f129a-98de-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-04-15T07:00:00.000Z",
       "state": "DRAFT",
       "title": "bundle-1",
       "updated_at": "2025-04-04T10:15:00.000Z",
@@ -24,7 +23,7 @@
     }
     {
       "id": "bundle-2",
-      "bundle_type": "MANUAL",
+      "bundle_type": "SCHEDULED",
       "created_at": "2025-03-10T11:20:00.000Z",
       "created_by": {
         "email": "publisher@ons.gov.uk"
@@ -82,7 +81,6 @@
           "id": "f01d345b-98de-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-05-10T09:30:00.000Z",
       "state": "DRAFT",
       "title": "bundle-4",
       "updated_at": "2025-04-02T11:45:00.000Z",
@@ -150,7 +148,6 @@
           "id": "456i897g-98df-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-04-22T08:30:00.000Z",
       "state": "DRAFT",
       "title": "bundle-7",
       "updated_at": "2025-04-10T15:45:00.000Z",
@@ -194,7 +191,6 @@
           "id": "789l120j-98df-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-05-15T09:00:00.000Z",
       "state": "DRAFT",
       "title": "bundle-9",
       "updated_at": "2025-04-02T14:20:00.000Z",
@@ -202,7 +198,7 @@
     }
     {
       "id": "bundle-10",
-      "bundle_type": "MANUAL",
+      "bundle_type": "SCHEDULED",
       "created_at": "2025-04-03T11:25:00.000Z",
       "created_by": {
         "email": "publisher@ons.gov.uk"

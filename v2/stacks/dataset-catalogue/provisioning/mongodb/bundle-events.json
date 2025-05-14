@@ -110,7 +110,7 @@
           "title": "Dataset 1"
         },
         "id": "31fda76c-972e-4f73-a999-f9fc428ba74f",
-        "bundle_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+        "bundle_id": "bundle-1",
         "state": "DRAFT",
         "links": {
           "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
@@ -135,7 +135,7 @@
           "title": "Dataset 2"
         },
         "id": "45gba98c-d12e-5f67-b890-1a2b3c4d5e6f",
-        "bundle_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+        "bundle_id": "bundle-2",
         "state": "IN_REVIEW",
         "links": {
           "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
@@ -160,7 +160,7 @@
           "title": "Dataset 3"
         },
         "id": "67h8i9j0-k1l2-m3n4-o5p6-q7r8s9t0u1v2",
-        "bundle_id": "f67e8a92-d4b3-5c6a-834d-7e9f0c8b1d2a",
+        "bundle_id": "bundle-3",
         "state": "APPROVED",
         "links": {
           "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
@@ -185,7 +185,7 @@
           "title": "Dataset 4"
         },
         "id": "b5c4d3e2-f1g0-h9i8-j7k6-l5m4n3o2p1q0",
-        "bundle_id": "a47dc538-1e9f-48b2-b75f-3a2c8e6d9b0a",
+        "bundle_id": "bundle-4",
         "state": "PUBLISHED",
         "links": {
           "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
@@ -210,7 +210,7 @@
           "title": "Dataset 5"
         },
         "id": "w3x4y5z6-a7b8-c9d0-e1f2-g3h4i5j6k7l8",
-        "bundle_id": "b59c6a41-d2e0-48f7-a936-c1d2e3f4a5b6",
+        "bundle_id": "bundle-5",
         "state": "DRAFT",
         "links": {
           "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
