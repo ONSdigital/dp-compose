@@ -1,0 +1,243 @@
+
+    {
+      "created_at": "2025-05-01T09:12:34.567Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "bundle_type": "MANUAL",
+        "preview_teams": [
+          { "id": "1253e849-01fd-4662-bee2-63253538da93" }
+        ],
+        "title": "Bundle 1",
+        "state": "DRAFT",
+        "id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+        "created_by": {
+          "email": "publisher@ons.gov.uk"
+        },
+        "created_at": "2025-05-01T09:12:34.567Z",
+        "managed_by": "DATA-ADMIN"
+      }
+    }
+    {
+      "created_at": "2025-05-05T13:22:45.678Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "bundle_type": "MANUAL",
+        "preview_teams": [
+          { "id": "1253e849-01fd-4662-bee2-63253538da93" },
+          { "id": "a456b789-01fd-4662-bee2-63253538da93" }
+        ],
+        "title": "Bundle 2",
+        "state": "IN_REVIEW",
+        "id": "f67e8a92-d4b3-5c6a-834d-7e9f0c8b1d2a",
+        "created_by": {
+          "email": "publisher@ons.gov.uk"
+        },
+        "created_at": "2025-05-05T13:22:45.678Z",
+        "managed_by": "WAGTAIL"
+      }
+    }
+    {
+      "created_at": "2025-05-10T08:22:33.444Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "bundle_type": "MANUAL",
+        "preview_teams": [
+          { "id": "789a7b8c-6d5e-4f3d-2c1b-0a9b8c7d6e5f" }
+        ],
+        "title": "Bundle 3",
+        "state": "APPROVED",
+        "id": "a47dc538-1e9f-48b2-b75f-3a2c8e6d9b0a",
+        "created_by": {
+          "email": "publisher@ons.gov.uk"
+        },
+        "created_at": "2025-05-10T08:22:33.444Z",
+        "managed_by": "DATA-ADMIN"
+      }
+    }
+    {
+      "created_at": "2025-05-12T11:15:27.333Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "bundle_type": "MANUAL",
+        "preview_teams": [
+          { "id": "789a7b8c-6d5e-4f3d-2c1b-0a9b8c7d6e5f" },
+          { "id": "5a4b3c2d-1e0f-9g8h-7i6j-5k4l3m2n1o0p" }
+        ],
+        "title": "Bundle 4",
+        "state": "PUBLISHED",
+        "id": "b59c6a41-d2e0-48f7-a936-c1d2e3f4a5b6",
+        "created_by": {
+          "email": "publisher@ons.gov.uk"
+        },
+        "created_at": "2025-05-12T11:15:27.333Z",
+        "managed_by": "WAGTAIL"
+      }
+    }
+    {
+      "created_at": "2025-05-15T09:30:42.111Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "content_type": "DATASET",
+        "metadata": {
+          "dataset_id": "dataset 1",
+          "edition_id": "time-series",
+          "version_id": 1,
+          "title": "Dataset 1"
+        },
+        "id": "31fda76c-972e-4f73-a999-f9fc428ba74f",
+        "bundle_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+        "state": "DRAFT",
+        "links": {
+          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+        }
+      }
+    }
+    {
+      "created_at": "2025-05-15T09:35:18.222Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "content_type": "DATASET",
+        "metadata": {
+          "dataset_id": "dataset 2",
+          "edition_id": "time-series",
+          "version_id": 1,
+          "title": "Dataset 2"
+        },
+        "id": "45gba98c-d12e-5f67-b890-1a2b3c4d5e6f",
+        "bundle_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+        "state": "IN_REVIEW",
+        "links": {
+          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+        }
+      }
+    }
+    {
+      "created_at": "2025-05-18T14:22:39.876Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "content_type": "DATASET",
+        "metadata": {
+          "dataset_id": "dataset 3",
+          "edition_id": "time-series",
+          "version_id": 1,
+          "title": "Dataset 3"
+        },
+        "id": "67h8i9j0-k1l2-m3n4-o5p6-q7r8s9t0u1v2",
+        "bundle_id": "f67e8a92-d4b3-5c6a-834d-7e9f0c8b1d2a",
+        "state": "APPROVED",
+        "links": {
+          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+        }
+      }
+    }
+    {
+      "created_at": "2025-05-20T10:45:12.321Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "content_type": "DATASET",
+        "metadata": {
+          "dataset_id": "dataset 4",
+          "edition_id": "time-series",
+          "version_id": 1,
+          "title": "Dataset 4"
+        },
+        "id": "b5c4d3e2-f1g0-h9i8-j7k6-l5m4n3o2p1q0",
+        "bundle_id": "a47dc538-1e9f-48b2-b75f-3a2c8e6d9b0a",
+        "state": "PUBLISHED",
+        "links": {
+          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+        }
+      }
+    }
+    {
+      "created_at": "2025-05-22T15:33:27.654Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "content_type": "DATASET",
+        "metadata": {
+          "dataset_id": "dataset 5",
+          "edition_id": "time-series",
+          "version_id": 1,
+          "title": "Dataset 5"
+        },
+        "id": "w3x4y5z6-a7b8-c9d0-e1f2-g3h4i5j6k7l8",
+        "bundle_id": "b59c6a41-d2e0-48f7-a936-c1d2e3f4a5b6",
+        "state": "DRAFT",
+        "links": {
+          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+        }
+      }
+    }
+    {
+      "created_at": "2025-05-22T15:40:58.987Z",
+      "requested_by": {
+        "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+        "email": "publisher@ons.gov.uk"
+      },
+      "action": "CREATE",
+      "resource": "/bundles",
+      "data": {
+        "bundle_type": "MANUAL",
+        "preview_teams": [
+          { "id": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r" }
+        ],
+        "title": "Bundle 5",
+        "state": "DRAFT",
+        "id": "c6d7e8f9-0a1b-2c3d-4e5f-6g7h8i9j0k1l",
+        "created_by": {
+          "email": "publisher@ons.gov.uk"
+        },
+        "created_at": "2025-05-22T15:40:58.987Z",
+        "managed_by": "DATA-ADMIN"
+      }
+    }
