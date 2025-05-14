@@ -1,8 +1,8 @@
-# Legacy Core Stack
+# Legacy Web Stack
 
 This stack deploys the necessary services and dependencies for the legacy core functionality for web mode.
 
-The basic version of this stack uses:
+The basic (full) version of this stack uses:
 
 - zebedee-reader
 - babbage
@@ -11,6 +11,26 @@ The basic version of this stack uses:
 - sixteens
 - elasticsearch
 - highcharts
+- dis-redirect-proxy
+- dis-redirect-api
+- redis
+
+However, there are 2 other variants of this stack, as follows:
+
+The redirects-only version of this stack:
+
+- dis-redirect-proxy 
+- dis-redirect-api 
+- redis
+
+The core backing services version of this stack:
+
+- zebedee-reader
+- babbage
+- dp-frontend-router
+- dp-api-router
+- sixteens
+- elasticsearch
 
 ## Getting started
 
@@ -33,7 +53,17 @@ To run the stack:
 
    This is required for the local docker builds to work around a current issue with the volume paths not existing pre-build. Once this issue has been resolved, this step will no longer be necessary.
 
-3. Build and start the stack:
+3. Set the COMPOSE_FILE environment variable in local.env if required:
+
+For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
+
+COMPOSE_FILE=redir-deps.yml:redir-services.yml
+
+Or, for the core backing services version of the stack, set the COMPOSE_FILE as follows in local.env:
+
+COMPOSE_FILE=core-deps.yml:core-services.yml
+
+4. Build and start the stack:
 
    ```shell
    make up
