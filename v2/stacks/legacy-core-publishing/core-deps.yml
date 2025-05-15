@@ -1,0 +1,43 @@
+services:
+  mongodb:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/mongo.yml
+      service: mongodb
+    volumes:
+      - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  zookeeper-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: zookeeper-1
+  kafka-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-1
+    depends_on:
+      - zookeeper-1
+  kafka-2:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-2
+    depends_on:
+      - zookeeper-1
+  kafka-3:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-3
+    depends_on:
+      - zookeeper-1
+  kowl:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-tools.yml
+      service: kowl
+    depends_on:
+      - kafka-1
+  elasticsearch:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
+      service: elasticsearch
+  localstack:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/localstack.yml
+      service: localstack
