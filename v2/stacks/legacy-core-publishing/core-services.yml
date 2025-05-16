@@ -6,6 +6,7 @@ services:
     environment:
       ENABLE_JWT_SESSIONS: "true"
       ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+      IDENTITY_API_URL: "http://host.docker.internal:25600" # to port forward to remote
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -47,13 +48,13 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
-  dp-topic-api:
-    extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
-      service: dp-topic-api
-    depends_on:
-      dp-api-router:
-        condition: service_healthy
+#  dp-topic-api:
+#    extends:
+#      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+#      service: dp-topic-api
+#    depends_on:
+#      dp-api-router:
+#        condition: service_healthy
   the-train:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/the-train.yml
