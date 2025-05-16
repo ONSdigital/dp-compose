@@ -104,8 +104,8 @@
       "data": {
         "content_type": "DATASET",
         "metadata": {
-          "dataset_id": "dataset 1",
-          "edition_id": "time-series",
+          "dataset_id": "dataset-1",
+          "edition_id": "january",
           "version_id": 1,
           "title": "Dataset 1"
         },
@@ -113,8 +113,8 @@
         "bundle_id": "bundle-1",
         "state": "DRAFT",
         "links": {
-          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
-          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+          "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-1/editions/january/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-1/editions/january/versions/1"
         }
       }
     }
@@ -129,8 +129,8 @@
       "data": {
         "content_type": "DATASET",
         "metadata": {
-          "dataset_id": "dataset 2",
-          "edition_id": "time-series",
+          "dataset_id": "dataset-2",
+          "edition_id": "february",
           "version_id": 1,
           "title": "Dataset 2"
         },
@@ -138,8 +138,8 @@
         "bundle_id": "bundle-2",
         "state": "IN_REVIEW",
         "links": {
-          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
-          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+          "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-2/editions/february/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-2/editions/february/versions/1"
         }
       }
     }
@@ -154,8 +154,8 @@
       "data": {
         "content_type": "DATASET",
         "metadata": {
-          "dataset_id": "dataset 3",
-          "edition_id": "time-series",
+          "dataset_id": "dataset-3",
+          "edition_id": "march",
           "version_id": 1,
           "title": "Dataset 3"
         },
@@ -163,8 +163,8 @@
         "bundle_id": "bundle-3",
         "state": "APPROVED",
         "links": {
-          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
-          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+          "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-3/editions/march/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-3/editions/march/versions/1"
         }
       }
     }
@@ -179,8 +179,8 @@
       "data": {
         "content_type": "DATASET",
         "metadata": {
-          "dataset_id": "dataset 4",
-          "edition_id": "time-series",
+          "dataset_id": "dataset-4",
+          "edition_id": "april",
           "version_id": 1,
           "title": "Dataset 4"
         },
@@ -188,8 +188,8 @@
         "bundle_id": "bundle-4",
         "state": "PUBLISHED",
         "links": {
-          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
-          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+          "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-4/editions/april/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-4/editions/april/versions/1"
         }
       }
     }
@@ -204,8 +204,8 @@
       "data": {
         "content_type": "DATASET",
         "metadata": {
-          "dataset_id": "dataset 5",
-          "edition_id": "time-series",
+          "dataset_id": "dataset-5",
+          "edition_id": "may",
           "version_id": 1,
           "title": "Dataset 5"
         },
@@ -213,8 +213,8 @@
         "bundle_id": "bundle-5",
         "state": "DRAFT",
         "links": {
-          "edit": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1",
-          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/cpih/editions/time-series/versions/1"
+          "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-5/editions/may/versions/1",
+          "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-5/editions/may/versions/1"
         }
       }
     }
