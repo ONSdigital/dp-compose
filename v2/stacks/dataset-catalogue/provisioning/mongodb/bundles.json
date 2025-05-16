@@ -60,7 +60,6 @@
           "id": "e90f123a-98de-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-04-18T07:30:00.000Z",
       "state": "DRAFT",
       "title": "bundle-3",
       "updated_at": "2025-03-28T16:20:00.000Z",
@@ -124,7 +123,6 @@
           "id": "234g675e-98df-11ec-b909-0242ac120002"
         }
       ],
-      "scheduled_at": "2025-06-20T07:00:00.000Z",
       "state": "DRAFT",
       "title": "bundle-6",
       "updated_at": "2025-04-05T11:30:00.000Z",
