@@ -7,3 +7,4 @@ mongoimport --host 127.0.0.1:27017 --db datasets --collection dimension.options 
 mongoimport --host 127.0.0.1:27017 --db datasets --collection versions --file /docker-entrypoint-initdb.d/versions.json
 mongoimport --host 127.0.0.1:27017 --db bundles --collection bundles --file /docker-entrypoint-initdb.d/bundles.json
 mongoimport --host 127.0.0.1:27017 --db bundles --collection bundle_events --file /docker-entrypoint-initdb.d/bundle-events.json
+mongoimport --host 127.0.0.1:27017 --db bundles --collection bundle_contents --file /docker-entrypoint-initdb.d/bundle-contents.json

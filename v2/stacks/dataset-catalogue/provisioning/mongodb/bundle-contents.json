@@ -1,0 +1,160 @@
+{
+    "bundle_id": "bundle-1",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-1",
+        "edition_id": "january",
+        "version_id": 1,
+        "title": "Dataset 1"
+    },
+    "id": "f3ee8348-9956-44e1-9c83-55fd2d7b2fb1",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-1/editions/january/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-1/editions/january/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-2",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-2",
+        "edition_id": "february",
+        "version_id": 1,
+        "title": "Dataset 2"
+    },
+    "id": "af8b48b0-d085-4ea7-8f12-524fa8e6b0a0",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-2/editions/february/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-2/editions/february/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-3",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-3",
+        "edition_id": "march",
+        "version_id": 1,
+        "title": "Dataset 3"
+    },
+    "id": "e784dfe1-2026-421c-a184-0e5a4c551019",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-3/editions/march/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-3/editions/march/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-4",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-4",
+        "edition_id": "april",
+        "version_id": 1,
+        "title": "Dataset 4"
+    },
+    "id": "bf330992-d7fa-4a46-8adc-b1ba63887b69",
+    "state": "PUBLISHED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-4/editions/april/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-4/editions/april/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-5",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-5",
+        "edition_id": "may",
+        "version_id": 1,
+        "title": "Dataset 5"
+    },
+    "id": "d91bc710-461a-4792-a8b9-7d5baab950d5",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-5/editions/may/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-5/editions/may/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-6",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-6",
+        "edition_id": "june",
+        "version_id": 1,
+        "title": "Dataset 6"
+    },
+    "id": "60552c07-ed75-465d-9dcc-7c4b5e014aeb",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-6/editions/june/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-6/editions/june/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-7",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-7",
+        "edition_id": "july",
+        "version_id": 1,
+        "title": "Dataset 7"
+    },
+    "id": "467e05cb-536e-4fd1-9024-78a374cb14c5",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-7/editions/july/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-7/editions/july/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-8",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-8",
+        "edition_id": "august",
+        "version_id": 1,
+        "title": "Dataset 8"
+    },
+    "id": "987cd307-c735-4be7-834c-b0b4d68196cd",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-8/editions/august/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-8/editions/august/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-9",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-9",
+        "edition_id": "september",
+        "version_id": 1,
+        "title": "Dataset 9"
+    },
+    "id": "e6cfc8b4-532b-4598-b96d-99a8330c65ca",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-9/editions/september/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-9/editions/september/versions/1"
+    }
+}
+{
+    "bundle_id": "bundle-10",
+    "content_type": "DATASET",
+    "metadata": {
+        "dataset_id": "dataset-10",
+        "edition_id": "october",
+        "version_id": 1,
+        "title": "Dataset 10"
+    },
+    "id": "c6afd50e-6be8-4739-b2cb-01665a2654b6",
+    "state": "APPROVED",
+    "links": {
+        "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/dataset-10/editions/october/versions/1",
+        "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/dataset-10/editions/october/versions/1"
+    }
+}
