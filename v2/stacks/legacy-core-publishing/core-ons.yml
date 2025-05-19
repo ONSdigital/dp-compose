@@ -1,0 +1,51 @@
+services:
+  zebedee:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
+      service: zebedee
+    environment:
+      ENABLE_JWT_SESSIONS:     "true"
+      ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+    depends_on:
+      dp-identity-api:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+  florence: # note: this might not build :( manually delete florence/dist florence/src/node_modules florence/assets/data.go
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/florence.yml
+      service: florence
+    depends_on:
+      zebedee:
+        condition: service_healthy
+  dp-frontend-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
+      service: dp-frontend-router
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  babbage:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/babbage.yml
+      service: babbage
+    environment:
+      FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+  sixteens:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
+      service: sixteens
+  the-train:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/the-train.yml
+      service: the-train
+    depends_on:
+      dp-api-router:
+        condition: service_healthy

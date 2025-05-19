@@ -5,8 +5,8 @@ services:
       service: zebedee
     environment:
       ENABLE_JWT_SESSIONS: "true"
-      ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
       IDENTITY_API_URL: "http://host.docker.internal:25600" # to port forward to remote
+      ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -24,6 +24,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/babbage.yml
       service: babbage
+    environment:
+      FORMAT_LOGGING: ${FORMAT_LOGGING:-true}
     depends_on:
       elasticsearch:
         condition: service_healthy

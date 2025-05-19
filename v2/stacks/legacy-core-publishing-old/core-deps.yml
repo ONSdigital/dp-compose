@@ -1,10 +1,10 @@
 services:
-#  mongodb:
-#    extends:
-#      file: ${PATH_MANIFESTS}/deps/mongo.yml
-#      service: mongodb
-#    volumes:
-#      - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  mongodb:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/mongo.yml
+      service: mongodb
+    volumes:
+      - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
 #  zookeeper-1:
 #    extends:
 #      file: ${PATH_MANIFESTS}/deps/kafka.yml
