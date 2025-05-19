@@ -1,0 +1,160 @@
+{
+  "created_at": "2025-05-15T09:30:42.111Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-1",
+  "data": {
+    "dataset_id": "dataset-1",
+    "edition_id": "january",
+    "item_id": "bundle-1",
+    "state": "draft",
+    "url_path": "/datasets/dataset-1/editions/january/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-15T09:35:18.222Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-2",
+  "data": {
+    "dataset_id": "dataset-2",
+    "edition_id": "february",
+    "item_id": "bundle-2",
+    "state": "in_review",
+    "url_path": "/datasets/dataset-2/editions/february/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-18T14:22:39.876Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-3",
+  "data": {
+    "dataset_id": "dataset-3",
+    "edition_id": "march",
+    "item_id": "bundle-3",
+    "state": "approved",
+    "url_path": "/datasets/dataset-3/editions/march/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-20T10:45:12.321Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-4",
+  "data": {
+    "dataset_id": "dataset-4",
+    "edition_id": "april",
+    "item_id": "bundle-4",
+    "state": "published",
+    "url_path": "/datasets/dataset-4/editions/april/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-22T15:33:27.654Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-5",
+  "data": {
+    "dataset_id": "dataset-5",
+    "edition_id": "may",
+    "item_id": "bundle-5",
+    "state": "draft",
+    "url_path": "/datasets/dataset-5/editions/may/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-01T09:12:34.567Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-6",
+  "data": {
+    "dataset_id": "dataset-6",
+    "edition_id": "june",
+    "item_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
+    "state": "draft",
+    "url_path": "/datasets/dataset-6/editions/june/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-05T13:22:45.678Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-7",
+  "data": {
+    "dataset_id": "dataset-7",
+    "edition_id": "july",
+    "item_id": "f67e8a92-d4b3-5c6a-834d-7e9f0c8b1d2a",
+    "state": "in_review",
+    "url_path": "/datasets/dataset-7/editions/july/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-10T08:22:33.444Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-8",
+  "data": {
+    "dataset_id": "dataset-8",
+    "edition_id": "aug",
+    "item_id": "a47dc538-1e9f-48b2-b75f-3a2c8e6d9b0a",
+    "state": "approved",
+    "url_path": "/datasets/dataset-8/editions/aug/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-12T11:15:27.333Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-9",
+  "data": {
+    "dataset_id": "dataset-9",
+    "edition_id": "sept",
+    "item_id": "b59c6a41-d2e0-48f7-a936-c1d2e3f4a5b6",
+    "state": "published",
+    "url_path": "/datasets/dataset-9/editions/sep/versions/1"
+  }
+}
+{
+  "created_at": "2025-05-22T15:40:58.987Z",
+  "requested_by": {
+    "id": "0889d599-3f0e-4564-9d6e-9455a6b73da7",
+    "email": "publisher@ons.gov.uk"
+  },
+  "action": "CREATE",
+  "resource": "/bundles/bundle-10",
+  "data": {
+    "dataset_id": "dataset-10",
+    "edition_id": "oct",
+    "item_id": "c6d7e8f9-0a1b-2c3d-4e5f-6g7h8i9j0k1l",
+    "state": "draft",
+    "url_path": "/datasets/dataset-10/editions/oct/versions/1"
+  }
+}
