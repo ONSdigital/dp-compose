@@ -6,13 +6,22 @@ services:
     environment:
       ENABLE_JWT_SESSIONS:     "true"
       ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+      IDENTITY_API_URL: http://host.docker.internal:25600
     depends_on:
       elasticsearch:
         condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"          # localhost mapping for linux
+      - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
       service: dp-api-router
+    environment:
+      IDENTITY_API_URL: http://host.docker.internal:25600
+    extra_hosts:
+      - "host.docker.internal:host-gateway"          # localhost mapping for linux
+      - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
   florence: # note: this might not build :( manually delete florence/dist florence/src/node_modules florence/assets/data.go
     extends:
       file: ${PATH_MANIFESTS}/core-ons/florence.yml
