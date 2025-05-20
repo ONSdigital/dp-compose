@@ -1,0 +1,24 @@
+services:
+  dis-redirect-api:
+    x-repo-url: "https://github.com/ONSdigital/dis-redirect-api"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-redirect-api
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-redirect-api:/dis-redirect-api
+    expose:
+      - "29900"
+    ports:
+      - 29900:29900
+    entrypoint: make debug
+    restart: unless-stopped
+    environment:
+      BIND_ADDR: ":29900"
+      HEALTHCHECK_INTERVAL: ${HEALTHCHECK_INTERVAL:-30s}
+      GRACEFUL_SHUTDOWN_TIMEOUT: "30s"
+      HEALTHCHECK_CRITICAL_TIMEOUT: "30s"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:29900/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
