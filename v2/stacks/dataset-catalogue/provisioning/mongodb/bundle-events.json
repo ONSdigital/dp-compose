@@ -6,12 +6,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-1",
-  "data": {
-    "dataset_id": "dataset-1",
-    "edition_id": "january",
-    "item_id": "bundle-1",
-    "state": "draft",
-    "url_path": "/datasets/dataset-1/editions/january/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-1",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -22,12 +36,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-2",
-  "data": {
-    "dataset_id": "dataset-2",
-    "edition_id": "february",
-    "item_id": "bundle-2",
-    "state": "in_review",
-    "url_path": "/datasets/dataset-2/editions/february/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-2",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -38,12 +66,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-3",
-  "data": {
-    "dataset_id": "dataset-3",
-    "edition_id": "march",
-    "item_id": "bundle-3",
-    "state": "approved",
-    "url_path": "/datasets/dataset-3/editions/march/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-3",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -54,12 +96,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-4",
-  "data": {
-    "dataset_id": "dataset-4",
-    "edition_id": "april",
-    "item_id": "bundle-4",
-    "state": "published",
-    "url_path": "/datasets/dataset-4/editions/april/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-4",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -70,12 +126,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-5",
-  "data": {
-    "dataset_id": "dataset-5",
-    "edition_id": "may",
-    "item_id": "bundle-5",
-    "state": "draft",
-    "url_path": "/datasets/dataset-5/editions/may/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-5",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -86,12 +156,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-6",
-  "data": {
-    "dataset_id": "dataset-6",
-    "edition_id": "june",
-    "item_id": "e58e8381-c6b2-4e5a-934c-8cbce9b4dc6f",
-    "state": "draft",
-    "url_path": "/datasets/dataset-6/editions/june/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-6",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -102,12 +186,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-7",
-  "data": {
-    "dataset_id": "dataset-7",
-    "edition_id": "july",
-    "item_id": "f67e8a92-d4b3-5c6a-834d-7e9f0c8b1d2a",
-    "state": "in_review",
-    "url_path": "/datasets/dataset-7/editions/july/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-7",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -118,12 +216,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-8",
-  "data": {
-    "dataset_id": "dataset-8",
-    "edition_id": "aug",
-    "item_id": "a47dc538-1e9f-48b2-b75f-3a2c8e6d9b0a",
-    "state": "approved",
-    "url_path": "/datasets/dataset-8/editions/aug/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-8",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -134,12 +246,26 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-9",
-  "data": {
-    "dataset_id": "dataset-9",
-    "edition_id": "sept",
-    "item_id": "b59c6a41-d2e0-48f7-a936-c1d2e3f4a5b6",
-    "state": "published",
-    "url_path": "/datasets/dataset-9/editions/sep/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-9",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
 {
@@ -150,11 +276,25 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-10",
-  "data": {
-    "dataset_id": "dataset-10",
-    "edition_id": "oct",
-    "item_id": "c6d7e8f9-0a1b-2c3d-4e5f-6g7h8i9j0k1l",
-    "state": "draft",
-    "url_path": "/datasets/dataset-10/editions/oct/versions/1"
+  "bundle": {
+      "bundle_type": "SCHEDULED",
+      "created_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "created_at": "2025-04-04T07:00:00.000Z",
+      "id": "bundle-10",
+      "last_updated_by": {
+        "email": "publisher@ons.gov.uk"
+      },
+      "preview_teams": [
+        {
+          "id": "1253e849-01fd-4662-bee2-63253538da93"
+        }
+      ],
+      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "state": "APPROVED",
+      "title": "CPI March 2025",
+      "updated_at": "2025-04-04T07:00:00.000Z",
+      "managed_by": "WAGTAIL"
   }
 }
