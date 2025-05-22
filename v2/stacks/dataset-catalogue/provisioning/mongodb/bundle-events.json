@@ -7,7 +7,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-1",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -21,10 +21,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -51,10 +50,10 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "scheduled_at": "2025-04-05T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -67,7 +66,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-3",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -81,10 +80,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -97,7 +95,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-4",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -111,10 +109,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -127,7 +124,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-5",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -141,10 +138,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -157,7 +153,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-6",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -171,10 +167,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -187,7 +182,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-7",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -201,10 +196,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -217,7 +211,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-8",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -231,10 +225,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -247,7 +240,7 @@
   "action": "CREATE",
   "resource": "/bundles/bundle-9",
   "bundle": {
-      "bundle_type": "SCHEDULED",
+      "bundle_type": "MANUAL",
       "created_by": {
         "email": "publisher@ons.gov.uk"
       },
@@ -261,10 +254,9 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
@@ -291,10 +283,10 @@
           "id": "1253e849-01fd-4662-bee2-63253538da93"
         }
       ],
-      "scheduled_at": "2025-04-04T07:00:00.000Z",
+      "scheduled_at": "2025-04-05T07:00:00.000Z",
       "state": "APPROVED",
       "title": "CPI March 2025",
-      "updated_at": "2025-04-04T07:00:00.000Z",
+      "updated_at": "2025-04-04T10:00:00.000Z",
       "managed_by": "WAGTAIL"
   }
 }
