@@ -1,0 +1,24 @@
+services:
+  dis-redirect-proxy:
+    x-repo-url: "https://github.com/ONSdigital/dis-redirect-proxy"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-redirect-proxy
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-redirect-proxy:/dis-redirect-proxy
+    expose:
+      - "30000"
+    ports:
+      - 30000:30000
+    entrypoint: make debug
+    restart: unless-stopped
+    environment:
+      BIND_ADDR: ":30000"
+      HEALTHCHECK_INTERVAL: ${HEALTHCHECK_INTERVAL:-30s}
+      GRACEFUL_SHUTDOWN_TIMEOUT: "30s"
+      HEALTHCHECK_CRITICAL_TIMEOUT: "30s"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:30000/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
