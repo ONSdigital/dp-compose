@@ -81,3 +81,6 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-bundle-api.yml
       service: dis-bundle-api
+    environment:
+      DATASET_API_URL: "http://dp-dataset-api:22000"
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
