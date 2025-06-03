@@ -1,217 +1,261 @@
 {
-      "id": "bundle-1",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-03-15T09:30:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "a46e362c-98de-11ec-b909-0242ac120002"
-        },
-        {
-          "id": "b67f129a-98de-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-1",
-      "updated_at": "2025-04-04T10:15:00.000Z",
-      "managed_by": "DATA-ADMIN"
-    }
+  "id": "bundle-1",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-03-15T09:30:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-2",
-      "bundle_type": "SCHEDULED",
-      "created_at": "2025-03-10T11:20:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "c78d457e-98de-11ec-b909-0242ac120002"
-        }
-      ],
-      "scheduled_at": "2025-04-25T09:00:00.000Z",
-      "state": "DRAFT",
-      "title": "bundle-2",
-      "updated_at": "2025-03-25T14:30:00.000Z",
-      "managed_by": "WAGTAIL"
-    }
+      "id": "a46e362c-98de-11ec-b909-0242ac120002"
+    },
     {
-      "id": "bundle-3",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-03-25T08:45:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "d89e254f-98de-11ec-b909-0242ac120002"
-        },
-        {
-          "id": "e90f123a-98de-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-3",
-      "updated_at": "2025-03-28T16:20:00.000Z",
-      "managed_by": "DATA-ADMIN"
+      "id": "b67f129a-98de-11ec-b909-0242ac120002"
     }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-1",
+  "updated_at": {
+    "$date": "2025-04-04T10:15:00.000Z"
+  },
+  "managed_by": "DATA-ADMIN"
+}
+{
+  "id": "bundle-2",
+  "bundle_type": "SCHEDULED",
+  "created_at": {
+    "$date": "2025-03-10T11:20:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-4",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-04-01T10:00:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "f01d345b-98de-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-4",
-      "updated_at": "2025-04-02T11:45:00.000Z",
-      "managed_by": "WAGTAIL"
+      "id": "c78d457e-98de-11ec-b909-0242ac120002"
     }
+  ],
+  "scheduled_at": {
+    "$date": "2025-04-25T09:00:00.000Z"
+  },
+  "state": "DRAFT",
+  "title": "bundle-2",
+  "updated_at": {
+    "$date": "2025-03-25T14:30:00.000Z"
+  },
+  "managed_by": "WAGTAIL"
+}
+{
+  "id": "bundle-3",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-03-25T08:45:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-5",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-03-18T14:15:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "012e453c-98df-11ec-b909-0242ac120002"
-        },
-        {
-          "id": "123f564d-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-5",
-      "updated_at": "2025-03-30T09:10:00.000Z",
-      "managed_by": "DATA-ADMIN"
-    }
+      "id": "d89e254f-98de-11ec-b909-0242ac120002"
+    },
     {
-      "id": "bundle-6",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-04-05T11:30:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "234g675e-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-6",
-      "updated_at": "2025-04-05T11:30:00.000Z",
-      "managed_by": "WAGTAIL"
+      "id": "e90f123a-98de-11ec-b909-0242ac120002"
     }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-3",
+  "updated_at": {
+    "$date": "2025-03-28T16:20:00.000Z"
+  },
+  "managed_by": "DATA-ADMIN"
+}
+{
+  "id": "bundle-4",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-04-01T10:00:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-7",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-03-28T09:20:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "345h786f-98df-11ec-b909-0242ac120002"
-        },
-        {
-          "id": "456i897g-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-7",
-      "updated_at": "2025-04-10T15:45:00.000Z",
-      "managed_by": "DATA-ADMIN"
+      "id": "f01d345b-98de-11ec-b909-0242ac120002"
     }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-4",
+  "updated_at": {
+    "$date": "2025-04-02T11:45:00.000Z"
+  },
+  "managed_by": "WAGTAIL"
+}
+{
+  "id": "bundle-5",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-03-18T14:15:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-8",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-04-08T13:40:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "567j908h-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-8",
-      "updated_at": "2025-04-12T10:30:00.000Z",
-      "managed_by": "WAGTAIL"
-    }
+      "id": "012e453c-98df-11ec-b909-0242ac120002"
+    },
     {
-      "id": "bundle-9",
-      "bundle_type": "MANUAL",
-      "created_at": "2025-03-30T09:15:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "678k019i-98df-11ec-b909-0242ac120002"
-        },
-        {
-          "id": "789l120j-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "state": "DRAFT",
-      "title": "bundle-9",
-      "updated_at": "2025-04-02T14:20:00.000Z",
-      "managed_by": "DATA-ADMIN"
+      "id": "123f564d-98df-11ec-b909-0242ac120002"
     }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-5",
+  "updated_at": {
+    "$date": "2025-03-30T09:10:00.000Z"
+  },
+  "managed_by": "DATA-ADMIN"
+}
+{
+  "id": "bundle-6",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-04-05T11:30:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
     {
-      "id": "bundle-10",
-      "bundle_type": "SCHEDULED",
-      "created_at": "2025-04-03T11:25:00.000Z",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "890m231k-98df-11ec-b909-0242ac120002"
-        }
-      ],
-      "scheduled_at": "2025-05-05T08:00:00.000Z",
-      "state": "DRAFT",
-      "title": "bundle-10",
-      "updated_at": "2025-04-20T15:30:00.000Z",
-      "managed_by": "WAGTAIL"
+      "id": "234g675e-98df-11ec-b909-0242ac120002"
     }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-6",
+  "updated_at": {
+    "$date": "2025-04-05T11:30:00.000Z"
+  },
+  "managed_by": "WAGTAIL"
+}
+{
+  "id": "bundle-7",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-03-28T09:20:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
+    {
+      "id": "345h786f-98df-11ec-b909-0242ac120002"
+    },
+    {
+      "id": "456i897g-98df-11ec-b909-0242ac120002"
+    }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-7",
+  "updated_at": {
+    "$date": "2025-04-10T15:45:00.000Z"
+  },
+  "managed_by": "DATA-ADMIN"
+}
+{
+  "id": "bundle-8",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-04-08T13:40:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
+    {
+      "id": "567j908h-98df-11ec-b909-0242ac120002"
+    }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-8",
+  "updated_at": {
+    "$date": "2025-04-12T10:30:00.000Z"
+  },
+  "managed_by": "WAGTAIL"
+}
+{
+  "id": "bundle-9",
+  "bundle_type": "MANUAL",
+  "created_at": {
+    "$date": "2025-03-30T09:15:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
+    {
+      "id": "678k019i-98df-11ec-b909-0242ac120002"
+    },
+    {
+      "id": "789l120j-98df-11ec-b909-0242ac120002"
+    }
+  ],
+  "state": "DRAFT",
+  "title": "bundle-9",
+  "updated_at": {
+    "$date": "2025-04-02T14:20:00.000Z"
+  },
+  "managed_by": "DATA-ADMIN"
+}
+{
+  "id": "bundle-10",
+  "bundle_type": "SCHEDULED",
+  "created_at": {
+    "$date": "2025-04-03T11:25:00.000Z"
+  },
+  "created_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "last_updated_by": {
+    "email": "publisher@ons.gov.uk"
+  },
+  "preview_teams": [
+    {
+      "id": "890m231k-98df-11ec-b909-0242ac120002"
+    }
+  ],
+  "scheduled_at": {
+    "$date": "2025-05-05T08:00:00.000Z"
+  },
+  "state": "DRAFT",
+  "title": "bundle-10",
+  "updated_at": {
+    "$date": "2025-04-20T15:30:00.000Z"
+  },
+  "managed_by": "WAGTAIL"
+}
