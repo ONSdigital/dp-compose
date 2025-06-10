@@ -35,7 +35,7 @@ services:
       KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
       KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
       SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
-      ENABLE_STATIC_FILES_PUBLISHING: "true"
+      ENABLE_STATIC_FILES_PUBLISHING: ${ENABLE_STATIC_FILES_PUBLISHING:-true"}
       FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
       ENABLE_JWT_SESSIONS:            "false"
       IDENTITY_API_URL:               ${IDENTITY_API_URL:-http://dp-identity-api:25600}
