@@ -14,15 +14,15 @@ Use when working on:
 
 - dp-identity-api
 
-[Read more about the auth stack](./auth/README.md)
+[Read more about the auth stack](./stacks/auth/README.md)
 
 ### CMD
 
-[Read more about the CMD stack](./cmd/README.md)
+[Read more about the CMD stack](./stacks/cmd/README.md)
 
 ### Dataset Catalogue
 
-[Read more about the dataset catalogue stack](./dataset-catalogue/README.md)
+[Read more about the dataset catalogue stack](./stacks/dataset-catalogue/README.md)
 
 ### Feedback
 
@@ -32,7 +32,7 @@ Use when working on:
 
 - dp-feedback-api
 
-[Read more about the feedback stack](./feedback/README.md)
+[Read more about the feedback stack](./stacks/feedback/README.md)
 
 ### Homepage Publishing
 
@@ -45,7 +45,7 @@ Use when working on:
 
 N.B. This stack will decommissioned in the near future.
 
-[Read more about the homepage publishing stack](./homepage-publishing/README.md)
+[Read more about the homepage publishing stack](./stacks/homepage-publishing/README.md)
 
 ### Homepage Web
 
@@ -57,7 +57,7 @@ Use when working on:
 
 N.B. This stack will decommissioned in the near future.
 
-[Read more about the homepage web stack](./homepage-web/README.md)
+[Read more about the homepage web stack](./stacks/homepage-web/README.md)
 
 ### Legacy Core Publishing
 
@@ -70,7 +70,7 @@ Use when working on:
 - babbage
 - the-train
 
-[Read more about the legacy core publishing stack](./legacy-core-publishing/README.md)
+[Read more about the legacy core publishing stack](./stacks/legacy-core-publishing/README.md)
 
 ### Legacy Core Web
 
@@ -81,7 +81,7 @@ Use when working on:
 - zebedee-reader
 - babbage
 
-[Read more about the legacy core web stack](./legacy-core-web/README.md)
+[Read more about the legacy core web stack](./stacks/legacy-core-web/README.md)
 
 ### Search
 
@@ -94,21 +94,21 @@ Use when working on:
 - dp-search-reindex-batch
 - dp-search-api
 
-[Read more about the search stack](./search/README.md)
+[Read more about the search stack](./stacks/search/README.md)
 
 ### Static Files
 
-[Read more about the static files stack](./static-files/README.md)
+[Read more about the static files stack](./stacks/static-files/README.md)
 
 ### Static Files with auth
 
-[Read more about the static files with auth stack](./static-files-with-auth/README.md)
+[Read more about the static files with auth stack](./stacks/static-files-with-auth/README.md)
 
 ### V1 Compat
 
 This stack is used for running our backing services without any other applications.
 
-[Read more about the V1 compat stack](./v1-compat/README.md)
+[Read more about the V1 compat stack](./stacks/v1-compat/README.md)
 
 ## Getting started
 
