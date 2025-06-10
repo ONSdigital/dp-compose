@@ -4,6 +4,112 @@ Motivation for v2 is to create a consistent structure that allows our teams to e
 
 Eventually we plan to move this v2 directory up to root and remove/refactor all other directories/files to provide a single source of truth.
 
+## What stacks are there?
+
+### Auth
+
+This stack is specifically for developing with auth and the complications that brings when working with a remote Cognito instance. This should only be used when requiring that level of accuracy.
+
+Use when working on:
+
+- dp-identity-api
+
+[Read more about the auth stack](./auth/README.md)
+
+### CMD
+
+[Read more about the CMD stack](./cmd/README.md)
+
+### Dataset Catalogue
+
+[Read more about the dataset catalogue stack](./dataset-catalogue/README.md)
+
+### Feedback
+
+This stack is specifically for developing with feedback service including working e-mail server.
+
+Use when working on:
+
+- dp-feedback-api
+
+[Read more about the feedback stack](./feedback/README.md)
+
+### Homepage Publishing
+
+This stack is a legacy stack for working with the homepage components, including the image processing services. 
+
+Use when working on:
+
+- dp-image-api
+- dp-image-importer
+
+N.B. This stack will decommissioned in the near future.
+
+[Read more about the homepage publishing stack](./homepage-publishing/README.md)
+
+### Homepage Web
+
+This stack is a legacy stack for working with the homepage components, including the image processing services. This variant is for web mode, with no publishing capability.
+
+Use when working on:
+
+- dp-image-api
+
+N.B. This stack will decommissioned in the near future.
+
+[Read more about the homepage web stack](./homepage-web/README.md)
+
+### Legacy Core Publishing
+
+This stack is for the legacy core applications, including publishing functionality. It uses a remote dp-identity-api to back the auth capability, to remove the complications of working with remote Cognito.
+
+Use when working on:
+
+- florence
+- zebedee
+- babbage
+- the-train
+
+[Read more about the legacy core publishing stack](./legacy-core-publishing/README.md)
+
+### Legacy Core Web
+
+This stack is for the legacy core applications, without publishing functionality.
+
+Use when working on:
+
+- zebedee-reader
+- babbage
+
+[Read more about the legacy core web stack](./legacy-core-web/README.md)
+
+### Search
+
+This stack is for the search applications, in a variety of different modes.
+
+Use when working on:
+
+- dp-search-data-importer
+- dp-search-data-extractor
+- dp-search-reindex-batch
+- dp-search-api
+
+[Read more about the search stack](./search/README.md)
+
+### Static Files
+
+[Read more about the static files stack](./static-files/README.md)
+
+### Static Files with auth
+
+[Read more about the static files with auth stack](./static-files-with-auth/README.md)
+
+### V1 Compat
+
+This stack is used for running our backing services without any other applications.
+
+[Read more about the V1 compat stack](./v1-compat/README.md)
+
 ## Getting started
 
 ### Prerequisites
