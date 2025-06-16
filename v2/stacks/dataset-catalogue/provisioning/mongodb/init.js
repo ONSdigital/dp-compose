@@ -230,3 +230,13 @@ for (database of databases) {
         }
     }
 }
+
+db = db.getSiblingDB("bundles");
+db.bundle_events.find({}).forEach(function(doc) {
+    if (typeof doc.created_at === "string") {
+        db.bundle_events.updateOne(
+            {_id: doc._id},
+            {$set: {"created_at": new ISODate(doc.created_at)}}
+        );
+    }
+});

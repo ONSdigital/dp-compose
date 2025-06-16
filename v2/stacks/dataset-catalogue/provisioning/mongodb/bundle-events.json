@@ -6,25 +6,20 @@
   },
   "action": "CREATE",
   "resource": "/bundles/bundle-1",
-  "bundle": {
-      "bundle_type": "MANUAL",
-      "created_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "created_at": "2025-04-04T07:00:00.000Z",
-      "id": "bundle-1",
-      "last_updated_by": {
-        "email": "publisher@ons.gov.uk"
-      },
-      "preview_teams": [
-        {
-          "id": "1253e849-01fd-4662-bee2-63253538da93"
-        }
-      ],
-      "state": "APPROVED",
-      "title": "CPI March 2025",
-      "updated_at": "2025-04-04T10:00:00.000Z",
-      "managed_by": "WAGTAIL"
+  "content_item": {
+    "id": "content-item-1",
+    "bundle_id": "bundle-1",
+    "content_type": "DATASET",
+    "metadata": {
+      "dataset_id": "test-dataset-1",
+      "edition_id": "2021",
+      "version_id": 1,
+      "title": "Test Dataset 1"
+    },
+    "links": {
+      "edit": "https://publishing.ons.gov.uk/data-admin/edit/datasets/test-dataset-1/editions/2021/versions/1",
+      "preview": "https://publishing.ons.gov.uk/data-admin/preview/datasets/test-dataset-1/editions/2021/versions/1"
+    }
   }
 }
 {
