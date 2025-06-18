@@ -29,7 +29,7 @@ To run the stack:
    make up
    ```
 
-To run the stack with dp-topic-api database seeded:
+To run the stack with dp-topic-api and dp-permissions-api database seeded:
 
 Follow the prerequsites for installing `mongosh` here - `https://github.com/ONSdigital/dp-topic-api/tree/develop/scripts`
 
@@ -39,9 +39,9 @@ Run:
    make up-with-seed
    ```
 
-This assumes that the location of dp-topic-api on your system is `/Users/{your username}/src/github.com/ONSdigital/dp-topic-api`
+This assumes that the location of dp-topic-api on your system is `/Users/{your username}/src/github.com/ONSdigital/dp-topic-api` and that dp-permissions-api is `/Users/{your username}/src/github.com/ONSdigital/dp-permissions-api`
 
-If that is not the correct location, you will be prompted to input a custom location for dp-topic-api on your system.
+If that is not the correct location, you will be prompted to input a custom location for dp-topic-api or dp-permissions-api on your system.
 
 Once the correct location is found, you should see something like:
 
@@ -49,6 +49,9 @@ Once the correct location is found, you should see something like:
 Found dp-topic-api at /Users/{your username}/src/github.com/ONSdigital/dp-topic-api
 mongosh localhost:27017/topics ./scripts/seed-database/index.js
 creating collections
+
+Seeding permissions API database...
+Found dp-permissions-api at /Users/{your username}/src/github.com/ONSdigital/dp-permissions-api
    ```
 
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
