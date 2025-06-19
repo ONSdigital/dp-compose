@@ -1,0 +1,37 @@
+services: 
+  nginx-web:
+    image: nginx:1.27
+    volumes:
+      - ../../provisioning/nginx/nginx-web.conf:/etc/nginx/nginx.conf:ro
+      - ../../provisioning/nginx/localhost.pem:/etc/nginx/certs/localhost.pem:ro
+      - ../../provisioning/nginx/localhost-key.pem:/etc/nginx/certs/localhost-key.pem:ro
+    ports:
+      - 8443:8443
+    restart: always
+    healthcheck:
+      test: [
+        "CMD", "curl",  "-k", "--fail", "https://localhost:8443/health"
+      ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
+  nginx-publishing:
+    image: nginx:1.27
+    volumes:
+      - ../../provisioning/nginx/nginx-publishing.conf:/etc/nginx/nginx.conf:ro
+      - ../../provisioning/nginx/localhost.pem:/etc/nginx/certs/localhost.pem:ro
+      - ../../provisioning/nginx/localhost-key.pem:/etc/nginx/certs/localhost-key.pem:ro
+    ports:
+      - 8443:8443
+    restart: always
+    healthcheck:
+      test: [
+        "CMD", "curl",  "-k", "--fail", "https://localhost:8443/health"
+      ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
