@@ -16,3 +16,6 @@ cantabular-import/analysis/simple-plot/*.svg
 
 # Key files for running in HTTPS mode
 *.pem
+
+# Files for VSCode
+.vscode
