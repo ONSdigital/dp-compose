@@ -14,6 +14,8 @@ cd v2/scripts
 ./generate-certs.sh
 ```
 
+This will generate two `pem` files in the `v2/provisioning/nginx` folder. These are not to be committed.
+
 1. Add the appropriate nginx to your `deps.yml` file:
 
 ```yml
