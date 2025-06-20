@@ -14,6 +14,41 @@ To connect to the dp-identity-api in sandbox you will need to port forward the a
 
 `$IDENTITY_API_PORT` can be found in the [list of nomad ports](https://github.com/ONSdigital/dp-setup/blob/awsb/PORTS.md)
 
+## Getting started
+
+To run the stack:
+
+1. Clone the repos needed for the stack:
+
+   ```shell
+   make clone
+   ```
+
+2. Set the COMPOSE_FILE environment variable in local.env if required:
+
+    For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
+  
+     ```shell
+     COMPOSE_FILE=redir-deps.yml:redir-services.yml
+     ```
+  
+    Or, for the core backing services version of the stack, set the COMPOSE_FILE as follows in local.env:
+  
+     ```shell
+    COMPOSE_FILE=deps.yml:core-ons.yml
+     ```
+  
+    Or, for the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out.
+    Then, the COMPOSE_FILE value in default.env will be used instead.
+
+3. Build and start the stack:
+
+   ```shell
+   make up
+   ```
+
+For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
+
 ## Testing
 
 To know this stack is working as expected, run `make up` and then check:
