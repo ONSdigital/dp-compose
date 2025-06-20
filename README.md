@@ -37,6 +37,17 @@ Running dp-compose assumes Docker is running natively and not in a VM. On a Mac 
 
 More information about working with the kafka cluster provided by stacks in this repo can be found [here](./kafka-cluster.md).
 
+## Redis
+
+When running Redis in the legacy-core-publishing or legacy-core-web stacks, you can use the generate-redirects script, here in the root, to add 20 redirect keys and values to your local Redis store.
+This can be done using the following command:
+
+```shell
+go run .
+```
+
+For a local Redis UI, to see the keys amd values that have been set, it is recommended to use Redis Insight, which can be downloaded from here: https://redis.io/downloads/
+
 ## Versioning
 
 Dependencies should be kept at specific versions and up-to-date with production.
