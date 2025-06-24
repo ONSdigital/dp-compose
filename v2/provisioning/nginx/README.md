@@ -2,7 +2,7 @@
 
 This directory contains configuration to run an nginx server as a proxy similar to how we do it in a remote environment.
 
-Specifically has been setup to allow for running with HTTPS locally to debug issues related to this.
+Specifically this has been set up to allow the debugging of issues relaated to running with HTTPS locally.
 
 To add to your stack you will need to:
 
