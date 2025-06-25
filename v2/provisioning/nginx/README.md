@@ -8,24 +8,24 @@ To add to your stack you will need to:
 
 1. Run the certificate generation:
 
-    ```sh
-    # only need to set this if you don't have it already
-    export DP_REPO_DIR=/path/to/your/repos 
-    # From repo root
-    cd v2/scripts
-    ./generate-certs.sh
-    ```
+  ```sh
+  # only need to set this if you don't have it already
+  export DP_REPO_DIR=/path/to/your/repos 
+  # From repo root
+  cd v2/scripts
+  ./generate-certs.sh
+  ```
 
-    This will generate two `pem` files in the `v2/provisioning/nginx` folder. These are not to be committed.
+  This will generate two `pem` files in the `v2/provisioning/nginx` folder. These are not to be committed.
 
 1. Add the appropriate nginx to your `deps.yml` file:
 
-    ```yml
-    nginx:
-        extends:
-        file: ${PATH_MANIFESTS}/deps/nginx.yml
-        service: nginx-web
-    ```
+  ```yml
+  nginx:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/nginx.yml
+      service: nginx-web
+  ```
 
 1. `make up`
 
