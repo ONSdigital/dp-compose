@@ -8,6 +8,8 @@ services:
     ports:
       - 8443:8443
     restart: always
+    depends_on:
+      - dp-frontend-router
     healthcheck:
       test: [
         "CMD", "curl",  "-k", "--fail", "https://localhost:8443/health"
@@ -26,6 +28,8 @@ services:
     ports:
       - 8443:8443
     restart: always
+    depends_on:
+      - florence
     healthcheck:
       test: [
         "CMD", "curl",  "-k", "--fail", "https://localhost:8443/health"
