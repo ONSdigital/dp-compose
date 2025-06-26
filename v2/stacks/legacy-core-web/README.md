@@ -58,13 +58,13 @@ To run the stack:
    For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
    
       ```shell
-      COMPOSE_FILE=redir-deps.yml:redir-services.yml
+      COMPOSE_FILE=redirect-deps.yml:redirect.yml
       ```
    
    Or, for the core backing services version of the stack, set the COMPOSE_FILE as follows in local.env:
    
       ```shell
-     COMPOSE_FILE=deps.yml:core-ons.yml
+     COMPOSE_FILE=core-deps.yml:core.yml
       ```
    
    Or, for the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out. 
