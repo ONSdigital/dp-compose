@@ -39,12 +39,12 @@ More information about working with the kafka cluster provided by stacks in this
 
 ## Redis
 
-When running Redis in the legacy-core-publishing or legacy-core-web stacks, you can use the add-redirects script to add 20 redirect keys and values to your local Redis store.
-This can be done as follows:
+When running Redis in the legacy-core-publishing or legacy-core-web stacks, the generate-redirects script should automatically add 20 redirect keys and values to your local Redis store.
+This can also be done manually as follows:
 
 ```shell
-cd v2/scripts
-go run .
+cd v2/provisioning/redis
+./generate-redirects
 ```
 
 For a local Redis UI, to see the keys amd values that have been set, it is recommended to use Redis Insight, which can be downloaded from here: https://redis.io/downloads/
