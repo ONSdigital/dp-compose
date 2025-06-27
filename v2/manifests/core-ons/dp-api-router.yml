@@ -47,6 +47,8 @@ services:
       FEEDBACK_API_URL:            ${FEEDBACK_API_URL:-http://dp-feedback-api:28600}
       ENABLE_REDIRECT_API:         ${ENABLE_REDIRECT_API:-false}
       REDIRECT_API_URL:            ${REDIRECT_API_URL:-http://dis-redirect-api:29900}
+      ENABLE_BUNDLE_API:           ${ENABLE_BUNDLE_API:-true}
+      BUNDLE_API_URL:              ${BUNDLE_API_URL:-http://dis-bundle-api:29800}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:23200/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
