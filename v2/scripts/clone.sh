@@ -21,11 +21,12 @@ REPO_SSH_URL_REGEX='^(git@)?github.com:([^\/]+)\/([^\/]+)\/?(\.git)?$'
 which git > /dev/null || fatal "git not installed"
 which yq  > /dev/null || fatal "yq not installed"
 
-# Test ssh to github
-test_github_ssh
-
 # Get list of repo urls from docker compose config
 repos=( $(make list-repos) )
+[ ${#repos[@]} -eq 0 ] && info "no github repos in stack" && exit 0
+
+# Test ssh to github
+test_github_ssh
 
 errors=()
 for repo_url in ${repos[@]}; do
