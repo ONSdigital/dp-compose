@@ -68,6 +68,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-data-admin-ui.yml
       service: dis-data-admin-ui
+    environment:
+      API_ROUTER_URL: "http://dp-api-router:23200/v1"
   dp-topic-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
