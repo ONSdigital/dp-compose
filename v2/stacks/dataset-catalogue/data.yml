@@ -13,3 +13,5 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
       service: dis-authentication-stub
+    environment:
+      DATA_ADMIN_URL: "http://dis-data-admin-ui:29400/data-admin"
