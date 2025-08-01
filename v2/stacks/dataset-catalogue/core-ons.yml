@@ -18,6 +18,9 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
       service: dp-files-api
+    environment:
+      ZEBEDEE_URL:              "http://dis-authentication-stub:29500"
+      IDENTITY_WEB_KEY_SET_URL: "http://dis-authentication-stub:29500"
   dp-upload-service:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
