@@ -5,14 +5,16 @@ services:
       context: ${DP_REPO_DIR:-../../../..}/dis-data-admin-ui
       dockerfile: Dockerfile.local
     volumes:
-      - ${DP_REPO_DIR:-../../../..}/dis-data-admin-ui:/dis-data-admin-ui
+      - ${DP_REPO_DIR:-../../../..}/dis-data-admin-ui:/app
     expose:
       - "29400"
     ports:
       - 29400:29400
     restart: unless-stopped
     environment:
-      BIND_ADDR:                      ":29400"
+      BIND_ADDR: ":29400"
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:29400/data-admin/api/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
