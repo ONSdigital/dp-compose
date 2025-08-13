@@ -18,8 +18,6 @@ To add to your stack you will need to:
 
   This will generate two `pem` files in the `v2/provisioning/nginx` folder. These are not to be committed.
 
-  :bulb: TIP: Check the read permissions are set correctly for the `pem` files so nginx can access them :bulb:
-
 1. Add the appropriate nginx to your `deps.yml` file:
 
   ```yml

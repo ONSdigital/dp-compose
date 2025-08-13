@@ -3,3 +3,4 @@
 brew install mkcert
 sudo mkcert -install
 sudo mkcert -cert-file "$DP_REPO_DIR/dp-compose/v2/provisioning/nginx/localhost.pem" -key-file "$DP_REPO_DIR/dp-compose/v2/provisioning/nginx/localhost-key.pem" localhost
+sudo chmod 644 "$DP_REPO_DIR/dp-compose/v2/provisioning/nginx/localhost.pem" "$DP_REPO_DIR/dp-compose/v2/provisioning/nginx/localhost-key.pem"
