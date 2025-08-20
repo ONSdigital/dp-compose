@@ -3,6 +3,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-redirect-proxy.yml
       service: dis-redirect-proxy
+    environment:
+      PROXIED_SERVICE_URL: http://dp-frontend-router:20000
   dis-redirect-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-redirect-api.yml

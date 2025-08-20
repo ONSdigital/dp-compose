@@ -50,6 +50,8 @@ services:
       ELASTIC_SEARCH_SERVER:          "elasticsearch"
       brian_url:                      "http://project-brian:8083"
       BABBAGE_URL:                    "http://babbage:8080"
+      REDIRECT_API_URL:               ${REDIRECT_API_URL:-http://dp-api-router:23200}
+      ENABLE_REDIRECT_API:            ${ENABLE_REDIRECT_API:-false}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
