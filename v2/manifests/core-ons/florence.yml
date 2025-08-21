@@ -21,6 +21,7 @@ services:
       ENABLE_HOMEPAGE_PUBLISHING: "true"
       ENABLE_PERMISSION_API:      ${ENABLE_PERMISSION_API:-false}
       ENABLE_DATASET_IMPORT:      ${ENABLE_DATASET_IMPORT:-true}
+      ENABLE_MIGRATION_FIELD:     ${ENABLE_MIGRATION_FIELD:-true}
       API_ROUTER_URL:             ${API_ROUTER_URL:-http://dp-api-router:23200}
       ROUTER_URL:                 ${FRONTEND_ROUTER_URL:-http://dp-frontend-router:20000}
       DATASET_CONTROLLER_URL:     ${DATASET_CONTROLLER_URL:-http://dp-publishing-dataset-controller:24000}
