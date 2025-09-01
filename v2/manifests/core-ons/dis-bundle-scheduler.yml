@@ -3,8 +3,6 @@ services:
     build:
       context: ${DP_REPO_DIR:-../../../..}/dis-bundle-scheduler
       dockerfile: Dockerfile.local
-    volumes:
-      - ${DP_REPO_DIR:-../../../..}/dis-bundle-scheduler:/dis-bundle-scheduler
     environment:
       BUNDLES_API_URL:              ${BUNDLES_API_URL:-http://dis-bundle-api:29800}
     expose:
