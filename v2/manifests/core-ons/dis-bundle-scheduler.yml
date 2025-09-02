@@ -1,0 +1,11 @@
+services:
+  dis-bundle-scheduler:
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-bundle-scheduler
+      dockerfile: Dockerfile.local
+    environment:
+      BUNDLES_API_URL:              ${BUNDLES_API_URL:-http://dis-bundle-api:29800}
+    expose:
+      - "31500"
+    ports:
+      - 31500:31500

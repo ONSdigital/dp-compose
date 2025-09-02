@@ -17,6 +17,8 @@ services:
       IDENTITY_API_URL:                   ${IDENTITY_API_URL:-http://dis-authentication-stub:29500}
       IDENTITY_WEB_KEY_SET_URL:           ${IDENTITY_API_URL:-http://dis-authentication-stub:29500}
       AUTHORISATION_ENABLED:              "true"
+      ZEBEDEE_URL:                        "http://dis-authentication-stub:29500"
+      DATASET_API_URL:                    "http://dp-dataset-api:22000"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:29800/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
