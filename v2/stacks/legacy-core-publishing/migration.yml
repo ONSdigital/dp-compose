@@ -1,0 +1,5 @@
+services:
+  dis-migration-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-migration-service.yml
+      service: dis-migration-service

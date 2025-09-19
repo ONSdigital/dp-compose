@@ -41,7 +41,9 @@ To run the stack:
     Or, for the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out.
     Then, the COMPOSE_FILE value in default.env will be used instead.
 
-3. Build and start the stack:
+3. Ensure that the AWS access keys (environment variables) in local.env are up to date (and delete the word 'export' before each new one copied across).
+
+4. Build and start the stack:
 
    ```shell
    make up

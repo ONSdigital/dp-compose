@@ -1,0 +1,24 @@
+services:
+  dis-migration-service:
+    x-repo-url: "https://github.com/ONSdigital/dis-migration-service"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-migration-service
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-migration-service:/dis-migration-service
+    expose:
+      - "30100"
+    ports:
+      - 30100:30100
+    entrypoint: make debug
+    restart: unless-stopped
+    environment:
+      BIND_ADDR: ":30100"
+      HEALTHCHECK_INTERVAL: ${HEALTHCHECK_INTERVAL:-30s}
+      GRACEFUL_SHUTDOWN_TIMEOUT: "5s"
+      HEALTHCHECK_CRITICAL_TIMEOUT: "90s"
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:30100/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
