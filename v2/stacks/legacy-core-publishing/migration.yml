@@ -3,3 +3,10 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-migration-service.yml
       service: dis-migration-service
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+    depends_on:
+      zebedee:
+        condition: service_healthy
