@@ -33,3 +33,8 @@ services:
       service: kowl
     depends_on:
       - zookeeper-1
+  localstack:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/localstack.yml
+      service: localstack
+      
