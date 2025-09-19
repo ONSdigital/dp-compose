@@ -2,7 +2,7 @@ var databases = [
 	{
 		name: "datasets",
 		collections: [
-			{"name": "datasets"}, {"name":"contacts"}, {"name":"editions"}, {"name":"instances"}, {"name":"dimension.options"}, {"name":"instances_locks"}, {"name":"versions"}, {"name":"version_locks"}
+			{"name": "datasets"}, {"name":"contacts"}, {"name":"editions"}, {"name":"instances"}, {"name":"dimension.options"}, {"name":"instances_locks"}, {"name":"versions"}, {"name":"versions_locks"}
 		]
 	},
 	{
