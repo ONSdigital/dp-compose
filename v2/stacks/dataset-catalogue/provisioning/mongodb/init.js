@@ -175,6 +175,12 @@ var databases = [
 				index: [
 					{ condition: '{"id": 1}', options: '{"unique": true}' }
 				] 
+			},
+						{ 
+				name: "file_events",
+				index: [
+					{ condition: '{"id": 1}', options: '{"unique": true}' }
+				] 
 			}
 		]
 	},
