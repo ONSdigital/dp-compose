@@ -38,7 +38,13 @@ var databases = [
 					{ condition: '{"instance_id": 1, "name": 1, "option": 1}', options: '{}' }
 				]
 			},
-			{ name: "contacts" }
+			{ name: "contacts" },
+			{
+				name: "dataset_events",
+				index: [
+					{ condition: '{"id": 1}', options: '{"unique": true}' }
+				]
+			},
 		]
 	},
 	{
