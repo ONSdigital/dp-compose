@@ -3,7 +3,7 @@ services:
     x-repo-url: "https://github.com/ONSdigital/dp-files-api"
     build:
       context: ${DP_REPO_DIR:-../../../..}/dp-files-api
-      dockerfile: Dockerfile-local
+      dockerfile: Dockerfile.local
     volumes:
       - ${DP_REPO_DIR:-../../../..}/dp-files-api:/service
     expose:

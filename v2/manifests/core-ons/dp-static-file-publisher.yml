@@ -3,7 +3,7 @@ services:
     x-repo-url: "https://github.com/ONSdigital/dp-static-file-publisher"
     build:
       context: ${DP_REPO_DIR:-../../../..}/dp-static-file-publisher
-      dockerfile: Dockerfile-local
+      dockerfile: Dockerfile.local
     command:
       - reflex
       - -d
