@@ -26,6 +26,17 @@ To run the stack:
 
 2. Set the COMPOSE_FILE environment variable in local.env if required:
 
+    For the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out.
+    Then, the COMPOSE_FILE value in default.env will be used.
+
+    Alternatively, the local.env file can be used to set the COMPOSE_FILE value to specify different variations of the stack, as shown below.
+
+    For the migration services version of the stack, set the COMPOSE_FILE as follows in local.env:
+  
+     ```shell
+     COMPOSE_FILE=migration.yml:migration-deps.yml:static-files.yml
+     ```
+
     For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
   
      ```shell
@@ -38,9 +49,6 @@ To run the stack:
     COMPOSE_FILE=core-deps.yml:core.yml
      ```
   
-    Or, for the basic (full) version of this stack you will just need to make sure that any COMPOSE_FILE value, set in local.env, is commented out.
-    Then, the COMPOSE_FILE value in default.env will be used instead.
-
 3. Ensure that the AWS access keys (environment variables) in local.env are up to date (and delete the word 'export' before each new one copied across).
 
 4. Build and start the stack:
@@ -62,7 +70,7 @@ To know this stack is working as expected, run `make up` and then check:
   - make an edit to a page and view it in preview
   - submit a page for review and then review it
   - publish a manual collection
-  - view the published change when not in a collection
+  - view the published change when not in a collection (still signed into Florence though) e.g. changes to the [Economy page](http://localhost:20000/economy)
 
 Further functionality to test will be added as this stack is expanded and proved.
 
