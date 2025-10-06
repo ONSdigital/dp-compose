@@ -34,7 +34,7 @@ To run the stack:
     For the migration services version of the stack, set the COMPOSE_FILE as follows in local.env:
   
      ```shell
-     COMPOSE_FILE=migration.yml:migration-deps.yml:static-files.yml
+     COMPOSE_FILE=COMPOSE_FILE=migration.yml:migration-core.yml:migration-deps.yml:core-deps.yml:static-files.yml
      ```
 
     For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
