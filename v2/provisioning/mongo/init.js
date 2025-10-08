@@ -40,6 +40,10 @@ var databases = [
 	{
 		name: "search",
 		collections: [{"name":"jobs"}, {"name":"jobs_locks"}, {"name":"tasks"}]
+	},
+	{
+		name: "migrations",
+		collections: [{"name":"jobs"}, {"name":"tasks"}, {"name":"events"}]
 	}
 ];
 
