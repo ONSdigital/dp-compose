@@ -17,6 +17,7 @@ services:
       HEALTHCHECK_INTERVAL: ${HEALTHCHECK_INTERVAL:-30s}
       GRACEFUL_SHUTDOWN_TIMEOUT: "5s"
       HEALTHCHECK_CRITICAL_TIMEOUT: "90s"
+      MONGODB_BIND_ADDR: ${MONGODB_BIND_ADDR:-mongodb:27017}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:30100/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
