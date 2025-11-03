@@ -27,6 +27,7 @@ services:
       ZEBEDEE_URL:                 ${ZEBEDEE_URL:-http://zebedee:8082}
       ENABLE_PRIVATE_ENDPOINTS:    "true"
       ENABLE_DETACH_DATASET:       "true"
+      ENABLE_DELETE_STATIC_VERSION: "true"
       SERVICE_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
       GRAPH_ADDR:                  ${GRAPH_ADDR:-wss://host.docker.internal:8182/gremlin}
       GRAPH_DRIVER_TYPE:           ${GRAPH_DRIVER_TYPE:-neptune}
