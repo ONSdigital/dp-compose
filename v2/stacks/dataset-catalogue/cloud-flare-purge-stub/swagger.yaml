@@ -1,0 +1,294 @@
+openapi: 3.0.3
+info:
+  title: "Cloudflare stub service"
+  description: "A stub service which mimicks the behaviour of the endpoint in Cloudflare API to purge the cache"
+  version: 4.0.0
+  license:
+    name: "Open Government Licence v3.0"
+    url: "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+
+paths:
+  /zones/{zone_id}/purge_cache:
+    post:
+      description: |
+        ### Purge All Cached Content
+                Removes ALL files from Cloudflare's cache. All tiers can purge everything.
+                ```
+                {"purge_everything": true}
+                ```
+
+                ### Purge Cached Content by URL
+                Granularly removes one or more files from Cloudflare's cache by specifying URLs. All tiers can purge by URL.
+
+                To purge files with custom cache keys, include the headers used to compute the cache key as in the example. If you have a device type or geo in your cache key, you will need to include the CF-Device-Type or CF-IPCountry headers. If you have lang in your cache key, you will need to include the Accept-Language header.
+
+                **NB:** When including the Origin header, be sure to include the **scheme** and **hostname**. The port number can be omitted if it is the default port (80 for http, 443 for https), but must be included otherwise.
+
+                Single file purge example with files:
+                ```
+                {"files": ["http://www.example.com/css/styles.css", "http://www.example.com/js/index.js"]}
+                ```
+                Single file purge example with url and header pairs:
+                ```
+                {"files": [{url: "http://www.example.com/cat_picture.jpg", headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "http://www.example.com/dog_picture.jpg", headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
+                ```
+
+                ### Purge Cached Content by Tag, Host or Prefix
+                Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix.
+
+                Flex purge with tags:
+                ```
+                {"tags": ["a-cache-tag", "another-cache-tag"]}
+                ```
+                Flex purge with hosts:
+                ```
+                {"hosts": ["www.example.com", "images.example.com"]}
+                ```
+                Flex purge with prefixes:
+                ```
+                {"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
+                ```
+
+                ### Availability and limits
+                please refer to [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
+      operationId: zone-purge
+      parameters:
+        - in: path
+          name: zone_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/cache-purge_identifier'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Flex Purge with Hosts:
+                summary: Flex purge example with hosts list
+                value:
+                    hosts:
+                      - www.example.com
+                      - images.example.com
+              Flex Purge with Prefixes:
+                summary: Flex purge example with prefixes list
+                value:
+                  prefixes:
+                    - www.example.com/foo
+                    - images.example.com/bar/baz
+              Flex Purge with Tags:
+                summary: Flex purge example with tags list
+                value:
+                  tags:
+                    - a-cache-tag
+                    - another-cache-tag
+              Purge Everything:
+                summary: Purge everything example
+                value:
+                  purge_everything: true
+              Single File Purge:
+                summary: Single file purge example with files list
+                value:
+                  files:
+                    - http://www.example.com/css/styles.css
+                    - http://www.example.com/js/index.js
+              Single File Purge with UrlAndHeaders:
+                summary: Single file purge example with url and headers list
+                value:
+                  files:
+                    - headers:
+                        Accept-Language: zh-CN
+                        CF-Device-Type: desktop
+                        CF-IPCountry: US
+                        url: http://www.example.com/cat_picture.jpg
+                    - headers:
+                        Accept-Language: en-US
+                        CF-Device-Type: mobile
+                        CF-IPCountry: EU
+                        url: http://www.example.com/dog_picture.jpg
+            schema:
+              anyOf:
+               - $ref: '#/components/schemas/cache-purge_FlexPurgeByTags'
+               - $ref: '#/components/schemas/cache-purge_FlexPurgeByHostnames'
+               - $ref: '#/components/schemas/cache-purge_FlexPurgeByPrefixes'
+               - $ref: '#/components/schemas/cache-purge_Everything'
+               - $ref: '#/components/schemas/cache-purge_SingleFile'
+               - $ref: '#/components/schemas/cache-purge_SingleFileWithUrlAndHeaders'
+        required: true
+      responses:
+        4XX:
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/cache-purge_api-response-single-id'
+                  - $ref: '#/components/schemas/cache-purge_api-response-common-failure'
+          description: Request to purge cached content failed.
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cache-purge_api-response-single-id'
+          description: Request to purge cached content successfull.
+
+components:
+  schemas:
+    cache-purge_identifier:
+      example: 023e105f4ecef8ad9ca31a8372d0c353
+      maxLength: 32
+      type: string
+    cache-purge_api-response-single-id:
+      properties:
+        errors:
+          $ref: '#/components/schemas/cache-purge_messages'
+        messages:
+          $ref: '#/components/schemas/cache-purge_messages'
+        result:
+          nullable: true
+          properties:
+            id:
+              $ref: '#/components/schemas/cache-purge_identifier'
+          required:
+            - id
+          type: object
+        success:
+          description: Indicates the API call's success or failure.
+          example: true
+          type: boolean
+      required:
+        - success
+        - errors
+        - messages
+      type: object
+    cache-purge_api-response-common-failure:
+      properties:
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/cache-purge_messages'
+          example:
+            - code: 7003
+              message: No route for the URI
+              minLength: 1
+        messages:
+          allOf:
+            - $ref: '#/components/schemas/cache-purge_messages'
+          example: []
+        result:
+            nullable: true
+            type: object
+        success:
+          description: Indicates the API call's success or failure.
+          example: false
+          type: boolean
+      required:
+        - success
+        - errors
+        - messages
+        - result
+      type: object
+    cache-purge_messages:
+      example: []
+      items:
+        properties:
+          code:
+            minimum: 1000
+            type: integer
+          message:
+            type: string
+        required:
+          - code
+          - message
+        type: object
+        uniqueItems: true
+      type: array
+    cache-purge_SingleFileWithUrlAndHeaders:
+      properties:
+        files:
+          description: For more information on purging files with URL and headers, please refer to [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
+          example:
+            - headers:
+                Accept-Language: zh-CN
+                CF-Device-Type: desktop
+                CF-IPCountry: US
+                url: http://www.example.com/cat_picture.jpg
+            - headers:
+                Accept-Language: en-US
+                CF-Device-Type: mobile
+                CF-IPCountry: EU
+                url: http://www.example.com/dog_picture.jpg
+          items:
+            properties:
+              headers:
+                additionalProperties:
+                  type: string
+                  x-auditable: true
+                example: <HTTP header object>
+                type: object
+              url:
+                example: http://www.example.com/cat_picture.jpg
+                type: string
+                x-auditable: true
+            type: object
+          type: array
+      title: Purge files with URL and headers
+      type: object
+    cache-purge_SingleFile:
+      properties:
+        files:
+            description: For more information on purging files, please refer to [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
+            example:
+              - http://www.example.com/css/styles.css
+              - http://www.example.com/js/index.js
+            items:
+              type: string
+              x-auditable: true
+            type: array
+      title: Purge files
+      type: object
+    cache-purge_Everything:
+      properties:
+        purge_everything:
+          description: For more information, please refer to [purge everything documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-everything/).
+          example: true
+          type: boolean
+          x-auditable: true
+      title: Purge everything
+      type: object
+    cache-purge_FlexPurgeByPrefixes:
+      properties:
+        prefixes:
+          description: For more information on purging by prefixes, please refer to [purge by prefix documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge_by_prefix/).
+          example:
+            - www.example.com/foo
+            - images.example.com/bar/baz
+          items:
+            type: string
+            x-auditable: true
+          type: array
+      title: Purge by prefixes
+      type: object
+    cache-purge_FlexPurgeByHostnames:
+      properties:
+        hosts:
+          description: For more information purging by hostnames, please refer to [purge by hostname documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-hostname/).
+          example:
+            - www.example.com
+            - images.example.com
+          items:
+            type: string
+            x-auditable: true
+          type: array
+      title: Purge by hostnames
+      type: object
+    cache-purge_FlexPurgeByTags:
+      properties:
+        tags:
+          description: For more information on cache tags and purging by tags, please refer to [purge by cache-tags documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/).
+          example:
+            - a-cache-tag
+            - another-cache-tag
+          items:
+            type: string
+            x-auditable: true
+          type: array
+      title: Purge by tags
+      type: object
+

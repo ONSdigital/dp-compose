@@ -15,3 +15,7 @@ services:
       service: dis-authentication-stub
     environment:
       DATA_ADMIN_URL: "http://dis-data-admin-ui:29400/data-admin"
+  cloud-flare-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dp-cloud-flare-stub.yml
+      service: dp-cloud-flare-purge-stub
