@@ -8,7 +8,7 @@ The stub exposes the following endpoints:
 ```
 /zones/{zone_id}/purge_cache
 ```
-The endpoint being simulated, it accepts a POST request, with a json body that needs to contains one of the options as specificed in the [swagger.yml](./swagger.yaml) spec.
+The endpoint being simulated, it accepts a POST request, with a json body that needs to contain one of the options as specificed in the [swagger.yml](swagger.yaml) spec.
 `{zone_id}` is a path parameter that needs to be a string representing the zone ID and 32 characters long.
 ```
 /health

@@ -1,7 +1,7 @@
 services:
   dp-cloud-flare-purge-stub:
     build:
-      context: ../../stacks/dataset-catalogue/cloud-flare-purge-stub/
+      context: ../../stubs/cloud-flare-purge-stub/
       dockerfile: Dockerfile
     ports:
       - 22500:22500
