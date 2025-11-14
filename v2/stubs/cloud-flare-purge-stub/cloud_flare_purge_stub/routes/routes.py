@@ -22,7 +22,7 @@ def purge(zone_id):
 
     headers = request.headers
     bearer = headers.get("Authorization", "")
-    if not bearer.startswith("Bearer ") or current_app.config['CLOUD_FLARE_AUTH_TOKEN'] not in bearer:
+    if bearer != f"Bearer {current_app.config['CLOUD_FLARE_AUTH_TOKEN']}":
         return Response(dumps(__build_response_body(zone_id, error_message="Unauthorized")),
                         http.HTTPStatus.UNAUTHORIZED, mimetype="application/json")
 
