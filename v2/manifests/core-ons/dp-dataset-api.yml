@@ -34,6 +34,10 @@ services:
       DISABLE_GRAPH_DB_DEPENDENCY: "true"
       MONGODB_BIND_ADDR:           ${MONGODB_BIND_ADDR:-mongodb:27017}
       NEPTUNE_TLS_SKIP_VERIFY:     ${NEPTUNE_TLS_SKIP_VERIFY:-true}
+      PERMISSIONS_API_URL:                ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
+      IDENTITY_API_URL:                   ${IDENTITY_API_URL:-http://dis-authentication-stub:29500}
+      IDENTITY_WEB_KEY_SET_URL:           ${IDENTITY_API_URL:-http://dis-authentication-stub:29500}
+      AUTHORISATION_ENABLED:              "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:22000/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
