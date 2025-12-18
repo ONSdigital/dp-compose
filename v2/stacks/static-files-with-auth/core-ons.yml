@@ -10,8 +10,6 @@ services:
     depends_on:
       dp-identity-api:
         condition: service_healthy
-      elasticsearch:
-        condition: service_started
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml

@@ -20,7 +20,6 @@ services:
       PACKAGE_PREFIX:         "com.github.onsdigital.zebedee.reader.api"
       CONTENT_DIR:            "/content_dir"
       OTEL_JAVAAGENT_ENABLED: ${OTEL_JAVAAGENT_ENABLED:-"false"}
-      ELASTIC_SEARCH_SERVER:  ${ELASTIC_SEARCH_SERVER:-elasticsearch}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

@@ -61,11 +61,7 @@ For more information about the less standard v2 make targets, see [v2 Make targe
 
 ## Working with multiple Elasticsearches
 
-This stack contains three different elasticsearch instances. In order to allow locally running apps to connect, you will need to override the default ports configured in those apps.
-
-### Legacy Core
-
-The legacy core will use the `elasticsearch` instance so `zebedee` and `babbage` can continue to use the default ports without change.
+This stack contains two different elasticsearch instances. In order to allow locally running apps to connect, you will need to override the default ports configured in those apps.
 
 ### CMD
 

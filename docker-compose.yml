@@ -1,11 +1,4 @@
 services:
-  elasticsearch:
-    image: elasticsearch:2.4.2
-    ports:
-     - "9300:9300"
-     - "9200:9200"
-    environment:
-     - "discovery.type=single-node"
   cmdelasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.0.0
     ports:

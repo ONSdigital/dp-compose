@@ -9,7 +9,6 @@ The basic (full) version of this stack uses:
 - dp-frontend-router
 - dp-api-router
 - sixteens
-- elasticsearch
 - highcharts
 - dis-redirect-proxy
 - dis-redirect-api
@@ -30,7 +29,6 @@ The core backing services version of this stack:
 - dp-frontend-router
 - dp-api-router
 - sixteens
-- elasticsearch
 
 ## Getting started
 

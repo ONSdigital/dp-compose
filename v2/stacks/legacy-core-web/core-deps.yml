@@ -1,5 +1,0 @@
-services:
-  elasticsearch:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
-      service: elasticsearch
