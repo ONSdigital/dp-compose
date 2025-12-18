@@ -33,10 +33,6 @@ services:
       service: kowl
     depends_on:
       - kafka-1
-  elasticsearch:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
-      service: elasticsearch
   localstack:
     extends:
       file: ${PATH_MANIFESTS}/deps/localstack.yml

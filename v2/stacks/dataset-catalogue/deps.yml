@@ -45,7 +45,3 @@ services:
       - S3_HOSTNAME=localhost
       - DEBUG=1
       - LS_LOG=trace
-  elasticsearch:
-    extends:
-      file: ${PATH_MANIFESTS}/deps/elasticsearch.yml
-      service: elasticsearch

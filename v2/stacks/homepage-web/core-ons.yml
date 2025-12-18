@@ -45,6 +45,3 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee-reader.yml
       service: zebedee-reader
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
