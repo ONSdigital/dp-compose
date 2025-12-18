@@ -1,0 +1,18 @@
+services:
+  dis-cloudflare-stub:
+    build:
+      context: ../../stubs/dis-cloudflare-stub
+      dockerfile: Dockerfile
+    ports:
+      - 30200:30200
+    environment:
+      PORT: "30200"
+      RATE_LIMIT_REQUESTS: 50
+      RATE_LIMIT_PERIOD: 60
+      CLOUDFLARE_API_TOKEN: "test-token"
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request as r; r.urlopen('http://localhost:30200/health')" ]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 5s

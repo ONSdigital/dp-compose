@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
 COPY pyproject.toml poetry.lock* ./
 RUN poetry install --no-root --only main
-EXPOSE 22500
+EXPOSE 30200
 
 COPY . .
 

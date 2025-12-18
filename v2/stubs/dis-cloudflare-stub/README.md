@@ -1,6 +1,6 @@
-# Cloud Flare Purge Stub
+# Cloudflare Stub
 
-This directory contains a stub written in Python to simulate the Cloud Flare purge endpoint for local testing.
+This directory contains a stub written in Python to simulate the Cloudflare purge endpoint for local testing.
 The stub will start with the rest of the dataset catalogue stack when running `make up` or `make up-with-seed`.
 
 ## Endpoints
@@ -25,5 +25,5 @@ The stub can be configured with:
 - `PORT`: port number to run the stub on
 - `RATE_LIMIT_REQUESTS`: how many requests are allowed before rate limiting kicks in
 - `RATE_LIMIT_PERIOD`: the time period in seconds the number of requests can be made before rate limiting kicks in
-- `CLOUD_FLARE_AUTH_TOKEN`: the auth token expected
+- `CLOUDFLARE_API_TOKEN`: the API token expected
 

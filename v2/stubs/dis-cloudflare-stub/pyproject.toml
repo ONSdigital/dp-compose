@@ -1,5 +1,5 @@
 [project]
-name = "cloud-flare-purge-stub"
+name = "dis-cloudflare-stub"
 version = "0.1.0"
 description = ""
 readme = "README.md"
@@ -7,7 +7,6 @@ requires-python = ">=3.13"
 dependencies = [
     "flask (>=3.1.2,<4.0.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

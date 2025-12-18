@@ -1,4 +1,4 @@
-from cloud_flare_purge_stub.app_setup import create_app
+from dis_cloudflare_stub.app_setup import create_app
 
 app = create_app()
 
