@@ -43,7 +43,7 @@ var databases = [
 	},
 	{
 		name: "migrations",
-		collections: [{"name":"jobs"}, {"name":"tasks"}, {"name":"events"}]
+		collections: [{"name":"jobs"}, {"name":"tasks"}, {"name":"events"}, {"name":"counters"}]
 	}
 ];
 
