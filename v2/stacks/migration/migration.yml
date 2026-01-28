@@ -12,6 +12,8 @@ services:
         condition: service_healthy
       dp-upload-service:
         condition: service_healthy
+      dp-topic-api:
+        condition: service_healthy
       mongodb:
         condition: service_healthy
       zebedee:
