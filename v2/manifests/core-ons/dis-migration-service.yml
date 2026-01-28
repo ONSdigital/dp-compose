@@ -13,14 +13,21 @@ services:
     entrypoint: make debug
     restart: unless-stopped
     environment:
+      AUTHORISATION_ENABLED: ${AUTHORISATION_ENABLED:-true}
       BIND_ADDR: ":30100"
       DATASET_API_URL: ${DATASET_API_URL:-http://dp-dataset-api:22000}
+      ENABLE_EVENT_LOGGING: ${ENABLE_EVENT_LOGGING:-false}
+      ENABLE_TOPIC_CACHE: ${ENABLE_TOPIC_CACHE:-true}
       FILES_API_URL: ${FILES_API_URL:-http://dp-files-api:26900}
+      IDENTITY_WEB_KEY_SET_URL: ${IDENTITY_WEB_KEY_SET_URL:-http://dis-authentication-stub:29500}
+      HEALTHCHECK_CRITICAL_TIMEOUT: "90s"
       HEALTHCHECK_INTERVAL: ${HEALTHCHECK_INTERVAL:-30s}
       GRACEFUL_SHUTDOWN_TIMEOUT: "5s"
-      HEALTHCHECK_CRITICAL_TIMEOUT: "90s"
       MONGODB_BIND_ADDR: ${MONGODB_BIND_ADDR:-mongodb:27017}
+      PERMISSIONS_API_URL: ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
       REDIRECT_API_URL: ${REDIRECT_API_URL:-http://dis-redirect-api:29900}
+      SERVICE_AUTH_TOKEN: "migration-service-test-auth-token"
+      TOPIC_API_URL: ${TOPIC_API_URL:-http://dp-topic-api:25300}
       UPLOAD_SERVICE_URL: ${UPLOAD_SERVICE_URL:-http://dp-upload-service:25100}
       ZEBEDEE_URL: ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:

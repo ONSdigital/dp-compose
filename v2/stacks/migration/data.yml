@@ -1,0 +1,57 @@
+services:
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+    environment:
+      DISABLE_GRAPH_DB_DEPENDENCY: true
+      ENABLE_PRIVATE_ENDPOINTS: true
+      ENABLE_URL_REWRITING: true
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
+      FILES_API_URL:     "http://dp-files-api:26900"
+      CLOUDFLARE_ENABLED: true
+      CLOUDFLARE_BASE_URL: "http://dis-cloudflare-stub:30200"
+    depends_on:
+      kafka-1:
+        condition: service_healthy
+      dp-permissions-api:
+        condition: service_healthy
+      dis-authentication-stub:
+        condition: service_healthy
+  dp-files-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
+      service: dp-files-api
+    environment:
+      ZEBEDEE_URL:              "http://dis-authentication-stub:29500"
+      IDENTITY_WEB_KEY_SET_URL: "http://dis-authentication-stub:29500"
+    depends_on:
+      dp-permissions-api:
+        condition: service_healthy
+      dis-authentication-stub:
+        condition: service_healthy
+  dp-upload-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
+      service: dp-upload-service
+    depends_on:
+      localstack:
+        condition: service_healthy
+  dp-download-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-download-service.yml
+      service: dp-download-service
+    environment:
+      BUCKET_NAME:       "testing-public"
+      IS_PUBLISHING:     "false"
+      PUBLIC_BUCKET_URL: "http://localhost:14566/testing-public/"
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+  dp-frontend-dataset-controller:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
+      service: dp-frontend-dataset-controller
