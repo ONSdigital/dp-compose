@@ -39,19 +39,19 @@ Run:
    make up-with-seed
    ```
 
-This assumes that the location of dp-topic-api on your system is `/Users/{your username}/src/github.com/ONSdigital/dp-topic-api` and that dp-permissions-api is `/Users/{your username}/src/github.com/ONSdigital/dp-permissions-api`
+This assumes that the locations of repositories on your system is in the same root as `dp-compose` or that you have an environment variable set for `$DP_REPO_DIR`
 
 If that is not the correct location, you will be prompted to input a custom location for dp-topic-api or dp-permissions-api on your system.
 
 Once the correct location is found, you should see something like:
 
    ```shell
-Found dp-topic-api at /Users/{your username}/src/github.com/ONSdigital/dp-topic-api
+Found dp-topic-api at {some-path}/dp-topic-api
 mongosh localhost:27017/topics ./scripts/seed-database/index.js
 creating collections
 
 Seeding permissions API database...
-Found dp-permissions-api at /Users/{your username}/src/github.com/ONSdigital/dp-permissions-api
+Found dp-permissions-api at {some-path}/dp-permissions-api
    ```
 
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
