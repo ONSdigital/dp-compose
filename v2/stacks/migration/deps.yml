@@ -1,0 +1,48 @@
+---
+services:
+  kafka-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-1
+    depends_on:
+      - zookeeper-1
+  kafka-2:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-2
+    depends_on:
+      - zookeeper-1
+  kafka-3:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: kafka-3
+    depends_on:
+      - zookeeper-1
+  kowl:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka-tools.yml
+      service: kowl
+    depends_on:
+      - zookeeper-1
+  localstack:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/localstack.yml
+      service: localstack
+    ports:
+      - "4563-4599:4563-4599"
+      - "8055:8080"
+    environment:
+      - SERVICES=s3,lambda,iam,logs,secretsmanager,ses
+      - S3_HOSTNAME=localhost
+      - DEBUG=1
+      - LS_LOG=trace
+  mongodb:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/mongo.yml
+      service: mongodb
+    volumes:
+      - ${PATH_PROVISIONING}/mongo:/docker-entrypoint-initdb.d:ro
+  zookeeper-1:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/kafka.yml
+      service: zookeeper-1
