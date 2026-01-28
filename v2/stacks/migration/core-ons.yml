@@ -1,0 +1,40 @@
+services:
+  dp-api-router:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
+      service: dp-api-router
+    environment:
+      IDENTITY_API_URL:     "http://dis-authentication-stub:29500"
+      ZEBEDEE_URL:          "http://dis-authentication-stub:29500"
+      ENABLE_INTERCEPTOR:   "false"
+    depends_on:
+      zebedee:
+        condition: service_healthy
+  dis-authentication-stub:
+    extends:
+      file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
+      service: dis-authentication-stub
+  dp-permissions-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
+      service: dp-permissions-api
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+  dp-topic-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+      service: dp-topic-api
+    environment:
+      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+  zebedee:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
+      service: zebedee

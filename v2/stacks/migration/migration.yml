@@ -1,0 +1,18 @@
+services:
+  dis-migration-service:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-migration-service.yml
+      service: dis-migration-service
+    depends_on:
+      dis-authentication-stub:
+        condition: service_healthy
+      dp-dataset-api:
+        condition: service_healthy
+      dp-permissions-api:
+        condition: service_healthy
+      dp-upload-service:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      zebedee:
+        condition: service_healthy
