@@ -14,7 +14,7 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
       service: dp-frontend-router
-  dp-design-system:
+  dis-design-system-go:
     extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
-      service: dp-design-system
+      file: ${PATH_MANIFESTS}/core-ons/dis-design-system-go.yml
+      service: dis-design-system-go

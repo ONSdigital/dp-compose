@@ -1,8 +1,8 @@
 services:
-  dp-design-system:
+  dis-design-system-go:
     extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
-      service: dp-design-system
+      file: ${PATH_MANIFESTS}/core-ons/dis-design-system-go.yml
+      service: dis-design-system-go
     depends_on:
       dp-api-router:
         condition: service_healthy
@@ -18,7 +18,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/sixteens.yml
       service: sixteens
     depends_on:
-      dp-design-system:
+      dis-design-system-go:
         condition: service_healthy
   dp-frontend-router:
     extends:

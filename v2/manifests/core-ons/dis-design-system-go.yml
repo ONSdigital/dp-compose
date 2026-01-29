@@ -1,11 +1,11 @@
 services:
-  dp-design-system:
-    x-repo-url: "https://github.com/ONSdigital/dp-design-system"
+  dis-design-system-go:
+    x-repo-url: "https://github.com/ONSdigital/dis-design-system-go"
     build:
-      context: ${DP_REPO_DIR:-../../../..}/dp-design-system
+      context: ${DP_REPO_DIR:-../../../..}/dis-design-system-go
       dockerfile: Dockerfile.local
     volumes:
-      - ${DP_REPO_DIR:-../../../..}/dp-design-system:/dp-design-system
+      - ${DP_REPO_DIR:-../../../..}/dis-design-system-go:/dis-design-system-go
     expose:
       - "9002"
     ports:

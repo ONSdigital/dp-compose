@@ -55,10 +55,10 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-  dp-design-system:
+  dis-design-system-go:
     extends:
-      file: ${PATH_MANIFESTS}/core-ons/dp-design-system.yml
-      service: dp-design-system
+      file: ${PATH_MANIFESTS}/core-ons/dis-design-system-go.yml
+      service: dis-design-system-go
     depends_on:
       dp-api-router:
         condition: service_healthy

@@ -9,7 +9,7 @@ The stack uses:
 - dp-frontend-router
 - dp-feedback-api
 - dp-api-router
-- dp-design-system
+- dis-design-system-go
 - mailhog
 - http-echo
 
