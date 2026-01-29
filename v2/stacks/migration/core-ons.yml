@@ -38,3 +38,5 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/zebedee.yml
       service: zebedee
+    environment:
+      IDENTITY_API_URL: "http://dis-authentication-stub:29500"
