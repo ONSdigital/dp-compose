@@ -10,5 +10,5 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-search-controller.yml
       service: dp-frontend-search-controller
     depends_on:
-      dp-design-system:
+      dis-design-system-go:
         condition: service_healthy

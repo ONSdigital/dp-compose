@@ -8,7 +8,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-feedback-controller.yml
       service: dp-frontend-feedback-controller
     depends_on:
-      dp-design-system:
+      dis-design-system-go:
         condition: service_healthy
   dp-feedback-api:
     extends:
