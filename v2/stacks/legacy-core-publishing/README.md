@@ -31,12 +31,6 @@ To run the stack:
 
     Alternatively, the local.env file can be used to set the COMPOSE_FILE value to specify different variations of the stack, as shown below.
 
-    For the migration services version of the stack, set the COMPOSE_FILE as follows in local.env:
-  
-     ```shell
-     COMPOSE_FILE=migration.yml:migration-core.yml:migration-deps.yml:core.yml:static-files.yml
-     ```
-
     For the redirects-only version of the stack, set the COMPOSE_FILE as follows in local.env:
   
      ```shell
