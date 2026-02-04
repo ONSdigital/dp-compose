@@ -19,7 +19,6 @@ services:
     environment:
       DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
       DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
-      ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-true}
       ENABLE_DATASET_IMPORT:          ${ENABLE_DATASET_IMPORT:-true}
       FORMAT_LOGGING:                 ${FORMAT_LOGGING:-true}
       JAVA_OPTS:                      " -Xmx1204m -Xdebug -Xrunjdwp:transport=dt_socket,address=8002,server=y,suspend=n"
@@ -50,6 +49,8 @@ services:
       BABBAGE_URL:                    "http://babbage:8080"
       REDIRECT_API_URL:               ${REDIRECT_API_URL:-http://dp-api-router:23200}
       ENABLE_REDIRECT_API:            ${ENABLE_REDIRECT_API:-false}
+      ENABLE_PERMISSIONS_API:         ${ENABLE_PERMISSIONS_API:-true}
+      PERMISSIONS_API_URL:            ${PERMISSIONS_API_URL:-"http://dp-permissions-api:25400"}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}

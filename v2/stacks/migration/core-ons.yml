@@ -40,6 +40,8 @@ services:
       service: zebedee
     environment:
       IDENTITY_API_URL: "http://dis-authentication-stub:29500"
+      ENABLE_PERMISSIONS_API: true
+      PERMISSIONS_API_URL: "http://dp-permissions-api:25400"
     depends_on:
       dis-authentication-stub:
         condition: service_healthy
