@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR:         ":25300"
+      ENABLE_PRIVATE_ENDPOINTS: ${ENABLE_PRIVATE_ENDPOINTS:-false}
       MONGODB_BIND_ADDR: ${MONGODB_BIND_ADDR:-mongodb:27017}
       ZEBEDEE_URL:       ${ZEBEDEE_URL:-http://zebedee:8082}
     healthcheck:
