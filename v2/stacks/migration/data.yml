@@ -34,6 +34,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
       service: dp-upload-service
+    environment:
+      SERVICE_AUTH_TOKEN: "upload-service-test-auth-token"
     depends_on:
       localstack:
         condition: service_healthy
