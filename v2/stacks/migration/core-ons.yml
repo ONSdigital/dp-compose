@@ -14,6 +14,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/stubs/dis-authentication-stub.yml
       service: dis-authentication-stub
+    environment:
+      DATA_ADMIN_URL: "http://dis-data-admin-ui:29400/data-admin"
   dp-permissions-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
@@ -46,3 +48,10 @@ services:
     depends_on:
       dis-authentication-stub:
         condition: service_healthy
+  dis-data-admin-ui:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-data-admin-ui.yml
+      service: dis-data-admin-ui
+    environment:
+      API_ROUTER_URL: "http://dp-api-router:23200/v1"
+      MIGRATION_SERVICE_URL: "http://dis-migration-service:30100/v1"
