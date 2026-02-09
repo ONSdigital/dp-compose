@@ -56,10 +56,10 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 
 ## How to test it's all working together
 
-1. Access the authentication stub login page `localhost:29500/florence/login
+1. Access the authentication stub login page <http://localhost:29500/florence/login>
 1. Login as the admin user
-1. Obtain the access_token from your cookies (minus the 'Bearer ' prefix)
-1. Make a POST request to localhost:30100/v1/migration-jobs with the following payload:
+1. Obtain the `access_token` from your cookies (minus the 'Bearer ' prefix)
+1. Make a POST request to localhost:30100/v1/migration-jobs with the following payload (using the `access_token` as the `Authorization` header):
 
 ```json
 {
@@ -70,5 +70,3 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 ```
 
 You should receive a 202 created request.
-
-This only tests that jobs can be created, not the actual migration steps.
