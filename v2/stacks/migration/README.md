@@ -57,9 +57,9 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 ## How to test it's all working together
 
 1. Access the authentication stub login page <http://localhost:29500/florence/login>
-1. Login as the admin user
-1. Obtain the `access_token` from your cookies (minus the 'Bearer ' prefix)
-1. Make a POST request to localhost:30100/v1/migration-jobs with the following payload (using the `access_token` as the `Authorization` header):
+2. Login as the admin user
+3. Obtain the `access_token` from your cookies (minus the 'Bearer ' prefix)
+4. Make a POST request to localhost:30100/v1/migration-jobs with the following payload (using the `access_token` as the `Authorization` header):
 
 ```json
 {
@@ -69,4 +69,12 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 }
 ```
 
-You should receive a 202 created request.
+You should receive a 202 created request, and the `state` should be `submitted`.
+
+5. Make a GET request to localhost:30100/v1/migration-jobs with the same `access_token` as the `Authorization header`.
+
+You should now be able to see the migration job's state as `in_review` if the migration has been successful.
+
+6. Now, make a GET request to localhost:22000/datasets using the `access_token` as the `Authorization` header
+
+You should now be able to see your successfully migrated dataset in the dp-dataset-api.
