@@ -40,10 +40,7 @@ var databases = [
 			},
 			{ name: "contacts" },
 			{
-				name: "dataset_events",
-				index: [
-					{ condition: '{"id": 1}', options: '{"unique": true}' }
-				]
+				name: "dataset_events"
 			},
 		]
 	},
@@ -182,11 +179,8 @@ var databases = [
 					{ condition: '{"id": 1}', options: '{"unique": true}' }
 				] 
 			},
-						{ 
-				name: "file_events",
-				index: [
-					{ condition: '{"id": 1}', options: '{"unique": true}' }
-				] 
+			{ 
+				name: "file_events"
 			}
 		]
 	},
@@ -212,10 +206,7 @@ var databases = [
 				] 
 			},
 			{ 
-				name: "bundle_events",
-				index: [
-					{ condition: '{"id": 1}', options: '{"unique": true}' }
-				] 
+				name: "bundle_events"
 			},
 			{ 
 				name: "bundle_contents",
