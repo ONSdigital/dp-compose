@@ -78,3 +78,14 @@ You should now be able to see the migration job's state as `in_review` if the mi
 6. Now, make a GET request to localhost:22000/datasets using the `access_token` as the `Authorization` header
 
 You should now be able to see your successfully migrated dataset in the dp-dataset-api.
+
+## Working with migration data
+
+We have provided a `reset` target to help with repeated test runs - you can run this via:
+
+```sh
+   make reset
+```
+
+This will clear the `dp-dataset-api` and `dis-migration-service` mongo collections of data to re-run a migration. It will not
+currently modify zebedee's content store.
