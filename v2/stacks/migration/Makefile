@@ -20,3 +20,9 @@ up-with-seed:
 	$(MAKE) up
 	$(MAKE) seed-topic-api
 	$(MAKE) seed-permissions-api
+
+.PHONY: reset
+reset:
+	mongosh localhost:27017/migrations --file ../../provisioning/mongo/reset.js
+	mongosh localhost:27017/datasets --file ../../provisioning/mongo/reset.js
+
