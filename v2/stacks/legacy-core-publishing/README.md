@@ -4,6 +4,9 @@ This stack deploys the necessary services and dependencies to work with the lega
 
 The stack uses the sandbox instance of dp-identity-api to simplify the approach to using auth.
 
+By default this uses a local version of dp-permissions-api and runs in the de-centralised permissions mode as this what we
+are currently developing towards.
+
 ## Initialisation
 
 To connect to the dp-identity-api in sandbox you will need to port forward the address.
@@ -43,13 +46,13 @@ To run the stack:
     COMPOSE_FILE=core-deps.yml:core.yml
      ```
   
-3. Ensure that the AWS access keys (environment variables) in local.env are up to date (and delete the word 'export' before each new one copied across).
-
-4. Build and start the stack:
+3. Build and start the stack:
 
    ```shell
-   make up
+   make up-with-seed
    ```
+
+   `up-with-seed` seeds the `dp-permissions-api` with the appropriate permissions. You may need to restart other services to pick up the latest bundle if this is your first time.
 
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
 

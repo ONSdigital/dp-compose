@@ -5,12 +5,16 @@ services:
       service: zebedee
     environment:
       ENABLE_JWT_SESSIONS:     "true"
-      ENABLE_PERMISSIONS_AUTH: ${ENABLE_PERMISSIONS_AUTH:-1}
+      ENABLE_PERMISSIONS_API: ${ENABLE_PERMISSIONS_API:-true}
+      PERMISSIONS_API_URL: http://dp-permissions-api:25400
       IDENTITY_API_URL: http://host.docker.internal:25600
       ENABLE_STATIC_FILES_PUBLISHING: "false"
     extra_hosts:
       - "host.docker.internal:host-gateway"          # localhost mapping for linux
       - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+    depends_on:
+      dp-permissions-api:
+        condition: service_healthy
   dp-api-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-api-router.yml
@@ -27,6 +31,8 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
+    environment:
+      ENABLE_PERMISSION_API: ${ENABLE_PERMISSION_API:-true}
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
@@ -54,3 +60,13 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+  dp-permissions-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
+      service: dp-permissions-api
+    environment:
+      IDENTITY_API_URL: http://host.docker.internal:25600
+    extra_hosts:
+      - "host.docker.internal:host-gateway"          # localhost mapping for linux
+      - "docker.for.mac.host.internal:host-gateway"  # localhost mapping for mac (docker v17.12 to v18.02)
+

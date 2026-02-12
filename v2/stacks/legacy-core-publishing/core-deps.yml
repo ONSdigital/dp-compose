@@ -1,0 +1,7 @@
+services:
+  mongodb:
+    extends:
+      file: ${PATH_MANIFESTS}/deps/mongo.yml
+      service: mongodb
+    volumes:
+      - ${PATH_PROVISIONING}/mongo:/docker-entrypoint-initdb.d:ro
