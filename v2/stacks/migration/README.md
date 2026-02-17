@@ -87,5 +87,5 @@ We have provided a `reset` target to help with repeated test runs - you can run 
    make reset
 ```
 
-This will clear the `dp-dataset-api` and `dis-migration-service` mongo collections of data to re-run a migration. It will not
-currently modify zebedee's content store.
+This will clear the `dp-dataset-api` and `dis-migration-service` mongo collections of data to re-run a migration. It will also
+remove the created collection in zebedee.
