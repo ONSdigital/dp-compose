@@ -27,6 +27,8 @@ services:
       PERMISSIONS_API_URL: ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
       REDIRECT_API_URL: ${REDIRECT_API_URL:-http://dis-redirect-api:29900}
       SERVICE_AUTH_TOKEN: "migrationservicetestauthtoken"
+      SLACK_ENABLED: ${SLACK_ENABLED:-false}
+      SLACK_API_TOKEN: ${SLACK_API_TOKEN:-""}
       TOPIC_API_URL: ${TOPIC_API_URL:-http://dp-topic-api:25300}
       UPLOAD_SERVICE_URL: ${UPLOAD_SERVICE_URL:-http://dp-upload-service:25100}
       ZEBEDEE_URL: ${ZEBEDEE_URL:-http://zebedee:8082}
