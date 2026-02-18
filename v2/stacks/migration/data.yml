@@ -57,6 +57,8 @@ services:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-dataset-controller.yml
       service: dp-frontend-dataset-controller
+    environment:
+      IS_PUBLISHING: true
   dis-design-system-go:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dis-design-system-go.yml
