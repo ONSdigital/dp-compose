@@ -21,6 +21,7 @@ services:
       API_ROUTER_URL:                  ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
       BABBAGE_URL:                     ${BABBAGE_URL:-http://babbage:8080}
       DATASET_CONTROLLER_URL:          ${DATASET_CONTROLLER_URL:-http://dp-frontend-dataset-controller:20200}
+      ENABLE_STATIC_DATASET_ROUTING:   ${ENABLE_STATIC_DATASET_ROUTING:-false}
       FEEDBACK_CONTROLLER_URL:         ${FEEDBACK_CONTROLLER_URL:-http://dp-frontend-feedback-controller:25200}
       FILTER_FLEX_DATASET_SERVICE_URL: ${FILTER_FLEX_DATASET_SERVICE_URL:-http://dp-frontend-filter-flex-dataset:20100}
       FILTER_FLEX_ROUTES_ENABLED:      ${FILTER_FLEX_ROUTES_ENABLED:-false}
