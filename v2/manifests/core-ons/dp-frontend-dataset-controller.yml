@@ -20,6 +20,7 @@ services:
     environment:
       BIND_ADDR:                      ":20200"
       API_ROUTER_URL:                 ${API_ROUTER_URL:-http://dp-api-router:23200}/v1
+      DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
       CENSUS_TOPIC_ID:                ${CENSUS_TOPIC_ID:-4445}
       DEBUG:                          ${DEBUG:-false}
       ENABLE_CENSUS_TOPIC_SUBSECTION: ${ENABLE_CENSUS_TOPIC_SUBSECTION:-false}
