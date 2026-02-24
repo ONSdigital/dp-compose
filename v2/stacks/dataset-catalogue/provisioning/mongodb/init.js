@@ -200,19 +200,13 @@ var databases = [
 		name: "bundles",
 		collections: [
 			{ 
-				name: "bundles",
-				index: [
-					{ condition: '{"id": 1}', options: '{"unique": true}' }
-				] 
+				name: "bundles"
 			},
 			{ 
 				name: "bundle_events"
 			},
 			{ 
-				name: "bundle_contents",
-				index: [
-					{ condition: '{"id": 1}', options: '{"unique": true}' }
-				] 
+				name: "bundle_contents"
 			}
 		]
 	}
