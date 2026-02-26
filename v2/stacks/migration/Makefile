@@ -1,6 +1,8 @@
 # Include common make targets
 include ../common.mk
 
+MIGRATION_COLLECTION_NAME ?= migrationcollectionforjob1
+
 .PHONY: init
 init: base-init
 	# Add stack specific initialisation logic here
@@ -21,8 +23,14 @@ up-with-seed:
 	$(MAKE) seed-topic-api
 	$(MAKE) seed-permissions-api
 
+.PHONY: remove-migration-collection
+remove-migration-collection:
+	rm $(zebedee_root)/zebedee/collections/$(MIGRATION_COLLECTION_NAME).json
+	rm -r $(zebedee_root)/zebedee/collections/$(MIGRATION_COLLECTION_NAME)
+
 .PHONY: reset
 reset:
 	mongosh localhost:27017/migrations --file ../../provisioning/mongo/reset.js
 	mongosh localhost:27017/datasets --file ../../provisioning/mongo/reset.js
+	$(MAKE) remove-migration-collection
 
