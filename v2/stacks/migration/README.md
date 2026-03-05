@@ -59,11 +59,23 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 1. Access the authentication stub login page <http://localhost:29500/florence/login>
 2. Login as the admin user
 3. Obtain the `access_token` from your cookies (minus the 'Bearer ' prefix)
-4. Make a POST request to localhost:30100/v1/migration-jobs with the following payload (using the `access_token` as the `Authorization` header):
+4. Make a POST request to localhost:30100/v1/migration-jobs with these following payloads, depending on what you are testing (using the `access_token` as the `Authorization` header):
+
+**Testing with a simple dataset**
 
 ```json
 {
     "source_id": "/employmentandlabourmarket/peopleinwork/workplacedisputesandworkingconditions/datasets/labourdisputeslabourdisputesannualestimates",
+    "target_id": "new-dataset",
+    "type": "static_dataset"
+}
+```
+
+**Testing with a dataset that has edition as 'Current'**
+
+```json
+{
+    "source_id": "/businessindustryandtrade/business/activitysizeandlocation/datasets/businessdemographyreferencetable",
     "target_id": "new-dataset",
     "type": "static_dataset"
 }
