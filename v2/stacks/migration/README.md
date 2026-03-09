@@ -23,27 +23,27 @@ To run the stack:
 
    This is required for the local docker build to work around a current issue with the volume paths not existing pre-build. Once this issue has been resolved, this step will no longer be necessary.
 
-3. Build and start the stack:
+3. For most use cases, you will want to run the stack with dp-topic-api and dp-permissions-api database seeded.
 
-   ```shell
-   make up
-   ```
+To run the seeding you will need mongosh installed:
 
-To run the stack with dp-topic-api and dp-permissions-api database seeded:
+```sh
+   brew install mongosh
+```
 
-Follow the prerequsites for installing `mongosh` here - `https://github.com/ONSdigital/dp-topic-api/tree/develop/scripts`
-
-Run:
+To run the services with seeding, run:
 
 ```shell
    make up-with-seed
 ```
 
-This assumes that the locations of repositories on your system is in the same root as `dp-compose` or that you have an environment variable set for `$DP_REPO_DIR`
+This will start all the containers (including mongodb) and then run the seeding scripts.
+
+The seeding scripts assume that the repositories on your system are in the same root as `dp-compose` or that you have an environment variable set for `$DP_REPO_DIR`.
 
 If that is not the correct location, you will be prompted to input a custom location for dp-topic-api or dp-permissions-api on your system.
 
-Once the correct location is found, you should see something like:
+When the scripts run, you should see something like the below in your terminal:
 
 ```shell
 Found dp-topic-api at {some-path}/dp-topic-api
@@ -52,6 +52,14 @@ creating collections
 
 Seeding permissions API database...
 Found dp-permissions-api at {some-path}/dp-permissions-api
+```
+
+If any service hasn't picked up it's topic or permissions cache, you can force a refresh via `SERVICE={serviceName} make restart`.
+
+3a. If you don't want to run the stack with the databases seeded, you can use:
+
+```sh
+   make up
 ```
 
 ## How to test it's all working together
