@@ -29,6 +29,9 @@ services:
       SERVICE_AUTH_TOKEN: "migrationservicetestauthtoken"
       SLACK_ENABLED: ${SLACK_ENABLED:-false}
       SLACK_API_TOKEN: ${SLACK_API_TOKEN:-""}
+      SLACK_PUBLISH_CHANNEL: ${SLACK_PUBLISH_CHANNEL:-#sandbox-publish-log}
+      SLACK_ALARM_CHANNEL: ${SLACK_ALARM_CHANNEL:-#sandbox-alarm}
+      SLACK_WARNING_CHANNEL: ${SLACK_WARNING_CHANNEL:-#sandbox-warning}
       TOPIC_API_URL: ${TOPIC_API_URL:-http://dp-topic-api:25300}
       UPLOAD_SERVICE_URL: ${UPLOAD_SERVICE_URL:-http://dp-upload-service:25100}
       ZEBEDEE_URL: ${ZEBEDEE_URL:-http://zebedee:8082}
