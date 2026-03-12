@@ -42,7 +42,6 @@ services:
       AWS_COGNITO_SIGNING_KEY_TWO:    ${AWS_COGNITO_SIGNING_KEY_TWO:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"}
       AWS_COGNITO_KEY_ID_ONE:         ${AWS_COGNITO_KEY_ID_ONE:-"2a8vXmIK67ZZ3hFZ/DwQATgvqZgRBFjuuVavlw3zEwo="}
       AWS_COGNITO_KEY_ID_TWO:         ${AWS_COGNITO_KEY_ID_TWO:-"GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="}
-      website_reindex_key:            "1hZiEDeZcVKZwO6WmTDTDhVSiRAKS0jM6Nzlvlszk0OW0vY5M2FCiGD7ncqcucxB"
       scheduled_publishing_enabled:   "false"
       OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
       brian_url:                      "http://project-brian:8083"
