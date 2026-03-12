@@ -42,7 +42,11 @@ services:
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo:/docker-entrypoint-initdb.d:ro
+      - migration_data:/data/db
   zookeeper-1:
     extends:
       file: ${PATH_MANIFESTS}/deps/kafka.yml
       service: zookeeper-1
+
+volumes:
+  migration_data: {}

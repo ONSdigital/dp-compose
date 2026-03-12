@@ -5,3 +5,6 @@ services:
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo:/docker-entrypoint-initdb.d:ro
+      - legacy_core_publishing_data:/data/db
+volumes:
+  legacy_core_publishing_data: {}

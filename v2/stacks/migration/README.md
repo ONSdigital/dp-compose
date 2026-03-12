@@ -56,7 +56,16 @@ To run the stack:
 
    If any service hasn't picked up it's topic or permissions cache, you can force a refresh via `SERVICE={serviceName} make restart`.
 
-   If you don't want to run the stack with the databases seeded, you can use:
+   The seeded data will be persisted via a volume - if you need to re-seed again later, you can run:
+
+   ```sh
+   # to seed permissions
+   make seed-permissions-api
+   # to seed topics
+   make seed-topics-api
+   ```
+
+   To run the stack without seeding, run:
 
    ```sh
       make up

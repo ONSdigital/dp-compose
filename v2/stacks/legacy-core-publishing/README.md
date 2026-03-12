@@ -54,6 +54,8 @@ To run the stack:
 
    `up-with-seed` seeds the `dp-permissions-api` with the appropriate permissions. You may need to restart other services to pick up the latest bundle if this is your first time.
 
+   The seeded data will be persisted via a volume - if you need to re-seed again later, you can run `make seed-permissions-api`
+
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
 
 ## Testing
