@@ -21,8 +21,6 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-permissions-api.yml
       service: dp-permissions-api
     depends_on:
-      dp-api-router:
-        condition: service_healthy
       mongodb:
         condition: service_healthy
   dp-topic-api:
@@ -47,6 +45,8 @@ services:
       PERMISSIONS_API_URL: "http://dp-permissions-api:25400"
     depends_on:
       dis-authentication-stub:
+        condition: service_healthy
+      dp-permissions-api:
         condition: service_healthy
   dis-data-admin-ui:
     extends:
