@@ -21,7 +21,6 @@ services:
     environment:
       ZEBEDEE_URL:              "http://dis-authentication-stub:29500"
       IDENTITY_WEB_KEY_SET_URL: "http://dis-authentication-stub:29500"
-      ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
       LOCALSTACK_HOST:    "http://localstack:4566"
       AUTHORISATION_ENABLED: "true"
       PERMISSIONS_API_URL:    "http://dp-permissions-api:25400"
