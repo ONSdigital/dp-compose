@@ -31,7 +31,7 @@ services:
       IDENTITY_API_URL:                   ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       IDENTITY_WEB_KEY_SET_URL:           ${IDENTITY_API_URL:-http://dp-identity-api:25600}
       ZEBEDEE_URL:                        ${ZEBEDEE_URL:-http://zebedee:8082}
-      AUTHORISATION_ENABLED:              ${AUTHORISATION_ENABLED:-false}
+      AUTHORISATION_ENABLED:              ${AUTHORISATION_ENABLED:-true}
       S3_PRIVATE_BUCKET_NAME:             "testing"
       LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
     healthcheck:
