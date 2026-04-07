@@ -5,7 +5,7 @@ services:
       service: zebedee
     environment:
       ENABLE_JWT_SESSIONS:            "true"
-      ENABLE_PERMISSIONS_AUTH:        ${ENABLE_PERMISSIONS_AUTH:-1}
+      ENABLE_PERMISSIONS_API:         ${ENABLE_PERMISSIONS_API:-1}
       scheduled_publishing_enabled:   "true"
     depends_on:
       dp-identity-api:
@@ -83,5 +83,15 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-  
-
+  dp-dataset-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-dataset-api.yml
+      service: dp-dataset-api
+  dp-filter-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-filter-api.yml
+      service: dp-filter-api
+  dp-topic-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-topic-api.yml
+      service: dp-topic-api
