@@ -49,7 +49,7 @@ services:
       REDIRECT_API_URL:               ${REDIRECT_API_URL:-http://dp-api-router:23200}
       ENABLE_REDIRECT_API:            ${ENABLE_REDIRECT_API:-false}
       ENABLE_PERMISSIONS_API:         ${ENABLE_PERMISSIONS_API:-true}
-      PERMISSIONS_API_URL:            ${PERMISSIONS_API_URL:-"http://dp-permissions-api:25400"}
+      PERMISSIONS_API_URL:            ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
