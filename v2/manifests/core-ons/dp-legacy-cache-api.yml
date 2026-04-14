@@ -1,0 +1,27 @@
+services:
+  dp-legacy-cache-api:
+    x-repo-url: "https://github.com/ONSdigital/dp-legacy-cache-api"
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dp-legacy-cache-api
+      dockerfile: Dockerfile.local
+    command:
+      - make
+      - debug
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dp-legacy-cache-api:/dp-legacy-cache-api
+    expose:
+      - "29100"
+    ports:
+      - 29100:29100
+    restart: unless-stopped
+    environment:
+      BIND_ADDR:         ${BIND_ADDR:-:29100}
+      DEBUG:             ${DEBUG:-false}
+      IS_PUBLISHING:     ${IS_PUBLISHING:-true}
+      MONGODB_BIND_ADDR: ${MONGODB_BIND_ADDR:-mongodb:27017}
+      ZEBEDEE_URL:       ${ZEBEDEE_URL:-http://zebedee:8082}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:29100/health"]
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: 10s
+      retries: 10
