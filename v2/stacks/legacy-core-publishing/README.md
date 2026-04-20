@@ -46,7 +46,7 @@ To run the stack:
     COMPOSE_FILE=core-deps.yml:core.yml
      ```
 
-   To add the caching servies for scheduled publications, you can set the `COMPOSE_FILE` and `scheduled_publishing_enabled` as follows:
+   To add the caching services for scheduled publications, you can set the `COMPOSE_FILE` and `scheduled_publishing_enabled` as follows:
 
    ```shell
    COMPOSE_FILE=core-deps.yml:core.yml:cache.yml
