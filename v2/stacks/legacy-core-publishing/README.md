@@ -49,7 +49,7 @@ To run the stack:
    To add the caching servies for scheduled publications, you can set the `COMPOSE_FILE` and `scheduled_publishing_enabled` as follows:
 
    ```shell
-   COMPOSE_FILE=core-deps:core.yml:cache.yml
+   COMPOSE_FILE=core-deps.yml:core.yml:cache.yml
    scheduled_publishing_enabled=true
    ```
 
