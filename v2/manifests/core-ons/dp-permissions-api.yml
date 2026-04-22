@@ -11,6 +11,7 @@ services:
     entrypoint: make debug
     restart: "unless-stopped"
     environment:
+      AUTHORISATION_ENABLED:        ${AUTHORISATION_ENABLED:-true}
       BIND_ADDR:                    ":25400"
       HEALTHCHECK_INTERVAL:         ${HEALTHCHECK_INTERVAL:-30s}
       GRACEFUL_SHUTDOWN_TIMEOUT:    "30s"
@@ -19,7 +20,8 @@ services:
       MONGODB_BIND_ADDR:            "mongodb:27017"
       MONGODB_COLLECTIONS:          "RolesCollection:roles,PoliciesCollection:policies"
       IS_PUBLISHING:                ${IS_PUBLISHING:-true}
-      IDENTITY_WEB_KEY_SET_URL:     ${IDENTITY_API_URL:-http://dp-identity-api:25600}
+      IDENTITY_WEB_KEY_SET_URL:     ${IDENTITY_WEB_KEY_SET_URL:-http://dp-identity-api:25600}
+      ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
     volumes:
       - ${DP_REPO_DIR:-../../../..}/dp-permissions-api:/service
     healthcheck:
