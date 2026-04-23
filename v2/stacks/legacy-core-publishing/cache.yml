@@ -1,0 +1,10 @@
+services:
+  dp-legacy-cache-api:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dp-legacy-cache-api.yml
+      service: dp-legacy-cache-api
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      zebedee:
+        condition: service_healthy

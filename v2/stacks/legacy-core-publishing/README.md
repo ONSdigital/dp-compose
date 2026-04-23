@@ -45,7 +45,14 @@ To run the stack:
      ```shell
     COMPOSE_FILE=core-deps.yml:core.yml
      ```
-  
+
+   To add the caching services for scheduled publications, you can set the `COMPOSE_FILE` and `scheduled_publishing_enabled` as follows:
+
+   ```shell
+   COMPOSE_FILE=core-deps.yml:core.yml:cache.yml
+   scheduled_publishing_enabled=true
+   ```
+
 3. Build and start the stack:
 
    ```shell
@@ -86,10 +93,6 @@ Release page rendering:
 
 - dp-release-calendar-api
 - dp-frontend-release-calendar
-
-Cache Proxy service:
-
-- dp-legacy-cache-api
 
 Timeseries processing and publishing:
 
