@@ -3,7 +3,7 @@ module ONSdigital/ons-scrape-1
 go 1.15
 
 require (
-	github.com/containerd/containerd v1.5.9 // indirect
+	github.com/containerd/containerd v1.5.18 // indirect
 	github.com/docker/docker v20.10.7+incompatible
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
