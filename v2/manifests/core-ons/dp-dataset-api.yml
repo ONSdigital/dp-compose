@@ -25,7 +25,8 @@ services:
       FILES_API_URL:                ${FILES_API_URL:-http://dp-files-api:26900}
       IMPORT_API_URL:               ${IMPORT_API_URL:-http://dp-import-api:21800}
       TOPIC_API_URL:                ${TOPIC_API_URL:-http://dp-topic-api:25300}
-      WEBSITE_URL:                  ${WEBSITE_URL:-http://dp-frontend-router:20000}
+      PUBLIC_WEBSITE_URL:           ${PUBLIC_WEBSITE_URL:-http://dp-frontend-router:20000}
+      PRIVATE_WEBSITE_URL:          ${PRIVATE_WEBSITE_URL:-http://dp-frontend-router:20000}
       ZEBEDEE_URL:                  ${ZEBEDEE_URL:-http://zebedee:8082}
       ENABLE_PRIVATE_ENDPOINTS:     "true"
       ENABLE_DETACH_DATASET:        "true"
@@ -38,7 +39,7 @@ services:
       NEPTUNE_TLS_SKIP_VERIFY:      ${NEPTUNE_TLS_SKIP_VERIFY:-true}
       PERMISSIONS_API_URL:          ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
       IDENTITY_API_URL:             ${IDENTITY_API_URL:-http://dp-identity-api:25600}
-      IDENTITY_WEB_KEY_SET_URL:     ${IDENTITY_API_URL:-http://dp-identity-api:25600}
+      IDENTITY_WEB_KEY_SET_URL:     ${IDENTITY_WEB_KEY_SET_URL:-http://dp-identity-api:25600}
       AUTHORISATION_ENABLED:        "true"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:22000/health"]
