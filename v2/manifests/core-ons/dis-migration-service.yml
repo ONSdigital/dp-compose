@@ -35,6 +35,7 @@ services:
       TOPIC_API_URL: ${TOPIC_API_URL:-http://dp-topic-api:25300}
       UPLOAD_SERVICE_URL: ${UPLOAD_SERVICE_URL:-http://dp-upload-service:25100}
       ZEBEDEE_URL: ${ZEBEDEE_URL:-http://zebedee:8082}
+      ZEBEDEE_REQUEST_TIMEOUT_SECONDS: 20
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:30100/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
