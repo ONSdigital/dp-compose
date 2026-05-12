@@ -13,6 +13,7 @@ services:
       CLOUDFLARE_BASE_URL: "http://dis-cloudflare-stub:30200"
       IDENTITY_API_URL: "http://dis-authentication-stub:29500"
       IDENTITY_WEB_KEY_SET_URL: "http://dis-authentication-stub:29500"
+      SERVICE_AUTH_TOKEN: "dataset-api-test-auth-token"
     depends_on:
       kafka-1:
         condition: service_healthy
