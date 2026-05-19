@@ -55,3 +55,10 @@ services:
     environment:
       API_ROUTER_URL: "http://dp-api-router:23200/v1"
       MIGRATION_SERVICE_URL: "http://dis-migration-service:30100/v1"
+  the-train:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/the-train.yml
+      service: the-train
+    depends_on:
+      dp-api-router:
+        condition: service_healthy
