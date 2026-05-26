@@ -14,6 +14,10 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
+      dis-authentication-stub:
+        condition: service_healthy
+    environment:
+      JWT_VERIFICATION_PUBLIC_KEYS: ${JWT_VERIFICATION_PUBLIC_KEYS}
   dp-files-api:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
