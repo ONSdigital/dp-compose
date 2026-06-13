@@ -1,0 +1,50 @@
+services:
+  "dp-cantabular-filter-flex-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: http://api.localhost:23200/v1
+        description: Local dp-cantabular-filter-flex-api
+  "dp-dataset-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: http://api.localhost:23200/v1
+        description: Local dp-dataset-api
+  "dp-filter-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: http://api.localhost:23200/v1
+        description: Local dp-filter-api
+  "dp-import-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: https://localhost:21800/v1
+        description: Local dp-import-api
+  "dp-population-types-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: http://api.localhost:23200/v1
+        description: Local dp-population-api
+  "dp-recipe-api":
+    openapi: 3.0.0
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: https://api.localhost:22300/v1
+        description: Local dp-recipe-api
+  "zebedee":
+    openapi: 3.0.3
+    servers:
+      - url: https://api.dp.aws.onsdigital.uk/v1
+        description: Sandbox server
+      - url: https://localhost:8082
+        description: Local zebedee

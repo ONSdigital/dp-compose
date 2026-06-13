@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 services:
   mongodb:
     image: mongo:3.6
@@ -121,3 +121,27 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "9000:8080"
+    volumes:
+      - ${PWD}/../../dp-cantabular-filter-flex-api/swagger.yaml:/services/dp-cantabular-filter-flex-api.yaml
+      - ${PWD}/../../dp-dataset-api/swagger.yaml:/services/dp-dataset-api.yaml
+      - ${PWD}/../../dp-filter-api/swagger.yaml:/services/dp-filter-api.yaml
+      - ${PWD}/../../dp-import-api/swagger.yaml:/services/dp-import-api.yaml
+      - ${PWD}/../../dp-population-types-api/swagger.yaml:/services/dp-population-types-api.yaml
+      - ${PWD}/../../dp-recipe-api/swagger.yaml:/services/dp-recipe-api.yaml
+      - ${PWD}/../../zebedee/zebedee.yaml:/services/zebedee.yaml
+      - ${PWD}/swagger/dp-configuration.yaml:/dp-configuration.yaml
+      - ${PWD}/swagger/dp-configure-swagger.sh:/docker-entrypoint.d/00-dp-configure-swagger.sh # mount custom configure script into swagger entrypoint directory
+    environment:
+      URLS: "[
+              { url: \"./dp-cantabular-filter-flex-api.yaml\", name: \"dp-cantabular-filter-flex-api\" },
+              { url: \"./dp-dataset-api.yaml\", name: \"dp-dataset-api\" },
+              { url: \"./dp-filter-api.yaml\", name: \"dp-filter-api\" },
+              { url: \"./dp-import-api.yaml\", name: \"dp-import-api\" },
+              { url: \"./dp-population-types-api.yaml\", name: \"dp-population-types-api\" },
+              { url: \"./dp-recipe-api.yaml\", name: \"dp-recipe-api\" },
+              { url: \"./zebedee.yaml\", name: \"zebedee\" },
+              ]"
