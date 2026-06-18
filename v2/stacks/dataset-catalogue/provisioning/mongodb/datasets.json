@@ -147,7 +147,7 @@
                 "href": "/datasets/static-test-dataset/editions"
             },
             "latest_version": {
-                "href": "/datasets/static-test-dataset/editions/dataset/versions/2",
+                "href": "/datasets/static-test-dataset/editions/time-series/versions/2",
                 "id": "2"
             },
             "self": {
@@ -205,7 +205,7 @@
                 "href": "/datasets/static-test-dataset/editions"
             },
             "latest_version": {
-                "href": "/datasets/static-test-dataset/editions/dataset/versions/2",
+                "href": "/datasets/static-test-dataset/editions/time-series/versions/2",
                 "id": "2"
             },
             "self": {
