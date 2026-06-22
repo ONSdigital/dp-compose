@@ -1,0 +1,17 @@
+services:
+  dis-legacy-cache-purger:
+    build:
+      context: ${DP_REPO_DIR:-../../../..}/dis-legacy-cache-purger
+      dockerfile: Dockerfile.local
+    volumes:
+      - ${DP_REPO_DIR:-../../../..}/dis-legacy-cache-purger:/dis-legacy-cache-purger
+    environment:
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN:-""}
+      CLOUDFLARE_ZONE_ID: ${CLOUDFLARE_ZONE_ID:-""}
+      ENABLE_CACHE_API: ${ENABLE_CACHE_API:-true}
+      ENABLE_CLOUDFLARE_PURGE: ${ENABLE_CLOUDFLARE_PURGE:-false}
+      ENABLE_SLACK_ALERTS: ${ENABLE_SLACK_ALERTS:-true}
+      LEGACY_CACHE_API_URL: ${LEGACY_CACHE_API_URL:-http://dp-legacy-cache-api:29100}
+      SERVICE_AUTH_TOKEN: ${SERVICE_AUTH_TOKEN:-""}
+      SLACK_API_TOKEN: ${SLACK_API_TOKEN:-""}
+      SLACK_CHANNEL: ${SLACK_CHANNEL:-"#sandbox-publish-log"}

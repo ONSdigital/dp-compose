@@ -8,3 +8,10 @@ services:
         condition: service_healthy
       zebedee:
         condition: service_healthy
+  dis-legacy-cache-purger:
+    extends:
+      file: ${PATH_MANIFESTS}/core-ons/dis-legacy-cache-purger.yml
+      service: dis-legacy-cache-purger
+    depends_on:
+      dp-legacy-cache-api:
+        condition: service_healthy
