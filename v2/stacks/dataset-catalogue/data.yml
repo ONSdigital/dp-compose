@@ -5,7 +5,6 @@ services:
       service: dp-dataset-api
     environment:
       DISABLE_GRAPH_DB_DEPENDENCY: true
-      ENABLE_PRIVATE_ENDPOINTS: true
       ENABLE_URL_REWRITING: true
       ZEBEDEE_URL:       "http://dis-authentication-stub:29500"
       FILES_API_URL:     "http://dp-files-api:26900"
