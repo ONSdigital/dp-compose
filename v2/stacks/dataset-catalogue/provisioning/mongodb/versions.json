@@ -22,6 +22,9 @@
         "version": {
             "href": "/datasets/static-test-dataset/editions/time-series/versions/1",
             "id": "1"
+        },
+        "web_page": {
+            "href": "businessindustryandtrade/datasets/static-test-dataset/editions/time-series/versions/1"
         }
     },
     "release_date": "2025-01-26T07:00:00.000Z",
@@ -93,6 +96,9 @@
         "version": {
             "href": "/datasets/static-test-dataset/editions/time-series/versions/2",
             "id": "2"
+        },
+        "web_page": {
+            "href": "businessindustryandtrade/datasets/static-test-dataset/editions/time-series/versions/2"
         }
     },
     "release_date": "2025-01-27T07:00:00.000Z",
