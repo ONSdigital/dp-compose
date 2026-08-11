@@ -37,7 +37,7 @@ services:
       service: kowl
     depends_on:
       - zookeeper-1
-  localstack:
+  ministack:
     extends:
-      file: ${PATH_MANIFESTS}/deps/localstack.yml
-      service: localstack
+      file: ${PATH_MANIFESTS}/deps/ministack.yml
+      service: ministack

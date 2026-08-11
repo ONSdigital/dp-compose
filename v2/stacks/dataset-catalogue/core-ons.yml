@@ -19,7 +19,7 @@ services:
       file: ${PATH_MANIFESTS}/core-ons/dp-files-api.yml
       service: dp-files-api
     environment:
-      LOCALSTACK_HOST:    "http://localstack:4566"
+      LOCALSTACK_HOST:    "http://ministack:4566"
   dp-upload-service:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-upload-service.yml
@@ -31,7 +31,7 @@ services:
     environment:
       BUCKET_NAME:       "testing"
       PUBLIC_BUCKET_URL: "http://localhost:14566/testing-public/"
-      LOCALSTACK_HOST:    "http://localstack:4566"
+      LOCALSTACK_HOST:    "http://ministack:4566"
     depends_on:
       dp-api-router:
         condition: service_healthy

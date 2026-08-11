@@ -31,10 +31,10 @@ services:
       service: mongodb
     volumes:
       - ${PATH_PROVISIONING}/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
-  localstack:
+  ministack:
     extends:
-      file: ${PATH_MANIFESTS}/deps/localstack.yml
-      service: localstack
+      file: ${PATH_MANIFESTS}/deps/ministack.yml
+      service: ministack
   http-echo:
     extends:
       file: ${PATH_MANIFESTS}/deps/http-echo.yml
