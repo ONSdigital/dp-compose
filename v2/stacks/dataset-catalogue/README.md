@@ -56,9 +56,9 @@ Found dp-permissions-api at {some-path}/dp-permissions-api
 
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
 
-## Using `localstack` for running Dataset Ingest pipelines locally
+## Using `ministack` for running Dataset Ingest pipelines locally
 
-The `localstack` service can be used to run the Dataset Ingest pipelines locally. The `localstack` container is configured to use Terraform version 1.10.0. You can manage different versions of Terraform using `tfenv`, which can be installed via `brew`:
+The `ministack` service can be used to run the Dataset Ingest pipelines locally. The `ministack` container is configured to use Terraform version 1.10.0. You can manage different versions of Terraform using `tfenv`, which can be installed via `brew`:
 
    ```bash
    brew install tfenv

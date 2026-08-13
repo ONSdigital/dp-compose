@@ -39,7 +39,7 @@ services:
       S3_PUBLIC_BUCKET_NAME:              "testing-public"
       FILES_API_URL:                      ${FILES_API_URL:-http://dp-files-api:26900}
       CONSUMER_GROUP:                     "dp-static-file-publisher"
-      S3_LOCAL_URL:                       ${S3_LOCAL_URL:-http://localstack:4566}
+      S3_LOCAL_URL:                       ${S3_LOCAL_URL:-http://ministack:4566}
       S3_LOCAL_ID:                        "test"
       S3_LOCAL_SECRET:                    "test"
       IMAGE_API_URL:                      ${IMAGE_API_URL:-http://dp-image-api:24700}

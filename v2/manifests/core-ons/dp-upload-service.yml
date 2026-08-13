@@ -20,7 +20,7 @@ services:
       HEALTHCHECK_INTERVAL:               ${HEALTHCHECK_INTERVAL:-30s}
       BIND_ADDR:                          ":25100"
       AWS_REGION:                         "eu-west-1"
-      LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
+      LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://ministack:4566}
       UPLOAD_BUCKET_NAME:                 ${UPLOAD_BUCKET_NAME:-deprecated}
       STATIC_FILES_ENCRYPTED_BUCKET_NAME: ${STATIC_FILES_ENCRYPTED_BUCKET_NAME:-testing}
       GRACEFUL_SHUTDOWN_TIMEOUT:          "5s"

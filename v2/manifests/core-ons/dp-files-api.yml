@@ -33,7 +33,7 @@ services:
       ZEBEDEE_URL:                        ${ZEBEDEE_URL:-http://zebedee:8082}
       AUTHORISATION_ENABLED:              ${AUTHORISATION_ENABLED:-true}
       S3_PRIVATE_BUCKET_NAME:             "testing"
-      LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://localstack:4566}
+      LOCALSTACK_HOST:                    ${LOCALSTACK_URL:-http://ministack:4566}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:26900/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
