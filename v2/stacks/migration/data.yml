@@ -40,7 +40,7 @@ services:
     environment:
       SERVICE_AUTH_TOKEN: "upload-service-test-auth-token"
     depends_on:
-      localstack:
+      ministack:
         condition: service_healthy
   dp-download-service:
     extends:
@@ -54,7 +54,7 @@ services:
     depends_on:
       dp-api-router:
         condition: service_healthy
-      localstack:
+      ministack:
         condition: service_healthy
   dp-frontend-dataset-controller:
     extends:
