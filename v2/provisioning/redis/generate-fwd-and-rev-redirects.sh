@@ -3,7 +3,7 @@ echo "Setting redirects - make sure that Redis is running on localhost port 6379
 set -x
 redis-cli SET "fwd:/economy/mybulletin" "/finance/mybulletin"
 redis-cli SET "fwd:/economy/furtherreading/mybulletin" "/finance/mybulletin"
-redis-cli SADD set1 "/economy/mybulletin" "economy/furtherreading/mybulletin"
+redis-cli SADD set1 "/economy/mybulletin" "/economy/furtherreading/mybulletin"
 redis-cli SET "rev:/finance/mybulletin" set1
 redis-cli SET "fwd:/economy/economicoutputandproductivity/mybulletin" "/finance/economicoutputandproductivity/mybulletin"
 redis-cli SET "fwd:/economy/furtherreading/economicoutputandproductivity/mybulletin" "/finance/economicoutputandproductivity/mybulletin"
@@ -82,4 +82,4 @@ redis-cli SET "fwd:/peoplepopulationandcommunity/healthandsocialcare/childhealth
 redis-cli SADD set20 "/peoplepopulationandcommunity/healthandsocialcare/childhealth/mybulletin" "/peoplepopulationandcommunity/healthandsocialcare/childhealth/furtherreading/mybulletin"
 redis-cli SET "rev:/society/healthandsocialcare/childhealth/mybulletin" set20
 set +x
-echo "20 forward and 20 reverse redirect keys and values now set in Redis"
+echo "40 forward and 20 reverse redirect keys and values now set in Redis"
