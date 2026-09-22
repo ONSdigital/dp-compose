@@ -33,7 +33,15 @@ services:
       service: kowl
     depends_on:
       - kafka-1
-  localstack:
+  ministack:
     extends:
-      file: ${PATH_MANIFESTS}/deps/localstack.yml
-      service: localstack
+      file: ${PATH_MANIFESTS}/deps/ministack.yml
+      service: ministack
+    ports:
+      - "4563-4599:4563-4599"
+      - "8055:8080"
+    environment:
+      - SERVICES=s3
+      - S3_HOSTNAME=localhost
+      - DEBUG=1
+      - LS_LOG=trace
