@@ -65,6 +65,20 @@ To run the stack:
 
 For more information on working with the stack and other make targets, see the [general stack guidance](../README.md#general-guidance-for-each-stack).
 
+### Stack variants
+
+We have 4 stack variants available in this stack:
+
+- base (just applications required for zebedee publish)
+- with-redirects (adds redirect api for testing redirect publish)
+- with-cache (adds cache api for testing cache publish)
+- just-redirects (runs just redirect services for individual testing)
+
+There are two ways of working with these:
+
+- use STACK_VARIANT=just-redirects when issuing make commands, e.g. make up STACK_VARIANT=just-redirects
+- use our helper commands, e.g. make up-just-redirects
+
 ## Testing
 
 To know this stack is working as expected, run `make up` and then check:
