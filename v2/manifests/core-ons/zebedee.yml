@@ -17,41 +17,42 @@ services:
       - ${zebedee_root:-${DP_REPO_DIR:-../../../..}/dp-zebedee-content/generated/publishing}:/zebedee_root
     restart: unless-stopped
     environment:
-      DATASET_API_URL:                ${DATASET_API_URL:-http://dp-dataset-api:22000}
-      DATASET_API_AUTH_TOKEN:         ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
-      ENABLE_DATASET_IMPORT:          ${ENABLE_DATASET_IMPORT:-true}
-      FORMAT_LOGGING:                 ${FORMAT_LOGGING:-true}
-      JAVA_OPTS:                      " -Xmx1204m -Xdebug -Xrunjdwp:transport=dt_socket,address=8002,server=y,suspend=n"
-      PORT:                           "8082"
-      RESTOLINO_STATIC:               "src/main/resources/files"
-      RESTOLINO_CLASSES:              "zebedee-cms/target/classes"
-      PACKAGE_PREFIX:                 "com.github.onsdigital.zebedee"
-      audit_db_enabled:               "false"
-      enable_splunk_reporting:        "false"
-      zebedee_root:                   "/zebedee_root"
-      publish_url:                    ${PUBLISH_URL:-http://the-train:8084}
-      ENABLE_CENTRALISED_KEYRING:     "true"
-      KEYRING_SECRET_KEY:             "38c03PzhNuSrYV8J0537XQ=="
-      KEYRING_INIT_VECTOR:            "RkL9MmjfRcPB86alO82gHQ=="
-      SERVICE_AUTH_TOKEN:             ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
-      ENABLE_STATIC_FILES_PUBLISHING: ${ENABLE_STATIC_FILES_PUBLISHING:-true}
-      FILES_API_URL:                  ${FILES_API_URL:-http://dp-files-api:26900}
-      ENABLE_JWT_SESSIONS:            ${ENABLE_JWT_SESSIONS:-true}
-      IDENTITY_API_URL:               ${IDENTITY_API_URL:-http://dp-identity-api:25600}
-      AWS_COGNITO_SIGNING_KEY_ONE:    ${AWS_COGNITO_SIGNING_KEY_ONE:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApU1DqxJalEmlznkrM+U4aSBMw9u5axcIqNeUq8+ZHo98uKy8Xy5zCOXfWx6KafOPJhbOZInFaSh9UMaluSSw11l/PR4KrGBFzJODQ+RMq6bHW6FlwwHSkMTSfQ0hwzO7y91BiZFmJnaUECf52H3QBApGT4TT060ri5zt1ygpliRwjLLlHW1XX0epzZH3ogrikn4i65e8w6uUcsGBhQvQQqiHvEpcgCSWS6SUIeVjv5ZTT4stZuDtkbijtSgDrP2xDQCEZO1OipvT6O4ycDNb2Hjapddi25Rgr08aLP/zqM16fIiueXIbYf0Dn4eUuRxFAq3LjyEGjZ6vv+4nh34M2QIDAQAB"}
-      AWS_COGNITO_SIGNING_KEY_TWO:    ${AWS_COGNITO_SIGNING_KEY_TWO:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"}
-      AWS_COGNITO_KEY_ID_ONE:         ${AWS_COGNITO_KEY_ID_ONE:-"2a8vXmIK67ZZ3hFZ/DwQATgvqZgRBFjuuVavlw3zEwo="}
-      AWS_COGNITO_KEY_ID_TWO:         ${AWS_COGNITO_KEY_ID_TWO:-"GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="}
-      scheduled_publishing_enabled:   ${scheduled_publishing_enabled:-"false"}
-      OTEL_JAVAAGENT_ENABLED:         ${OTEL_JAVAAGENT_ENABLED:-"false"}
-      brian_url:                      "http://project-brian:8083"
-      BABBAGE_URL:                    "http://babbage:8080"
-      REDIRECT_API_URL:               ${REDIRECT_API_URL:-http://dp-api-router:23200}
-      ENABLE_REDIRECT_API:            ${ENABLE_REDIRECT_API:-false}
-      ENABLE_PERMISSIONS_API:         ${ENABLE_PERMISSIONS_API:-true}
-      PERMISSIONS_API_URL:            ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
-      LEGACY_CACHE_API_URL:           ${LEGACY_CACHE_API_URL:-http://dp-legacy-cache-api:29100}
-      LEGACY_CACHE_API_AUTH_TOKEN:    ${LEGACY_CACHE_API_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
+      DATASET_API_URL:                 ${DATASET_API_URL:-http://dp-dataset-api:22000}
+      DATASET_API_AUTH_TOKEN:          ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
+      ENABLE_DATASET_IMPORT:           ${ENABLE_DATASET_IMPORT:-true}
+      FORMAT_LOGGING:                  ${FORMAT_LOGGING:-true}
+      JAVA_OPTS:                       " -Xmx1204m -Xdebug -Xrunjdwp:transport=dt_socket,address=8002,server=y,suspend=n"
+      PORT:                            "8082"
+      RESTOLINO_STATIC:                "src/main/resources/files"
+      RESTOLINO_CLASSES:               "zebedee-cms/target/classes"
+      PACKAGE_PREFIX:                  "com.github.onsdigital.zebedee"
+      audit_db_enabled:                "false"
+      enable_splunk_reporting:         "false"
+      zebedee_root:                    "/zebedee_root"
+      publish_url:                     ${PUBLISH_URL:-http://the-train:8084}
+      ENABLE_CENTRALISED_KEYRING:      "true"
+      ENABLE_COLLECTION_WRITE_LOCKING: "true"
+      KEYRING_SECRET_KEY:              "38c03PzhNuSrYV8J0537XQ=="
+      KEYRING_INIT_VECTOR:             "RkL9MmjfRcPB86alO82gHQ=="
+      SERVICE_AUTH_TOKEN:              ${SERVICE_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
+      ENABLE_STATIC_FILES_PUBLISHING:  ${ENABLE_STATIC_FILES_PUBLISHING:-true}
+      FILES_API_URL:                   ${FILES_API_URL:-http://dp-files-api:26900}
+      ENABLE_JWT_SESSIONS:             ${ENABLE_JWT_SESSIONS:-true}
+      IDENTITY_API_URL:                ${IDENTITY_API_URL:-http://dp-identity-api:25600}
+      AWS_COGNITO_SIGNING_KEY_ONE:     ${AWS_COGNITO_SIGNING_KEY_ONE:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApU1DqxJalEmlznkrM+U4aSBMw9u5axcIqNeUq8+ZHo98uKy8Xy5zCOXfWx6KafOPJhbOZInFaSh9UMaluSSw11l/PR4KrGBFzJODQ+RMq6bHW6FlwwHSkMTSfQ0hwzO7y91BiZFmJnaUECf52H3QBApGT4TT060ri5zt1ygpliRwjLLlHW1XX0epzZH3ogrikn4i65e8w6uUcsGBhQvQQqiHvEpcgCSWS6SUIeVjv5ZTT4stZuDtkbijtSgDrP2xDQCEZO1OipvT6O4ycDNb2Hjapddi25Rgr08aLP/zqM16fIiueXIbYf0Dn4eUuRxFAq3LjyEGjZ6vv+4nh34M2QIDAQAB"}
+      AWS_COGNITO_SIGNING_KEY_TWO:     ${AWS_COGNITO_SIGNING_KEY_TWO:-"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvDfudfY9n+8sFJmHGFfgbKqKf8iiEcbvRXNMEi9qd2NGAekhdNJKdeW3sMSwR+sb4Ly6IypowCE2eueYk/GatzYyyolWny/Krdp0EWPT/PnK8Iq1FTIuHxFb08B8iLnH/2nKqgOjVvwEU4eSBh0YHKti2v77a+a4bnx6aOC2YkF2AyIRmbXAHaq4Js9u33X8gGMXZcVsxcSpG8Py/NJ3s+PLKebQFd28S1Jl/89JDcUv4/3DF+u8k9nxkGlaSEcwF7OIyj+cnSa7gm3PadTO+m/96JENyNaLTjpPE7yiHKDpwMP04LZeAF+QhpnQsCgOTNmP5ogFzQtwOyX25/FmQIDAQAB"}
+      AWS_COGNITO_KEY_ID_ONE:          ${AWS_COGNITO_KEY_ID_ONE:-"2a8vXmIK67ZZ3hFZ/DwQATgvqZgRBFjuuVavlw3zEwo="}
+      AWS_COGNITO_KEY_ID_TWO:          ${AWS_COGNITO_KEY_ID_TWO:-"GRBevIroJzPBvaGaL9xm4x/6rQGkbKxi3wLtcTiGymE="}
+      scheduled_publishing_enabled:    ${scheduled_publishing_enabled:-"false"}
+      OTEL_JAVAAGENT_ENABLED:          ${OTEL_JAVAAGENT_ENABLED:-"false"}
+      brian_url:                       "http://project-brian:8083"
+      BABBAGE_URL:                     "http://babbage:8080"
+      REDIRECT_API_URL:                ${REDIRECT_API_URL:-http://dp-api-router:23200}
+      ENABLE_REDIRECT_API:             ${ENABLE_REDIRECT_API:-false}
+      ENABLE_PERMISSIONS_API:          ${ENABLE_PERMISSIONS_API:-true}
+      PERMISSIONS_API_URL:             ${PERMISSIONS_API_URL:-http://dp-permissions-api:25400}
+      LEGACY_CACHE_API_URL:            ${LEGACY_CACHE_API_URL:-http://dp-legacy-cache-api:29100}
+      LEGACY_CACHE_API_AUTH_TOKEN:     ${LEGACY_CACHE_API_AUTH_TOKEN:-fc4089e2e12937861377629b0cd96cf79298a4c5d329a2ebb96664c88df77b67}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:8082/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
