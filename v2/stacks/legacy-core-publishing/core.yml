@@ -32,8 +32,6 @@ services:
     depends_on:
       zebedee:
         condition: service_healthy
-    environment:
-      ENABLE_PERMISSION_API: ${ENABLE_PERMISSION_API:-true}
   dp-frontend-router:
     extends:
       file: ${PATH_MANIFESTS}/core-ons/dp-frontend-router.yml
