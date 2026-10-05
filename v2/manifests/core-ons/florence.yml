@@ -18,8 +18,6 @@ services:
       - 8081:8081
     restart: unless-stopped
     environment:
-      ENABLE_HOMEPAGE_PUBLISHING: "true"
-      ENABLE_PERMISSION_API:      ${ENABLE_PERMISSION_API:-false}
       ENABLE_DATASET_IMPORT:      ${ENABLE_DATASET_IMPORT:-true}
       ENABLE_MIGRATION_FIELD:     ${ENABLE_MIGRATION_FIELD:-true}
       API_ROUTER_URL:             ${API_ROUTER_URL:-http://dp-api-router:23200}
