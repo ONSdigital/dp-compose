@@ -13,8 +13,7 @@ services:
     restart: unless-stopped
     environment:
       BIND_ADDR: ":29400"
-      CHOKIDAR_USEPOLLING: "true"
-      WATCHPACK_POLLING: "true"
+      WATCH_POLL_INTERVAL_MS: "1000"
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost:29400/data-admin/api/health"]
       interval: ${HEALTHCHECK_INTERVAL:-30s}
