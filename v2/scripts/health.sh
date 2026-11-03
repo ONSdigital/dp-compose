@@ -57,7 +57,7 @@ for name in ${services[@]}; do
         if [[ $health == "healthy" ]]; then
             health_f="${GREEN}${health}${RESET}"
         else
-            health_output=$(docker inspect $(docker-compose ps -q ${name}) | jq '.[] | .State.Health.Log[-1].Output | @json')
+            health_output=$(podman inspect $(docker-compose ps -q ${name}) | jq '.[] | .State.Health.Log[-1].Output | @json')
 
             if [[ $health == "starting" ]]; then
                 health_f="${YELLOW}${health}${RESET}"
