@@ -22,12 +22,6 @@ LOGS_NO_PREFIX ?=
 LOGS_TAIL ?=
 QUIET ?=
 
-# colima start args specifying the default resource allocations
-COLIMA_CPU_CORES  ?= 4
-COLIMA_MEMORY_GB  ?= 8
-COLIMA_DISK_GB    ?= 100
-COLIMA_START_ARGS ?= --cpu $(COLIMA_CPU_CORES) --memory $(COLIMA_MEMORY_GB) --disk $(COLIMA_DISK_GB)
-
 # crude check to see if SERVICE is set and correct (needs to avoid recursion, hence using the yml files)
 .PHONY: verify-service
 verify-service: $(LOCAL_ENV_FILE)
@@ -43,22 +37,18 @@ verify-service: $(LOCAL_ENV_FILE)
 	echo "\033[31m""service $(SERVICE) does not exist in stack. Failed to verify.\033[0m" >&2; \
 	exit 4
 
-.PHONY: colima-start
-colima-start:
-	@( docker ps > /dev/null 2>&1 ) || ( echo "\033[34m""starting colima...\033[0m" && colima start $(COLIMA_START_ARGS) )
-
 .PHONY: up
 up: init verify-service
 	@echo "\033[34m""building, creating and starting containers...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose up -d $(SERVICE)
 
 .PHONY: down
-down: verify-service colima-start
+down: verify-service
 	@echo "\033[34m""stopping and removing containers and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down $(SERVICE)
 
 .PHONY: clean
-clean: verify-service colima-start
+clean: verify-service
 	@echo "\033[34m""stopping and removing containers, associated volumes and networks...\033[0m"
 	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose down -v $(SERVICE)
 
@@ -69,18 +59,18 @@ restart: down up
 refresh: down clean-image up
 
 .PHONY: ps start stop config
-ps start stop config: colima-start verify-service
+ps start stop config: verify-service
 	@[[ -n "$(QUIET)" ]] || echo "\033[34m""$@ containers...\033[0m" >&2
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: images
-images: verify-service colima-start
-	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $@ $(SERVICE) $(ENV_FILE_ARGS)
+images: verify-service
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman $@ $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: ps-docker
-ps-docker: verify-service colima-start
+ps-docker: verify-service
 	@do=$@; do=$${do%-docker};	\
-		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker $$do $(SERVICE) $(ENV_FILE_ARGS)
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman $$do $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: get-repository-name
 get-repository-name: verify-service
@@ -94,32 +84,32 @@ get-repository-name: verify-service
 	fi
 
 .PHONY: image-id
-image-id: $(LOCAL_ENV_FILE) colima-start
+image-id: $(LOCAL_ENV_FILE)
 	@REPO_NAME=$(shell make get-repository-name);		\
-		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker images --format='{{ .ID }} {{ .Repository }}' | awk '$$2~/'"$$REPO_NAME"'$$/{print $$1}'
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman images --format='{{ .ID }} {{ .Repository }}' | awk '$$2~/'"$$REPO_NAME"'$$/{print $$1}'
 
 .PHONY: clean-image
-clean-image: verify-service colima-start
+clean-image: verify-service
 	@i_id=$$(make image-id);								\
 		if [[ -z $$i_id ]]; then echo "Could not get image-id" >&2; exit 3; fi;		\
 		if [[ $$i_id =~ [[:space:]] && -z "$(ENABLE_MULTI)" ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got >1 IDs $$i_id" >&2; exit 4; fi;	\
 		echo "\033[34m""Removing image '$$i_id' for $(SERVICE)\033[0m" >&2;		\
-	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker image rm $$i_id
+	COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman image rm $$i_id
 
 .PHONY: container-id
-container-id: verify-service colima-start
-	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
+container-id: verify-service
+	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman ps --format='{{ .ID }} {{ .Names }}' | awk '/$(SERVICE)/{print $$1}'
 
 .PHONY: attach
-attach: verify-service colima-start
+attach: verify-service
 	@c_id=$$(make container-id);								\
 		if [[ -z $$c_id ]]; then echo "Could not get container-id" >&2; exit 3; fi;	\
 		if [[ $$c_id =~ [[:space:]] ]]; then echo "Use more specific SERVICE or ENABLE_MULTI=1, got IDs $$c_id" >&2; exit 4; fi;	\
 		echo "\033[34m""Attaching to container '$$c_id' for $(SERVICE)\033[0m" >&2;			\
-		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker exec -it $$c_id bash
+		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) podman exec -it $$c_id bash
 
 .PHONY: logs
-logs: verify-service colima-start
+logs: verify-service
 	@logs_arg="";	\
 		[[ -n "$(LOGS_TAIL)" ]]		&& logs_arg+="-f ";	\
 		[[ -n "$(LOGS_TIMESTAMP)" ]]	&& logs_arg+="-t ";	\
@@ -127,14 +117,14 @@ logs: verify-service colima-start
 		COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) docker-compose logs $$logs_arg $(SERVICE) $(ENV_FILE_ARGS)
 
 .PHONY: health
-health: $(LOCAL_ENV_FILE) colima-start
+health: $(LOCAL_ENV_FILE)
 	@COMPOSE_ENV_FILES=$(COMPOSE_ENV_FILES) $(SCRIPTS_DIR)/health.sh
 
 .PHONY: base-init
 base-init: clone $(LOCAL_ENV_FILE)
 
 .PHONY: clone pull git-status check-repos prep
-clone pull git-status check-repos prep: colima-start
+clone pull git-status check-repos prep:
 	@$(SCRIPTS_DIR)/clone.sh $@
 
 .PHONY: list-apps
